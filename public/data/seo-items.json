@@ -12,23 +12,6 @@
           "Testez avec l'outil Google Search Console pour voir l'apparence dans les SERP",
           "Vérifiez la longueur avec l'outil en ligne 'Title Tag Length Checker'"
         ],
-        "outils": [
-          {
-            "nom": "Google Search Console",
-            "url": "https://search.google.com/search-console",
-            "description": "Analysez l'apparence de vos titres dans les résultats de recherche"
-          },
-          {
-            "nom": "Screaming Frog SEO Spider",
-            "url": "https://www.screamingfrog.co.uk/seo-spider/",
-            "description": "Audit complet des balises title de votre site"
-          },
-          {
-            "nom": "Title Tag Length Checker",
-            "url": "https://www.seoreviewtools.com/title-tag-length-checker/",
-            "description": "Vérifiez la longueur optimale de vos titres"
-          }
-        ],
         "bonnesPratiques": [
           "Longueur entre 50 et 60 caractères (visible dans les SERP)",
           "Inclure le mot-clé principal en début de titre",
@@ -53,23 +36,6 @@
           "Utilisez l'outil 'Meta Description Generator' pour créer des descriptions optimisées",
           "Testez l'apparence avec 'Google SERP Simulator'",
           "Vérifiez la longueur avec 'Meta Description Length Checker'"
-        ],
-        "outils": [
-          {
-            "nom": "Google SERP Simulator",
-            "url": "https://www.seoreviewtools.com/serp-simulator/",
-            "description": "Simulez l'apparence de vos meta descriptions dans Google"
-          },
-          {
-            "nom": "Meta Description Generator",
-            "url": "https://www.seoreviewtools.com/meta-description-generator/",
-            "description": "Générez des meta descriptions optimisées"
-          },
-          {
-            "nom": "Meta Description Length Checker",
-            "url": "https://www.seoreviewtools.com/meta-description-length-checker/",
-            "description": "Vérifiez la longueur de vos descriptions"
-          }
         ],
         "bonnesPratiques": [
           "Longueur entre 150 et 160 caractères (limite Google)",
@@ -96,33 +62,16 @@
           "Utilisez l'outil 'Heading Structure Checker' pour analyser votre hiérarchie",
           "Vérifiez avec 'HTML Validator' pour détecter les erreurs"
         ],
-        "outils": [
-          {
-            "nom": "Web Developer Extension",
-            "url": "https://chrome.google.com/webstore/detail/web-developer/bfbameneiokkgbdmiekhjnmfkcnldhhm",
-            "description": "Analysez la structure des titres de votre page"
-          },
-          {
-            "nom": "HTML Validator",
-            "url": "https://validator.w3.org/",
-            "description": "Validez votre HTML et détectez les erreurs de structure"
-          },
-          {
-            "nom": "Heading Structure Checker",
-            "url": "https://www.seoreviewtools.com/heading-structure-checker/",
-            "description": "Analysez la hiérarchie de vos titres"
-          }
-        ],
         "bonnesPratiques": [
           "Un seul H1 par page (règle absolue)",
           "Inclure le mot-clé principal naturellement",
           "Descriptif et pertinent pour le contenu",
-          "Hiérarchie logique avec H2, H3...",
-          "Longueur recommandée : 20-60 caractères"
+          "Longueur entre 20 et 60 caractères",
+          "Cohérent avec la balise title"
         ],
         "exemple": {
-          "html": "<main>\n  <h1>Agence SEO Paris - Expert en Référencement Naturel</h1>\n  <h2>Nos Services SEO</h2>\n  <h3>Audit Technique</h3>\n  <h3>Optimisation On-Page</h3>\n</main>",
-          "description": "Structure correcte avec un seul H1 et hiérarchie logique"
+          "html": "<h1>Agence SEO Paris - Optimisation Référencement Naturel</h1>",
+          "description": "Exemple de H1 optimisé avec mot-clé principal"
         }
       }
     },
@@ -138,34 +87,16 @@
           "Utilisez 'Screaming Frog' pour auditer toute votre structure",
           "Vérifiez avec 'HTML Validator' pour les erreurs de structure"
         ],
-        "outils": [
-          {
-            "nom": "Screaming Frog SEO Spider",
-            "url": "https://www.screamingfrog.co.uk/seo-spider/",
-            "description": "Audit complet de la structure des titres de votre site"
-          },
-          {
-            "nom": "Heading Structure Checker",
-            "url": "https://www.seoreviewtools.com/heading-structure-checker/",
-            "description": "Analysez la hiérarchie de vos titres"
-          },
-          {
-            "nom": "Web Developer Extension",
-            "url": "https://chrome.google.com/webstore/detail/web-developer/bfbameneiokkgbdmiekhjnmfkcnldhhm",
-            "description": "Visualisez la structure des titres de votre page"
-          }
-        ],
         "bonnesPratiques": [
-          "Respecter l'ordre hiérarchique strict",
-          "Pas de saut de niveau (H1 > H3 = interdit)",
-          "Titres descriptifs et pertinents",
-          "Inclure des mots-clés naturellement",
-          "Maximum 3-4 niveaux de profondeur"
+          "Hiérarchie logique : H1 → H2 → H3 → H4...",
+          "Pas de saut de niveau (H1 → H3)",
+          "Un seul H1 par page",
+          "Titres descriptifs et informatifs",
+          "Cohérence sur toutes les pages"
         ],
         "exemple": {
-          "html": "<h1>Agence SEO Paris</h1>\n<h2>Nos Services</h2>\n<h3>Audit SEO</h3>\n<h3>Optimisation On-Page</h3>\n<h2>Notre Équipe</h2>\n<h3>Experts SEO</h3>",
-          "description": "Structure logique sans saut de niveau",
-          "structure": "Bonne structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n│   ├── H3: Audit SEO\n│   └── H3: Optimisation On-Page\n└── H2: Notre Équipe\n    └── H3: Experts SEO\n\nMauvaise structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n└── H4: Audit SEO (saut de niveau !)"
+          "html": "<h1>Titre principal</h1>\n<h2>Section 1</h2>\n<h3>Sous-section 1.1</h3>\n<h2>Section 2</h2>\n<h3>Sous-section 2.1</h3>",
+          "description": "Exemple de hiérarchie de titres logique et accessible"
         }
       }
     },
@@ -181,34 +112,17 @@
           "Testez avec 'URL Rewrite Tool' pour optimiser vos URLs",
           "Vérifiez avec 'Screaming Frog' pour auditer toutes vos URLs"
         ],
-        "outils": [
-          {
-            "nom": "Google Search Console",
-            "url": "https://search.google.com/search-console",
-            "description": "Analysez les URLs indexées par Google"
-          },
-          {
-            "nom": "Screaming Frog SEO Spider",
-            "url": "https://www.screamingfrog.co.uk/seo-spider/",
-            "description": "Audit complet de la structure URL de votre site"
-          },
-          {
-            "nom": "URL Structure Checker",
-            "url": "https://www.seoreviewtools.com/url-structure-checker/",
-            "description": "Analysez la qualité de vos URLs"
-          }
-        ],
         "bonnesPratiques": [
-          "URLs descriptives et courtes (max 60 caractères)",
-          "Inclure les mots-clés principaux",
+          "URLs descriptives et courtes",
+          "Inclure les mots-clés pertinents",
+          "Éviter les paramètres techniques",
           "Utiliser des tirets (-) au lieu d'espaces",
-          "Éviter les caractères spéciaux et accents",
-          "Structure logique : /categorie/sous-categorie"
+          "Pas de caractères spéciaux"
         ],
         "exemple": {
-                  "bon": "URLs optimisées :\n/services/seo-audit\n/blog/optimisation-meta-description\n/contact-agence-seo-paris\n/audit-technique-seo",
-        "mauvais": "URLs à éviter :\n/page.php?id=123&cat=seo\n/services.php?service=audit&type=technical\n/contact?ref=google&utm_source=seo\n/page%20seo%20paris",
-          "description": "Exemples d'URLs optimisées vs à éviter"
+          "bon": "/services/seo-optimisation",
+          "mauvais": "/page.php?id=24&cat=seo",
+          "description": "Exemple d'URL optimisée vs URL non optimisée"
         }
       }
     },
@@ -223,36 +137,7 @@
           "Utilisez l'extension 'Web Developer' → Images → Display Alt Attributes",
           "Testez avec 'Alt Text Checker' pour analyser vos images",
           "Vérifiez avec 'Google Images' pour voir l'indexation de vos images"
-        ],
-        "outils": [
-          {
-            "nom": "Web Developer Extension",
-            "url": "https://chrome.google.com/webstore/detail/web-developer/bfbameneiokkgbdmiekhjnmfkcnldhhm",
-            "description": "Analysez les attributs alt de vos images"
-          },
-          {
-            "nom": "Alt Text Checker",
-            "url": "https://www.seoreviewtools.com/alt-text-checker/",
-            "description": "Vérifiez la qualité de vos attributs alt"
-          },
-          {
-            "nom": "Google Images",
-            "url": "https://images.google.com/",
-            "description": "Vérifiez l'indexation de vos images dans Google"
-          }
-        ],
-        "bonnesPratiques": [
-          "Décrire le contenu de l'image",
-          "Inclure les mots-clés pertinents",
-          "Maximum 125 caractères",
-          "Éviter 'image de', 'photo de'",
-          "Unique pour chaque image"
-        ],
-        "exemple": {
-          "html": "<img src=\"audit-seo.jpg\" alt=\"Audit SEO technique d'un site web avec graphiques de performance\">\n<img src=\"optimisation-seo.jpg\" alt=\"Optimisation SEO on-page avec analyse des balises meta\">",
-          "description": "Attributs alt descriptifs et optimisés pour le SEO"
-        }
-      }
+        ]}
     },
     {
       "id": "internal-links",
@@ -265,36 +150,7 @@
           "Testez avec 'Internal Link Checker' pour identifier les opportunités",
           "Vérifiez avec 'Google Search Console' → Liens → Liens internes",
           "Analysez avec 'Ahrefs' ou 'Majestic' pour un audit complet"
-        ],
-        "outils": [
-          {
-            "nom": "Screaming Frog SEO Spider",
-            "url": "https://www.screamingfrog.co.uk/seo-spider/",
-            "description": "Audit complet des liens internes de votre site"
-          },
-          {
-            "nom": "Google Search Console",
-            "url": "https://search.google.com/search-console",
-            "description": "Analysez les liens internes indexés par Google"
-          },
-          {
-            "nom": "Internal Link Checker",
-            "url": "https://www.seoreviewtools.com/internal-link-checker/",
-            "description": "Identifiez les opportunités de liens internes"
-          }
-        ],
-        "bonnesPratiques": [
-          "Liens contextuels et naturels",
-          "Utiliser des ancres descriptives",
-          "Éviter 'cliquez ici', 'en savoir plus'",
-          "Distribuer le PageRank équitablement",
-          "Maximum 100 liens par page"
-        ],
-        "exemple": {
-          "html": "<article>\n  <h2>Audit SEO Technique</h2>\n  <p>Notre <a href=\"/services/seo-audit\">audit SEO technique</a> analyse en profondeur votre site web pour identifier les problèmes de référencement.</p>\n  <p>Découvrez aussi nos <a href=\"/services/optimisation-on-page\">services d'optimisation on-page</a>.</p>\n</article>",
-          "description": "Liens internes contextuels avec ancres descriptives"
-        }
-      }
+        ]}
     },
     {
       "id": "canonical",
@@ -307,36 +163,7 @@
           "Utilisez 'Canonical URL Checker' pour analyser vos canonicals",
           "Vérifiez avec 'Google Search Console' → Couverture → Erreurs de contenu dupliqué",
           "Testez avec 'Screaming Frog' pour auditer toutes vos canonicals"
-        ],
-        "outils": [
-          {
-            "nom": "Google Search Console",
-            "url": "https://search.google.com/search-console",
-            "description": "Détectez les problèmes de contenu dupliqué"
-          },
-          {
-            "nom": "Screaming Frog SEO Spider",
-            "url": "https://www.screamingfrog.co.uk/seo-spider/",
-            "description": "Audit complet des balises canonical de votre site"
-          },
-          {
-            "nom": "Canonical URL Checker",
-            "url": "https://www.seoreviewtools.com/canonical-url-checker/",
-            "description": "Analysez vos balises canonical"
-          }
-        ],
-        "bonnesPratiques": [
-          "URL absolue (avec https://)",
-          "Une seule balise canonical par page",
-          "URL de la page principale",
-          "Cohérente avec la sitemap",
-          "Éviter les chaînes de requêtes inutiles"
-        ],
-        "exemple": {
-          "html": "<head>\n  <link rel=\"canonical\" href=\"https://serpenter.fr/services/seo-audit\">\n</head>",
-          "description": "Balise canonical avec URL absolue et propre"
-        }
-      }
+        ]}
     },
     {
       "id": "sitemap-xml",
@@ -349,36 +176,7 @@
           "Soumettez votre sitemap dans Google Search Console → Sitemaps",
           "Validez votre sitemap avec 'XML Sitemap Validator'",
           "Vérifiez que toutes vos pages importantes sont incluses"
-        ],
-        "outils": [
-          {
-            "nom": "Google Search Console",
-            "url": "https://search.google.com/search-console",
-            "description": "Soumettez et surveillez votre sitemap"
-          },
-          {
-            "nom": "XML Sitemap Validator",
-            "url": "https://www.xml-sitemaps.com/validate-xml-sitemap.html",
-            "description": "Validez la structure de votre sitemap XML"
-          },
-          {
-            "nom": "Screaming Frog SEO Spider",
-            "url": "https://www.screamingfrog.co.uk/seo-spider/",
-            "description": "Générez un sitemap XML complet de votre site"
-          }
-        ],
-        "bonnesPratiques": [
-          "Inclure toutes les pages importantes",
-          "Maximum 50 000 URLs par sitemap",
-          "URLs absolues avec https://",
-          "Mise à jour régulière",
-          "Référencée dans robots.txt"
-        ],
-        "exemple": {
-          "html": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url>\n    <loc>https://serpenter.fr/</loc>\n    <lastmod>2024-01-15</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>https://serpenter.fr/services/seo-audit</loc>\n    <lastmod>2024-01-10</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>",
-          "description": "Sitemap XML valide avec métadonnées importantes"
-        }
-      }
+        ]}
     },
     {
       "id": "robots-txt",
@@ -391,36 +189,7 @@
           "Vérifiez la syntaxe avec 'Robots.txt Validator'",
           "Testez avec 'Google Search Console' → URL Inspection → robots.txt",
           "Assurez-vous que le sitemap est référencé"
-        ],
-        "outils": [
-          {
-            "nom": "Google Search Console",
-            "url": "https://search.google.com/search-console",
-            "description": "Testez votre robots.txt avec l'inspecteur d'URL"
-          },
-          {
-            "nom": "Robots.txt Validator",
-            "url": "https://www.seoreviewtools.com/robots-txt-validator/",
-            "description": "Validez la syntaxe de votre robots.txt"
-          },
-          {
-            "nom": "Screaming Frog SEO Spider",
-            "url": "https://www.screamingfrog.co.uk/seo-spider/",
-            "description": "Analysez votre robots.txt et ses directives"
-          }
-        ],
-        "bonnesPratiques": [
-          "Placé à la racine du site",
-          "Syntaxe correcte et lisible",
-          "Référencer le sitemap XML",
-          "Ne pas bloquer les ressources importantes",
-          "Tester avec les outils Google"
-        ],
-        "exemple": {
-          "html": "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /private/\nDisallow: /tmp/\nSitemap: https://serpenter.fr/sitemap.xml",
-          "description": "Robots.txt avec directives claires et sitemap référencé"
-        }
-      }
+        ]}
     },
     {
       "id": "structured-data",
@@ -476,32 +245,15 @@
           "Testez avec 'Google Rich Results Test'",
           "Vérifiez l'apparence dans les SERP"
         ],
-        "outils": [
-          {
-            "nom": "Google Rich Results Test",
-            "url": "https://search.google.com/test/rich-results",
-            "description": "Testez vos breadcrumbs pour les rich snippets"
-          },
-          {
-            "nom": "Breadcrumb Generator",
-            "url": "https://www.seoreviewtools.com/breadcrumb-generator/",
-            "description": "Générez des breadcrumbs optimisés"
-          },
-          {
-            "nom": "Google Search Console",
-            "url": "https://search.google.com/search-console",
-            "description": "Surveillez l'apparence de vos breadcrumbs dans les SERP"
-          }
-        ],
         "bonnesPratiques": [
-          "Liens cliquables et fonctionnels",
-          "Hiérarchie logique du site",
+          "Breadcrumbs visibles sur toutes les pages",
           "Données structurées BreadcrumbList",
-          "Design cohérent avec le site",
-          "Visible sur toutes les pages internes"
+          "Liens fonctionnels et accessibles",
+          "Cohérence avec la structure du site",
+          "Test régulier dans les SERP"
         ],
         "exemple": {
-          "html": "<nav aria-label=\"Breadcrumb\">\n  <ol class=\"breadcrumb\">\n    <li><a href=\"/\">Accueil</a></li>\n    <li><a href=\"/services\">Services</a></li>\n    <li aria-current=\"page\">Audit SEO</li>\n  </ol>\n</nav>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BreadcrumbList\",\n  \"itemListElement\": [\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 1,\n      \"name\": \"Accueil\",\n      \"item\": \"https://serpenter.fr\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 2,\n      \"name\": \"Services\",\n      \"item\": \"https://serpenter.fr/services\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 3,\n      \"name\": \"Audit SEO\"\n    }\n  ]\n}\n</script>",
+          "html": "<nav aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"/\">Accueil</a></li>\n    <li><a href=\"/services\">Services</a></li>\n    <li>Audit SEO</li>\n  </ol>\n</nav>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BreadcrumbList\",\n  \"itemListElement\": [\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 1,\n      \"name\": \"Accueil\",\n      \"item\": \"https://serpenter.fr\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 2,\n      \"name\": \"Services\",\n      \"item\": \"https://serpenter.fr/services\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 3,\n      \"name\": \"Audit SEO\"\n    }\n  ]\n}\n</script>",
           "description": "Breadcrumbs avec HTML sémantique et données structurées"
         }
       }

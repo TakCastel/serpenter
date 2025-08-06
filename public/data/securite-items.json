@@ -53,36 +53,7 @@
           "Testez avec 'Security Headers' pour analyser votre politique",
           "Utilisez 'CSP Scanner' pour détecter les violations",
           "Analysez avec 'Lighthouse' → Security → CSP"
-        ],
-        "outils": [
-          {
-            "nom": "CSP Evaluator",
-            "url": "https://csp-evaluator.withgoogle.com/",
-            "description": "Évaluez votre Content Security Policy"
-          },
-          {
-            "nom": "Security Headers",
-            "url": "https://securityheaders.com/",
-            "description": "Analysez votre CSP et autres headers"
-          },
-          {
-            "nom": "CSP Scanner",
-            "url": "https://cspscanner.com/",
-            "description": "Scannez votre site pour les violations CSP"
-          }
-        ],
-        "bonnesPratiques": [
-          "Politique stricte mais fonctionnelle",
-          "Éviter 'unsafe-inline' quand possible",
-          "Utiliser des nonces ou hashes pour les scripts",
-          "Tester en mode report-only d'abord",
-          "Surveiller les violations"
-        ],
-        "exemple": {
-          "html": "<!-- CSP stricte -->\nHeader always set Content-Security-Policy \"default-src 'self'; script-src 'self' 'nonce-abc123'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.googleapis.com; connect-src 'self'; frame-ancestors 'none';\"\n\n<!-- CSP en mode report-only pour tests -->\nHeader always set Content-Security-Policy-Report-Only \"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';\"",
-          "description": "CSP stricte avec nonces et mode report-only pour tests"
-        }
-      }
+        ]}
     },
     {
       "id": "rate-limiting",
@@ -180,36 +151,7 @@
           "Testez avec 'Mozilla Observatory' pour un audit complet",
           "Utilisez 'Lighthouse' → Security → Security headers",
           "Analysez avec 'Security Headers Checker' pour des recommandations"
-        ],
-        "outils": [
-          {
-            "nom": "Security Headers",
-            "url": "https://securityheaders.com/",
-            "description": "Analysez vos headers de sécurité"
-          },
-          {
-            "nom": "Mozilla Observatory",
-            "url": "https://observatory.mozilla.org/",
-            "description": "Audit complet de sécurité web"
-          },
-          {
-            "nom": "Security Headers Checker",
-            "url": "https://securityheaders.com/",
-            "description": "Vérifiez et améliorez vos headers de sécurité"
-          }
-        ],
-        "bonnesPratiques": [
-          "Content-Security-Policy (CSP)",
-          "X-Frame-Options: DENY",
-          "X-Content-Type-Options: nosniff",
-          "Referrer-Policy",
-          "Permissions-Policy"
-        ],
-        "exemple": {
-          "html": "<!-- Headers de sécurité complets -->\n# Apache (.htaccess)\nHeader always set Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';\"\nHeader always set X-Frame-Options \"DENY\"\nHeader always set X-Content-Type-Options \"nosniff\"\nHeader always set Referrer-Policy \"strict-origin-when-cross-origin\"\nHeader always set Permissions-Policy \"geolocation=(), microphone=(), camera=()\"\n\n# Nginx (nginx.conf)\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';\";\nadd_header X-Frame-Options \"DENY\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;",
-          "description": "Configuration complète des headers de sécurité pour Apache et Nginx"
-        }
-      }
+        ]}
     },
     {
       "id": "protection-injection",

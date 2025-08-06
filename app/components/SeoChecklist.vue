@@ -46,7 +46,7 @@
     </div>
 
     <!-- Progress Bar -->
-    <div class="mb-8">
+    <div class="mb-8 progress-section">
       <div class="w-full bg-gray-200 rounded-full h-2 transition-colors duration-200" style="background-color: var(--bg-border);">
         <div 
           class="h-2 rounded-full transition-all duration-300 ease-out"
@@ -57,12 +57,12 @@
     </div>
 
     <!-- Categories -->
-    <div class="space-y-6" role="region" aria-label="Catégories de la checklist">
+    <div class="space-y-8" role="region" aria-label="Catégories de la checklist">
       <div 
         v-for="category in categories" 
         :key="category.id"
-        class="rounded-lg border transition-colors duration-200"
-        style="background-color: var(--bg-primary); border-color: var(--bg-border);"
+        class="rounded-lg border transition-colors duration-200 sticky"
+        style="background-color: var(--bg-primary); border-color: var(--bg-border); top: 80px; z-index: 10;"
         role="region"
         :aria-label="`Catégorie ${category.name}`"
       >
@@ -190,66 +190,36 @@ const loadCategories = async () => {
       const checklistData = await response.json()
       categories.value = checklistData.categories
       
-              // Charger les items pour chaque catégorie
-        for (const category of categories.value) {
-          if (category.dataFile) {
-            try {
-              const itemsResponse = await fetch(`/data/${category.dataFile}`)
-              if (itemsResponse.ok) {
-                const itemsData = await itemsResponse.json()
-                category.items = itemsData.items
-              } else {
-                console.error(`Erreur lors du chargement de ${category.dataFile}`)
-                category.items = []
-              }
-            } catch (error) {
-              console.error(`Erreur lors du chargement de ${category.dataFile}:`, error)
+      // Charger les items pour chaque catégorie
+      for (const category of categories.value) {
+        if (category.dataFile) {
+          try {
+            const itemsResponse = await fetch(`/data/${category.dataFile}`)
+            if (itemsResponse.ok) {
+              const itemsData = await itemsResponse.json()
+              category.items = itemsData.items
+            } else {
+              console.error(`Erreur lors du chargement de ${category.dataFile}`)
               category.items = []
             }
+          } catch (error) {
+            console.error(`Erreur lors du chargement de ${category.dataFile}:`, error)
+            category.items = []
           }
-          
-          // Ajouter les propriétés nécessaires pour le sommaire
-          category.icon = getCategoryIcon(category.id)
         }
+        
+        // Assigner l'icône à la catégorie
+        category.icon = getCategoryIcon(category.id)
+      }
+      
+      // Émettre l'événement avec les catégories chargées
+      emit('categories-loaded', categories.value)
     } else {
-      console.error('Erreur lors du chargement du fichier principal')
+      console.error('Erreur lors du chargement de la checklist')
     }
   } catch (error) {
-    console.error('Erreur lors du chargement des catégories:', error)
+    console.error('Erreur lors du chargement de la checklist:', error)
   }
-}
-
-const loadCheckedItems = () => {
-  if (process.client) {
-    const saved = localStorage.getItem('seo-checklist-progress')
-    if (saved) {
-      checkedItems.value = new Set(JSON.parse(saved))
-    }
-  }
-}
-
-const saveCheckedItems = () => {
-  if (process.client) {
-    localStorage.setItem('seo-checklist-progress', JSON.stringify([...checkedItems.value]))
-  }
-}
-
-const isItemChecked = (itemId) => {
-  return checkedItems.value.has(itemId)
-}
-
-const toggleItem = (itemId) => {
-  if (checkedItems.value.has(itemId)) {
-    checkedItems.value.delete(itemId)
-  } else {
-    checkedItems.value.add(itemId)
-  }
-  saveCheckedItems()
-}
-
-const getCategoryCompletedCount = (category) => {
-  if (!category.items) return 0
-  return category.items.filter(item => checkedItems.value.has(item.id)).length
 }
 
 const getCategoryIcon = (categoryId) => {
@@ -265,8 +235,54 @@ const getCategoryIcon = (categoryId) => {
   return icons[categoryId] || 'fluent-emoji:clipboard'
 }
 
+const loadCheckedItems = () => {
+  try {
+    if (process.client) {
+      const saved = localStorage.getItem('checklist-progress')
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        checkedItems.value = new Set(parsed.checkedItems || [])
+      }
+    }
+  } catch (error) {
+    console.error('Erreur lors du chargement du progrès:', error)
+  }
+}
+
+const saveCheckedItems = () => {
+  try {
+    if (process.client) {
+      const data = {
+        checkedItems: Array.from(checkedItems.value),
+        timestamp: Date.now()
+      }
+      localStorage.setItem('checklist-progress', JSON.stringify(data))
+    }
+  } catch (error) {
+    console.error('Erreur lors de la sauvegarde du progrès:', error)
+  }
+}
+
+const toggleItem = (itemId) => {
+  if (checkedItems.value.has(itemId)) {
+    checkedItems.value.delete(itemId)
+  } else {
+    checkedItems.value.add(itemId)
+  }
+  saveCheckedItems()
+}
+
+const isItemChecked = (itemId) => {
+  return checkedItems.value.has(itemId)
+}
+
 const isCategoryExpanded = (categoryId) => {
   return expandedCategories.value.has(categoryId)
+}
+
+const getCategoryCompletedCount = (category) => {
+  if (!category.items) return 0
+  return category.items.filter(item => isItemChecked(item.id)).length
 }
 
 const toggleCategory = (categoryId) => {
@@ -276,7 +292,7 @@ const toggleCategory = (categoryId) => {
     
     // Fermer tous les accordéons des items de cette catégorie
     const category = categories.value.find(cat => cat.id === categoryId)
-    if (category && category.items) {
+    if (category && category.items && process.client) {
       category.items.forEach(item => {
         // Émettre un événement pour fermer l'accordéon de l'item
         window.dispatchEvent(new CustomEvent('close-item-accordion', { 
@@ -298,31 +314,28 @@ const openCategory = (categoryId) => {
   expandedCategories.value.add(categoryId)
 }
 
+// Watcher pour émettre les événements de progression
+watch(progressPercentage, (newPercentage) => {
+  if (process.client) {
+    window.dispatchEvent(new CustomEvent('progress-updated', {
+      detail: { percentage: Math.round(newPercentage) }
+    }))
+  }
+}, { immediate: true })
+
 // Lifecycle
 onMounted(async () => {
   loadCheckedItems()
   await loadCategories()
   
-  // Ouvrir la première catégorie (SEO) par défaut
+  // Ouvrir la première catégorie par défaut
   if (categories.value.length > 0) {
     expandedCategories.value.add(categories.value[0].id)
   }
 })
 
-// Émettre les catégories quand elles sont chargées
-watch(categories, (newCategories) => {
-  if (newCategories.length > 0) {
-    emit('categories-loaded', newCategories)
-  }
-}, { immediate: true })
-
 // Exposer les méthodes
 defineExpose({
-  resetProgress: () => {
-    checkedItems.value.clear()
-    saveCheckedItems()
-    expandedCategories.value.clear()
-  },
   openCategory
 })
 </script> 

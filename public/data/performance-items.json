@@ -11,36 +11,7 @@
           "Utilisez 'Lighthouse' → Performance pour mesurer l'impact",
           "Testez avec 'PageSpeed Insights' pour voir les améliorations",
           "Vérifiez avec 'WebPageTest' pour analyser le chargement"
-        ],
-        "outils": [
-          {
-            "nom": "Lighthouse",
-            "url": "https://developers.google.com/web/tools/lighthouse",
-            "description": "Audit de performance intégré dans Chrome DevTools"
-          },
-          {
-            "nom": "PageSpeed Insights",
-            "url": "https://pagespeed.web.dev/",
-            "description": "Analysez la performance de votre site"
-          },
-          {
-            "nom": "WebPageTest",
-            "url": "https://www.webpagetest.org/",
-            "description": "Test complet de performance avec analyse détaillée"
-          }
-        ],
-        "bonnesPratiques": [
-          "Utiliser loading=\"lazy\" sur toutes les images",
-          "Définir width et height pour éviter le CLS",
-          "Utiliser des formats modernes (WebP, AVIF)",
-          "Optimiser la taille des images",
-          "Considérer l'Intersection Observer API"
-        ],
-        "exemple": {
-          "html": "<!-- Lazy loading avec dimensions -->\n<img \n  src=\"image.jpg\" \n  alt=\"Description\" \n  loading=\"lazy\" \n  width=\"800\" \n  height=\"600\"\n>\n\n<!-- Avec srcset pour responsive -->\n<img \n  src=\"image-small.jpg\" \n  srcset=\"image-small.jpg 300w, image-medium.jpg 600w, image-large.jpg 900w\" \n  sizes=\"(max-width: 600px) 300px, (max-width: 900px) 600px, 900px\" \n  alt=\"Description\" \n  loading=\"lazy\"\n>",
-          "description": "Exemples d'images avec lazy loading et optimisations"
-        }
-      }
+        ]}
     },
     {
       "id": "image-optimization",
@@ -53,36 +24,7 @@
           "Testez avec 'ImageOptim' pour l'optimisation automatique",
           "Vérifiez avec 'Lighthouse' → Performance → Image optimization",
           "Analysez avec 'WebPageTest' pour voir l'impact des images"
-        ],
-        "outils": [
-          {
-            "nom": "TinyPNG",
-            "url": "https://tinypng.com/",
-            "description": "Compressez vos images PNG et JPEG"
-          },
-          {
-            "nom": "Squoosh",
-            "url": "https://squoosh.app/",
-            "description": "Outil Google pour optimiser et convertir les images"
-          },
-          {
-            "nom": "ImageOptim",
-            "url": "https://imageoptim.com/",
-            "description": "Optimisation automatique d'images (Mac)"
-          }
-        ],
-        "bonnesPratiques": [
-          "Dimensions appropriées à l'affichage",
-          "Formats modernes (WebP, AVIF)",
-          "Compression optimale (qualité 80-85%)",
-          "Responsive images avec srcset",
-          "Poids maximum 200KB par image"
-        ],
-        "exemple": {
-          "html": "<!-- Image optimisée -->\n<img \n  src=\"hero-image.webp\" \n  alt=\"Hero image\" \n  width=\"1200\" \n  height=\"600\" \n  loading=\"lazy\"\n>\n\n<!-- Responsive avec formats multiples -->\n<picture>\n  <source srcset=\"image.avif\" type=\"image/avif\">\n  <source srcset=\"image.webp\" type=\"image/webp\">\n  <img src=\"image.jpg\" alt=\"Description\" loading=\"lazy\">\n</picture>",
-          "description": "Images optimisées avec formats modernes et responsive"
-        }
-      }
+        ]}
     },
     {
       "id": "modern-formats",
@@ -95,36 +37,7 @@
           "Utilisez l'élément <picture> pour la compatibilité",
           "Testez avec 'Can I Use' pour vérifier le support navigateur",
           "Vérifiez avec 'Lighthouse' pour mesurer l'impact"
-        ],
-        "outils": [
-          {
-            "nom": "Squoosh",
-            "url": "https://squoosh.app/",
-            "description": "Convertissez et optimisez vers WebP/AVIF"
-          },
-          {
-            "nom": "Convertio",
-            "url": "https://convertio.co/fr/",
-            "description": "Convertisseur en ligne vers WebP"
-          },
-          {
-            "nom": "Can I Use",
-            "url": "https://caniuse.com/",
-            "description": "Vérifiez le support des formats par navigateur"
-          }
-        ],
-        "bonnesPratiques": [
-          "WebP pour la compatibilité large",
-          "AVIF pour les navigateurs modernes",
-          "Fallback JPEG/PNG obligatoire",
-          "Utiliser l'élément <picture>",
-          "Tester sur différents navigateurs"
-        ],
-        "exemple": {
-          "html": "<!-- Support multi-formats avec fallback -->\n<picture>\n  <source srcset=\"image.avif\" type=\"image/avif\">\n  <source srcset=\"image.webp\" type=\"image/webp\">\n  <img src=\"image.jpg\" alt=\"Description\" loading=\"lazy\">\n</picture>\n\n<!-- Avec srcset pour responsive -->\n<picture>\n  <source \n    srcset=\"image-small.avif 300w, image-medium.avif 600w, image-large.avif 900w\" \n    type=\"image/avif\"\n  >\n  <source \n    srcset=\"image-small.webp 300w, image-medium.webp 600w, image-large.webp 900w\" \n    type=\"image/webp\"\n  >\n  <img \n    src=\"image.jpg\" \n    srcset=\"image-small.jpg 300w, image-medium.jpg 600w, image-large.jpg 900w\" \n    alt=\"Description\" \n    loading=\"lazy\"\n  >\n</picture>",
-          "description": "Support complet des formats modernes avec fallbacks"
-        }
-      }
+        ]}
     },
     {
       "id": "minification",
@@ -137,23 +50,6 @@
           "Testez avec 'JS Minifier' pour vos fichiers JavaScript",
           "Vérifiez avec 'Lighthouse' → Performance → Minification",
           "Analysez avec 'WebPageTest' pour mesurer l'impact"
-        ],
-        "outils": [
-          {
-            "nom": "Toptal CSS Minifier",
-            "url": "https://www.toptal.com/developers/cssminifier",
-            "description": "Minifiez vos fichiers CSS"
-          },
-          {
-            "nom": "JS Minifier",
-            "url": "https://www.toptal.com/developers/javascript-minifier",
-            "description": "Minifiez vos fichiers JavaScript"
-          },
-          {
-            "nom": "Lighthouse",
-            "url": "https://developers.google.com/web/tools/lighthouse",
-            "description": "Détecte les fichiers non minifiés"
-          }
         ],
         "bonnesPratiques": [
           "Minifier tous les fichiers CSS et JS",
@@ -180,37 +76,7 @@
           "Configurez votre serveur web (Apache/Nginx) pour activer GZIP",
           "Testez avec 'GTmetrix' pour voir l'impact",
           "Vérifiez les headers de réponse avec les outils de développement"
-        ],
-        "outils": [
-          {
-            "nom": "Gzip Test",
-            "url": "https://www.gzip.org/",
-            "description": "Testez si GZIP est activé sur votre site"
-          },
-          {
-            "nom": "GTmetrix",
-            "url": "https://gtmetrix.com/",
-            "description": "Analysez la compression de votre site"
-          },
-          {
-            "nom": "WebPageTest",
-            "url": "https://www.webpagetest.org/",
-            "description": "Testez la compression et les performances"
-          }
-        ],
-        "bonnesPratiques": [
-          "Activer pour HTML, CSS, JS, XML, JSON",
-          "Éviter pour les images déjà compressées",
-          "Configurer les niveaux de compression appropriés",
-          "Tester sur différents serveurs",
-          "Surveiller l'impact sur les performances"
-        ],
-        "exemple": {
-          "apache": "# .htaccess\n<IfModule mod_deflate.c>\n  AddOutputFilterByType DEFLATE text/plain\n  AddOutputFilterByType DEFLATE text/html\n  AddOutputFilterByType DEFLATE text/xml\n  AddOutputFilterByType DEFLATE text/css\n  AddOutputFilterByType DEFLATE application/xml\n  AddOutputFilterByType DEFLATE application/xhtml+xml\n  AddOutputFilterByType DEFLATE application/rss+xml\n  AddOutputFilterByType DEFLATE application/javascript\n  AddOutputFilterByType DEFLATE application/x-javascript\n</IfModule>",
-          "nginx": "# nginx.conf\ngzip on;\ngzip_vary on;\ngzip_min_length 1024;\ngzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;",
-          "description": "Configuration GZIP pour Apache et Nginx"
-        }
-      }
+        ]}
     },
     {
       "id": "browser-caching",

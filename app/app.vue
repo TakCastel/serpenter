@@ -24,7 +24,6 @@
               @keydown.enter="scrollToCategory(category.id)"
               @keydown.space.prevent="scrollToCategory(category.id)"
               class="w-full text-left px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg transition-all duration-200 flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3"
-
               :style="{
                 backgroundColor: activeCategory === category.id ? 'var(--bg-border)' : 'transparent',
                 color: 'var(--text-primary)',
@@ -91,92 +90,83 @@ const checkScroll = () => {
   // Ne pas exécuter si on est en train de scroller programmatiquement
   if (isScrollingProgrammatically.value) return
   
-  const scrollY = window.scrollY
-  const windowHeight = window.innerHeight
-  const headerHeight = 80
-  
-  let closestCategory = null
-  let closestDistance = Infinity
-  
-  for (const category of categories.value) {
-    const element = document.getElementById(`category-${category.id}`)
-    if (element) {
-      const rect = element.getBoundingClientRect()
-      const elementTop = rect.top
-      const elementBottom = rect.bottom
-      
-      const elementCenter = (elementTop + elementBottom) / 2
-      const viewportCenter = windowHeight / 2
-      const distance = Math.abs(elementCenter - viewportCenter)
-      
-      if (elementTop <= windowHeight * 0.3 && elementBottom >= windowHeight * 0.1) {
+  if (process.client) {
+    const scrollY = window.scrollY
+    const windowHeight = window.innerHeight
+    const headerHeight = 80
+    
+    let closestCategory = null
+    let closestDistance = Infinity
+    
+    // Vérifier chaque catégorie
+    categories.value.forEach(category => {
+      const element = document.getElementById(`category-${category.id}`)
+      if (element) {
+        const rect = element.getBoundingClientRect()
+        const distance = Math.abs(rect.top - headerHeight)
+        
         if (distance < closestDistance) {
           closestDistance = distance
           closestCategory = category.id
         }
       }
+    })
+    
+    if (closestCategory && closestCategory !== activeCategory.value) {
+      activeCategory.value = closestCategory
     }
   }
-  
-  if (closestCategory) {
-    activeCategory.value = closestCategory
+}
+
+const scrollToCategory = (categoryId) => {
+  if (process.client) {
+    const element = document.getElementById(`category-${categoryId}`)
+    if (element) {
+      if (seoChecklist.value) {
+        seoChecklist.value.openCategory(categoryId)
+      }
+      isScrollingProgrammatically.value = true
+      setTimeout(() => {
+        const headerElement = document.querySelector('header')
+        const headerHeight = headerElement ? headerElement.offsetHeight : 80
+        const elementTop = element.offsetTop
+        const scrollPosition = elementTop - headerHeight - 20 // Added 20px offset
+        window.scrollTo({
+          top: Math.max(0, scrollPosition),
+          behavior: 'smooth'
+        })
+        activeCategory.value = categoryId
+        setTimeout(() => {
+          isScrollingProgrammatically.value = false
+        }, 1000)
+      }, 300)
+    }
   }
 }
 
 const getSommaireIcon = (categoryId) => {
   const icons = {
     'seo': 'heroicons:magnifying-glass',
-    'accessibilite': 'heroicons:user-circle',
+    'accessibilite': 'heroicons:heart',
     'performance': 'heroicons:bolt',
-    'eco-conception': 'heroicons:globe-alt',
+    'eco-conception': 'heroicons:sparkles',
     'responsive-ux': 'heroicons:device-phone-mobile',
-    'securite': 'heroicons:lock-closed',
+    'securite': 'heroicons:shield-check',
     'analytics': 'heroicons:chart-bar'
   }
   return icons[categoryId] || 'heroicons:clipboard-document-list'
 }
 
-const scrollToCategory = (categoryId) => {
-  const element = document.getElementById(`category-${categoryId}`)
-  if (element) {
-    // Forcer l'ouverture de la catégorie d'abord
-    if (seoChecklist.value) {
-      seoChecklist.value.openCategory(categoryId)
-    }
-    
-    // Désactiver checkScroll temporairement
-    isScrollingProgrammatically.value = true
-    
-    // Attendre que l'accordéon soit complètement ouvert puis positionner
-    setTimeout(() => {
-      // Calculer la hauteur réelle du header
-      const headerElement = document.querySelector('header')
-      const headerHeight = headerElement ? headerElement.offsetHeight : 80
-      const elementTop = element.offsetTop
-      const scrollPosition = elementTop - headerHeight - 90 // Ajouter un espacement de 20px
-      
-      window.scrollTo({
-        top: Math.max(0, scrollPosition),
-        behavior: 'smooth'
-      })
-      
-      activeCategory.value = categoryId
-      
-      // Réactiver checkScroll après un délai pour laisser le scroll se terminer
-      setTimeout(() => {
-        isScrollingProgrammatically.value = false
-      }, 1000) // Délai suffisant pour que le scroll smooth se termine
-    }, 300) // Délai plus long pour laisser l'animation d'ouverture se terminer
-  }
-}
-
-// Écouter le scroll pour mettre à jour la catégorie active
 onMounted(() => {
-  window.addEventListener('scroll', checkScroll)
-  checkScroll()
+  if (process.client) {
+    window.addEventListener('scroll', checkScroll)
+  }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', checkScroll)
+  if (process.client) {
+    window.removeEventListener('scroll', checkScroll)
+  }
 })
 </script>
+

@@ -37,17 +37,17 @@
           </button>
           <div class="flex-1 min-w-0">
             <h3 class="text-sm font-medium leading-tight transition-colors duration-200" style="color: var(--text-primary);">
-          {{ item.label }}
+              {{ item.label }}
             </h3>
             <p class="text-xs mt-1 transition-colors duration-200" style="color: var(--text-secondary);">
               {{ item.description }}
             </p>
           </div>
-      </div>
-      <button 
+        </div>
+        <button 
           class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center transition-all duration-200 hover:opacity-80"
           :class="{ 'rotate-180': isExpanded }"
-        :aria-expanded="isExpanded"
+          :aria-expanded="isExpanded"
           :aria-label="`${isExpanded ? 'Fermer' : 'Ouvrir'} les détails`"
           aria-hidden="true"
         >
@@ -57,7 +57,7 @@
             style="color: var(--text-muted);"
             aria-hidden="true"
           />
-      </button>
+        </button>
       </div>
     </div>
 
@@ -98,87 +98,123 @@
               {{ item.details.exemple.description }}
             </div>
             
-            <!-- HTML -->
-            <div v-if="item.details.exemple && item.details.exemple.html" class="rounded-md p-3 border transition-colors duration-200" style="background-color: var(--bg-border); border-color: var(--bg-border);">
-              <div class="text-xs mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-                HTML
+            <!-- Code Examples -->
+            <div v-if="item.details.exemple && (item.details.exemple.code || item.details.exemple.html || item.details.exemple.css || item.details.exemple.javascript || item.details.exemple.php || item.details.exemple.nodejs || item.details.exemple.apache || item.details.exemple.nginx)" class="space-y-2">
+              <!-- HTML -->
+              <div v-if="item.details.exemple.html" class="space-y-1">
+                <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">HTML</div>
+                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple HTML"><code style="color: var(--text-secondary);">{{ item.details.exemple.html }}</code></pre>
               </div>
-              <pre class="text-sm font-mono transition-colors duration-200 whitespace-pre-wrap overflow-x-auto" style="color: var(--text-primary);" role="code" aria-label="Exemple de code HTML"><code>{{ item.details.exemple.html }}</code></pre>
-            </div>
-            
-            <!-- CSS -->
-            <div v-if="item.details.exemple && item.details.exemple.css" class="rounded-md p-3 border transition-colors duration-200" style="background-color: var(--bg-border); border-color: var(--bg-border);">
-              <div class="text-xs mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-                CSS
+              
+              <!-- CSS -->
+              <div v-if="item.details.exemple.css" class="space-y-1">
+                <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">CSS</div>
+                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple CSS"><code style="color: var(--text-secondary);">{{ item.details.exemple.css }}</code></pre>
               </div>
-              <pre class="text-sm font-mono transition-colors duration-200 whitespace-pre-wrap overflow-x-auto" style="color: var(--text-primary);" role="code" aria-label="Exemple de code CSS"><code>{{ item.details.exemple.css }}</code></pre>
-            </div>
-            
-            <!-- JavaScript -->
-            <div v-if="item.details.exemple && item.details.exemple.javascript" class="rounded-md p-3 border transition-colors duration-200" style="background-color: var(--bg-border); border-color: var(--bg-border);">
-              <div class="text-xs mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-                JavaScript
+              
+              <!-- JavaScript -->
+              <div v-if="item.details.exemple.javascript" class="space-y-1">
+                <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">JavaScript</div>
+                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple JavaScript"><code style="color: var(--text-secondary);">{{ item.details.exemple.javascript }}</code></pre>
               </div>
-              <pre class="text-sm font-mono transition-colors duration-200 whitespace-pre-wrap overflow-x-auto" style="color: var(--text-primary);" role="code" aria-label="Exemple de code JavaScript"><code>{{ item.details.exemple.javascript }}</code></pre>
-            </div>
-            
-            <!-- PHP -->
-            <div v-if="item.details.exemple && item.details.exemple.php" class="rounded-md p-3 border transition-colors duration-200" style="background-color: var(--bg-border); border-color: var(--bg-border);">
-              <div class="text-xs mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-                PHP
+              
+              <!-- PHP -->
+              <div v-if="item.details.exemple.php" class="space-y-1">
+                <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">PHP</div>
+                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple PHP"><code style="color: var(--text-secondary);">{{ item.details.exemple.php }}</code></pre>
               </div>
-              <pre class="text-sm font-mono transition-colors duration-200 whitespace-pre-wrap overflow-x-auto" style="color: var(--text-primary);" role="code" aria-label="Exemple de code PHP"><code>{{ item.details.exemple.php }}</code></pre>
-            </div>
-            
-            <!-- Node.js -->
-            <div v-if="item.details.exemple && item.details.exemple.nodejs" class="rounded-md p-3 border transition-colors duration-200" style="background-color: var(--bg-border); border-color: var(--bg-border);">
-              <div class="text-xs mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-                Node.js
+              
+              <!-- Node.js -->
+              <div v-if="item.details.exemple.nodejs" class="space-y-1">
+                <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Node.js</div>
+                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Node.js"><code style="color: var(--text-secondary);">{{ item.details.exemple.nodejs }}</code></pre>
               </div>
-              <pre class="text-sm font-mono transition-colors duration-200 whitespace-pre-wrap overflow-x-auto" style="color: var(--text-primary);" role="code" aria-label="Exemple de code Node.js"><code>{{ item.details.exemple.nodejs }}</code></pre>
-            </div>
-            
-            <!-- Apache -->
-            <div v-if="item.details.exemple && item.details.exemple.apache" class="rounded-md p-3 border transition-colors duration-200" style="background-color: var(--bg-border); border-color: var(--bg-border);">
-              <div class="text-xs mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-                Apache
+              
+              <!-- Apache -->
+              <div v-if="item.details.exemple.apache" class="space-y-1">
+                <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Apache</div>
+                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Apache"><code style="color: var(--text-secondary);">{{ item.details.exemple.apache }}</code></pre>
               </div>
-              <pre class="text-sm font-mono transition-colors duration-200 whitespace-pre-wrap overflow-x-auto" style="color: var(--text-primary);" role="code" aria-label="Exemple de configuration Apache"><code>{{ item.details.exemple.apache }}</code></pre>
-            </div>
-            
-            <!-- Nginx -->
-            <div v-if="item.details.exemple && item.details.exemple.nginx" class="rounded-md p-3 border transition-colors duration-200" style="background-color: var(--bg-border); border-color: var(--bg-border);">
-              <div class="text-xs mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-                Nginx
+              
+              <!-- Nginx -->
+              <div v-if="item.details.exemple.nginx" class="space-y-1">
+                <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Nginx</div>
+                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Nginx"><code style="color: var(--text-secondary);">{{ item.details.exemple.nginx }}</code></pre>
               </div>
-              <pre class="text-sm font-mono transition-colors duration-200 whitespace-pre-wrap overflow-x-auto" style="color: var(--text-primary);" role="code" aria-label="Exemple de configuration Nginx"><code>{{ item.details.exemple.nginx }}</code></pre>
+              
+              <!-- Code Examples (ancienne structure) -->
+              <div v-if="item.details.exemple.code" class="space-y-2">
+                <!-- HTML -->
+                <div v-if="item.details.exemple.code.html" class="space-y-1">
+                  <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">HTML</div>
+                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple HTML"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.html }}</code></pre>
+                </div>
+                
+                <!-- CSS -->
+                <div v-if="item.details.exemple.code.css" class="space-y-1">
+                  <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">CSS</div>
+                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple CSS"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.css }}</code></pre>
+                </div>
+                
+                <!-- JavaScript -->
+                <div v-if="item.details.exemple.code.javascript" class="space-y-1">
+                  <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">JavaScript</div>
+                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple JavaScript"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.javascript }}</code></pre>
+                </div>
+                
+                <!-- PHP -->
+                <div v-if="item.details.exemple.code.php" class="space-y-1">
+                  <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">PHP</div>
+                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple PHP"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.php }}</code></pre>
+                </div>
+                
+                <!-- Node.js -->
+                <div v-if="item.details.exemple.code.nodejs" class="space-y-1">
+                  <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Node.js</div>
+                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Node.js"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.nodejs }}</code></pre>
+                </div>
+                
+                <!-- Apache -->
+                <div v-if="item.details.exemple.code.apache" class="space-y-1">
+                  <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Apache</div>
+                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Apache"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.apache }}</code></pre>
+                </div>
+                
+                <!-- Nginx -->
+                <div v-if="item.details.exemple.code.nginx" class="space-y-1">
+                  <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Nginx</div>
+                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Nginx"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.nginx }}</code></pre>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Bonnes pratiques -->
-        <div v-if="item.details && item.details.bonnesPratiques && item.details.bonnesPratiques.length > 0" class="space-y-2">
+        <div v-if="item.details && item.details.bonnesPratiques" class="space-y-2">
           <h4 class="text-sm font-medium transition-colors duration-200" style="color: var(--accent-primary);">
             Bonnes pratiques
           </h4>
           <ul class="space-y-1" role="list">
             <li 
-              v-for="(practice, index) in item.details.bonnesPratiques" 
+              v-for="(pratique, index) in item.details.bonnesPratiques" 
               :key="index"
-              class="text-sm flex items-start space-x-2 transition-colors duration-200"
+              class="text-sm leading-relaxed transition-colors duration-200 flex items-start space-x-2"
               style="color: var(--text-secondary);"
               role="listitem"
             >
               <Icon 
-                name="heroicons:check" 
+                name="heroicons:check-circle" 
                 class="w-4 h-4 flex-shrink-0 mt-0.5 transition-colors duration-200"
                 style="color: var(--accent-primary);"
                 aria-hidden="true"
               />
-              <span>{{ practice }}</span>
+              <span>{{ pratique }}</span>
             </li>
           </ul>
         </div>
+
+
       </div>
     </div>
   </div>
@@ -188,11 +224,18 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
-  item: { type: Object, required: true },
-  isItemChecked: { type: Boolean, required: true }
+  item: {
+    type: Object,
+    required: true
+  },
+  isItemChecked: {
+    type: Boolean,
+    required: true
+  }
 })
 
 const emit = defineEmits(['toggle-item'])
+
 const isExpanded = ref(false)
 
 const toggleAccordion = () => {
@@ -203,7 +246,6 @@ const toggleItem = () => {
   emit('toggle-item', props.item.id)
 }
 
-// Écouter l'événement de fermeture des accordéons d'items
 const handleCloseItemAccordion = (event) => {
   if (event.detail.itemId === props.item.id) {
     isExpanded.value = false
@@ -211,22 +253,14 @@ const handleCloseItemAccordion = (event) => {
 }
 
 onMounted(() => {
-  window.addEventListener('close-item-accordion', handleCloseItemAccordion)
+  if (process.client) {
+    window.addEventListener('close-item-accordion', handleCloseItemAccordion)
+  }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('close-item-accordion', handleCloseItemAccordion)
-})
-
-const getCodeTitle = (language) => {
-  const titles = {
-    'html': 'HTML',
-    'vue': 'Vue.js',
-    'js': 'JavaScript',
-    'css': 'CSS',
-    'php': 'PHP',
-    'python': 'Python'
+  if (process.client) {
+    window.removeEventListener('close-item-accordion', handleCloseItemAccordion)
   }
-  return titles[language] || language.toUpperCase()
-}
+})
 </script> 

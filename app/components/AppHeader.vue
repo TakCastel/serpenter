@@ -23,7 +23,44 @@
           Checklist Pré-Déploiement
         </span>
       </div>
+      
       <div class="flex items-center space-x-3" role="toolbar" aria-label="Actions de l'application">
+        <!-- Progress Indicator (visible only when scrolled) -->
+        <div 
+          v-if="isScrolled && progressPercentage !== null"
+          class="flex items-center space-x-3 mr-2"
+        >
+          <!-- Progress Circle -->
+          <div class="relative w-12 h-12">
+            <!-- Background Circle -->
+            <svg class="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
+              <path
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                stroke="var(--bg-border)"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <!-- Progress Circle -->
+              <path
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                stroke="var(--accent-primary)"
+                stroke-width="2"
+                stroke-linecap="round"
+                :stroke-dasharray="`${progressPercentage * 1.131}, 100`"
+                class="transition-all duration-500 ease-out"
+              />
+            </svg>
+            <!-- Percentage Text -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-xs font-bold transition-colors duration-200" style="color: var(--text-primary);">
+                {{ Math.round(progressPercentage) }}%
+              </span>
+            </div>
+          </div>
+        </div>
+        
         <button
           @click="toggleTheme"
           class="w-10 h-10 rounded-lg transition-colors duration-200 flex items-center justify-center hover:opacity-80"
@@ -71,35 +108,50 @@ const emit = defineEmits(['reset-progress'])
 
 const isDark = ref(true)
 const isScrolled = ref(false)
+const progressPercentage = ref(null)
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 20
+  if (process.client) {
+    isScrolled.value = window.scrollY > 20
+  }
+}
+
+const handleProgressUpdate = (event) => {
+  progressPercentage.value = event.detail.percentage
 }
 
 const toggleTheme = () => {
   isDark.value = !isDark.value
-  document.documentElement.classList.toggle('light-theme')
-  localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
+  if (process.client) {
+    document.documentElement.classList.toggle('light-theme')
+    localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
+  }
 }
 
 const resetProgress = () => {
-  if (confirm('Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cette action ne peut pas être annulée.')) {
+  if (process.client && confirm('Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cette action ne peut pas être annulée.')) {
     emit('reset-progress')
   }
 }
 
 onMounted(() => {
-  const savedTheme = localStorage.getItem('theme')
-  if (savedTheme === 'light') {
-    isDark.value = false
-    document.documentElement.classList.add('light-theme')
+  if (process.client) {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'light') {
+      isDark.value = false
+      document.documentElement.classList.add('light-theme')
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('progress-updated', handleProgressUpdate)
+    handleScroll() // Check initial scroll position
   }
-  
-  window.addEventListener('scroll', handleScroll)
-  handleScroll() // Check initial scroll position
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+  if (process.client) {
+    window.removeEventListener('scroll', handleScroll)
+    window.removeEventListener('progress-updated', handleProgressUpdate)
+  }
 })
 </script> 

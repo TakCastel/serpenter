@@ -20,21 +20,29 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const isVisible = ref(false)
 
 const checkScroll = () => {
-  isVisible.value = window.scrollY > 300
+  if (process.client) {
+    isVisible.value = window.scrollY > 300
+  }
 }
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
+  if (process.client) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', checkScroll)
+  if (process.client) {
+    window.addEventListener('scroll', checkScroll)
+  }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', checkScroll)
+  if (process.client) {
+    window.removeEventListener('scroll', checkScroll)
+  }
 })
 </script> 

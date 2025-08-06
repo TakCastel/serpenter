@@ -11,36 +11,7 @@
           "Vérifiez avec 'Lighthouse' → Performance → Reduce requests",
           "Testez avec 'GTmetrix' pour identifier les ressources inutiles",
           "Analysez avec 'Chrome DevTools' → Network pour voir toutes les requêtes"
-        ],
-        "outils": [
-          {
-            "nom": "WebPageTest",
-            "url": "https://www.webpagetest.org/",
-            "description": "Analysez le nombre et le type de requêtes HTTP"
-          },
-          {
-            "nom": "Lighthouse",
-            "url": "https://developers.google.com/web/tools/lighthouse",
-            "description": "Détecte les opportunités de réduction de requêtes"
-          },
-          {
-            "nom": "GTmetrix",
-            "url": "https://gtmetrix.com/",
-            "description": "Analyse complète des performances et requêtes"
-          }
-        ],
-        "bonnesPratiques": [
-          "Combiner les fichiers CSS en un seul",
-          "Combiner les fichiers JS en un seul",
-          "Utiliser les sprites CSS pour les icônes",
-          "Éliminer les scripts tiers inutiles",
-          "Utiliser les polices système quand possible"
-        ],
-        "exemple": {
-          "html": "<!-- Fichiers combinés -->\n<link rel=\"stylesheet\" href=\"/css/main.min.css\">\n<script src=\"/js/main.min.js\" defer></script>\n\n<!-- Fichiers séparés -->\n<link rel=\"stylesheet\" href=\"/css/reset.css\">\n<link rel=\"stylesheet\" href=\"/css/layout.css\">\n<link rel=\"stylesheet\" href=\"/css/components.css\">\n<script src=\"/js/utils.js\"></script>\n<script src=\"/js/app.js\"></script>",
-          "description": "Exemple de fichiers combinés vs séparés pour réduire les requêtes"
-        }
-      }
+        ]}
     },
     {
       "id": "poids-page",
@@ -53,36 +24,7 @@
           "Vérifiez avec 'Lighthouse' → Performance → Total page size",
           "Testez avec 'GTmetrix' pour analyser la répartition du poids",
           "Analysez avec 'Chrome DevTools' → Network → Total transferred"
-        ],
-        "outils": [
-          {
-            "nom": "WebPageTest",
-            "url": "https://www.webpagetest.org/",
-            "description": "Mesurez le poids total de votre page"
-          },
-          {
-            "nom": "GTmetrix",
-            "url": "https://gtmetrix.com/",
-            "description": "Analyse détaillée du poids des ressources"
-          },
-          {
-            "nom": "Lighthouse",
-            "url": "https://developers.google.com/web/tools/lighthouse",
-            "description": "Audit de performance avec métriques de poids"
-          }
-        ],
-        "bonnesPratiques": [
-          "HTML : moins de 50KB",
-          "CSS : moins de 100KB",
-          "JS : moins de 200KB",
-          "Images : moins de 500KB total",
-          "Total : moins de 1MB"
-        ],
-        "exemple": {
-          "html": "<!-- Page légère -->\n<!-- HTML: 15KB -->\n<!-- CSS: 25KB -->\n<!-- JS: 45KB -->\n<!-- Images: 300KB -->\n<!-- Total: 385KB -->\n\n<!-- Page lourde -->\n<!-- HTML: 50KB -->\n<!-- CSS: 200KB -->\n<!-- JS: 500KB -->\n<!-- Images: 2MB -->\n<!-- Total: 2.75MB -->",
-          "description": "Exemple de répartition du poids pour une page optimisée vs lourde"
-        }
-      }
+        ]}
     },
     {
       "id": "tracking-inutile",
