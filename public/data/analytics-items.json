@@ -1,0 +1,83 @@
+{
+  "items": [
+    {
+      "id": "google-analytics",
+      "label": "Google Analytics configuré",
+      "description": "Suivi des conversions et comportements",
+      "details": {
+        "explication": "Google Analytics permet de suivre les performances du site, les comportements utilisateurs et les conversions.",
+        "exemple": "GA4 configuré avec événements personnalisés",
+        "bonnesPratiques": [
+          "Utiliser GA4 (nouvelle version)",
+          "Configurer les objectifs",
+          "Respecter le RGPD",
+          "Événements personnalisés"
+        ],
+        "codeExemple": {
+          "html": "<!-- Google Analytics 4 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'GA_MEASUREMENT_ID');\n</script>",
+          "vue": "<script>\nexport default {\n  mounted() {\n    // Événement personnalisé\n    gtag('event', 'page_view', {\n      page_title: this.$route.name,\n      page_location: window.location.href\n    });\n  },\n  methods: {\n    trackConversion() {\n      gtag('event', 'conversion', {\n        send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL'\n      });\n    }\n  }\n}\n</script>",
+          "nuxt": "// nuxt.config.ts\nexport default {\n  app: {\n    head: {\n      script: [\n        {\n          src: 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID',\n          async: true\n        },\n        {\n          innerHTML: `\n            window.dataLayer = window.dataLayer || [];\n            function gtag(){dataLayer.push(arguments);}\n            gtag('js', new Date());\n            gtag('config', 'GA_MEASUREMENT_ID');\n          `\n        }\n      ]\n    }\n  }\n}"
+        }
+      }
+    },
+    {
+      "id": "search-console",
+      "label": "Google Search Console configuré",
+      "description": "Monitoring des performances de recherche",
+      "details": {
+        "explication": "Google Search Console permet de surveiller les performances de recherche, les erreurs d'indexation et les opportunités d'amélioration.",
+        "exemple": "Site vérifié, sitemap soumis, erreurs surveillées",
+        "bonnesPratiques": [
+          "Vérifier la propriété",
+          "Soumettre le sitemap",
+          "Surveiller les erreurs",
+          "Analyser les requêtes"
+        ],
+        "codeExemple": {
+          "html": "<!-- Méta tag de vérification -->\n<meta name=\"google-site-verification\" content=\"verification_token\" />",
+          "nuxt": "// nuxt.config.ts\nexport default {\n  app: {\n    head: {\n      meta: [\n        {\n          name: 'google-site-verification',\n          content: 'verification_token'\n        }\n      ]\n    }\n  }\n}",
+          "info": "Étapes de configuration :\n1. Aller sur Google Search Console\n2. Ajouter une propriété\n3. Vérifier la propriété (méta tag ou fichier HTML)\n4. Soumettre le sitemap\n5. Configurer les notifications"
+        }
+      }
+    },
+    {
+      "id": "error-tracking",
+      "label": "Suivi des erreurs",
+      "description": "Monitoring des erreurs JavaScript",
+      "details": {
+        "explication": "Le suivi des erreurs permet d'identifier et corriger les problèmes avant qu'ils n'affectent trop d'utilisateurs.",
+        "exemple": "Sentry, LogRocket, Bugsnag",
+        "bonnesPratiques": [
+          "Capturer les erreurs JavaScript",
+          "Grouper les erreurs similaires",
+          "Notifications en temps réel",
+          "Contexte utilisateur"
+        ],
+        "codeExemple": {
+          "vue": "<script>\nexport default {\n  errorCaptured(err, vm, info) {\n    // Envoyer l'erreur à Sentry\n    Sentry.captureException(err, {\n      extra: {\n        componentName: vm.$options.name,\n        info: info\n      }\n    });\n    return false; // Empêcher la propagation\n  },\n  \n  mounted() {\n    // Capturer les erreurs globales\n    window.addEventListener('error', (event) => {\n      Sentry.captureException(event.error);\n    });\n    \n    // Capturer les promesses rejetées\n    window.addEventListener('unhandledrejection', (event) => {\n      Sentry.captureException(event.reason);\n    });\n  }\n}\n</script>",
+          "sentry": "// Configuration Sentry\nimport * as Sentry from '@sentry/vue';\nimport { BrowserTracing } from '@sentry/tracing';\n\nSentry.init({\n  app,\n  dsn: 'YOUR_SENTRY_DSN',\n  integrations: [\n    new BrowserTracing({\n      routingInstrumentation: Sentry.vueRouterInstrumentation(router)\n    })\n  ],\n  tracesSampleRate: 1.0,\n  environment: process.env.NODE_ENV\n});"
+        }
+      }
+    },
+    {
+      "id": "performance-monitoring",
+      "label": "Monitoring des performances",
+      "description": "Suivi des métriques Core Web Vitals",
+      "details": {
+        "explication": "Surveiller les métriques de performance en temps réel pour détecter les problèmes et optimiser l'expérience utilisateur.",
+        "exemple": "LCP, FID, CLS, temps de chargement",
+        "bonnesPratiques": [
+          "Surveiller les Core Web Vitals",
+          "Alertes en temps réel",
+          "Historique des performances",
+          "Corrélation avec les erreurs"
+        ],
+        "codeExemple": {
+          "javascript": "// Monitoring des Core Web Vitals\nimport { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';\n\nfunction sendToAnalytics(metric) {\n  // Envoyer à Google Analytics\n  gtag('event', metric.name, {\n    value: Math.round(metric.value),\n    event_category: 'Web Vitals',\n    event_label: metric.id,\n    non_interaction: true\n  });\n}\n\ngetCLS(sendToAnalytics);\ngetFID(sendToAnalytics);\ngetFCP(sendToAnalytics);\ngetLCP(sendToAnalytics);\ngetTTFB(sendToAnalytics);",
+          "vue": "<script>\nexport default {\n  mounted() {\n    // Mesurer le temps de chargement de la page\n    const navigation = performance.getEntriesByType('navigation')[0];\n    const loadTime = navigation.loadEventEnd - navigation.loadEventStart;\n    \n    // Envoyer la métrique\n    this.$gtag('event', 'timing_complete', {\n      name: 'load',\n      value: Math.round(loadTime)\n    });\n  }\n}\n</script>",
+          "nuxt": "// plugins/web-vitals.client.js\nexport default ({ app }) => {\n  if (process.client) {\n    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {\n      const sendToAnalytics = (metric) => {\n        app.$gtag('event', metric.name, {\n          value: Math.round(metric.value),\n          event_category: 'Web Vitals'\n        });\n      };\n      \n      getCLS(sendToAnalytics);\n      getFID(sendToAnalytics);\n      getFCP(sendToAnalytics);\n      getLCP(sendToAnalytics);\n      getTTFB(sendToAnalytics);\n    });\n  }\n}"
+        }
+      }
+    }
+  ]
+} 

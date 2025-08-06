@@ -1,0 +1,214 @@
+{
+  "items": [
+    {
+      "id": "title-tag",
+      "label": "Balise <title> présente et optimisée",
+      "description": "Titre unique et pertinent, avec mots-clés",
+      "details": {
+        "explication": "La balise title est l'un des éléments les plus importants pour le SEO. Elle doit être unique pour chaque page et contenir les mots-clés principaux.",
+        "exemple": "<title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>",
+        "bonnesPratiques": [
+          "Longueur entre 50 et 60 caractères",
+          "Inclure le mot-clé principal en début",
+          "Unique pour chaque page",
+          "Descriptif et attractif"
+        ],
+        "codeExemple": {
+          "html": "<head>\n  <title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>\n</head>",
+          "vue": "<template>\n  <head>\n    <title>{{ pageTitle }}</title>\n  </head>\n</template>\n\n<script>\nexport default {\n  head() {\n    return {\n      title: 'Agence SEO Paris - Optimisation Référencement Naturel | Serpenter'\n    }\n  }\n}\n</script>"
+        }
+      }
+    },
+    {
+      "id": "meta-description",
+      "label": "Balise <meta description> renseignée",
+      "description": "Résumé attrayant et en lien avec le contenu",
+      "details": {
+        "explication": "La meta description apparaît dans les résultats de recherche et influence le taux de clic. Elle doit résumer le contenu de la page de manière attractive.",
+        "exemple": "<meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">",
+        "bonnesPratiques": [
+          "Longueur entre 150 et 160 caractères",
+          "Inclure le mot-clé principal",
+          "Descriptif et incitatif",
+          "Unique pour chaque page"
+        ],
+        "codeExemple": {
+          "html": "<head>\n  <meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">\n</head>",
+          "vue": "<script>\nexport default {\n  head() {\n    return {\n      meta: [\n        {\n          name: 'description',\n          content: 'Agence SEO à Paris spécialisée dans l\\'optimisation pour les moteurs de recherche.'\n        }\n      ]\n    }\n  }\n}\n</script>"
+        }
+      }
+    },
+    {
+      "id": "h1-unique",
+      "label": "Une seule balise <h1> par page",
+      "description": "Structuration claire du contenu principal",
+      "details": {
+        "explication": "Le H1 est le titre principal de la page. Il ne doit y en avoir qu'un seul par page pour une hiérarchie claire et une bonne compréhension par les moteurs de recherche.",
+        "exemple": "<h1>Agence SEO Paris - Expert en Référencement Naturel</h1>",
+        "bonnesPratiques": [
+          "Un seul H1 par page",
+          "Inclure le mot-clé principal",
+          "Descriptif et pertinent",
+          "Hiérarchie logique avec H2, H3..."
+        ],
+        "codeExemple": {
+          "html": "<main>\n  <h1>Agence SEO Paris - Expert en Référencement Naturel</h1>\n  <h2>Nos Services SEO</h2>\n  <h3>Audit Technique</h3>\n</main>",
+          "vue": "<template>\n  <main>\n    <h1>{{ pageTitle }}</h1>\n    <h2>{{ sectionTitle }}</h2>\n  </main>\n</template>"
+        }
+      }
+    },
+    {
+      "id": "heading-structure",
+      "label": "Structure des titres logique (H1 > H2 > H3)",
+      "description": "Pas de saut de niveau, lisible pour les moteurs",
+      "details": {
+        "explication": "La hiérarchie des titres doit être logique et respecter l'ordre H1 > H2 > H3. Évitez les sauts de niveau qui peuvent confondre les moteurs de recherche.",
+        "exemple": "H1 (titre principal) > H2 (sections) > H3 (sous-sections) > H4 (détails)",
+        "bonnesPratiques": [
+          "Respecter l'ordre hiérarchique",
+          "Pas de saut de niveau (H1 > H3)",
+          "Titres descriptifs et pertinents",
+          "Inclure des mots-clés naturellement"
+        ],
+        "codeExemple": {
+          "html": "<h1>Agence SEO Paris</h1>\n<h2>Nos Services</h2>\n<h3>Audit SEO</h3>\n<h3>Optimisation On-Page</h3>\n<h2>Notre Équipe</h2>\n<h3>Experts SEO</h3>",
+          "structure": "✅ Bonne structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n│   ├── H3: Audit SEO\n│   └── H3: Optimisation On-Page\n└── H2: Notre Équipe\n    └── H3: Experts SEO\n\n❌ Mauvaise structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n└── H4: Audit SEO (saut de niveau !)"
+        }
+      }
+    },
+    {
+      "id": "url-structure",
+      "label": "URL lisible et courte",
+      "description": "Ex : /services/seo plutôt que /page?id=24",
+      "details": {
+        "explication": "Les URLs doivent être descriptives, courtes et inclure les mots-clés pertinents. Évitez les paramètres techniques et les caractères spéciaux.",
+        "exemple": "https://serpenter.fr/services/seo-audit-technique",
+        "bonnesPratiques": [
+          "URLs descriptives et courtes",
+          "Inclure les mots-clés principaux",
+          "Utiliser des tirets (-) au lieu d'espaces",
+          "Éviter les caractères spéciaux"
+        ],
+        "codeExemple": {
+          "bon": "✅ URLs optimisées :\n/services/seo-audit\n/blog/optimisation-meta-description\n/contact-agence-seo-paris",
+          "mauvais": "❌ URLs à éviter :\n/page.php?id=123&cat=seo\n/services.php?service=audit&type=technical\n/contact?ref=google&utm_source=seo",
+          "nuxt": "// nuxt.config.ts\nexport default {\n  router: {\n    extendRoutes(routes, resolve) {\n      routes.push({\n        name: 'seo-audit',\n        path: '/services/seo-audit',\n        component: resolve(__dirname, 'pages/services/seo-audit.vue')\n      })\n    }\n  }\n}"
+        }
+      }
+    },
+    {
+      "id": "image-alt",
+      "label": "Texte alternatif (alt) sur toutes les images",
+      "description": "Pour le SEO image et l'accessibilité",
+      "details": {
+        "explication": "L'attribut alt décrit le contenu de l'image pour les moteurs de recherche et les lecteurs d'écran. Il améliore l'accessibilité et le SEO image.",
+        "exemple": "<img src=\"audit-seo.jpg\" alt=\"Audit SEO technique d'un site e-commerce\">",
+        "bonnesPratiques": [
+          "Descriptif et pertinent",
+          "Inclure les mots-clés naturellement",
+          "Pas de spam de mots-clés",
+          "Décrire le contenu de l'image"
+        ],
+        "codeExemple": {
+          "html": "<img \n  src=\"/images/audit-seo-technique.jpg\" \n  alt=\"Audit SEO technique d'un site e-commerce - Analyse des performances\" \n  width=\"800\" \n  height=\"600\"\n>",
+          "vue": "<template>\n  <img \n    :src=\"image.src\" \n    :alt=\"image.alt\" \n    :width=\"image.width\" \n    :height=\"image.height\"\n  >\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      image: {\n        src: '/images/audit-seo.jpg',\n        alt: 'Audit SEO technique d\\'un site e-commerce',\n        width: 800,\n        height: 600\n      }\n    }\n  }\n}\n</script>"
+        }
+      }
+    },
+    {
+      "id": "internal-links",
+      "label": "Liens internes présents",
+      "description": "Navigation contextuelle",
+      "details": {
+        "explication": "Les liens internes aident les moteurs de recherche à comprendre la structure de votre site et distribuent le PageRank entre vos pages.",
+        "exemple": "Lien vers des pages connexes avec des ancres descriptives",
+        "bonnesPratiques": [
+          "Ancres descriptives et pertinentes",
+          "Lien vers des pages connexes",
+          "Éviter les ancres génériques (cliquez ici)",
+          "Utiliser des mots-clés dans les ancres"
+        ],
+        "codeExemple": {
+          "html": "<p>Découvrez nos <a href=\"/services/audit-seo\">services d'audit SEO</a> pour améliorer votre visibilité.</p>\n<p>Consultez notre <a href=\"/blog/optimisation-meta-description\">guide sur les meta descriptions</a>.</p>",
+          "vue": "<template>\n  <div>\n    <p>Découvrez nos <NuxtLink to=\"/services/audit-seo\">services d'audit SEO</NuxtLink>.</p>\n    <p>Consultez notre <NuxtLink to=\"/blog/optimisation-meta-description\">guide sur les meta descriptions</NuxtLink>.</p>\n  </div>\n</template>"
+        }
+      }
+    },
+    {
+      "id": "canonical",
+      "label": "Balise canonical présente",
+      "description": "Pour éviter le contenu dupliqué",
+      "details": {
+        "explication": "La balise canonical indique aux moteurs de recherche quelle est la version principale d'une page, évitant ainsi les problèmes de contenu dupliqué.",
+        "exemple": "<link rel=\"canonical\" href=\"https://serpenter.fr/services/seo\">",
+        "bonnesPratiques": [
+          "URL absolue et complète",
+          "Une seule par page",
+          "Pointe vers la version principale",
+          "Éviter les chaînes de redirection"
+        ],
+        "codeExemple": {
+          "html": "<head>\n  <link rel=\"canonical\" href=\"https://serpenter.fr/services/seo\">\n</head>",
+          "vue": "<script>\nexport default {\n  head() {\n    return {\n      link: [\n        {\n          rel: 'canonical',\n          href: 'https://serpenter.fr/services/seo'\n        }\n      ]\n    }\n  }\n}\n</script>"
+        }
+      }
+    },
+    {
+      "id": "sitemap",
+      "label": "Sitemap XML généré",
+      "description": "Sitemap à jour et soumis à Google Search Console",
+      "details": {
+        "explication": "Le sitemap XML aide les moteurs de recherche à découvrir et indexer toutes les pages de votre site. Il doit être à jour et soumis à Google Search Console.",
+        "exemple": "sitemap.xml accessible à https://serpenter.fr/sitemap.xml",
+        "bonnesPratiques": [
+          "Inclure toutes les pages importantes",
+          "Mettre à jour régulièrement",
+          "Soumettre à Google Search Console",
+          "Limiter à 50 000 URLs par sitemap"
+        ],
+        "codeExemple": {
+          "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url>\n    <loc>https://serpenter.fr/</loc>\n    <lastmod>2024-01-15</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>https://serpenter.fr/services/seo</loc>\n    <lastmod>2024-01-10</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>",
+          "nuxt": "// nuxt.config.ts\nexport default {\n  sitemap: {\n    hostname: 'https://serpenter.fr',\n    gzip: true,\n    defaults: {\n      changefreq: 'daily',\n      priority: 1,\n      lastmod: new Date()\n    }\n  }\n}"
+        }
+      }
+    },
+    {
+      "id": "robots-txt",
+      "label": "Fichier robots.txt configuré",
+      "description": "Instructions claires pour les crawlers",
+      "details": {
+        "explication": "Le fichier robots.txt indique aux moteurs de recherche quelles parties du site ils peuvent explorer et où se trouve le sitemap.",
+        "exemple": "robots.txt accessible à https://serpenter.fr/robots.txt",
+        "bonnesPratiques": [
+          "Placé à la racine du site",
+          "Instructions claires",
+          "Référencer le sitemap",
+          "Ne pas bloquer les ressources importantes"
+        ],
+        "codeExemple": {
+          "robots": "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /private/\nSitemap: https://serpenter.fr/sitemap.xml",
+          "nuxt": "// nuxt.config.ts\nexport default {\n  robots: {\n    UserAgent: '*',\n    Allow: '/',\n    Disallow: ['/admin/', '/private/'],\n    Sitemap: 'https://serpenter.fr/sitemap.xml'\n  }\n}"
+        }
+      }
+    },
+    {
+      "id": "structured-data",
+      "label": "Données structurées implémentées",
+      "description": "Schema.org pour les informations importantes",
+      "details": {
+        "explication": "Les données structurées (Schema.org) aident les moteurs de recherche à comprendre le contenu de votre site et peuvent générer des rich snippets.",
+        "exemple": "Schema Organization, LocalBusiness, Article, etc.",
+        "bonnesPratiques": [
+          "Utiliser les schémas appropriés",
+          "Données valides et à jour",
+          "Tester avec Google Rich Results Test",
+          "Implémenter progressivement"
+        ],
+        "codeExemple": {
+          "organization": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Serpenter\",\n  \"url\": \"https://serpenter.fr\",\n  \"logo\": \"https://serpenter.fr/logo.png\",\n  \"description\": \"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"streetAddress\": \"123 Rue de la SEO\",\n    \"addressLocality\": \"Paris\",\n    \"postalCode\": \"75001\",\n    \"addressCountry\": \"FR\"\n  }\n}",
+          "vue": "<script>\nexport default {\n  head() {\n    return {\n      script: [\n        {\n          type: 'application/ld+json',\n          json: {\n            '@context': 'https://schema.org',\n            '@type': 'Organization',\n            name: 'Serpenter',\n            url: 'https://serpenter.fr'\n          }\n        }\n      ]\n    }\n  }\n}\n</script>"
+        }
+      }
+    }
+  ]
+} 

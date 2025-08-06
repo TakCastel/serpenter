@@ -1,0 +1,46 @@
+{
+  "categories": [
+    {
+      "id": "seo",
+      "name": "SEO",
+      "description": "Optimisation pour les moteurs de recherche",
+      "dataFile": "seo-items.json"
+    },
+    {
+      "id": "accessibilite",
+      "name": "Accessibilité",
+      "description": "Conformité WCAG et accessibilité universelle",
+      "dataFile": "accessibilite-items.json"
+    },
+    {
+      "id": "performance",
+      "name": "Performance",
+      "description": "Optimisation de la vitesse de chargement",
+      "dataFile": "performance-items.json"
+    },
+    {
+      "id": "eco-conception",
+      "name": "Éco-conception",
+      "description": "Réduction de l'impact environnemental",
+      "dataFile": "eco-conception-items.json"
+    },
+    {
+      "id": "responsive-ux",
+      "name": "Responsive / UX",
+      "description": "Expérience utilisateur optimale sur tous les appareils",
+      "dataFile": "responsive-ux-items.json"
+    },
+    {
+      "id": "securite",
+      "name": "Sécurité",
+      "description": "Protection du site et des utilisateurs",
+      "dataFile": "securite-items.json"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics & Monitoring",
+      "description": "Suivi et analyse des performances",
+      "dataFile": "analytics-items.json"
+    }
+  ]
+} 

@@ -1,0 +1,118 @@
+{
+  "items": [
+    {
+      "id": "https",
+      "label": "Site en HTTPS",
+      "description": "Certificat SSL actif",
+      "details": {
+        "explication": "HTTPS chiffre les données échangées entre le navigateur et le serveur, protégeant la confidentialité et l'intégrité des données.",
+        "exemple": "https://serpenter.fr au lieu de http://serpenter.fr",
+        "bonnesPratiques": [
+          "Certificat SSL valide",
+          "Redirection HTTP vers HTTPS",
+          "HSTS (HTTP Strict Transport Security)",
+          "Certificat renouvelé automatiquement"
+        ],
+        "codeExemple": {
+          "nginx": "# Redirection HTTP vers HTTPS\nserver {\n  listen 80;\n  server_name serpenter.fr;\n  return 301 https://$server_name$request_uri;\n}\n\nserver {\n  listen 443 ssl http2;\n  server_name serpenter.fr;\n  \n  ssl_certificate /path/to/cert.pem;\n  ssl_certificate_key /path/to/key.pem;\n  \n  # HSTS\n  add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;\n}",
+          "nuxt": "// nuxt.config.ts\nexport default {\n  app: {\n    head: {\n      meta: [\n        {\n          'http-equiv': 'Content-Security-Policy',\n          content: 'upgrade-insecure-requests'\n        }\n      ]\n    }\n  }\n}"
+        }
+      }
+    },
+    {
+      "id": "security-headers",
+      "label": "Headers de sécurité configurés",
+      "description": "Content-Security-Policy, etc.",
+      "details": {
+        "explication": "Les headers de sécurité protègent contre diverses attaques comme XSS, clickjacking, et autres vulnérabilités.",
+        "exemple": "CSP, X-Frame-Options, X-Content-Type-Options",
+        "bonnesPratiques": [
+          "Content-Security-Policy strict",
+          "X-Frame-Options: DENY",
+          "X-Content-Type-Options: nosniff",
+          "Referrer-Policy approprié"
+        ],
+        "codeExemple": {
+          "nginx": "# Headers de sécurité\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:;\" always;\nadd_header X-Frame-Options \"DENY\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\" always;\nadd_header Permissions-Policy \"geolocation=(), microphone=(), camera=()\" always;",
+          "express": "// Express.js\napp.use((req, res, next) => {\n  res.setHeader('Content-Security-Policy', \"default-src 'self'\");\n  res.setHeader('X-Frame-Options', 'DENY');\n  res.setHeader('X-Content-Type-Options', 'nosniff');\n  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');\n  next();\n});"
+        }
+      }
+    },
+    {
+      "id": "xss-protection",
+      "label": "Protection basique contre l'injection (XSS, etc.)",
+      "description": "Éviter l'input non filtré",
+      "details": {
+        "explication": "Protéger contre les attaques XSS en validant et échappant toutes les entrées utilisateur.",
+        "exemple": "Validation côté serveur, échappement HTML, CSP",
+        "bonnesPratiques": [
+          "Validation côté serveur",
+          "Échappement HTML",
+          "Content Security Policy",
+          "Utiliser des frameworks sécurisés"
+        ],
+        "codeExemple": {
+          "vue": "<template>\n  <div>\n    <!-- Échappement automatique en Vue -->\n    <p>{{ userInput }}</p>\n    \n    <!-- Pour le HTML non échappé, utiliser v-html avec précaution -->\n    <div v-html=\"sanitizedHtml\"></div>\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      userInput: '',\n      sanitizedHtml: ''\n    }\n  },\n  methods: {\n    sanitizeInput(input) {\n      // Validation côté client\n      return input.replace(/<script\\b[^<]*(?:(?!<\\/script>)<[^<]*)*<\\/script>/gi, '');\n    }\n  }\n}\n</script>",
+          "server": "// Validation côté serveur (Node.js)\nconst validator = require('validator');\n\napp.post('/api/comment', (req, res) => {\n  const { content } = req.body;\n  \n  // Validation\n  if (!validator.isLength(content, { min: 1, max: 1000 })) {\n    return res.status(400).json({ error: 'Invalid content length' });\n  }\n  \n  // Échappement\n  const sanitizedContent = validator.escape(content);\n  \n  // Sauvegarder en base\n  saveComment(sanitizedContent);\n});"
+        }
+      }
+    },
+    {
+      "id": "csrf-protection",
+      "label": "Protection CSRF",
+      "description": "Tokens de sécurité sur les formulaires",
+      "details": {
+        "explication": "La protection CSRF empêche les attaques Cross-Site Request Forgery en utilisant des tokens uniques pour chaque formulaire.",
+        "exemple": "Token CSRF dans chaque formulaire, validation côté serveur",
+        "bonnesPratiques": [
+          "Token unique par session",
+          "Validation côté serveur",
+          "Token dans les headers",
+          "Expiration des tokens"
+        ],
+        "codeExemple": {
+          "vue": "<template>\n  <form @submit.prevent=\"submitForm\">\n    <input type=\"hidden\" name=\"_csrf\" :value=\"csrfToken\">\n    <input type=\"text\" v-model=\"formData.name\" required>\n    <button type=\"submit\">Envoyer</button>\n  </form>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      csrfToken: '',\n      formData: { name: '' }\n    }\n  },\n  async mounted() {\n    // Récupérer le token CSRF\n    this.csrfToken = await this.$fetch('/api/csrf-token');\n  },\n  methods: {\n    async submitForm() {\n      await this.$fetch('/api/submit', {\n        method: 'POST',\n        body: {\n          ...this.formData,\n          _csrf: this.csrfToken\n        }\n      });\n    }\n  }\n}\n</script>",
+          "server": "// Middleware CSRF (Express.js)\nconst csrf = require('csurf');\nconst csrfProtection = csrf({ cookie: true });\n\napp.use(csrfProtection);\n\napp.get('/api/csrf-token', (req, res) => {\n  res.json({ token: req.csrfToken() });\n});\n\napp.post('/api/submit', (req, res) => {\n  // Le middleware valide automatiquement le token\n  // Traitement du formulaire...\n});"
+        }
+      }
+    },
+    {
+      "id": "input-validation",
+      "label": "Validation des entrées utilisateur",
+      "description": "Côté client et serveur",
+      "details": {
+        "explication": "Valider toutes les entrées utilisateur côté client pour l'UX et côté serveur pour la sécurité.",
+        "exemple": "Validation email, longueur, format, caractères spéciaux",
+        "bonnesPratiques": [
+          "Validation côté serveur obligatoire",
+          "Validation côté client pour UX",
+          "Messages d'erreur clairs",
+          "Sanitisation des données"
+        ],
+        "codeExemple": {
+          "vue": "<template>\n  <form @submit.prevent=\"submitForm\">\n    <div class=\"form-group\">\n      <label for=\"email\">Email</label>\n      <input \n        id=\"email\" \n        type=\"email\" \n        v-model=\"email\" \n        @blur=\"validateEmail\"\n        :class=\"{ 'error': emailError }\"\n        required\n      >\n      <span v-if=\"emailError\" class=\"error-message\">{{ emailError }}</span>\n    </div>\n    <button type=\"submit\" :disabled=\"!isFormValid\">Envoyer</button>\n  </form>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      email: '',\n      emailError: '',\n      isFormValid: false\n    }\n  },\n  methods: {\n    validateEmail() {\n      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n      if (!this.email) {\n        this.emailError = 'Email requis';\n      } else if (!emailRegex.test(this.email)) {\n        this.emailError = 'Format email invalide';\n      } else {\n        this.emailError = '';\n      }\n      this.updateFormValidity();\n    },\n    updateFormValidity() {\n      this.isFormValid = !this.emailError && this.email;\n    }\n  }\n}\n</script>",
+          "server": "// Validation côté serveur (Node.js)\nconst Joi = require('joi');\n\nconst userSchema = Joi.object({\n  email: Joi.string().email().required(),\n  password: Joi.string().min(8).pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)/).required(),\n  name: Joi.string().min(2).max(50).required()\n});\n\napp.post('/api/register', (req, res) => {\n  const { error, value } = userSchema.validate(req.body);\n  \n  if (error) {\n    return res.status(400).json({\n      error: 'Validation failed',\n      details: error.details\n    });\n  }\n  \n  // Traitement des données validées\n  processRegistration(value);\n});"
+        }
+      }
+    },
+    {
+      "id": "secure-cookies",
+      "label": "Cookies sécurisés",
+      "description": "Flags httpOnly et secure appropriés",
+      "details": {
+        "explication": "Configurer les cookies avec les flags de sécurité appropriés pour éviter les attaques XSS et CSRF.",
+        "exemple": "httpOnly, secure, SameSite, expiration",
+        "bonnesPratiques": [
+          "httpOnly pour les cookies sensibles",
+          "secure en HTTPS",
+          "SameSite=Strict",
+          "Expiration appropriée"
+        ],
+        "codeExemple": {
+          "express": "// Configuration des cookies sécurisés\napp.use(session({\n  secret: process.env.SESSION_SECRET,\n  cookie: {\n    httpOnly: true,\n    secure: process.env.NODE_ENV === 'production',\n    sameSite: 'strict',\n    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 jours\n  },\n  resave: false,\n  saveUninitialized: false\n}));",
+          "php": "<?php\n// Cookies sécurisés en PHP\nsetcookie(\n  'session_id', \n  $sessionId, \n  [\n    'expires' => time() + 3600,\n    'path' => '/',\n    'domain' => '',\n    'secure' => true,\n    'httponly' => true,\n    'samesite' => 'Strict'\n  ]\n);\n?>"
+        }
+      }
+    }
+  ]
+} 

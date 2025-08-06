@@ -1,0 +1,121 @@
+{
+  "items": [
+    {
+      "id": "contrast",
+      "label": "Contrastes suffisants (WCAG AA minimum)",
+      "description": "Texte lisible sur fond sombre ou clair",
+      "details": {
+        "explication": "Le contraste entre le texte et l'arrière-plan doit respecter les standards WCAG AA (ratio de 4.5:1 pour le texte normal, 3:1 pour le gros texte).",
+        "exemple": "Texte noir (#000000) sur fond blanc (#FFFFFF) = ratio 21:1",
+        "bonnesPratiques": [
+          "Ratio de contraste minimum 4.5:1 pour le texte normal",
+          "Ratio de contraste minimum 3:1 pour le gros texte (18px+)",
+          "Tester avec des outils comme WebAIM Contrast Checker",
+          "Considérer les utilisateurs daltoniens"
+        ],
+        "codeExemple": {
+          "css": "/* Exemple de couleurs avec bon contraste */\n.text-primary {\n  color: #000000;\n  background-color: #ffffff;\n  /* Ratio: 21:1 */\n}\n\n.text-secondary {\n  color: #1f2937;\n  background-color: #f9fafb;\n  /* Ratio: 12.6:1 */\n}",
+          "css-variables": ":root {\n  --text-primary: #000000;\n  --bg-primary: #ffffff;\n  --text-secondary: #1f2937;\n  --bg-secondary: #f9fafb;\n}\n\n/* Utilisation */\n.text {\n  color: var(--text-primary);\n  background-color: var(--bg-primary);\n}",
+          "outil": "// Outils de test :\n// - WebAIM Contrast Checker\n// - Chrome DevTools (Audit)\n// - axe-core (automation)"
+        }
+      }
+    },
+    {
+      "id": "keyboard-navigation",
+      "label": "Navigation clavier fonctionnelle",
+      "description": "Focus visible, tab-index cohérent",
+      "details": {
+        "explication": "Tous les éléments interactifs doivent être accessibles au clavier avec un focus visible et un ordre de tabulation logique.",
+        "exemple": "Navigation possible avec Tab, Shift+Tab, Entrée, Espace, flèches",
+        "bonnesPratiques": [
+          "Focus visible sur tous les éléments interactifs",
+          "Ordre de tabulation logique",
+          "Pas d'éléments bloqués dans le tab",
+          "Raccourcis clavier pour les actions principales"
+        ],
+        "codeExemple": {
+          "css": "/* Focus visible */\nbutton:focus,\na:focus,\ninput:focus {\n  outline: 2px solid #fbbf24;\n  outline-offset: 2px;\n}\n\n/* Ou avec box-shadow */\n.focus-visible {\n  box-shadow: 0 0 0 2px #fbbf24;\n}",
+          "html": "<!-- Ordre de tabulation logique -->\n<nav>\n  <a href=\"/\" tabindex=\"0\">Accueil</a>\n  <a href=\"/services\" tabindex=\"0\">Services</a>\n  <a href=\"/contact\" tabindex=\"0\">Contact</a>\n</nav>\n\n<!-- Éviter les éléments bloqués -->\n<button tabindex=\"-1\" style=\"display: none;\">Caché</button>",
+          "vue": "<template>\n  <div>\n    <button \n      @click=\"handleClick\" \n      @keydown.enter=\"handleClick\"\n      @keydown.space=\"handleClick\"\n      class=\"accessible-button\"\n    >\n      Cliquez-moi\n    </button>\n  </div>\n</template>\n\n<script>\nexport default {\n  methods: {\n    handleClick() {\n      // Action\n    }\n  }\n}\n</script>"
+        }
+      }
+    },
+    {
+      "id": "form-labels",
+      "label": "Labels explicites pour les champs de formulaire",
+      "description": "Ex : <label for=\"email\">Email</label>",
+      "details": {
+        "explication": "Chaque champ de formulaire doit avoir un label explicite lié à l'input via l'attribut 'for' ou en utilisant l'élément label comme conteneur.",
+        "exemple": "<label for=\"email\">Adresse email</label><input id=\"email\" type=\"email\">",
+        "bonnesPratiques": [
+          "Label explicite et descriptif",
+          "Attribut 'for' lié à l'id de l'input",
+          "Ou utiliser label comme conteneur",
+          "Indiquer les champs obligatoires"
+        ],
+        "codeExemple": {
+          "html": "<!-- Méthode 1 : label + for -->\n<label for=\"email\">Adresse email *</label>\n<input id=\"email\" type=\"email\" required>\n\n<!-- Méthode 2 : label conteneur -->\n<label>\n  Adresse email *\n  <input type=\"email\" required>\n</label>",
+          "vue": "<template>\n  <div class=\"form-group\">\n    <label :for=\"fieldId\">{{ label }} <span v-if=\"required\">*</span></label>\n    <input \n      :id=\"fieldId\" \n      :type=\"type\" \n      :required=\"required\"\n      v-model=\"value\"\n    >\n  </div>\n</template>\n\n<script>\nexport default {\n  props: {\n    label: String,\n    type: { type: String, default: 'text' },\n    required: Boolean,\n    value: String\n  },\n  computed: {\n    fieldId() {\n      return `field-${this.label.toLowerCase().replace(/\\s+/g, '-')}`\n    }\n  }\n}\n</script>"
+        }
+      }
+    },
+    {
+      "id": "semantic-html",
+      "label": "Utilisation d'éléments HTML sémantiques",
+      "description": "<nav>, <main>, <section>, etc.",
+      "details": {
+        "explication": "Utiliser les éléments HTML sémantiques aide les lecteurs d'écran à comprendre la structure de la page et améliore l'accessibilité.",
+        "exemple": "<header>, <nav>, <main>, <section>, <article>, <aside>, <footer>",
+        "bonnesPratiques": [
+          "Utiliser les balises appropriées",
+          "Une seule balise <main> par page",
+          "Structure logique et hiérarchique",
+          "Éviter les div pour tout"
+        ],
+        "codeExemple": {
+          "html": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <title>Mon Site</title>\n</head>\n<body>\n  <header>\n    <nav>\n      <ul>\n        <li><a href=\"/\">Accueil</a></li>\n        <li><a href=\"/services\">Services</a></li>\n      </ul>\n    </nav>\n  </header>\n  \n  <main>\n    <section>\n      <h1>Titre principal</h1>\n      <article>\n        <h2>Article</h2>\n        <p>Contenu...</p>\n      </article>\n    </section>\n    \n    <aside>\n      <h3>Informations complémentaires</h3>\n    </aside>\n  </main>\n  \n  <footer>\n    <p>&copy; 2024</p>\n  </footer>\n</body>\n</html>",
+          "vue": "<template>\n  <div>\n    <header>\n      <nav>\n        <ul>\n          <li><NuxtLink to=\"/\">Accueil</NuxtLink></li>\n          <li><NuxtLink to=\"/services\">Services</NuxtLink></li>\n        </ul>\n      </nav>\n    </header>\n    \n    <main>\n      <section>\n        <h1>{{ pageTitle }}</h1>\n        <article>\n          <h2>{{ articleTitle }}</h2>\n          <p>{{ content }}</p>\n        </article>\n      </section>\n    </main>\n  </div>\n</template>"
+        }
+      }
+    },
+    {
+      "id": "aria-labels",
+      "label": "Attributs ARIA appropriés",
+      "description": "Pour les éléments interactifs complexes",
+      "details": {
+        "explication": "Les attributs ARIA (Accessible Rich Internet Applications) améliorent l'accessibilité des éléments complexes pour les lecteurs d'écran.",
+        "exemple": "aria-label, aria-describedby, aria-expanded, aria-hidden",
+        "bonnesPratiques": [
+          "Utiliser aria-label pour les éléments sans texte",
+          "aria-describedby pour les descriptions",
+          "aria-expanded pour les accordéons",
+          "Ne pas surcharger avec ARIA"
+        ],
+        "codeExemple": {
+          "html": "<!-- Bouton avec aria-label -->\n<button aria-label=\"Fermer la modal\">×</button>\n\n<!-- Accordéon avec aria-expanded -->\n<button \n  aria-expanded=\"false\" \n  aria-controls=\"content-1\"\n>\n  Titre de section\n</button>\n<div id=\"content-1\" aria-hidden=\"true\">\n  Contenu...\n</div>\n\n<!-- Description avec aria-describedby -->\n<input \n  type=\"password\" \n  aria-describedby=\"password-help\"\n>\n<div id=\"password-help\">\n  Le mot de passe doit contenir au moins 8 caractères\n</div>",
+          "vue": "<template>\n  <div>\n    <button \n      @click=\"toggleAccordion\"\n      :aria-expanded=\"isExpanded\"\n      :aria-controls=\"`accordion-${id}`\"\n      class=\"accordion-toggle\"\n    >\n      {{ title }}\n    </button>\n    \n    <div \n      :id=\"`accordion-${id}`\"\n      :aria-hidden=\"!isExpanded\"\n      v-show=\"isExpanded\"\n    >\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<script>\nexport default {\n  props: ['id', 'title'],\n  data() {\n    return {\n      isExpanded: false\n    }\n  },\n  methods: {\n    toggleAccordion() {\n      this.isExpanded = !this.isExpanded\n    }\n  }\n}\n</script>"
+        }
+      }
+    },
+    {
+      "id": "skip-links",
+      "label": "Liens d'évitement présents",
+      "description": "Pour naviguer directement au contenu",
+      "details": {
+        "explication": "Les liens d'évitement permettent aux utilisateurs de clavier de passer directement au contenu principal, évitant ainsi la navigation répétitive.",
+        "exemple": "Lien \"Aller au contenu\" en haut de page",
+        "bonnesPratiques": [
+          "Lien visible au focus",
+          "Premier élément de la page",
+          "Ciblage du contenu principal",
+          "Style approprié (caché par défaut)"
+        ],
+        "codeExemple": {
+          "html": "<!-- Lien d'évitement -->\n<a href=\"#main-content\" class=\"skip-link\">\n  Aller au contenu principal\n</a>\n\n<header>\n  <!-- Navigation -->\n</header>\n\n<main id=\"main-content\">\n  <!-- Contenu principal -->\n</main>",
+          "css": "/* Style pour le lien d'évitement */\n.skip-link {\n  position: absolute;\n  top: -40px;\n  left: 6px;\n  background: #000;\n  color: #fff;\n  padding: 8px;\n  text-decoration: none;\n  z-index: 1000;\n}\n\n.skip-link:focus {\n  top: 6px;\n}",
+          "vue": "<template>\n  <div>\n    <a href=\"#main-content\" class=\"skip-link\">\n      Aller au contenu principal\n    </a>\n    \n    <AppHeader />\n    \n    <main id=\"main-content\">\n      <slot></slot>\n    </main>\n  </div>\n</template>\n\n<style scoped>\n.skip-link {\n  position: absolute;\n  top: -40px;\n  left: 6px;\n  background: var(--primary-color);\n  color: var(--bg-primary);\n  padding: 8px;\n  text-decoration: none;\n  z-index: 1000;\n}\n\n.skip-link:focus {\n  top: 6px;\n}\n</style>"
+        }
+      }
+    }
+  ]
+} 

@@ -1,0 +1,124 @@
+{
+  "items": [
+    {
+      "id": "lazy-loading",
+      "label": "Images en lazy loading",
+      "description": "Attribut loading=\"lazy\" sur les images",
+      "details": {
+        "explication": "Le lazy loading permet de charger les images uniquement quand elles sont nécessaires, améliorant ainsi les temps de chargement initial.",
+        "exemple": "<img src=\"image.jpg\" loading=\"lazy\" alt=\"Description\">",
+        "bonnesPratiques": [
+          "Utiliser loading=\"lazy\" sur les images non critiques",
+          "Définir width et height pour éviter le layout shift",
+          "Utiliser des formats modernes (WebP, AVIF)",
+          "Optimiser la taille des images"
+        ],
+        "codeExemple": {
+          "html": "<img \n  src=\"/images/hero.jpg\" \n  loading=\"lazy\" \n  alt=\"Image principale\" \n  width=\"1200\" \n  height=\"600\"\n>",
+          "vue": "<template>\n  <img \n    :src=\"image.src\" \n    :alt=\"image.alt\" \n    :width=\"image.width\" \n    :height=\"image.height\" \n    loading=\"lazy\"\n  >\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      image: {\n        src: '/images/hero.jpg',\n        alt: 'Image principale',\n        width: 1200,\n        height: 600\n      }\n    }\n  }\n}\n</script>",
+          "nuxt": "<!-- Avec Nuxt Image -->\n<NuxtImg \n  src=\"/images/hero.jpg\" \n  alt=\"Image principale\" \n  width=\"1200\" \n  height=\"600\" \n  loading=\"lazy\"\n  format=\"webp\"\n/>"
+        }
+      }
+    },
+    {
+      "id": "image-optimization",
+      "label": "Taille d'image optimisée",
+      "description": "Pas de 4K pour une icône 😉",
+      "details": {
+        "explication": "Les images doivent être optimisées en taille et en qualité pour réduire le temps de chargement sans perdre en qualité visuelle.",
+        "exemple": "Icône 32x32px = 2-5KB, Image hero 1200x600px = 100-200KB",
+        "bonnesPratiques": [
+          "Redimensionner les images à leur taille d'affichage",
+          "Compresser sans perte de qualité visible",
+          "Utiliser des formats modernes (WebP, AVIF)",
+          "Différentes tailles pour responsive"
+        ],
+        "codeExemple": {
+          "html": "<!-- Image responsive avec srcset -->\n<img \n  src=\"/images/hero-small.jpg\" \n  srcset=\"/images/hero-small.jpg 480w, \n           /images/hero-medium.jpg 768w, \n           /images/hero-large.jpg 1200w\" \n  sizes=\"(max-width: 480px) 480px, \n         (max-width: 768px) 768px, \n         1200px\" \n  alt=\"Hero image\"\n>",
+          "vue": "<template>\n  <picture>\n    <source \n      :srcset=\"image.webp\" \n      type=\"image/webp\"\n    >\n    <img \n      :src=\"image.jpg\" \n      :alt=\"image.alt\" \n      :width=\"image.width\" \n      :height=\"image.height\"\n    >\n  </picture>\n</template>",
+          "nuxt": "<!-- Nuxt Image avec optimisation automatique -->\n<NuxtImg \n  src=\"/images/hero.jpg\" \n  alt=\"Hero image\" \n  width=\"1200\" \n  height=\"600\" \n  format=\"webp\" \n  quality=\"80\" \n  placeholder\n/>"
+        }
+      }
+    },
+    {
+      "id": "modern-formats",
+      "label": "Utilisation de formats modernes (WebP, AVIF)",
+      "description": "Plus légers que JPEG/PNG",
+      "details": {
+        "explication": "Les formats modernes comme WebP et AVIF offrent une meilleure compression que JPEG et PNG, réduisant la taille des fichiers de 25-50%.",
+        "exemple": "WebP : 25-35% plus petit que JPEG, AVIF : 50% plus petit",
+        "bonnesPratiques": [
+          "Utiliser WebP comme format principal",
+          "AVIF pour les images complexes",
+          "Fallback en JPEG/PNG pour compatibilité",
+          "Tester la compatibilité navigateur"
+        ],
+        "codeExemple": {
+          "html": "<!-- Picture avec fallback -->\n<picture>\n  <source srcset=\"image.avif\" type=\"image/avif\">\n  <source srcset=\"image.webp\" type=\"image/webp\">\n  <img src=\"image.jpg\" alt=\"Description\">\n</picture>",
+          "vue": "<template>\n  <picture>\n    <source \n      v-for=\"format in formats\" \n      :key=\"format.type\" \n      :srcset=\"format.src\" \n      :type=\"format.type\"\n    >\n    <img :src=\"fallback\" :alt=\"alt\">\n  </picture>\n</template>\n\n<script>\nexport default {\n  props: ['src', 'alt'],\n  computed: {\n    formats() {\n      const base = this.src.replace(/\\.(jpg|png)$/, '')\n      return [\n        { src: `${base}.avif`, type: 'image/avif' },\n        { src: `${base}.webp`, type: 'image/webp' }\n      ]\n    },\n    fallback() {\n      return this.src\n    }\n  }\n}\n</script>",
+          "nuxt": "<!-- Nuxt Image avec formats automatiques -->\n<NuxtImg \n  src=\"/images/hero.jpg\" \n  alt=\"Hero image\" \n  format=\"webp\" \n  quality=\"80\" \n  :modifiers=\"{ format: 'webp' }\"\n/>"
+        }
+      }
+    },
+    {
+      "id": "minification",
+      "label": "CSS et JS minifiés",
+      "description": "Fichiers compressés",
+      "details": {
+        "explication": "La minification supprime les espaces, commentaires et caractères inutiles pour réduire la taille des fichiers CSS et JavaScript.",
+        "exemple": "Fichier CSS de 50KB → 15KB après minification",
+        "bonnesPratiques": [
+          "Minifier en production uniquement",
+          "Conserver les fichiers source pour debug",
+          "Utiliser la compression gzip/brotli",
+          "Surveiller la taille des bundles"
+        ],
+        "codeExemple": {
+          "nuxt": "// nuxt.config.ts\nexport default {\n  build: {\n    // Minification automatique en production\n    minify: true,\n    \n    // Optimisation des chunks\n    optimization: {\n      splitChunks: {\n        chunks: 'all',\n        cacheGroups: {\n          vendor: {\n            test: /[\\\\/]node_modules[\\\\/]/,\n            name: 'vendors',\n            chunks: 'all'\n          }\n        }\n      }\n    }\n  }\n}",
+          "webpack": "// webpack.config.js\nconst TerserPlugin = require('terser-webpack-plugin');\nconst CssMinimizerPlugin = require('css-minimizer-webpack-plugin');\n\nmodule.exports = {\n  optimization: {\n    minimize: true,\n    minimizer: [\n      new TerserPlugin(),\n      new CssMinimizerPlugin()\n    ]\n  }\n}",
+          "package": "{\n  \"scripts\": {\n    \"build\": \"nuxt build\",\n    \"build:analyze\": \"nuxt build --analyze\"\n  },\n  \"devDependencies\": {\n    \"@nuxt/bundle-analyzer\": \"^0.4.0\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "id": "core-web-vitals",
+      "label": "Core Web Vitals optimisés",
+      "description": "LCP, FID, CLS dans le vert",
+      "details": {
+        "explication": "Les Core Web Vitals sont des métriques de performance web qui mesurent l'expérience utilisateur réelle. LCP, FID et CLS doivent être dans le vert.",
+        "exemple": "LCP < 2.5s, FID < 100ms, CLS < 0.1",
+        "bonnesPratiques": [
+          "LCP : Optimiser le chargement des ressources critiques",
+          "FID : Réduire le JavaScript bloquant",
+          "CLS : Éviter les layout shifts",
+          "Surveiller avec Google PageSpeed Insights"
+        ],
+        "codeExemple": {
+          "lcp": "<!-- Optimisation LCP -->\n<link rel=\"preload\" href=\"/fonts/inter.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\n<link rel=\"preload\" href=\"/images/hero.webp\" as=\"image\">\n\n<!-- Image optimisée pour LCP -->\n<img \n  src=\"/images/hero.webp\" \n  alt=\"Hero\" \n  width=\"1200\" \n  height=\"600\" \n  fetchpriority=\"high\"\n>",
+          "fid": "<!-- Réduire le JavaScript bloquant -->\n<script>\n// Script critique inline\nwindow.performance.mark('critical-js-start');\n// Code critique...\nwindow.performance.mark('critical-js-end');\n</script>\n\n<!-- Scripts non-critiques en différé -->\n<script src=\"/js/non-critical.js\" defer></script>",
+          "cls": "<!-- Éviter les layout shifts -->\n<style>\n/* Réserver l'espace pour les images */\n.image-container {\n  aspect-ratio: 16/9;\n  background: #f0f0f0;\n}\n\n/* Ou avec des dimensions fixes */\nimg {\n  width: 100%;\n  height: auto;\n  max-width: 100%;\n}\n</style>"
+        }
+      }
+    },
+    {
+      "id": "caching",
+      "label": "Cache configuré",
+      "description": "Headers de cache appropriés",
+      "details": {
+        "explication": "La configuration du cache permet de stocker les ressources statiques côté client, réduisant les requêtes et améliorant les performances.",
+        "exemple": "Cache long pour les assets statiques, court pour le contenu dynamique",
+        "bonnesPratiques": [
+          "Cache long pour CSS/JS/images (1 an)",
+          "Cache court pour HTML (1 heure)",
+          "Cache conditionnel pour API",
+          "Utiliser ETags pour validation"
+        ],
+        "codeExemple": {
+          "nginx": "# Nginx configuration\nlocation ~* \\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {\n  expires 1y;\n  add_header Cache-Control \"public, immutable\";\n}\n\nlocation ~* \\.html$ {\n  expires 1h;\n  add_header Cache-Control \"public, must-revalidate\";\n}",
+          "apache": "# Apache .htaccess\n<IfModule mod_expires.c>\n  ExpiresActive On\n  \n  # Assets statiques\n  ExpiresByType text/css \"access plus 1 year\"\n  ExpiresByType application/javascript \"access plus 1 year\"\n  ExpiresByType image/png \"access plus 1 year\"\n  ExpiresByType image/jpg \"access plus 1 year\"\n  \n  # HTML\n  ExpiresByType text/html \"access plus 1 hour\"\n</IfModule>",
+          "nuxt": "// nuxt.config.ts\nexport default {\n  render: {\n    // Headers de cache pour les assets\n    static: {\n      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 an\n      headers: {\n        'Cache-Control': 'public, immutable'\n      }\n    }\n  }\n}"
+        }
+      }
+    }
+  ]
+} 

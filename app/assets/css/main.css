@@ -1,0 +1,78 @@
+/* ===== IMPORT DES STYLES DES COMPOSANTS ===== */
+@import './components.css';
+
+/* ===== RESET ET BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+/* ===== VARIABLES CSS POUR LES THÈMES ===== */
+:root {
+  /* Thème sombre (par défaut) */
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --bg-hover: #4b5563;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --primary-color: #fbbf24;
+  --primary-hover: #fde047;
+  --border-color: #374151;
+  --header-bg: #1f2937;
+  --hover-bg: #374151;
+  --progress-bg: #1f2937;
+  --progress-fill: #fbbf24;
+}
+
+/* Thème clair */
+.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --bg-hover: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --primary-color: #d97706;
+  --primary-hover: #f59e0b;
+  --border-color: #d1d5db;
+  --header-bg: #f9fafb;
+  --hover-bg: #f3f4f6;
+  --progress-bg: #e5e7eb;
+  --progress-fill: #d97706;
+}
+
+/* ===== LAYOUT GLOBAL ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ===== ANIMATIONS GLOBALES ===== */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* ===== UTILITAIRES ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+} 
