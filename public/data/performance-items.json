@@ -11,7 +11,19 @@
           "Utilisez 'Lighthouse' → Performance pour mesurer l'impact",
           "Testez avec 'PageSpeed Insights' pour voir les améliorations",
           "Vérifiez avec 'WebPageTest' pour analyser le chargement"
-        ]}
+        ],
+        "bonnesPratiques": [
+          "Utiliser loading=\"lazy\" pour toutes les images non critiques",
+          "Éviter le lazy loading pour les images above the fold",
+          "Tester sur différents appareils et connexions",
+          "Mesurer l'impact sur les Core Web Vitals",
+          "Combiner avec l'optimisation des images"
+        ],
+        "exemple": {
+          "html": "<!-- Image avec lazy loading -->\n<img src=\"image.jpg\" alt=\"Description\" loading=\"lazy\" width=\"800\" height=\"600\">\n\n<!-- Image critique (above the fold) sans lazy loading -->\n<img src=\"hero-image.jpg\" alt=\"Image principale\" width=\"1200\" height=\"400\">",
+          "description": "Exemples d'utilisation du lazy loading pour les images"
+        }
+      }
     },
     {
       "id": "image-optimization",
@@ -24,7 +36,19 @@
           "Testez avec 'ImageOptim' pour l'optimisation automatique",
           "Vérifiez avec 'Lighthouse' → Performance → Image optimization",
           "Analysez avec 'WebPageTest' pour voir l'impact des images"
-        ]}
+        ],
+        "bonnesPratiques": [
+          "Utiliser des dimensions appropriées à l'affichage",
+          "Compresser sans perte de qualité visible",
+          "Choisir le bon format (JPEG pour photos, PNG pour graphiques)",
+          "Utiliser des outils d'optimisation automatique",
+          "Tester sur différents appareils"
+        ],
+        "exemple": {
+          "html": "<!-- Image optimisée -->\n<img src=\"photo-optimisee.jpg\" alt=\"Photo optimisée\" width=\"800\" height=\"600\">\n\n<!-- Image non optimisée (à éviter) -->\n<img src=\"photo-4k.jpg\" alt=\"Photo 4K\" width=\"800\" height=\"600\">",
+          "description": "Exemples d'images optimisées vs non optimisées"
+        }
+      }
     },
     {
       "id": "modern-formats",
@@ -37,7 +61,19 @@
           "Utilisez l'élément <picture> pour la compatibilité",
           "Testez avec 'Can I Use' pour vérifier le support navigateur",
           "Vérifiez avec 'Lighthouse' pour mesurer l'impact"
-        ]}
+        ],
+        "bonnesPratiques": [
+          "Utiliser WebP comme format principal",
+          "Fournir des fallbacks pour les navigateurs anciens",
+          "Tester la qualité visuelle après conversion",
+          "Mesurer l'impact sur les performances",
+          "Utiliser l'élément <picture> pour la compatibilité"
+        ],
+        "exemple": {
+          "html": "<picture>\n  <source srcset=\"image.webp\" type=\"image/webp\">\n  <source srcset=\"image.avif\" type=\"image/avif\">\n  <img src=\"image.jpg\" alt=\"Image avec formats modernes\">\n</picture>",
+          "description": "Exemple d'utilisation de formats modernes avec fallback"
+        }
+      }
     },
     {
       "id": "minification",
@@ -76,7 +112,20 @@
           "Configurez votre serveur web (Apache/Nginx) pour activer GZIP",
           "Testez avec 'GTmetrix' pour voir l'impact",
           "Vérifiez les headers de réponse avec les outils de développement"
-        ]}
+        ],
+        "bonnesPratiques": [
+          "Activer GZIP pour tous les fichiers texte",
+          "Configurer les niveaux de compression appropriés",
+          "Tester l'impact sur les performances",
+          "Vérifier la compatibilité avec les navigateurs",
+          "Monitorer l'utilisation CPU du serveur"
+        ],
+        "exemple": {
+          "apache": "# .htaccess\n<IfModule mod_deflate.c>\n  AddOutputFilterByType DEFLATE text/plain\n  AddOutputFilterByType DEFLATE text/html\n  AddOutputFilterByType DEFLATE text/xml\n  AddOutputFilterByType DEFLATE text/css\n  AddOutputFilterByType DEFLATE application/xml\n  AddOutputFilterByType DEFLATE application/xhtml+xml\n  AddOutputFilterByType DEFLATE application/rss+xml\n  AddOutputFilterByType DEFLATE application/javascript\n  AddOutputFilterByType DEFLATE application/x-javascript\n</IfModule>",
+          "nginx": "# nginx.conf\ngzip on;\ngzip_vary on;\ngzip_min_length 1024;\ngzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;",
+          "description": "Configuration GZIP pour Apache et Nginx"
+        }
+      }
     },
     {
       "id": "browser-caching",
@@ -90,34 +139,17 @@
           "Testez avec 'GTmetrix' pour analyser le cache",
           "Vérifiez les headers de réponse dans les outils de développement"
         ],
-        "outils": [
-          {
-            "nom": "Cache Checker",
-            "url": "https://www.seoreviewtools.com/cache-checker/",
-            "description": "Vérifiez la configuration du cache"
-          },
-          {
-            "nom": "GTmetrix",
-            "url": "https://gtmetrix.com/",
-            "description": "Analysez l'utilisation du cache"
-          },
-          {
-            "nom": "WebPageTest",
-            "url": "https://www.webpagetest.org/",
-            "description": "Testez l'efficacité du cache"
-          }
-        ],
         "bonnesPratiques": [
-          "Cache long pour les ressources statiques",
-          "Cache court pour le contenu dynamique",
-          "Utiliser ETags pour la validation",
-          "Configurer les headers appropriés",
-          "Tester sur différents navigateurs"
+          "Configurer des durées de cache appropriées",
+          "Utiliser des noms de fichiers avec versioning",
+          "Tester l'impact sur les performances",
+          "Vérifier la cohérence entre serveurs",
+          "Monitorer l'utilisation du cache"
         ],
         "exemple": {
-          "apache": "# .htaccess\n<IfModule mod_expires.c>\n  ExpiresActive On\n  ExpiresByType text/css \"access plus 1 year\"\n  ExpiresByType application/javascript \"access plus 1 year\"\n  ExpiresByType image/png \"access plus 1 year\"\n  ExpiresByType image/jpg \"access plus 1 year\"\n  ExpiresByType image/jpeg \"access plus 1 year\"\n  ExpiresByType image/gif \"access plus 1 year\"\n  ExpiresByType image/ico \"access plus 1 year\"\n  ExpiresByType image/icon \"access plus 1 year\"\n  ExpiresByType text/plain \"access plus 1 month\"\n  ExpiresByType application/pdf \"access plus 1 month\"\n  ExpiresByType application/x-shockwave-flash \"access plus 1 month\"\n</IfModule>",
-          "nginx": "# nginx.conf\nlocation ~* \\.(css|js|png|jpg|jpeg|gif|ico|svg)$ {\n  expires 1y;\n  add_header Cache-Control \"public, immutable\";\n}",
-          "description": "Configuration du cache pour Apache et Nginx"
+          "apache": "# .htaccess\n<IfModule mod_expires.c>\n  ExpiresActive On\n  ExpiresByType text/css \"access plus 1 year\"\n  ExpiresByType application/javascript \"access plus 1 year\"\n  ExpiresByType image/png \"access plus 1 year\"\n  ExpiresByType image/jpg \"access plus 1 year\"\n</IfModule>",
+          "nginx": "# nginx.conf\nlocation ~*\\.(css|js|png|jpg|jpeg|gif|ico|svg)$ {\n  expires 1y;\n  add_header Cache-Control \"public, immutable\";\n}",
+          "description": "Configuration du cache navigateur pour Apache et Nginx"
         }
       }
     },

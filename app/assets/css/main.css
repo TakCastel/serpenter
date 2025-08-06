@@ -13,6 +13,8 @@
   --text-muted: rgba(255, 255, 255, 0.5);
   --accent-primary: #ffd700;
   --accent-hover: #ffed4e;
+  --bg-code: #1e1e1e;
+  --text-code: #d4d4d4;
 }
 
 /* Light theme */
@@ -25,6 +27,8 @@
   --text-muted: rgba(33, 37, 41, 0.5);
   --accent-primary: #d63384;
   --accent-hover: #c2255c;
+  --bg-code: #f8f9fa;
+  --text-code: #495057;
 }
 
 /* Base styles */

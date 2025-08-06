@@ -11,7 +11,19 @@
           "Vérifiez avec 'Lighthouse' → Performance → Reduce requests",
           "Testez avec 'GTmetrix' pour identifier les ressources inutiles",
           "Analysez avec 'Chrome DevTools' → Network pour voir toutes les requêtes"
-        ]}
+        ],
+        "bonnesPratiques": [
+          "Combiner les fichiers CSS et JS",
+          "Éliminer les ressources inutiles",
+          "Utiliser des sprites pour les icônes",
+          "Optimiser les images et médias",
+          "Minifier tous les fichiers"
+        ],
+        "exemple": {
+          "html": "<!-- CSS combiné -->\n<link rel=\"stylesheet\" href=\"styles.min.css\">\n\n<!-- JS combiné -->\n<script src=\"app.min.js\"></script>\n\n<!-- Éviter les multiples requêtes -->\n<!-- ❌ À éviter -->\n<link rel=\"stylesheet\" href=\"header.css\">\n<link rel=\"stylesheet\" href=\"footer.css\">\n<link rel=\"stylesheet\" href=\"main.css\">",
+          "description": "Exemple de réduction des requêtes en combinant les fichiers"
+        }
+      }
     },
     {
       "id": "poids-page",
@@ -24,7 +36,19 @@
           "Vérifiez avec 'Lighthouse' → Performance → Total page size",
           "Testez avec 'GTmetrix' pour analyser la répartition du poids",
           "Analysez avec 'Chrome DevTools' → Network → Total transferred"
-        ]}
+        ],
+        "bonnesPratiques": [
+          "Optimiser toutes les images",
+          "Minifier CSS, JS et HTML",
+          "Utiliser des formats modernes (WebP, AVIF)",
+          "Éliminer le contenu inutile",
+          "Compresser avec GZIP/Brotli"
+        ],
+        "exemple": {
+          "html": "<!-- Page légère (< 1MB) -->\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Page Optimisée</title>\n  <link rel=\"stylesheet\" href=\"styles.min.css\">\n</head>\n<body>\n  <img src=\"image.webp\" alt=\"Image optimisée\">\n  <script src=\"app.min.js\"></script>\n</body>\n</html>\n\n<!-- Page lourde (> 1MB) à éviter -->\n<!-- Images non optimisées, scripts multiples, CSS non minifié -->",
+          "description": "Exemple de page légère vs lourde pour l'éco-conception"
+        }
+      }
     },
     {
       "id": "tracking-inutile",

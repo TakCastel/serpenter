@@ -103,43 +103,43 @@
               <!-- HTML -->
               <div v-if="item.details.exemple.html" class="space-y-1">
                 <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">HTML</div>
-                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple HTML"><code style="color: var(--text-secondary);">{{ item.details.exemple.html }}</code></pre>
+                <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple HTML"><code style="color: var(--text-code);">{{ item.details.exemple.html }}</code></pre>
               </div>
               
               <!-- CSS -->
               <div v-if="item.details.exemple.css" class="space-y-1">
                 <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">CSS</div>
-                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple CSS"><code style="color: var(--text-secondary);">{{ item.details.exemple.css }}</code></pre>
+                <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple CSS"><code style="color: var(--text-code);">{{ item.details.exemple.css }}</code></pre>
               </div>
               
               <!-- JavaScript -->
               <div v-if="item.details.exemple.javascript" class="space-y-1">
                 <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">JavaScript</div>
-                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple JavaScript"><code style="color: var(--text-secondary);">{{ item.details.exemple.javascript }}</code></pre>
+                <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple JavaScript"><code style="color: var(--text-code);">{{ item.details.exemple.javascript }}</code></pre>
               </div>
               
               <!-- PHP -->
               <div v-if="item.details.exemple.php" class="space-y-1">
                 <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">PHP</div>
-                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple PHP"><code style="color: var(--text-secondary);">{{ item.details.exemple.php }}</code></pre>
+                <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple PHP"><code style="color: var(--text-code);">{{ item.details.exemple.php }}</code></pre>
               </div>
               
               <!-- Node.js -->
               <div v-if="item.details.exemple.nodejs" class="space-y-1">
                 <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Node.js</div>
-                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Node.js"><code style="color: var(--text-secondary);">{{ item.details.exemple.nodejs }}</code></pre>
+                <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple Node.js"><code style="color: var(--text-code);">{{ item.details.exemple.nodejs }}</code></pre>
               </div>
               
               <!-- Apache -->
               <div v-if="item.details.exemple.apache" class="space-y-1">
                 <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Apache</div>
-                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Apache"><code style="color: var(--text-secondary);">{{ item.details.exemple.apache }}</code></pre>
+                <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple Apache"><code style="color: var(--text-code);">{{ item.details.exemple.apache }}</code></pre>
               </div>
               
               <!-- Nginx -->
               <div v-if="item.details.exemple.nginx" class="space-y-1">
                 <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Nginx</div>
-                <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Nginx"><code style="color: var(--text-secondary);">{{ item.details.exemple.nginx }}</code></pre>
+                <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple Nginx"><code style="color: var(--text-code);">{{ item.details.exemple.nginx }}</code></pre>
               </div>
               
               <!-- Code Examples (ancienne structure) -->
@@ -147,43 +147,43 @@
                 <!-- HTML -->
                 <div v-if="item.details.exemple.code.html" class="space-y-1">
                   <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">HTML</div>
-                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple HTML"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.html }}</code></pre>
+                  <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple HTML"><code style="color: var(--text-code);">{{ item.details.exemple.code.html }}</code></pre>
                 </div>
                 
                 <!-- CSS -->
                 <div v-if="item.details.exemple.code.css" class="space-y-1">
                   <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">CSS</div>
-                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple CSS"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.css }}</code></pre>
+                  <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple CSS"><code style="color: var(--text-code);">{{ item.details.exemple.code.css }}</code></pre>
                 </div>
                 
                 <!-- JavaScript -->
                 <div v-if="item.details.exemple.code.javascript" class="space-y-1">
                   <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">JavaScript</div>
-                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple JavaScript"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.javascript }}</code></pre>
+                  <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple JavaScript"><code style="color: var(--text-code);">{{ item.details.exemple.code.javascript }}</code></pre>
                 </div>
                 
                 <!-- PHP -->
                 <div v-if="item.details.exemple.code.php" class="space-y-1">
                   <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">PHP</div>
-                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple PHP"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.php }}</code></pre>
+                  <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple PHP"><code style="color: var(--text-code);">{{ item.details.exemple.code.php }}</code></pre>
                 </div>
                 
                 <!-- Node.js -->
                 <div v-if="item.details.exemple.code.nodejs" class="space-y-1">
                   <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Node.js</div>
-                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Node.js"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.nodejs }}</code></pre>
+                  <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple Node.js"><code style="color: var(--text-code);">{{ item.details.exemple.code.nodejs }}</code></pre>
                 </div>
                 
                 <!-- Apache -->
                 <div v-if="item.details.exemple.code.apache" class="space-y-1">
                   <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Apache</div>
-                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Apache"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.apache }}</code></pre>
+                  <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple Apache"><code style="color: var(--text-code);">{{ item.details.exemple.code.apache }}</code></pre>
                 </div>
                 
                 <!-- Nginx -->
                 <div v-if="item.details.exemple.code.nginx" class="space-y-1">
                   <div class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">Nginx</div>
-                  <pre class="text-xs p-3 rounded bg-gray-100 dark:bg-gray-800 overflow-x-auto" style="background-color: var(--bg-surface);" role="code" aria-label="Exemple Nginx"><code style="color: var(--text-secondary);">{{ item.details.exemple.code.nginx }}</code></pre>
+                  <pre class="text-xs p-3 rounded overflow-x-auto" style="background-color: var(--bg-code);" role="code" aria-label="Exemple Nginx"><code style="color: var(--text-code);">{{ item.details.exemple.code.nginx }}</code></pre>
                 </div>
               </div>
             </div>

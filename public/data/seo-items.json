@@ -20,7 +20,7 @@
           "Inclure le nom de la marque à la fin"
         ],
         "exemple": {
-          "html": "<head>\\n  <title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>\\n</head>",
+          "html": "<head>\n  <title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>\n</head>",
           "description": "Exemple de titre optimisé avec mot-clé principal, description et marque"
         }
       }
@@ -45,7 +45,7 @@
           "Résumer le contenu principal de la page"
         ],
         "exemple": {
-          "html": "<head>\\n  <meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">\\n</head>",
+          "html": "<head>\n  <meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">\n</head>",
           "description": "Meta description optimisée avec mot-clé et call-to-action"
         }
       }
@@ -95,7 +95,7 @@
           "Cohérence sur toutes les pages"
         ],
         "exemple": {
-          "html": "<h1>Titre principal</h1>\\n<h2>Section 1</h2>\\n<h3>Sous-section 1.1</h3>\\n<h2>Section 2</h2>\\n<h3>Sous-section 2.1</h3>",
+          "html": "<h1>Titre principal</h1>\n<h2>Section 1</h2>\n<h3>Sous-section 1.1</h3>\n<h2>Section 2</h2>\n<h3>Sous-section 2.1</h3>",
           "description": "Exemple de hiérarchie de titres logique et accessible"
         }
       }
@@ -228,7 +228,7 @@
           "Suivre les guidelines Google"
         ],
         "exemple": {
-          "html": "<script type=\"application/ld+json\">\\n{\\n  \"@context\": \"https://schema.org\",\\n  \"@type\": \"Organization\",\\n  \"name\": \"Serpenter\",\\n  \"url\": \"https://serpenter.fr\",\\n  \"logo\": \"https://serpenter.fr/logo.png\",\\n  \"description\": \"Agence SEO à Paris\",\\n  \"address\": {\\n    \"@type\": \"PostalAddress\",\\n    \"streetAddress\": \"123 Rue de la Paix\",\\n    \"addressLocality\": \"Paris\",\\n    \"postalCode\": \"75001\",\\n    \"addressCountry\": \"FR\"\\n  }\\n}\\n</script>",
+          "html": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Serpenter\",\n  \"url\": \"https://serpenter.fr\",\n  \"logo\": \"https://serpenter.fr/logo.png\",\n  \"description\": \"Agence SEO à Paris\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"streetAddress\": \"123 Rue de la Paix\",\n    \"addressLocality\": \"Paris\",\n    \"postalCode\": \"75001\",\n    \"addressCountry\": \"FR\"\n  }\n}\n</script>",
           "description": "Données structurées pour une organisation avec adresse"
         }
       }
@@ -253,7 +253,7 @@
           "Test régulier dans les SERP"
         ],
         "exemple": {
-          "html": "<nav aria-label=\"Breadcrumb\">\\n  <ol>\\n    <li><a href=\"/\">Accueil</a></li>\\n    <li><a href=\"/services\">Services</a></li>\\n    <li>Audit SEO</li>\\n  </ol>\\n</nav>\\n\\n<script type=\"application/ld+json\">\\n{\\n  \"@context\": \"https://schema.org\",\\n  \"@type\": \"BreadcrumbList\",\\n  \"itemListElement\": [\\n    {\\n      \"@type\": \"ListItem\",\\n      \"position\": 1,\\n      \"name\": \"Accueil\",\\n      \"item\": \"https://serpenter.fr\"\\n    },\\n    {\\n      \"@type\": \"ListItem\",\\n      \"position\": 2,\\n      \"name\": \"Services\",\\n      \"item\": \"https://serpenter.fr/services\"\\n    },\\n    {\\n      \"@type\": \"ListItem\",\\n      \"position\": 3,\\n      \"name\": \"Audit SEO\"\\n    }\\n  ]\\n}\\n</script>",
+          "html": "<nav aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"/\">Accueil</a></li>\n    <li><a href=\"/services\">Services</a></li>\n    <li>Audit SEO</li>\n  </ol>\n</nav>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BreadcrumbList\",\n  \"itemListElement\": [\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 1,\n      \"name\": \"Accueil\",\n      \"item\": \"https://serpenter.fr\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 2,\n      \"name\": \"Services\",\n      \"item\": \"https://serpenter.fr/services\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 3,\n      \"name\": \"Audit SEO\"\n    }\n  ]\n}\n</script>",
           "description": "Breadcrumbs avec HTML sémantique et données structurées"
         }
       }

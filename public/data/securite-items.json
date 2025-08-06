@@ -53,7 +53,19 @@
           "Testez avec 'Security Headers' pour analyser votre politique",
           "Utilisez 'CSP Scanner' pour détecter les violations",
           "Analysez avec 'Lighthouse' → Security → CSP"
-        ]}
+        ],
+        "bonnesPratiques": [
+          "Définir une politique stricte mais fonctionnelle",
+          "Utiliser 'self' pour les ressources internes",
+          "Éviter 'unsafe-inline' quand possible",
+          "Tester en mode report-only d'abord",
+          "Surveiller les violations"
+        ],
+        "exemple": {
+          "html": "<!-- Headers CSP -->\nContent-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:;\n\n<!-- CSP en mode report-only -->\nContent-Security-Policy-Report-Only: default-src 'self'; report-uri /csp-report;",
+          "description": "Exemple de configuration CSP stricte avec mode report-only"
+        }
+      }
     },
     {
       "id": "rate-limiting",
@@ -138,8 +150,8 @@
           "php": "<?php\n// Validation des uploads\n$allowed_types = ['image/jpeg', 'image/png', 'image/gif'];\n$max_size = 5 * 1024 * 1024; // 5MB\n\nif ($_FILES['upload']['error'] === UPLOAD_ERR_OK) {\n  $file_info = finfo_open(FILEINFO_MIME_TYPE);\n  $mime_type = finfo_file($file_info, $_FILES['upload']['tmp_name']);\n  \n  if (!in_array($mime_type, $allowed_types)) {\n    die('Type de fichier non autorisé');\n  }\n  \n  if ($_FILES['upload']['size'] > $max_size) {\n    die('Fichier trop volumineux');\n  }\n  \n  $filename = uniqid() . '_' . basename($_FILES['upload']['name']);\n  move_uploaded_file($_FILES['upload']['tmp_name'], '/secure/uploads/' . $filename);\n}\n?>",
           "description": "Validation sécurisée des uploads de fichiers en PHP"
         }
-             }
-     },
+      }
+    },
      {
       "id": "headers-securite",
       "label": "Headers de sécurité configurés",

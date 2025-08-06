@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style="min-height: calc(100vh + 200px);">
     <!-- Header -->
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold mb-6 transition-colors duration-200" style="color: var(--text-primary);">
@@ -58,14 +58,13 @@
 
     <!-- Categories -->
     <div class="space-y-8" role="region" aria-label="Catégories de la checklist">
-      <div 
-        v-for="category in categories" 
-        :key="category.id"
-        class="rounded-lg border transition-colors duration-200 sticky"
-        style="background-color: var(--bg-primary); border-color: var(--bg-border); top: 80px; z-index: 10;"
-        role="region"
-        :aria-label="`Catégorie ${category.name}`"
-      >
+      <template v-for="(category, index) in categories" :key="category.id">
+        <div 
+          class="rounded-lg border transition-colors duration-200"
+          style="background-color: var(--bg-primary); border-color: var(--bg-border);"
+          role="region"
+          :aria-label="`Catégorie ${category.name}`"
+        >
         <!-- Category Header -->
         <div 
           class="p-6 cursor-pointer transition-colors duration-200 hover:opacity-80"
@@ -140,6 +139,7 @@
           <p class="transition-colors duration-200" style="color: var(--text-muted);">Chargement des critères...</p>
         </div>
       </div>
+      </template>
     </div>
 
     <!-- Footer -->
@@ -263,6 +263,18 @@ const saveCheckedItems = () => {
   }
 }
 
+const resetProgress = () => {
+  try {
+    if (process.client) {
+      checkedItems.value.clear()
+      localStorage.removeItem('checklist-progress')
+      console.log('Progrès réinitialisé avec succès')
+    }
+  } catch (error) {
+    console.error('Erreur lors de la réinitialisation du progrès:', error)
+  }
+}
+
 const toggleItem = (itemId) => {
   if (checkedItems.value.has(itemId)) {
     checkedItems.value.delete(itemId)
@@ -336,6 +348,7 @@ onMounted(async () => {
 
 // Exposer les méthodes
 defineExpose({
-  openCategory
+  openCategory,
+  resetProgress
 })
 </script> 
