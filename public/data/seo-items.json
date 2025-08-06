@@ -7,7 +7,7 @@
       "details": {
         "explication": "La balise title est l'un des éléments les plus importants pour le SEO. Elle apparaît dans l'onglet du navigateur et dans les résultats de recherche. Elle doit être unique pour chaque page et contenir les mots-clés principaux de manière naturelle.",
         "commentFaire": [
-          "Cliquez droit sur votre page → 'Afficher le code source' → Cherchez la balise <title>",
+          "Cliquez droit sur votre page -> 'Afficher le code source' -> Cherchez la balise <title>",
           "Utilisez l'extension Chrome 'SEO Meta in 1 Click' pour analyser vos titres",
           "Testez avec l'outil Google Search Console pour voir l'apparence dans les SERP",
           "Vérifiez la longueur avec l'outil en ligne 'Title Tag Length Checker'"
@@ -20,7 +20,7 @@
           "Inclure le nom de la marque à la fin"
         ],
         "exemple": {
-          "html": "<head>\n  <title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>\n</head>",
+          "html": "<head>\\n  <title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>\\n</head>",
           "description": "Exemple de titre optimisé avec mot-clé principal, description et marque"
         }
       }
@@ -32,7 +32,7 @@
       "details": {
         "explication": "La meta description apparaît dans les résultats de recherche sous le titre. Elle influence directement le taux de clic (CTR) et doit résumer le contenu de la page de manière attractive en incluant les mots-clés importants.",
         "commentFaire": [
-          "Inspectez votre page (F12) → Cherchez la balise <meta name=\"description\">",
+          "Inspectez votre page (F12) -> Cherchez la balise <meta name=\"description\">",
           "Utilisez l'outil 'Meta Description Generator' pour créer des descriptions optimisées",
           "Testez l'apparence avec 'Google SERP Simulator'",
           "Vérifiez la longueur avec 'Meta Description Length Checker'"
@@ -45,7 +45,7 @@
           "Résumer le contenu principal de la page"
         ],
         "exemple": {
-          "html": "<head>\n  <meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">\n</head>",
+          "html": "<head>\\n  <meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">\\n</head>",
           "description": "Meta description optimisée avec mot-clé et call-to-action"
         }
       }
@@ -57,7 +57,7 @@
       "details": {
         "explication": "Le H1 est le titre principal de la page et a le plus de poids SEO. Il ne doit y en avoir qu'un seul par page pour une hiérarchie claire et une bonne compréhension par les moteurs de recherche. C'est le titre le plus important de votre page.",
         "commentFaire": [
-          "Utilisez l'extension Chrome 'Web Developer' → Information → View Document Outline",
+          "Utilisez l'extension Chrome 'Web Developer' -> Information -> View Document Outline",
           "Recherchez 'h1' dans le code source (Ctrl+F)",
           "Utilisez l'outil 'Heading Structure Checker' pour analyser votre hiérarchie",
           "Vérifiez avec 'HTML Validator' pour détecter les erreurs"
@@ -82,20 +82,20 @@
       "details": {
         "explication": "La hiérarchie des titres doit être logique et respecter l'ordre H1 > H2 > H3. Évitez les sauts de niveau qui peuvent confondre les moteurs de recherche et nuire à la compréhension de votre contenu. C'est comme un plan de document.",
         "commentFaire": [
-          "Utilisez l'extension 'Web Developer' → Information → View Document Outline",
+          "Utilisez l'extension 'Web Developer' -> Information -> View Document Outline",
           "Analysez avec 'Heading Structure Checker' pour détecter les sauts",
           "Utilisez 'Screaming Frog' pour auditer toute votre structure",
           "Vérifiez avec 'HTML Validator' pour les erreurs de structure"
         ],
         "bonnesPratiques": [
-          "Hiérarchie logique : H1 → H2 → H3 → H4...",
-          "Pas de saut de niveau (H1 → H3)",
+          "Hiérarchie logique : H1 -> H2 -> H3 -> H4...",
+          "Pas de saut de niveau (H1 -> H3)",
           "Un seul H1 par page",
           "Titres descriptifs et informatifs",
           "Cohérence sur toutes les pages"
         ],
         "exemple": {
-          "html": "<h1>Titre principal</h1>\n<h2>Section 1</h2>\n<h3>Sous-section 1.1</h3>\n<h2>Section 2</h2>\n<h3>Sous-section 2.1</h3>",
+          "html": "<h1>Titre principal</h1>\\n<h2>Section 1</h2>\\n<h3>Sous-section 1.1</h3>\\n<h2>Section 2</h2>\\n<h3>Sous-section 2.1</h3>",
           "description": "Exemple de hiérarchie de titres logique et accessible"
         }
       }
@@ -133,8 +133,8 @@
       "details": {
         "explication": "L'attribut alt décrit le contenu de l'image pour les moteurs de recherche et les lecteurs d'écran. Il améliore l'accessibilité et peut aider au référencement des images dans Google Images.",
         "commentFaire": [
-          "Inspectez vos images (clic droit → Inspecter) → Cherchez l'attribut alt",
-          "Utilisez l'extension 'Web Developer' → Images → Display Alt Attributes",
+          "Inspectez vos images (clic droit -> Inspecter) -> Cherchez l'attribut alt",
+          "Utilisez l'extension 'Web Developer' -> Images -> Display Alt Attributes",
           "Testez avec 'Alt Text Checker' pour analyser vos images",
           "Vérifiez avec 'Google Images' pour voir l'indexation de vos images"
         ]}
@@ -148,7 +148,7 @@
         "commentFaire": [
           "Utilisez 'Screaming Frog' pour analyser tous vos liens internes",
           "Testez avec 'Internal Link Checker' pour identifier les opportunités",
-          "Vérifiez avec 'Google Search Console' → Liens → Liens internes",
+          "Vérifiez avec 'Google Search Console' -> Liens -> Liens internes",
           "Analysez avec 'Ahrefs' ou 'Majestic' pour un audit complet"
         ]}
     },
@@ -159,9 +159,9 @@
       "details": {
         "explication": "La balise canonical indique aux moteurs de recherche quelle est la version principale d'une page quand il existe plusieurs URLs pointant vers le même contenu. Elle évite les problèmes de contenu dupliqué.",
         "commentFaire": [
-          "Inspectez votre page (F12) → Cherchez <link rel=\"canonical\">",
+          "Inspectez votre page (F12) -> Cherchez <link rel=\"canonical\">",
           "Utilisez 'Canonical URL Checker' pour analyser vos canonicals",
-          "Vérifiez avec 'Google Search Console' → Couverture → Erreurs de contenu dupliqué",
+          "Vérifiez avec 'Google Search Console' -> Couverture -> Erreurs de contenu dupliqué",
           "Testez avec 'Screaming Frog' pour auditer toutes vos canonicals"
         ]}
     },
@@ -173,7 +173,7 @@
         "explication": "Le sitemap XML liste toutes les pages importantes de votre site et aide les moteurs de recherche à les découvrir et les indexer. Il doit être soumis à Google Search Console et être accessible via /sitemap.xml.",
         "commentFaire": [
           "Vérifiez l'existence de votre sitemap : votresite.com/sitemap.xml",
-          "Soumettez votre sitemap dans Google Search Console → Sitemaps",
+          "Soumettez votre sitemap dans Google Search Console -> Sitemaps",
           "Validez votre sitemap avec 'XML Sitemap Validator'",
           "Vérifiez que toutes vos pages importantes sont incluses"
         ]}
@@ -187,7 +187,7 @@
         "commentFaire": [
           "Accédez à votresite.com/robots.txt pour vérifier l'existence",
           "Vérifiez la syntaxe avec 'Robots.txt Validator'",
-          "Testez avec 'Google Search Console' → URL Inspection → robots.txt",
+          "Testez avec 'Google Search Console' -> URL Inspection -> robots.txt",
           "Assurez-vous que le sitemap est référencé"
         ]}
     },
@@ -228,7 +228,7 @@
           "Suivre les guidelines Google"
         ],
         "exemple": {
-          "html": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Serpenter\",\n  \"url\": \"https://serpenter.fr\",\n  \"logo\": \"https://serpenter.fr/logo.png\",\n  \"description\": \"Agence SEO à Paris\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"streetAddress\": \"123 Rue de la Paix\",\n    \"addressLocality\": \"Paris\",\n    \"postalCode\": \"75001\",\n    \"addressCountry\": \"FR\"\n  }\n}\n</script>",
+          "html": "<script type=\"application/ld+json\">\\n{\\n  \"@context\": \"https://schema.org\",\\n  \"@type\": \"Organization\",\\n  \"name\": \"Serpenter\",\\n  \"url\": \"https://serpenter.fr\",\\n  \"logo\": \"https://serpenter.fr/logo.png\",\\n  \"description\": \"Agence SEO à Paris\",\\n  \"address\": {\\n    \"@type\": \"PostalAddress\",\\n    \"streetAddress\": \"123 Rue de la Paix\",\\n    \"addressLocality\": \"Paris\",\\n    \"postalCode\": \"75001\",\\n    \"addressCountry\": \"FR\"\\n  }\\n}\\n</script>",
           "description": "Données structurées pour une organisation avec adresse"
         }
       }
@@ -253,7 +253,7 @@
           "Test régulier dans les SERP"
         ],
         "exemple": {
-          "html": "<nav aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"/\">Accueil</a></li>\n    <li><a href=\"/services\">Services</a></li>\n    <li>Audit SEO</li>\n  </ol>\n</nav>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BreadcrumbList\",\n  \"itemListElement\": [\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 1,\n      \"name\": \"Accueil\",\n      \"item\": \"https://serpenter.fr\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 2,\n      \"name\": \"Services\",\n      \"item\": \"https://serpenter.fr/services\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 3,\n      \"name\": \"Audit SEO\"\n    }\n  ]\n}\n</script>",
+          "html": "<nav aria-label=\"Breadcrumb\">\\n  <ol>\\n    <li><a href=\"/\">Accueil</a></li>\\n    <li><a href=\"/services\">Services</a></li>\\n    <li>Audit SEO</li>\\n  </ol>\\n</nav>\\n\\n<script type=\"application/ld+json\">\\n{\\n  \"@context\": \"https://schema.org\",\\n  \"@type\": \"BreadcrumbList\",\\n  \"itemListElement\": [\\n    {\\n      \"@type\": \"ListItem\",\\n      \"position\": 1,\\n      \"name\": \"Accueil\",\\n      \"item\": \"https://serpenter.fr\"\\n    },\\n    {\\n      \"@type\": \"ListItem\",\\n      \"position\": 2,\\n      \"name\": \"Services\",\\n      \"item\": \"https://serpenter.fr/services\"\\n    },\\n    {\\n      \"@type\": \"ListItem\",\\n      \"position\": 3,\\n      \"name\": \"Audit SEO\"\\n    }\\n  ]\\n}\\n</script>",
           "description": "Breadcrumbs avec HTML sémantique et données structurées"
         }
       }
