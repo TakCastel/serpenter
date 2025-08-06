@@ -5,17 +5,40 @@
       "label": "Balise <title> présente et optimisée",
       "description": "Titre unique et pertinent, avec mots-clés",
       "details": {
-        "explication": "La balise title est l'un des éléments les plus importants pour le SEO. Elle doit être unique pour chaque page et contenir les mots-clés principaux.",
-        "exemple": "<title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>",
-        "bonnesPratiques": [
-          "Longueur entre 50 et 60 caractères",
-          "Inclure le mot-clé principal en début",
-          "Unique pour chaque page",
-          "Descriptif et attractif"
+        "explication": "La balise title est l'un des éléments les plus importants pour le SEO. Elle apparaît dans l'onglet du navigateur et dans les résultats de recherche. Elle doit être unique pour chaque page et contenir les mots-clés principaux de manière naturelle.",
+        "commentFaire": [
+          "Cliquez droit sur votre page → 'Afficher le code source' → Cherchez la balise <title>",
+          "Utilisez l'extension Chrome 'SEO Meta in 1 Click' pour analyser vos titres",
+          "Testez avec l'outil Google Search Console pour voir l'apparence dans les SERP",
+          "Vérifiez la longueur avec l'outil en ligne 'Title Tag Length Checker'"
         ],
-        "codeExemple": {
+        "outils": [
+          {
+            "nom": "Google Search Console",
+            "url": "https://search.google.com/search-console",
+            "description": "Analysez l'apparence de vos titres dans les résultats de recherche"
+          },
+          {
+            "nom": "Screaming Frog SEO Spider",
+            "url": "https://www.screamingfrog.co.uk/seo-spider/",
+            "description": "Audit complet des balises title de votre site"
+          },
+          {
+            "nom": "Title Tag Length Checker",
+            "url": "https://www.seoreviewtools.com/title-tag-length-checker/",
+            "description": "Vérifiez la longueur optimale de vos titres"
+          }
+        ],
+        "bonnesPratiques": [
+          "Longueur entre 50 et 60 caractères (visible dans les SERP)",
+          "Inclure le mot-clé principal en début de titre",
+          "Unique pour chaque page du site",
+          "Descriptif et attractif pour inciter au clic",
+          "Inclure le nom de la marque à la fin"
+        ],
+        "exemple": {
           "html": "<head>\n  <title>Agence SEO Paris - Optimisation Référencement Naturel | Serpenter</title>\n</head>",
-          "vue": "<template>\n  <head>\n    <title>{{ pageTitle }}</title>\n  </head>\n</template>\n\n<script>\nexport default {\n  head() {\n    return {\n      title: 'Agence SEO Paris - Optimisation Référencement Naturel | Serpenter'\n    }\n  }\n}\n</script>"
+          "description": "Exemple de titre optimisé avec mot-clé principal, description et marque"
         }
       }
     },
@@ -24,17 +47,40 @@
       "label": "Balise <meta description> renseignée",
       "description": "Résumé attrayant et en lien avec le contenu",
       "details": {
-        "explication": "La meta description apparaît dans les résultats de recherche et influence le taux de clic. Elle doit résumer le contenu de la page de manière attractive.",
-        "exemple": "<meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">",
-        "bonnesPratiques": [
-          "Longueur entre 150 et 160 caractères",
-          "Inclure le mot-clé principal",
-          "Descriptif et incitatif",
-          "Unique pour chaque page"
+        "explication": "La meta description apparaît dans les résultats de recherche sous le titre. Elle influence directement le taux de clic (CTR) et doit résumer le contenu de la page de manière attractive en incluant les mots-clés importants.",
+        "commentFaire": [
+          "Inspectez votre page (F12) → Cherchez la balise <meta name=\"description\">",
+          "Utilisez l'outil 'Meta Description Generator' pour créer des descriptions optimisées",
+          "Testez l'apparence avec 'Google SERP Simulator'",
+          "Vérifiez la longueur avec 'Meta Description Length Checker'"
         ],
-        "codeExemple": {
+        "outils": [
+          {
+            "nom": "Google SERP Simulator",
+            "url": "https://www.seoreviewtools.com/serp-simulator/",
+            "description": "Simulez l'apparence de vos meta descriptions dans Google"
+          },
+          {
+            "nom": "Meta Description Generator",
+            "url": "https://www.seoreviewtools.com/meta-description-generator/",
+            "description": "Générez des meta descriptions optimisées"
+          },
+          {
+            "nom": "Meta Description Length Checker",
+            "url": "https://www.seoreviewtools.com/meta-description-length-checker/",
+            "description": "Vérifiez la longueur de vos descriptions"
+          }
+        ],
+        "bonnesPratiques": [
+          "Longueur entre 150 et 160 caractères (limite Google)",
+          "Inclure le mot-clé principal naturellement",
+          "Descriptif et incitatif pour le clic",
+          "Unique pour chaque page",
+          "Résumer le contenu principal de la page"
+        ],
+        "exemple": {
           "html": "<head>\n  <meta name=\"description\" content=\"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche. Améliorez votre visibilité avec nos services de référencement naturel.\">\n</head>",
-          "vue": "<script>\nexport default {\n  head() {\n    return {\n      meta: [\n        {\n          name: 'description',\n          content: 'Agence SEO à Paris spécialisée dans l\\'optimisation pour les moteurs de recherche.'\n        }\n      ]\n    }\n  }\n}\n</script>"
+          "description": "Meta description optimisée avec mot-clé et call-to-action"
         }
       }
     },
@@ -43,17 +89,40 @@
       "label": "Une seule balise <h1> par page",
       "description": "Structuration claire du contenu principal",
       "details": {
-        "explication": "Le H1 est le titre principal de la page. Il ne doit y en avoir qu'un seul par page pour une hiérarchie claire et une bonne compréhension par les moteurs de recherche.",
-        "exemple": "<h1>Agence SEO Paris - Expert en Référencement Naturel</h1>",
-        "bonnesPratiques": [
-          "Un seul H1 par page",
-          "Inclure le mot-clé principal",
-          "Descriptif et pertinent",
-          "Hiérarchie logique avec H2, H3..."
+        "explication": "Le H1 est le titre principal de la page et a le plus de poids SEO. Il ne doit y en avoir qu'un seul par page pour une hiérarchie claire et une bonne compréhension par les moteurs de recherche. C'est le titre le plus important de votre page.",
+        "commentFaire": [
+          "Utilisez l'extension Chrome 'Web Developer' → Information → View Document Outline",
+          "Recherchez 'h1' dans le code source (Ctrl+F)",
+          "Utilisez l'outil 'Heading Structure Checker' pour analyser votre hiérarchie",
+          "Vérifiez avec 'HTML Validator' pour détecter les erreurs"
         ],
-        "codeExemple": {
-          "html": "<main>\n  <h1>Agence SEO Paris - Expert en Référencement Naturel</h1>\n  <h2>Nos Services SEO</h2>\n  <h3>Audit Technique</h3>\n</main>",
-          "vue": "<template>\n  <main>\n    <h1>{{ pageTitle }}</h1>\n    <h2>{{ sectionTitle }}</h2>\n  </main>\n</template>"
+        "outils": [
+          {
+            "nom": "Web Developer Extension",
+            "url": "https://chrome.google.com/webstore/detail/web-developer/bfbameneiokkgbdmiekhjnmfkcnldhhm",
+            "description": "Analysez la structure des titres de votre page"
+          },
+          {
+            "nom": "HTML Validator",
+            "url": "https://validator.w3.org/",
+            "description": "Validez votre HTML et détectez les erreurs de structure"
+          },
+          {
+            "nom": "Heading Structure Checker",
+            "url": "https://www.seoreviewtools.com/heading-structure-checker/",
+            "description": "Analysez la hiérarchie de vos titres"
+          }
+        ],
+        "bonnesPratiques": [
+          "Un seul H1 par page (règle absolue)",
+          "Inclure le mot-clé principal naturellement",
+          "Descriptif et pertinent pour le contenu",
+          "Hiérarchie logique avec H2, H3...",
+          "Longueur recommandée : 20-60 caractères"
+        ],
+        "exemple": {
+          "html": "<main>\n  <h1>Agence SEO Paris - Expert en Référencement Naturel</h1>\n  <h2>Nos Services SEO</h2>\n  <h3>Audit Technique</h3>\n  <h3>Optimisation On-Page</h3>\n</main>",
+          "description": "Structure correcte avec un seul H1 et hiérarchie logique"
         }
       }
     },
@@ -62,17 +131,41 @@
       "label": "Structure des titres logique (H1 > H2 > H3)",
       "description": "Pas de saut de niveau, lisible pour les moteurs",
       "details": {
-        "explication": "La hiérarchie des titres doit être logique et respecter l'ordre H1 > H2 > H3. Évitez les sauts de niveau qui peuvent confondre les moteurs de recherche.",
-        "exemple": "H1 (titre principal) > H2 (sections) > H3 (sous-sections) > H4 (détails)",
-        "bonnesPratiques": [
-          "Respecter l'ordre hiérarchique",
-          "Pas de saut de niveau (H1 > H3)",
-          "Titres descriptifs et pertinents",
-          "Inclure des mots-clés naturellement"
+        "explication": "La hiérarchie des titres doit être logique et respecter l'ordre H1 > H2 > H3. Évitez les sauts de niveau qui peuvent confondre les moteurs de recherche et nuire à la compréhension de votre contenu. C'est comme un plan de document.",
+        "commentFaire": [
+          "Utilisez l'extension 'Web Developer' → Information → View Document Outline",
+          "Analysez avec 'Heading Structure Checker' pour détecter les sauts",
+          "Utilisez 'Screaming Frog' pour auditer toute votre structure",
+          "Vérifiez avec 'HTML Validator' pour les erreurs de structure"
         ],
-        "codeExemple": {
+        "outils": [
+          {
+            "nom": "Screaming Frog SEO Spider",
+            "url": "https://www.screamingfrog.co.uk/seo-spider/",
+            "description": "Audit complet de la structure des titres de votre site"
+          },
+          {
+            "nom": "Heading Structure Checker",
+            "url": "https://www.seoreviewtools.com/heading-structure-checker/",
+            "description": "Analysez la hiérarchie de vos titres"
+          },
+          {
+            "nom": "Web Developer Extension",
+            "url": "https://chrome.google.com/webstore/detail/web-developer/bfbameneiokkgbdmiekhjnmfkcnldhhm",
+            "description": "Visualisez la structure des titres de votre page"
+          }
+        ],
+        "bonnesPratiques": [
+          "Respecter l'ordre hiérarchique strict",
+          "Pas de saut de niveau (H1 > H3 = interdit)",
+          "Titres descriptifs et pertinents",
+          "Inclure des mots-clés naturellement",
+          "Maximum 3-4 niveaux de profondeur"
+        ],
+        "exemple": {
           "html": "<h1>Agence SEO Paris</h1>\n<h2>Nos Services</h2>\n<h3>Audit SEO</h3>\n<h3>Optimisation On-Page</h3>\n<h2>Notre Équipe</h2>\n<h3>Experts SEO</h3>",
-          "structure": "✅ Bonne structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n│   ├── H3: Audit SEO\n│   └── H3: Optimisation On-Page\n└── H2: Notre Équipe\n    └── H3: Experts SEO\n\n❌ Mauvaise structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n└── H4: Audit SEO (saut de niveau !)"
+          "description": "Structure logique sans saut de niveau",
+          "structure": "Bonne structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n│   ├── H3: Audit SEO\n│   └── H3: Optimisation On-Page\n└── H2: Notre Équipe\n    └── H3: Experts SEO\n\nMauvaise structure :\nH1: Agence SEO Paris\n├── H2: Nos Services\n└── H4: Audit SEO (saut de niveau !)"
         }
       }
     },
@@ -81,18 +174,41 @@
       "label": "URL lisible et courte",
       "description": "Ex : /services/seo plutôt que /page?id=24",
       "details": {
-        "explication": "Les URLs doivent être descriptives, courtes et inclure les mots-clés pertinents. Évitez les paramètres techniques et les caractères spéciaux.",
-        "exemple": "https://serpenter.fr/services/seo-audit-technique",
+        "explication": "Les URLs doivent être descriptives, courtes et inclure les mots-clés pertinents. Évitez les paramètres techniques et les caractères spéciaux. Une bonne URL aide au référencement et à la compréhension par les utilisateurs.",
+        "commentFaire": [
+          "Analysez vos URLs actuelles avec 'URL Structure Checker'",
+          "Utilisez 'Google Search Console' pour voir les URLs indexées",
+          "Testez avec 'URL Rewrite Tool' pour optimiser vos URLs",
+          "Vérifiez avec 'Screaming Frog' pour auditer toutes vos URLs"
+        ],
+        "outils": [
+          {
+            "nom": "Google Search Console",
+            "url": "https://search.google.com/search-console",
+            "description": "Analysez les URLs indexées par Google"
+          },
+          {
+            "nom": "Screaming Frog SEO Spider",
+            "url": "https://www.screamingfrog.co.uk/seo-spider/",
+            "description": "Audit complet de la structure URL de votre site"
+          },
+          {
+            "nom": "URL Structure Checker",
+            "url": "https://www.seoreviewtools.com/url-structure-checker/",
+            "description": "Analysez la qualité de vos URLs"
+          }
+        ],
         "bonnesPratiques": [
-          "URLs descriptives et courtes",
+          "URLs descriptives et courtes (max 60 caractères)",
           "Inclure les mots-clés principaux",
           "Utiliser des tirets (-) au lieu d'espaces",
-          "Éviter les caractères spéciaux"
+          "Éviter les caractères spéciaux et accents",
+          "Structure logique : /categorie/sous-categorie"
         ],
-        "codeExemple": {
-          "bon": "✅ URLs optimisées :\n/services/seo-audit\n/blog/optimisation-meta-description\n/contact-agence-seo-paris",
-          "mauvais": "❌ URLs à éviter :\n/page.php?id=123&cat=seo\n/services.php?service=audit&type=technical\n/contact?ref=google&utm_source=seo",
-          "nuxt": "// nuxt.config.ts\nexport default {\n  router: {\n    extendRoutes(routes, resolve) {\n      routes.push({\n        name: 'seo-audit',\n        path: '/services/seo-audit',\n        component: resolve(__dirname, 'pages/services/seo-audit.vue')\n      })\n    }\n  }\n}"
+        "exemple": {
+                  "bon": "URLs optimisées :\n/services/seo-audit\n/blog/optimisation-meta-description\n/contact-agence-seo-paris\n/audit-technique-seo",
+        "mauvais": "URLs à éviter :\n/page.php?id=123&cat=seo\n/services.php?service=audit&type=technical\n/contact?ref=google&utm_source=seo\n/page%20seo%20paris",
+          "description": "Exemples d'URLs optimisées vs à éviter"
         }
       }
     },
@@ -101,17 +217,40 @@
       "label": "Texte alternatif (alt) sur toutes les images",
       "description": "Pour le SEO image et l'accessibilité",
       "details": {
-        "explication": "L'attribut alt décrit le contenu de l'image pour les moteurs de recherche et les lecteurs d'écran. Il améliore l'accessibilité et le SEO image.",
-        "exemple": "<img src=\"audit-seo.jpg\" alt=\"Audit SEO technique d'un site e-commerce\">",
-        "bonnesPratiques": [
-          "Descriptif et pertinent",
-          "Inclure les mots-clés naturellement",
-          "Pas de spam de mots-clés",
-          "Décrire le contenu de l'image"
+        "explication": "L'attribut alt décrit le contenu de l'image pour les moteurs de recherche et les lecteurs d'écran. Il améliore l'accessibilité et peut aider au référencement des images dans Google Images.",
+        "commentFaire": [
+          "Inspectez vos images (clic droit → Inspecter) → Cherchez l'attribut alt",
+          "Utilisez l'extension 'Web Developer' → Images → Display Alt Attributes",
+          "Testez avec 'Alt Text Checker' pour analyser vos images",
+          "Vérifiez avec 'Google Images' pour voir l'indexation de vos images"
         ],
-        "codeExemple": {
-          "html": "<img \n  src=\"/images/audit-seo-technique.jpg\" \n  alt=\"Audit SEO technique d'un site e-commerce - Analyse des performances\" \n  width=\"800\" \n  height=\"600\"\n>",
-          "vue": "<template>\n  <img \n    :src=\"image.src\" \n    :alt=\"image.alt\" \n    :width=\"image.width\" \n    :height=\"image.height\"\n  >\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      image: {\n        src: '/images/audit-seo.jpg',\n        alt: 'Audit SEO technique d\\'un site e-commerce',\n        width: 800,\n        height: 600\n      }\n    }\n  }\n}\n</script>"
+        "outils": [
+          {
+            "nom": "Web Developer Extension",
+            "url": "https://chrome.google.com/webstore/detail/web-developer/bfbameneiokkgbdmiekhjnmfkcnldhhm",
+            "description": "Analysez les attributs alt de vos images"
+          },
+          {
+            "nom": "Alt Text Checker",
+            "url": "https://www.seoreviewtools.com/alt-text-checker/",
+            "description": "Vérifiez la qualité de vos attributs alt"
+          },
+          {
+            "nom": "Google Images",
+            "url": "https://images.google.com/",
+            "description": "Vérifiez l'indexation de vos images dans Google"
+          }
+        ],
+        "bonnesPratiques": [
+          "Décrire le contenu de l'image",
+          "Inclure les mots-clés pertinents",
+          "Maximum 125 caractères",
+          "Éviter 'image de', 'photo de'",
+          "Unique pour chaque image"
+        ],
+        "exemple": {
+          "html": "<img src=\"audit-seo.jpg\" alt=\"Audit SEO technique d'un site web avec graphiques de performance\">\n<img src=\"optimisation-seo.jpg\" alt=\"Optimisation SEO on-page avec analyse des balises meta\">",
+          "description": "Attributs alt descriptifs et optimisés pour le SEO"
         }
       }
     },
@@ -120,17 +259,40 @@
       "label": "Liens internes présents",
       "description": "Navigation contextuelle",
       "details": {
-        "explication": "Les liens internes aident les moteurs de recherche à comprendre la structure de votre site et distribuent le PageRank entre vos pages.",
-        "exemple": "Lien vers des pages connexes avec des ancres descriptives",
-        "bonnesPratiques": [
-          "Ancres descriptives et pertinentes",
-          "Lien vers des pages connexes",
-          "Éviter les ancres génériques (cliquez ici)",
-          "Utiliser des mots-clés dans les ancres"
+        "explication": "Les liens internes aident les moteurs de recherche à comprendre la structure de votre site et distribuent le PageRank entre vos pages. Ils améliorent aussi l'expérience utilisateur en facilitant la navigation.",
+        "commentFaire": [
+          "Utilisez 'Screaming Frog' pour analyser tous vos liens internes",
+          "Testez avec 'Internal Link Checker' pour identifier les opportunités",
+          "Vérifiez avec 'Google Search Console' → Liens → Liens internes",
+          "Analysez avec 'Ahrefs' ou 'Majestic' pour un audit complet"
         ],
-        "codeExemple": {
-          "html": "<p>Découvrez nos <a href=\"/services/audit-seo\">services d'audit SEO</a> pour améliorer votre visibilité.</p>\n<p>Consultez notre <a href=\"/blog/optimisation-meta-description\">guide sur les meta descriptions</a>.</p>",
-          "vue": "<template>\n  <div>\n    <p>Découvrez nos <NuxtLink to=\"/services/audit-seo\">services d'audit SEO</NuxtLink>.</p>\n    <p>Consultez notre <NuxtLink to=\"/blog/optimisation-meta-description\">guide sur les meta descriptions</NuxtLink>.</p>\n  </div>\n</template>"
+        "outils": [
+          {
+            "nom": "Screaming Frog SEO Spider",
+            "url": "https://www.screamingfrog.co.uk/seo-spider/",
+            "description": "Audit complet des liens internes de votre site"
+          },
+          {
+            "nom": "Google Search Console",
+            "url": "https://search.google.com/search-console",
+            "description": "Analysez les liens internes indexés par Google"
+          },
+          {
+            "nom": "Internal Link Checker",
+            "url": "https://www.seoreviewtools.com/internal-link-checker/",
+            "description": "Identifiez les opportunités de liens internes"
+          }
+        ],
+        "bonnesPratiques": [
+          "Liens contextuels et naturels",
+          "Utiliser des ancres descriptives",
+          "Éviter 'cliquez ici', 'en savoir plus'",
+          "Distribuer le PageRank équitablement",
+          "Maximum 100 liens par page"
+        ],
+        "exemple": {
+          "html": "<article>\n  <h2>Audit SEO Technique</h2>\n  <p>Notre <a href=\"/services/seo-audit\">audit SEO technique</a> analyse en profondeur votre site web pour identifier les problèmes de référencement.</p>\n  <p>Découvrez aussi nos <a href=\"/services/optimisation-on-page\">services d'optimisation on-page</a>.</p>\n</article>",
+          "description": "Liens internes contextuels avec ancres descriptives"
         }
       }
     },
@@ -139,74 +301,208 @@
       "label": "Balise canonical présente",
       "description": "Pour éviter le contenu dupliqué",
       "details": {
-        "explication": "La balise canonical indique aux moteurs de recherche quelle est la version principale d'une page, évitant ainsi les problèmes de contenu dupliqué.",
-        "exemple": "<link rel=\"canonical\" href=\"https://serpenter.fr/services/seo\">",
-        "bonnesPratiques": [
-          "URL absolue et complète",
-          "Une seule par page",
-          "Pointe vers la version principale",
-          "Éviter les chaînes de redirection"
+        "explication": "La balise canonical indique aux moteurs de recherche quelle est la version principale d'une page quand il existe plusieurs URLs pointant vers le même contenu. Elle évite les problèmes de contenu dupliqué.",
+        "commentFaire": [
+          "Inspectez votre page (F12) → Cherchez <link rel=\"canonical\">",
+          "Utilisez 'Canonical URL Checker' pour analyser vos canonicals",
+          "Vérifiez avec 'Google Search Console' → Couverture → Erreurs de contenu dupliqué",
+          "Testez avec 'Screaming Frog' pour auditer toutes vos canonicals"
         ],
-        "codeExemple": {
-          "html": "<head>\n  <link rel=\"canonical\" href=\"https://serpenter.fr/services/seo\">\n</head>",
-          "vue": "<script>\nexport default {\n  head() {\n    return {\n      link: [\n        {\n          rel: 'canonical',\n          href: 'https://serpenter.fr/services/seo'\n        }\n      ]\n    }\n  }\n}\n</script>"
+        "outils": [
+          {
+            "nom": "Google Search Console",
+            "url": "https://search.google.com/search-console",
+            "description": "Détectez les problèmes de contenu dupliqué"
+          },
+          {
+            "nom": "Screaming Frog SEO Spider",
+            "url": "https://www.screamingfrog.co.uk/seo-spider/",
+            "description": "Audit complet des balises canonical de votre site"
+          },
+          {
+            "nom": "Canonical URL Checker",
+            "url": "https://www.seoreviewtools.com/canonical-url-checker/",
+            "description": "Analysez vos balises canonical"
+          }
+        ],
+        "bonnesPratiques": [
+          "URL absolue (avec https://)",
+          "Une seule balise canonical par page",
+          "URL de la page principale",
+          "Cohérente avec la sitemap",
+          "Éviter les chaînes de requêtes inutiles"
+        ],
+        "exemple": {
+          "html": "<head>\n  <link rel=\"canonical\" href=\"https://serpenter.fr/services/seo-audit\">\n</head>",
+          "description": "Balise canonical avec URL absolue et propre"
         }
       }
     },
     {
-      "id": "sitemap",
-      "label": "Sitemap XML généré",
-      "description": "Sitemap à jour et soumis à Google Search Console",
+      "id": "sitemap-xml",
+      "label": "Sitemap XML présente et valide",
+      "description": "Aide les moteurs à découvrir vos pages",
       "details": {
-        "explication": "Le sitemap XML aide les moteurs de recherche à découvrir et indexer toutes les pages de votre site. Il doit être à jour et soumis à Google Search Console.",
-        "exemple": "sitemap.xml accessible à https://serpenter.fr/sitemap.xml",
+        "explication": "Le sitemap XML liste toutes les pages importantes de votre site et aide les moteurs de recherche à les découvrir et les indexer. Il doit être soumis à Google Search Console et être accessible via /sitemap.xml.",
+        "commentFaire": [
+          "Vérifiez l'existence de votre sitemap : votresite.com/sitemap.xml",
+          "Soumettez votre sitemap dans Google Search Console → Sitemaps",
+          "Validez votre sitemap avec 'XML Sitemap Validator'",
+          "Vérifiez que toutes vos pages importantes sont incluses"
+        ],
+        "outils": [
+          {
+            "nom": "Google Search Console",
+            "url": "https://search.google.com/search-console",
+            "description": "Soumettez et surveillez votre sitemap"
+          },
+          {
+            "nom": "XML Sitemap Validator",
+            "url": "https://www.xml-sitemaps.com/validate-xml-sitemap.html",
+            "description": "Validez la structure de votre sitemap XML"
+          },
+          {
+            "nom": "Screaming Frog SEO Spider",
+            "url": "https://www.screamingfrog.co.uk/seo-spider/",
+            "description": "Générez un sitemap XML complet de votre site"
+          }
+        ],
         "bonnesPratiques": [
           "Inclure toutes les pages importantes",
-          "Mettre à jour régulièrement",
-          "Soumettre à Google Search Console",
-          "Limiter à 50 000 URLs par sitemap"
+          "Maximum 50 000 URLs par sitemap",
+          "URLs absolues avec https://",
+          "Mise à jour régulière",
+          "Référencée dans robots.txt"
         ],
-        "codeExemple": {
-          "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url>\n    <loc>https://serpenter.fr/</loc>\n    <lastmod>2024-01-15</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>https://serpenter.fr/services/seo</loc>\n    <lastmod>2024-01-10</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>",
-          "nuxt": "// nuxt.config.ts\nexport default {\n  sitemap: {\n    hostname: 'https://serpenter.fr',\n    gzip: true,\n    defaults: {\n      changefreq: 'daily',\n      priority: 1,\n      lastmod: new Date()\n    }\n  }\n}"
+        "exemple": {
+          "html": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url>\n    <loc>https://serpenter.fr/</loc>\n    <lastmod>2024-01-15</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>https://serpenter.fr/services/seo-audit</loc>\n    <lastmod>2024-01-10</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>",
+          "description": "Sitemap XML valide avec métadonnées importantes"
         }
       }
     },
     {
       "id": "robots-txt",
       "label": "Fichier robots.txt configuré",
-      "description": "Instructions claires pour les crawlers",
+      "description": "Guide les robots d'indexation",
       "details": {
-        "explication": "Le fichier robots.txt indique aux moteurs de recherche quelles parties du site ils peuvent explorer et où se trouve le sitemap.",
-        "exemple": "robots.txt accessible à https://serpenter.fr/robots.txt",
+        "explication": "Le fichier robots.txt indique aux robots des moteurs de recherche quelles pages ils peuvent ou ne peuvent pas explorer. Il doit être accessible à la racine de votre site (votresite.com/robots.txt).",
+        "commentFaire": [
+          "Accédez à votresite.com/robots.txt pour vérifier l'existence",
+          "Vérifiez la syntaxe avec 'Robots.txt Validator'",
+          "Testez avec 'Google Search Console' → URL Inspection → robots.txt",
+          "Assurez-vous que le sitemap est référencé"
+        ],
+        "outils": [
+          {
+            "nom": "Google Search Console",
+            "url": "https://search.google.com/search-console",
+            "description": "Testez votre robots.txt avec l'inspecteur d'URL"
+          },
+          {
+            "nom": "Robots.txt Validator",
+            "url": "https://www.seoreviewtools.com/robots-txt-validator/",
+            "description": "Validez la syntaxe de votre robots.txt"
+          },
+          {
+            "nom": "Screaming Frog SEO Spider",
+            "url": "https://www.screamingfrog.co.uk/seo-spider/",
+            "description": "Analysez votre robots.txt et ses directives"
+          }
+        ],
         "bonnesPratiques": [
           "Placé à la racine du site",
-          "Instructions claires",
-          "Référencer le sitemap",
-          "Ne pas bloquer les ressources importantes"
+          "Syntaxe correcte et lisible",
+          "Référencer le sitemap XML",
+          "Ne pas bloquer les ressources importantes",
+          "Tester avec les outils Google"
         ],
-        "codeExemple": {
-          "robots": "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /private/\nSitemap: https://serpenter.fr/sitemap.xml",
-          "nuxt": "// nuxt.config.ts\nexport default {\n  robots: {\n    UserAgent: '*',\n    Allow: '/',\n    Disallow: ['/admin/', '/private/'],\n    Sitemap: 'https://serpenter.fr/sitemap.xml'\n  }\n}"
+        "exemple": {
+          "html": "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /private/\nDisallow: /tmp/\nSitemap: https://serpenter.fr/sitemap.xml",
+          "description": "Robots.txt avec directives claires et sitemap référencé"
         }
       }
     },
     {
       "id": "structured-data",
-      "label": "Données structurées implémentées",
-      "description": "Schema.org pour les informations importantes",
+      "label": "Données structurées (Schema.org)",
+      "description": "Améliore la visibilité dans les SERP",
       "details": {
-        "explication": "Les données structurées (Schema.org) aident les moteurs de recherche à comprendre le contenu de votre site et peuvent générer des rich snippets.",
-        "exemple": "Schema Organization, LocalBusiness, Article, etc.",
-        "bonnesPratiques": [
-          "Utiliser les schémas appropriés",
-          "Données valides et à jour",
-          "Tester avec Google Rich Results Test",
-          "Implémenter progressivement"
+        "explication": "Les données structurées aident les moteurs de recherche à comprendre le contenu de vos pages et peuvent générer des rich snippets dans les résultats de recherche. Elles améliorent la visibilité et le taux de clic.",
+        "commentFaire": [
+          "Identifiez le type de contenu (Article, Organisation, LocalBusiness...)",
+          "Utilisez 'Schema.org Generator' pour créer vos données structurées",
+          "Testez avec 'Google Rich Results Test' pour valider",
+          "Vérifiez avec 'Structured Data Testing Tool'"
         ],
-        "codeExemple": {
-          "organization": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Serpenter\",\n  \"url\": \"https://serpenter.fr\",\n  \"logo\": \"https://serpenter.fr/logo.png\",\n  \"description\": \"Agence SEO à Paris spécialisée dans l'optimisation pour les moteurs de recherche\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"streetAddress\": \"123 Rue de la SEO\",\n    \"addressLocality\": \"Paris\",\n    \"postalCode\": \"75001\",\n    \"addressCountry\": \"FR\"\n  }\n}",
-          "vue": "<script>\nexport default {\n  head() {\n    return {\n      script: [\n        {\n          type: 'application/ld+json',\n          json: {\n            '@context': 'https://schema.org',\n            '@type': 'Organization',\n            name: 'Serpenter',\n            url: 'https://serpenter.fr'\n          }\n        }\n      ]\n    }\n  }\n}\n</script>"
+        "outils": [
+          {
+            "nom": "Google Rich Results Test",
+            "url": "https://search.google.com/test/rich-results",
+            "description": "Testez vos données structurées pour les rich snippets"
+          },
+          {
+            "nom": "Schema.org Generator",
+            "url": "https://schema.org/",
+            "description": "Générez des données structurées valides"
+          },
+          {
+            "nom": "Structured Data Testing Tool",
+            "url": "https://search.google.com/structured-data/testing-tool",
+            "description": "Validez vos données structurées"
+          }
+        ],
+        "bonnesPratiques": [
+          "Choisir le bon type de schéma",
+          "Données cohérentes avec le contenu",
+          "Éviter le spam et les données trompeuses",
+          "Tester régulièrement",
+          "Suivre les guidelines Google"
+        ],
+        "exemple": {
+          "html": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Serpenter\",\n  \"url\": \"https://serpenter.fr\",\n  \"logo\": \"https://serpenter.fr/logo.png\",\n  \"description\": \"Agence SEO à Paris\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"streetAddress\": \"123 Rue de la Paix\",\n    \"addressLocality\": \"Paris\",\n    \"postalCode\": \"75001\",\n    \"addressCountry\": \"FR\"\n  }\n}\n</script>",
+          "description": "Données structurées pour une organisation avec adresse"
+        }
+      }
+    },
+    {
+      "id": "breadcrumbs",
+      "label": "Fil d'Ariane (breadcrumbs) présent",
+      "description": "Navigation et SEO local",
+      "details": {
+        "explication": "Les breadcrumbs améliorent la navigation utilisateur et peuvent apparaître dans les résultats de recherche. Ils aident aussi au SEO local en montrant la hiérarchie de votre site aux moteurs de recherche.",
+        "commentFaire": [
+          "Vérifiez la présence de breadcrumbs sur vos pages",
+          "Implémentez avec des données structurées BreadcrumbList",
+          "Testez avec 'Google Rich Results Test'",
+          "Vérifiez l'apparence dans les SERP"
+        ],
+        "outils": [
+          {
+            "nom": "Google Rich Results Test",
+            "url": "https://search.google.com/test/rich-results",
+            "description": "Testez vos breadcrumbs pour les rich snippets"
+          },
+          {
+            "nom": "Breadcrumb Generator",
+            "url": "https://www.seoreviewtools.com/breadcrumb-generator/",
+            "description": "Générez des breadcrumbs optimisés"
+          },
+          {
+            "nom": "Google Search Console",
+            "url": "https://search.google.com/search-console",
+            "description": "Surveillez l'apparence de vos breadcrumbs dans les SERP"
+          }
+        ],
+        "bonnesPratiques": [
+          "Liens cliquables et fonctionnels",
+          "Hiérarchie logique du site",
+          "Données structurées BreadcrumbList",
+          "Design cohérent avec le site",
+          "Visible sur toutes les pages internes"
+        ],
+        "exemple": {
+          "html": "<nav aria-label=\"Breadcrumb\">\n  <ol class=\"breadcrumb\">\n    <li><a href=\"/\">Accueil</a></li>\n    <li><a href=\"/services\">Services</a></li>\n    <li aria-current=\"page\">Audit SEO</li>\n  </ol>\n</nav>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BreadcrumbList\",\n  \"itemListElement\": [\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 1,\n      \"name\": \"Accueil\",\n      \"item\": \"https://serpenter.fr\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 2,\n      \"name\": \"Services\",\n      \"item\": \"https://serpenter.fr/services\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 3,\n      \"name\": \"Audit SEO\"\n    }\n  ]\n}\n</script>",
+          "description": "Breadcrumbs avec HTML sémantique et données structurées"
         }
       }
     }

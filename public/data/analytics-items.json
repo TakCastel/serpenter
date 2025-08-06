@@ -3,79 +3,129 @@
     {
       "id": "google-analytics",
       "label": "Google Analytics configuré",
-      "description": "Suivi des conversions et comportements",
+      "description": "Suivi des performances et comportement",
       "details": {
-        "explication": "Google Analytics permet de suivre les performances du site, les comportements utilisateurs et les conversions.",
-        "exemple": "GA4 configuré avec événements personnalisés",
-        "bonnesPratiques": [
-          "Utiliser GA4 (nouvelle version)",
-          "Configurer les objectifs",
-          "Respecter le RGPD",
-          "Événements personnalisés"
+        "explication": "Google Analytics permet de mesurer les performances de votre site, comprendre le comportement des utilisateurs et optimiser votre stratégie SEO. Il fournit des données précieuses pour améliorer l'expérience utilisateur.",
+        "commentFaire": [
+          "Créez un compte Google Analytics et obtenez votre ID de mesure",
+          "Installez le code de suivi dans le <head> de votre site",
+          "Configurez les objectifs et événements personnalisés",
+          "Vérifiez l'installation avec 'Google Tag Assistant'",
+          "Testez avec 'Real-time' dans Google Analytics"
         ],
-        "codeExemple": {
-          "html": "<!-- Google Analytics 4 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'GA_MEASUREMENT_ID');\n</script>",
-          "vue": "<script>\nexport default {\n  mounted() {\n    // Événement personnalisé\n    gtag('event', 'page_view', {\n      page_title: this.$route.name,\n      page_location: window.location.href\n    });\n  },\n  methods: {\n    trackConversion() {\n      gtag('event', 'conversion', {\n        send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL'\n      });\n    }\n  }\n}\n</script>",
-          "nuxt": "// nuxt.config.ts\nexport default {\n  app: {\n    head: {\n      script: [\n        {\n          src: 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID',\n          async: true\n        },\n        {\n          innerHTML: `\n            window.dataLayer = window.dataLayer || [];\n            function gtag(){dataLayer.push(arguments);}\n            gtag('js', new Date());\n            gtag('config', 'GA_MEASUREMENT_ID');\n          `\n        }\n      ]\n    }\n  }\n}"
+        "outils": [
+          {
+            "nom": "Google Analytics",
+            "url": "https://analytics.google.com/",
+            "description": "Plateforme d'analyse web de Google"
+          },
+          {
+            "nom": "Google Tag Assistant",
+            "url": "https://chrome.google.com/webstore/detail/tag-assistant-legacy-by-g/kejbdjndbnbjgmefkgdddjlbokphdefk",
+            "description": "Extension pour vérifier l'installation des tags"
+          },
+          {
+            "nom": "Google Analytics Debugger",
+            "url": "https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna",
+            "description": "Debuggez les événements Google Analytics"
+          }
+        ],
+        "bonnesPratiques": [
+          "Respecter le RGPD et demander le consentement",
+          "Configurer les objectifs de conversion",
+          "Implémenter le suivi des événements",
+          "Exclure les IPs internes",
+          "Configurer les filtres et segments"
+        ],
+        "exemple": {
+          "html": "<!-- Google Analytics 4 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'GA_MEASUREMENT_ID');\n</script>\n\n<!-- Événement personnalisé -->\n<script>\ngtag('event', 'button_click', {\n  'event_category': 'engagement',\n  'event_label': 'contact_form'\n});\n</script>",
+          "description": "Installation Google Analytics 4 avec événements personnalisés"
         }
       }
     },
     {
-      "id": "search-console",
-      "label": "Google Search Console configuré",
-      "description": "Monitoring des performances de recherche",
+      "id": "rgpd-respect",
+      "label": "Respecter le RGPD",
+      "description": "Consentement et politique de confidentialité",
       "details": {
-        "explication": "Google Search Console permet de surveiller les performances de recherche, les erreurs d'indexation et les opportunités d'amélioration.",
-        "exemple": "Site vérifié, sitemap soumis, erreurs surveillées",
-        "bonnesPratiques": [
-          "Vérifier la propriété",
-          "Soumettre le sitemap",
-          "Surveiller les erreurs",
-          "Analyser les requêtes"
+        "explication": "Le RGPD (Règlement Général sur la Protection des Données) impose des obligations strictes pour la collecte et le traitement des données personnelles. Tous les sites web doivent respecter ces règles.",
+        "commentFaire": [
+          "Créez une politique de confidentialité claire",
+          "Implémentez un système de consentement (bannière cookie)",
+          "Utilisez 'Cookiebot' ou 'OneTrust' pour la conformité",
+          "Vérifiez avec 'GDPR Checklist' pour vous assurer de la conformité",
+          "Testez avec 'Lighthouse' → Best Practices → Privacy"
         ],
-        "codeExemple": {
-          "html": "<!-- Méta tag de vérification -->\n<meta name=\"google-site-verification\" content=\"verification_token\" />",
-          "nuxt": "// nuxt.config.ts\nexport default {\n  app: {\n    head: {\n      meta: [\n        {\n          name: 'google-site-verification',\n          content: 'verification_token'\n        }\n      ]\n    }\n  }\n}",
-          "info": "Étapes de configuration :\n1. Aller sur Google Search Console\n2. Ajouter une propriété\n3. Vérifier la propriété (méta tag ou fichier HTML)\n4. Soumettre le sitemap\n5. Configurer les notifications"
+        "outils": [
+          {
+            "nom": "Cookiebot",
+            "url": "https://www.cookiebot.com/",
+            "description": "Solution de gestion des cookies RGPD"
+          },
+          {
+            "nom": "OneTrust",
+            "url": "https://www.onetrust.com/",
+            "description": "Plateforme de conformité RGPD"
+          },
+          {
+            "nom": "GDPR Checklist",
+            "url": "https://gdprchecklist.io/",
+            "description": "Checklist de conformité RGPD"
+          }
+        ],
+        "bonnesPratiques": [
+          "Demander le consentement avant tout tracking",
+          "Permettre de retirer le consentement facilement",
+          "Documenter toutes les données collectées",
+          "Limiter la collecte au minimum nécessaire",
+          "Sécuriser les données collectées"
+        ],
+        "exemple": {
+          "html": "<!-- Bannière de consentement RGPD -->\n<div id=\"cookie-banner\" class=\"cookie-banner\">\n  <p>Nous utilisons des cookies pour améliorer votre expérience.</p>\n  <button onclick=\"acceptCookies()\">Accepter</button>\n  <button onclick=\"rejectCookies()\">Refuser</button>\n  <a href=\"/privacy\">En savoir plus</a>\n</div>\n\n<script>\nfunction acceptCookies() {\n  localStorage.setItem('cookies-accepted', 'true');\n  document.getElementById('cookie-banner').style.display = 'none';\n  // Activer Google Analytics\n  gtag('consent', 'update', {\n    'analytics_storage': 'granted'\n  });\n}\n\nfunction rejectCookies() {\n  localStorage.setItem('cookies-accepted', 'false');\n  document.getElementById('cookie-banner').style.display = 'none';\n  // Désactiver Google Analytics\n  gtag('consent', 'update', {\n    'analytics_storage': 'denied'\n  });\n}\n</script>",
+          "description": "Exemple de bannière de consentement RGPD avec gestion des cookies"
         }
       }
     },
     {
-      "id": "error-tracking",
-      "label": "Suivi des erreurs",
-      "description": "Monitoring des erreurs JavaScript",
+      "id": "evenements-personnalises",
+      "label": "Événements personnalisés",
+      "description": "Suivi des actions importantes",
       "details": {
-        "explication": "Le suivi des erreurs permet d'identifier et corriger les problèmes avant qu'ils n'affectent trop d'utilisateurs.",
-        "exemple": "Sentry, LogRocket, Bugsnag",
-        "bonnesPratiques": [
-          "Capturer les erreurs JavaScript",
-          "Grouper les erreurs similaires",
-          "Notifications en temps réel",
-          "Contexte utilisateur"
+        "explication": "Les événements personnalisés permettent de suivre des actions spécifiques des utilisateurs (clics, soumissions de formulaire, téléchargements) pour mieux comprendre le comportement et optimiser les conversions.",
+        "commentFaire": [
+          "Identifiez les actions importantes à tracker (clics, formulaires, téléchargements)",
+          "Implémentez les événements avec gtag() ou dataLayer.push()",
+          "Testez avec 'Google Analytics Debugger'",
+          "Vérifiez dans Google Analytics → Real-time → Events",
+          "Analysez avec 'Google Tag Manager' pour une gestion avancée"
         ],
-        "codeExemple": {
-          "vue": "<script>\nexport default {\n  errorCaptured(err, vm, info) {\n    // Envoyer l'erreur à Sentry\n    Sentry.captureException(err, {\n      extra: {\n        componentName: vm.$options.name,\n        info: info\n      }\n    });\n    return false; // Empêcher la propagation\n  },\n  \n  mounted() {\n    // Capturer les erreurs globales\n    window.addEventListener('error', (event) => {\n      Sentry.captureException(event.error);\n    });\n    \n    // Capturer les promesses rejetées\n    window.addEventListener('unhandledrejection', (event) => {\n      Sentry.captureException(event.reason);\n    });\n  }\n}\n</script>",
-          "sentry": "// Configuration Sentry\nimport * as Sentry from '@sentry/vue';\nimport { BrowserTracing } from '@sentry/tracing';\n\nSentry.init({\n  app,\n  dsn: 'YOUR_SENTRY_DSN',\n  integrations: [\n    new BrowserTracing({\n      routingInstrumentation: Sentry.vueRouterInstrumentation(router)\n    })\n  ],\n  tracesSampleRate: 1.0,\n  environment: process.env.NODE_ENV\n});"
-        }
-      }
-    },
-    {
-      "id": "performance-monitoring",
-      "label": "Monitoring des performances",
-      "description": "Suivi des métriques Core Web Vitals",
-      "details": {
-        "explication": "Surveiller les métriques de performance en temps réel pour détecter les problèmes et optimiser l'expérience utilisateur.",
-        "exemple": "LCP, FID, CLS, temps de chargement",
-        "bonnesPratiques": [
-          "Surveiller les Core Web Vitals",
-          "Alertes en temps réel",
-          "Historique des performances",
-          "Corrélation avec les erreurs"
+        "outils": [
+          {
+            "nom": "Google Analytics Debugger",
+            "url": "https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna",
+            "description": "Debuggez vos événements personnalisés"
+          },
+          {
+            "nom": "Google Tag Manager",
+            "url": "https://tagmanager.google.com/",
+            "description": "Gérez vos tags et événements de manière centralisée"
+          },
+          {
+            "nom": "Google Analytics",
+            "url": "https://analytics.google.com/",
+            "description": "Analysez vos événements personnalisés"
+          }
         ],
-        "codeExemple": {
-          "javascript": "// Monitoring des Core Web Vitals\nimport { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';\n\nfunction sendToAnalytics(metric) {\n  // Envoyer à Google Analytics\n  gtag('event', metric.name, {\n    value: Math.round(metric.value),\n    event_category: 'Web Vitals',\n    event_label: metric.id,\n    non_interaction: true\n  });\n}\n\ngetCLS(sendToAnalytics);\ngetFID(sendToAnalytics);\ngetFCP(sendToAnalytics);\ngetLCP(sendToAnalytics);\ngetTTFB(sendToAnalytics);",
-          "vue": "<script>\nexport default {\n  mounted() {\n    // Mesurer le temps de chargement de la page\n    const navigation = performance.getEntriesByType('navigation')[0];\n    const loadTime = navigation.loadEventEnd - navigation.loadEventStart;\n    \n    // Envoyer la métrique\n    this.$gtag('event', 'timing_complete', {\n      name: 'load',\n      value: Math.round(loadTime)\n    });\n  }\n}\n</script>",
-          "nuxt": "// plugins/web-vitals.client.js\nexport default ({ app }) => {\n  if (process.client) {\n    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {\n      const sendToAnalytics = (metric) => {\n        app.$gtag('event', metric.name, {\n          value: Math.round(metric.value),\n          event_category: 'Web Vitals'\n        });\n      };\n      \n      getCLS(sendToAnalytics);\n      getFID(sendToAnalytics);\n      getFCP(sendToAnalytics);\n      getLCP(sendToAnalytics);\n      getTTFB(sendToAnalytics);\n    });\n  }\n}"
+        "bonnesPratiques": [
+          "Nommer les événements de manière cohérente",
+          "Inclure des paramètres pertinents (category, label, value)",
+          "Ne pas surcharger avec trop d'événements",
+          "Tester en développement avant production",
+          "Documenter les événements implémentés"
+        ],
+        "exemple": {
+          "html": "<!-- Événements personnalisés -->\n<script>\n// Clic sur bouton CTA\nfunction trackCTAClick(buttonText) {\n  gtag('event', 'click', {\n    'event_category': 'engagement',\n    'event_label': buttonText,\n    'value': 1\n  });\n}\n\n// Soumission de formulaire\nfunction trackFormSubmission(formName) {\n  gtag('event', 'form_submit', {\n    'event_category': 'conversion',\n    'event_label': formName,\n    'value': 1\n  });\n}\n\n// Téléchargement de fichier\nfunction trackDownload(fileName) {\n  gtag('event', 'download', {\n    'event_category': 'engagement',\n    'event_label': fileName,\n    'value': 1\n  });\n}\n</script>\n\n<!-- Utilisation dans le HTML -->\n<button onclick=\"trackCTAClick('Contact Button')\">Contactez-nous</button>\n<form onsubmit=\"trackFormSubmission('Contact Form')\">\n  <!-- Formulaire -->\n</form>\n<a href=\"/download.pdf\" onclick=\"trackDownload('PDF Guide')\">Télécharger</a>",
+          "description": "Exemples d'événements personnalisés pour différents types d'actions"
         }
       }
     }

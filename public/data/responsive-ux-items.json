@@ -1,116 +1,170 @@
 {
   "items": [
     {
-      "id": "responsive-design",
+      "id": "design-responsive",
       "label": "Design responsive (mobile > desktop)",
       "description": "Affichage optimisé pour toutes les tailles d'écran",
       "details": {
-        "explication": "Le design responsive s'adapte automatiquement à toutes les tailles d'écran, en commençant par mobile (mobile-first).",
-        "exemple": "Breakpoints : 320px, 768px, 1024px, 1440px",
+        "explication": "Le design responsive s'adapte automatiquement à toutes les tailles d'écran, du mobile au desktop. L'approche mobile-first privilégie l'expérience sur mobile, puis améliore pour les écrans plus grands.",
+        "commentFaire": [
+          "Utilisez 'Chrome DevTools' → Device Toolbar pour tester les breakpoints",
+          "Testez avec 'Responsive Design Checker' pour voir votre site sur différents appareils",
+          "Vérifiez avec 'Lighthouse' → Performance → Mobile",
+          "Analysez avec 'BrowserStack' pour tester sur de vrais appareils"
+        ],
+        "outils": [
+          {
+            "nom": "Chrome DevTools",
+            "url": "https://developers.google.com/web/tools/chrome-devtools",
+            "description": "Testez le responsive avec l'outil Device Toolbar"
+          },
+          {
+            "nom": "Responsive Design Checker",
+            "url": "https://responsivedesignchecker.com/",
+            "description": "Vérifiez votre site sur différentes tailles d'écran"
+          },
+          {
+            "nom": "BrowserStack",
+            "url": "https://www.browserstack.com/",
+            "description": "Testez sur de vrais appareils et navigateurs"
+          }
+        ],
         "bonnesPratiques": [
           "Approche mobile-first",
-          "Breakpoints cohérents",
-          "Images responsives",
-          "Navigation adaptée"
+          "Breakpoints cohérents (320px, 768px, 1024px, 1440px)",
+          "Images et médias responsives",
+          "Navigation adaptée au mobile",
+          "Texte lisible sur tous les écrans"
         ],
-        "codeExemple": {
-          "css": "/* Mobile-first CSS */\n.container {\n  width: 100%;\n  padding: 1rem;\n}\n\n/* Tablet */\n@media (min-width: 768px) {\n  .container {\n    max-width: 750px;\n    margin: 0 auto;\n  }\n}\n\n/* Desktop */\n@media (min-width: 1024px) {\n  .container {\n    max-width: 1200px;\n  }\n}",
-          "vue": "<template>\n  <div class=\"responsive-container\">\n    <div class=\"content\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n.responsive-container {\n  width: 100%;\n  padding: 1rem;\n}\n\n@media (min-width: 768px) {\n  .responsive-container {\n    max-width: 750px;\n    margin: 0 auto;\n  }\n}\n\n@media (min-width: 1024px) {\n  .responsive-container {\n    max-width: 1200px;\n  }\n}\n</style>"
+        "exemple": {
+          "html": "/* CSS Mobile-first */\n.container {\n  width: 100%;\n  padding: 1rem;\n}\n\n/* Tablette (768px+) */\n@media (min-width: 768px) {\n  .container {\n    max-width: 750px;\n    margin: 0 auto;\n  }\n}\n\n/* Desktop (1024px+) */\n@media (min-width: 1024px) {\n  .container {\n    max-width: 1200px;\n  }\n}\n\n/* Images responsives */\nimg {\n  max-width: 100%;\n  height: auto;\n}",
+          "description": "Exemple de CSS mobile-first avec breakpoints et images responsives"
         }
       }
     },
     {
-      "id": "touch-targets",
+      "id": "boutons-adaptes",
       "label": "Taille des boutons adaptée (min. 44px)",
       "description": "Facile à cliquer sur mobile",
       "details": {
-        "explication": "Les éléments tactiles doivent avoir une taille minimale de 44x44px pour être facilement cliquables sur mobile.",
-        "exemple": "Boutons, liens, champs de formulaire de 44px minimum",
-        "bonnesPratiques": [
-          "Taille minimale 44x44px",
-          "Espacement suffisant entre éléments",
-          "Feedback visuel au toucher",
-          "Éviter les éléments trop proches"
+        "explication": "Les boutons et éléments cliquables doivent être suffisamment grands pour être facilement utilisables sur mobile. La taille minimum recommandée est de 44x44px pour respecter les guidelines d'accessibilité.",
+        "commentFaire": [
+          "Mesurez vos boutons avec 'Chrome DevTools' → Inspect",
+          "Testez avec 'Touch Target Size Checker' pour vérifier les tailles",
+          "Vérifiez avec 'Lighthouse' → Accessibility → Touch targets",
+          "Analysez avec 'axe DevTools' pour détecter les cibles trop petites"
         ],
-        "codeExemple": {
-          "css": "/* Boutons tactiles optimisés */\n.touch-button {\n  min-width: 44px;\n  min-height: 44px;\n  padding: 12px 16px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n/* Espacement entre éléments */\n.touch-element {\n  margin: 8px;\n  /* Éviter les éléments trop proches */\n}",
-          "vue": "<template>\n  <button \n    class=\"touch-button\" \n    @click=\"handleClick\"\n  >\n    {{ label }}\n  </button>\n</template>\n\n<style scoped>\n.touch-button {\n  min-width: 44px;\n  min-height: 44px;\n  padding: 12px 16px;\n  border: none;\n  border-radius: 8px;\n  background-color: var(--primary-color);\n  color: white;\n  font-size: 16px;\n  cursor: pointer;\n  transition: all 0.2s ease;\n}\n\n.touch-button:active {\n  transform: scale(0.95);\n}\n</style>"
+        "outils": [
+          {
+            "nom": "Touch Target Size Checker",
+            "url": "https://chrome.google.com/webstore/detail/touch-target-size-checker/kkebgegbbimeefdmdlkkhacceikcndj",
+            "description": "Extension pour vérifier la taille des éléments cliquables"
+          },
+          {
+            "nom": "axe DevTools",
+            "url": "https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd",
+            "description": "Détecte les cibles tactiles trop petites"
+          },
+          {
+            "nom": "Lighthouse",
+            "url": "https://developers.google.com/web/tools/lighthouse",
+            "description": "Audit d'accessibilité avec vérification des cibles tactiles"
+          }
+        ],
+        "bonnesPratiques": [
+          "Taille minimum 44x44px",
+          "Espacement suffisant entre les éléments",
+          "Feedback visuel au toucher",
+          "Éviter les éléments trop proches",
+          "Tester sur de vrais appareils"
+        ],
+        "exemple": {
+          "html": "/* Boutons adaptés au mobile */\n.button {\n  min-width: 44px;\n  min-height: 44px;\n  padding: 12px 24px;\n  font-size: 16px;\n  border-radius: 8px;\n}\n\n/* Navigation mobile */\n.nav-item {\n  display: block;\n  padding: 16px;\n  min-height: 44px;\n  margin: 4px 0;\n}\n\n/* Boutons trop petits */\n.small-button {\n  width: 20px;\n  height: 20px;\n  /* Trop petit pour mobile */\n}",
+          "description": "Exemples de boutons adaptés vs trop petits pour mobile"
         }
       }
     },
     {
-      "id": "no-horizontal-scroll",
+      "id": "pas-debordement",
       "label": "Pas d'éléments qui débordent / scroll horizontal",
       "description": "Sur mobile surtout",
       "details": {
-        "explication": "Le contenu doit s'adapter à la largeur de l'écran sans créer de scroll horizontal, surtout sur mobile.",
-        "exemple": "Images responsives, textes qui s'adaptent, tableaux scrollables",
-        "bonnesPratiques": [
-          "Images avec max-width: 100%",
-          "Textes qui s'adaptent",
-          "Tableaux avec scroll horizontal",
-          "Tester sur différentes tailles"
+        "explication": "Le scroll horizontal est une mauvaise expérience utilisateur, surtout sur mobile. Tous les éléments doivent s'adapter à la largeur de l'écran sans créer de débordement horizontal.",
+        "commentFaire": [
+          "Testez avec 'Chrome DevTools' → Device Toolbar → Toggle device toolbar",
+          "Utilisez 'Responsive Design Checker' pour voir les débordements",
+          "Vérifiez avec 'Lighthouse' → Performance → Avoid horizontal scrolling",
+          "Analysez avec 'axe DevTools' pour détecter les problèmes de layout"
         ],
-        "codeExemple": {
-          "css": "/* Éviter le scroll horizontal */\n* {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\n.container {\n  width: 100%;\n  overflow-x: hidden;\n}\n\n/* Tableau responsive */\n.table-container {\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n}",
-          "vue": "<template>\n  <div class=\"responsive-content\">\n    <img :src=\"image.src\" :alt=\"image.alt\" class=\"responsive-image\">\n    <div class=\"text-content\">\n      {{ content }}\n    </div>\n  </div>\n</template>\n\n<style scoped>\n.responsive-content {\n  width: 100%;\n  overflow-x: hidden;\n}\n\n.responsive-image {\n  max-width: 100%;\n  height: auto;\n}\n\n.text-content {\n  word-wrap: break-word;\n  overflow-wrap: break-word;\n}\n</style>"
+        "outils": [
+          {
+            "nom": "Chrome DevTools",
+            "url": "https://developers.google.com/web/tools/chrome-devtools",
+            "description": "Testez le responsive et détectez les débordements"
+          },
+          {
+            "nom": "Responsive Design Checker",
+            "url": "https://responsivedesignchecker.com/",
+            "description": "Vérifiez votre site sur différentes tailles d'écran"
+          },
+          {
+            "nom": "axe DevTools",
+            "url": "https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd",
+            "description": "Détecte les problèmes de layout et débordements"
+          }
+        ],
+        "bonnesPratiques": [
+          "Utiliser width: 100% et max-width",
+          "Éviter les largeurs fixes en pixels",
+          "Utiliser flexbox et grid responsivement",
+          "Tester sur différentes tailles d'écran",
+          "Vérifier les tableaux et images"
+        ],
+        "exemple": {
+          "html": "/* Layout responsive sans débordement */\n.container {\n  width: 100%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 1rem;\n  box-sizing: border-box;\n}\n\n.content {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1rem;\n}\n\n.item {\n  flex: 1 1 300px;\n  min-width: 0;\n}\n\n/* Images responsives */\nimg {\n  max-width: 100%;\n  height: auto;\n  display: block;\n}",
+          "description": "CSS pour éviter les débordements horizontaux"
         }
       }
     },
     {
-      "id": "perceived-speed",
+      "id": "vitesse-percue",
       "label": "Vitesse de chargement perçue rapide",
       "description": "Skeletons, transitions douces",
       "details": {
-        "explication": "Améliorer la perception de la vitesse avec des skeletons, des transitions douces et un feedback immédiat.",
-        "exemple": "Skeletons pendant le chargement, animations fluides",
-        "bonnesPratiques": [
-          "Utiliser des skeletons",
-          "Transitions douces",
-          "Feedback immédiat",
-          "Optimiser les animations"
+        "explication": "La vitesse perçue est plus importante que la vitesse réelle. Utiliser des skeletons, des transitions douces et des optimisations visuelles donne l'impression d'un site plus rapide.",
+        "commentFaire": [
+          "Implémentez des skeletons avec 'Skeleton Screen' ou 'Content Placeholder'",
+          "Testez avec 'Lighthouse' → Performance → First Contentful Paint",
+          "Vérifiez avec 'WebPageTest' pour mesurer les métriques de performance",
+          "Analysez avec 'Chrome DevTools' → Performance pour optimiser"
         ],
-        "codeExemple": {
-          "vue": "<template>\n  <div>\n    <!-- Skeleton pendant le chargement -->\n    <div v-if=\"loading\" class=\"skeleton\">\n      <div class=\"skeleton-item\"></div>\n      <div class=\"skeleton-item\"></div>\n      <div class=\"skeleton-item\"></div>\n    </div>\n    \n    <!-- Contenu réel -->\n    <div v-else class=\"content\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n.skeleton {\n  animation: pulse 1.5s ease-in-out infinite;\n}\n\n.skeleton-item {\n  height: 20px;\n  background: #e5e7eb;\n  margin: 8px 0;\n  border-radius: 4px;\n}\n\n@keyframes pulse {\n  0%, 100% { opacity: 1; }\n  50% { opacity: 0.5; }\n}\n\n.content {\n  animation: fadeIn 0.3s ease-in;\n}\n\n@keyframes fadeIn {\n  from { opacity: 0; transform: translateY(10px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n</style>",
-          "css": "/* Transitions douces */\n.fade-enter-active, .fade-leave-active {\n  transition: opacity 0.3s ease;\n}\n\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n\n/* Skeleton animation */\n@keyframes shimmer {\n  0% { background-position: -200px 0; }\n  100% { background-position: calc(200px + 100%) 0; }\n}\n\n.skeleton {\n  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);\n  background-size: 200px 100%;\n  animation: shimmer 1.5s infinite;\n}"
-        }
-      }
-    },
-    {
-      "id": "mobile-first",
-      "label": "Approche mobile-first",
-      "description": "Conception pensée mobile en premier",
-      "details": {
-        "explication": "L'approche mobile-first consiste à concevoir d'abord pour mobile, puis d'ajouter des fonctionnalités pour les écrans plus grands.",
-        "exemple": "CSS mobile-first, navigation adaptée, contenu priorisé",
-        "bonnesPratiques": [
-          "Commencer par mobile",
-          "Contenu priorisé",
-          "Navigation simplifiée",
-          "Performance mobile"
+        "outils": [
+          {
+            "nom": "Lighthouse",
+            "url": "https://developers.google.com/web/tools/lighthouse",
+            "description": "Mesurez les métriques de performance perçue"
+          },
+          {
+            "nom": "WebPageTest",
+            "url": "https://www.webpagetest.org/",
+            "description": "Analysez les métriques de performance détaillées"
+          },
+          {
+            "nom": "Chrome DevTools",
+            "url": "https://developers.google.com/web/tools/chrome-devtools",
+            "description": "Analysez les performances avec l'onglet Performance"
+          }
         ],
-        "codeExemple": {
-          "css": "/* Mobile-first CSS */\n.nav {\n  /* Styles de base pour mobile */\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n}\n\n.nav-item {\n  padding: 0.5rem;\n  border-bottom: 1px solid #eee;\n}\n\n/* Desktop styles */\n@media (min-width: 768px) {\n  .nav {\n    flex-direction: row;\n    padding: 0;\n  }\n  \n  .nav-item {\n    padding: 1rem;\n    border-bottom: none;\n  }\n}",
-          "vue": "<template>\n  <nav class=\"mobile-first-nav\">\n    <button \n      @click=\"toggleMenu\" \n      class=\"menu-toggle\"\n      aria-label=\"Menu\"\n    >\n      ☰\n    </button>\n    \n    <div \n      :class=\"{ 'nav-menu': true, 'open': isMenuOpen }\"\n    >\n      <NuxtLink \n        v-for=\"item in menuItems\" \n        :key=\"item.path\" \n        :to=\"item.path\" \n        class=\"nav-item\"\n        @click=\"closeMenu\"\n      >\n        {{ item.label }}\n      </NuxtLink>\n    </div>\n  </nav>\n</template>"
-        }
-      }
-    },
-    {
-      "id": "touch-friendly",
-      "label": "Éléments tactiles optimisés",
-      "description": "Boutons et liens facilement cliquables",
-      "details": {
-        "explication": "Tous les éléments interactifs doivent être optimisés pour le tactile avec une taille suffisante et un feedback approprié.",
-        "exemple": "Boutons 44px+, espacement suffisant, feedback visuel",
         "bonnesPratiques": [
-          "Taille minimale 44x44px",
-          "Espacement de 8px minimum",
-          "Feedback visuel immédiat",
-          "Éviter les éléments trop petits"
+          "Afficher des skeletons pendant le chargement",
+          "Utiliser des transitions CSS fluides",
+          "Optimiser le First Contentful Paint",
+          "Précharger les ressources critiques",
+          "Utiliser le lazy loading"
         ],
-        "codeExemple": {
-          "css": "/* Éléments tactiles optimisés */\n.touch-friendly {\n  min-width: 44px;\n  min-height: 44px;\n  padding: 12px 16px;\n  margin: 4px;\n  border-radius: 8px;\n  transition: all 0.2s ease;\n  -webkit-tap-highlight-color: transparent;\n}\n\n.touch-friendly:active {\n  transform: scale(0.95);\n  background-color: var(--bg-hover);\n}\n\n/* Désactiver le highlight sur mobile */\n* {\n  -webkit-tap-highlight-color: transparent;\n}",
-          "vue": "<template>\n  <div class=\"touch-interface\">\n    <button \n      v-for=\"action in actions\" \n      :key=\"action.id\"\n      @click=\"handleAction(action.id)\"\n      @touchstart=\"handleTouchStart\"\n      @touchend=\"handleTouchEnd\"\n      class=\"touch-button\"\n      :class=\"{ 'active': activeButton === action.id }\"\n    >\n      {{ action.label }}\n    </button>\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      activeButton: null,\n      actions: [\n        { id: 1, label: 'Action 1' },\n        { id: 2, label: 'Action 2' }\n      ]\n    }\n  },\n  methods: {\n    handleTouchStart(event) {\n      this.activeButton = event.target.dataset.id\n    },\n    handleTouchEnd() {\n      this.activeButton = null\n    }\n  }\n}\n</script>"
+        "exemple": {
+          "html": "/* Skeleton loading */\n.skeleton {\n  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);\n  background-size: 200% 100%;\n  animation: loading 1.5s infinite;\n  border-radius: 4px;\n}\n\n@keyframes loading {\n  0% { background-position: 200% 0; }\n  100% { background-position: -200% 0; }\n}\n\n/* Transitions douces */\n.fade-in {\n  opacity: 0;\n  animation: fadeIn 0.3s ease-in forwards;\n}\n\n@keyframes fadeIn {\n  to { opacity: 1; }\n}",
+          "description": "Exemples de skeletons et transitions pour améliorer la vitesse perçue"
         }
       }
     }
