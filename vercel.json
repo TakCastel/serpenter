@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build:vercel",
   "installCommand": "npm ci",
-  "outputDirectory": ".output/public",
+  "outputDirectory": ".output",
   "build": {
     "env": {
       "NODE_OPTIONS": "--max-old-space-size=2048"
