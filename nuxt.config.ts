@@ -85,8 +85,7 @@ export default defineNuxtConfig({
         output: {
           manualChunks: {
             vendor: ['vue', 'vue-router'],
-            pinia: ['pinia'],
-            i18n: ['@nuxtjs/i18n']
+            pinia: ['pinia']
           }
         }
       }
