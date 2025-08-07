@@ -3,7 +3,7 @@
   publish = ".output/public"
 
 [build.environment]
-  NODE_OPTIONS = "--max-old-space-size=6144"
+  NODE_OPTIONS = "--max-old-space-size=2048"
 
 [[redirects]]
   from = "/*"
