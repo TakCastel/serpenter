@@ -75,11 +75,15 @@ export default defineNuxtConfig({
       'vercel-build': {
         driver: 'memory'
       }
+    },
+    experimental: {
+      wasm: false
     }
   },
 
   experimental: {
-    payloadExtraction: false
+    payloadExtraction: false,
+    componentIslands: false
   },
 
   build: {
@@ -95,13 +99,25 @@ export default defineNuxtConfig({
           }
         }
       },
-      chunkSizeWarningLimit: 1000
+      chunkSizeWarningLimit: 1000,
+      target: 'esnext',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      }
     },
     optimizeDeps: {
       exclude: ['@nuxt/kit']
     },
     ssr: {
       noExternal: ['@nuxt/icon']
+    },
+    define: {
+      __VUE_OPTIONS_API__: false,
+      __VUE_PROD_DEVTOOLS__: false
     }
   }
 });
