@@ -3,17 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate",
-    "build:vercel": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate",
-    "build:vercel-simple": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate",
-    "build:vercel-copy": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate && cp -r .output .vercel/output",
-    "prepare:vercel": "powershell -ExecutionPolicy Bypass -File scripts/prepare-vercel.ps1",
-    "deploy": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=6144 nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "build:analyze": "cross-env ANALYZE=true nuxt build"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.8.0",

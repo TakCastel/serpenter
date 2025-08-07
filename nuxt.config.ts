@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: false,
-
+  devtools: { enabled: true },
   ssr: true,
 
   modules: [
@@ -65,19 +64,32 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'static',
-    prerender: {
-      routes: ['/'],
-      crawlLinks: true
+    preset: 'vercel',
+    minify: true,
+    experimental: {
+      wasm: false
     }
   },
 
-  // Optimisations de build
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['vue', 'vue-router']
+          }
+        }
+      }
+    },
+    optimizeDeps: {
+      include: ['vue', 'vue-router']
+    }
+  },
+
   experimental: {
     payloadExtraction: false
   },
 
-  // Optimisations de rendu
   app: {
     head: {
       htmlAttrs: {
@@ -85,4 +97,4 @@ export default defineNuxtConfig({
       }
     }
   }
-});
+})
