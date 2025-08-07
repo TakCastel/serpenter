@@ -11,29 +11,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt'
   ],
 
-  icon: {
-    size: '24px',
-    class: 'icon',
-    aliases: {
-      nuxt: 'logos:nuxt-icon'
-    }
-  },
-
-  i18n: {
-    defaultLocale: 'fr',
-    langDir: 'locales/',
-    locales: [
-      { code: 'fr', name: 'Français', file: 'fr.json' },
-      { code: 'en', name: 'English', file: 'en.json' }
-    ],
-    strategy: 'prefix_except_default',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root'
-    }
-  },
-
   css: ['~/assets/css/main.css'],
 
   tailwindcss: {
@@ -63,8 +40,4 @@ export default defineNuxtConfig({
       }
     }
   },
-
-  nitro: {
-    preset: 'vercel'
-  }
 });
