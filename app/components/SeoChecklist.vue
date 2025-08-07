@@ -155,12 +155,22 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import ItemAccordion from './ItemAccordion.vue'
 import { useI18n } from 'vue-i18n'
+import { useProjectsStore } from '~/stores/projects'
 
 const emit = defineEmits(['categories-loaded'])
 const { locale } = useI18n()
+const projectsStore = useProjectsStore()
+
+// Props pour recevoir l'ID du projet actuel
+const props = defineProps({
+  currentProjectId: {
+    type: String,
+    default: 'default'
+  }
+})
 
 // État réactif
 const categories = ref([])
@@ -175,12 +185,11 @@ const totalCount = computed(() => {
 })
 
 const completedCount = computed(() => {
-  return checkedItems.value.size
+  return projectsStore.getProjectScores(props.currentProjectId).completedItems
 })
 
 const progressPercentage = computed(() => {
-  if (totalCount.value === 0) return 0
-  return (completedCount.value / totalCount.value) * 100
+  return projectsStore.getProjectScores(props.currentProjectId).percentage
 })
 
 // Méthodes
@@ -243,7 +252,7 @@ const getCategoryIcon = (categoryId) => {
 const loadCheckedItems = () => {
   try {
     if (process.client) {
-      const saved = localStorage.getItem('checklist-progress')
+      const saved = localStorage.getItem(`checklist-progress-${props.currentProjectId}`)
       if (saved) {
         const parsed = JSON.parse(saved)
         checkedItems.value = new Set(parsed.checkedItems || [])
@@ -261,7 +270,16 @@ const saveCheckedItems = () => {
         checkedItems: Array.from(checkedItems.value),
         timestamp: Date.now()
       }
-      localStorage.setItem('checklist-progress', JSON.stringify(data))
+      localStorage.setItem(`checklist-progress-${props.currentProjectId}`, JSON.stringify(data))
+      
+      // Mettre à jour les scores dans le store
+      const allItems = []
+      categories.value.forEach(category => {
+        if (category.items) {
+          allItems.push(...category.items)
+        }
+      })
+      projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
     }
   } catch (error) {
     console.error('Erreur lors de la sauvegarde du progrès:', error)
@@ -272,7 +290,8 @@ const resetProgress = () => {
   try {
     if (process.client) {
       checkedItems.value.clear()
-      localStorage.removeItem('checklist-progress')
+      localStorage.removeItem(`checklist-progress-${props.currentProjectId}`)
+      projectsStore.resetProjectScores(props.currentProjectId)
       console.log('Progrès réinitialisé avec succès')
     }
   } catch (error) {
@@ -369,6 +388,21 @@ watch(progressPercentage, (newPercentage) => {
 // Watcher pour recharger les données quand la langue change
 watch(locale, async () => {
   await loadCategories()
+}, { immediate: false })
+
+// Watcher pour recharger les items cochés quand le projet change
+watch(() => props.currentProjectId, () => {
+  loadCheckedItems()
+  // Recalculer les scores après le chargement
+  nextTick(() => {
+    const allItems = []
+    categories.value.forEach(category => {
+      if (category.items) {
+        allItems.push(...category.items)
+      }
+    })
+    projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
+  })
 }, { immediate: false })
 
 // Lifecycle

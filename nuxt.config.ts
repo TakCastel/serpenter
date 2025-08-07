@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/icon',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@pinia/nuxt'
   ],
   i18n: {
     defaultLocale: 'fr',
@@ -49,5 +50,28 @@ export default defineNuxtConfig({
       }
     }
   },
-
+  // Optimisations pour réduire l'utilisation mémoire
+  nitro: {
+    compressPublicAssets: true,
+    minify: true
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['vue', 'vue-i18n'],
+            utils: ['@nuxt/icon']
+          }
+        }
+      }
+    }
+  },
+  experimental: {
+    payloadExtraction: false
+  },
+  // Optimisations pour le build
+  build: {
+    transpile: ['vue-i18n']
+  }
 })

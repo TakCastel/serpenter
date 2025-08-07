@@ -13,6 +13,11 @@
         aria-label="Navigation des vérifications"
       >
         <div class="sticky top-24 p-4">
+          <!-- Sélecteur de projet -->
+          <div class="mb-6 hidden sm:block">
+            <ProjectSelector @project-changed="handleProjectChanged" />
+          </div>
+          
           <h3 class="text-sm font-semibold mb-4 transition-colors duration-200 hidden sm:block" style="color: var(--text-primary);">
             {{ $t('app.navigation.verifications') }}
           </h3>
@@ -50,7 +55,8 @@
       
       <!-- Contenu principal -->
       <main class="flex-1 min-w-0" role="main" aria-label="Contenu principal des vérifications">
-        <SeoChecklist ref="seoChecklist" @categories-loaded="handleCategoriesLoaded" />
+        <EmptyState v-if="!hasProjects" @create-project="handleCreateFirstProject" />
+        <SeoChecklist v-else ref="seoChecklist" :current-project-id="currentProjectId" @categories-loaded="handleCategoriesLoaded" />
       </main>
     </div>
     
@@ -59,11 +65,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useProjectsStore } from '~/stores/projects'
 
 const seoChecklist = ref(null)
 const categories = ref([])
 const activeCategory = ref(null)
+const projectsStore = useProjectsStore()
+const hasProjects = computed(() => projectsStore.hasProjects)
+const currentProjectId = computed(() => projectsStore.currentProjectId)
 
 const handleResetProgress = () => {
   console.log('handleResetProgress called')
@@ -82,6 +92,17 @@ const handleCategoriesLoaded = (loadedCategories) => {
   if (loadedCategories.length > 0) {
     activeCategory.value = loadedCategories[0].id
   }
+}
+
+const handleProjectChanged = (projectId) => {
+  currentProjectId.value = projectId
+  // Ici on pourrait recharger les données spécifiques au projet
+  console.log('Projet changé:', projectId)
+}
+
+const handleCreateFirstProject = () => {
+  // Créer un projet par défaut
+  projectsStore.createProject('Mon premier projet', 'Projet créé automatiquement')
 }
 
 const isScrollingProgrammatically = ref(false)

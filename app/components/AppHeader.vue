@@ -153,6 +153,44 @@
       </div>
     </div>
   </header>
+
+  <!-- Modal de confirmation de réinitialisation -->
+  <div
+    v-if="showResetModal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    @click="cancelReset"
+  >
+    <div
+      @click.stop
+      class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4"
+      style="background-color: var(--bg-surface);"
+    >
+      <h3 class="text-lg font-semibold mb-4" style="color: var(--text-primary);">
+        {{ $t('app.progress.resetTitle') }}
+      </h3>
+      
+      <p class="mb-6" style="color: var(--text-secondary);">
+        {{ $t('app.progress.resetConfirm') }}
+      </p>
+      
+      <div class="flex justify-end space-x-3">
+        <button
+          @click="cancelReset"
+          class="px-4 py-2 rounded-lg transition-colors duration-200"
+          style="background-color: var(--bg-border); color: var(--text-primary);"
+        >
+          {{ $t('common.cancel') }}
+        </button>
+        <button
+          @click="confirmReset"
+          class="px-4 py-2 rounded-lg transition-colors duration-200"
+          style="background-color: var(--text-danger); color: white;"
+        >
+          {{ $t('app.progress.reset') }}
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -166,6 +204,7 @@ const isDark = ref(true)
 const isScrolled = ref(false)
 const progressPercentage = ref(null)
 const showLanguageMenu = ref(false)
+const showResetModal = ref(false)
 
 const handleScroll = () => {
   if (process.client) {
@@ -186,9 +225,16 @@ const toggleTheme = () => {
 }
 
 const resetProgress = () => {
-  if (process.client && confirm($t('app.progress.resetConfirm'))) {
-    emit('reset-progress')
-  }
+  showResetModal.value = true
+}
+
+const confirmReset = () => {
+  emit('reset-progress')
+  showResetModal.value = false
+}
+
+const cancelReset = () => {
+  showResetModal.value = false
 }
 
 const toggleLanguageMenu = () => {

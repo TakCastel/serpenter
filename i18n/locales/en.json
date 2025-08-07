@@ -85,6 +85,28 @@
     "category": "Category {name}",
     "categoryItems": "Items in category {name}",
     "item": "Item {label}",
-    "itemDetails": "Details of {label}"
+    "itemDetails": "Details of {label}",
+    "cancel": "Cancel"
+  },
+  "projects": {
+    "selectProject": "Select a project",
+    "projectList": "Project list",
+    "noProject": "No project",
+    "createNew": "Create a new project",
+    "deleteCurrent": "Delete current project",
+    "createTitle": "Create a new project",
+    "deleteTitle": "Delete project",
+    "name": "Project name",
+    "namePlaceholder": "Enter project name",
+    "description": "Description",
+    "descriptionPlaceholder": "Optional project description",
+    "create": "Create",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete the project \"{name}\" ? This action cannot be undone."
+  },
+  "emptyState": {
+    "title": "No project found",
+    "description": "Start by creating your first project to organize your pre-deployment checks.",
+    "createButton": "Create my first project"
   }
 }

@@ -85,6 +85,28 @@
     "category": "Catégorie {name}",
     "categoryItems": "Éléments de la catégorie {name}",
     "item": "Élément {label}",
-    "itemDetails": "Détails de {label}"
+    "itemDetails": "Détails de {label}",
+    "cancel": "Annuler"
+  },
+  "projects": {
+    "selectProject": "Sélectionner un projet",
+    "projectList": "Liste des projets",
+    "noProject": "Aucun projet",
+    "createNew": "Créer un nouveau projet",
+    "deleteCurrent": "Supprimer le projet actuel",
+    "createTitle": "Créer un nouveau projet",
+    "deleteTitle": "Supprimer le projet",
+    "name": "Nom du projet",
+    "namePlaceholder": "Entrez le nom du projet",
+    "description": "Description",
+    "descriptionPlaceholder": "Description optionnelle du projet",
+    "create": "Créer",
+    "delete": "Supprimer",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer le projet \"{name}\" ? Cette action ne peut pas être annulée."
+  },
+  "emptyState": {
+    "title": "Aucun projet trouvé",
+    "description": "Commencez par créer votre premier projet pour organiser vos vérifications de pré-déploiement.",
+    "createButton": "Créer mon premier projet"
   }
 }
