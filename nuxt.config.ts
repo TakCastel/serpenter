@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  ssr: true,
+  devtools: { enabled: false },
+  ssr: false,
 
   modules: [
     '@nuxt/icon',
@@ -64,10 +64,10 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify',
-    minify: true,
-    experimental: {
-      wasm: false
+    preset: 'static',
+    prerender: {
+      routes: ['/'],
+      crawlLinks: true
     }
   },
 
