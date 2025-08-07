@@ -75,28 +75,57 @@ export default defineNuxtConfig({
     // Optimisations de build
     prerender: {
       crawlLinks: false
+    },
+    // Réduction de la mémoire utilisée
+    storage: {
+      fs: {
+        driver: 'fs'
+      }
     }
   },
 
   // Optimisations Vite pour réduire la taille du bundle
   vite: {
     build: {
+      // Réduction de la mémoire utilisée
+      target: 'esnext',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      },
       rollupOptions: {
         output: {
           manualChunks: {
             vendor: ['vue', 'vue-router'],
-            pinia: ['pinia']
+            pinia: ['pinia'],
+            i18n: ['@nuxtjs/i18n']
           }
         }
       }
     },
     optimizeDeps: {
       include: ['vue', 'vue-router', 'pinia']
+    },
+    // Optimisations pour réduire la mémoire
+    ssr: {
+      noExternal: ['@nuxtjs/i18n']
     }
   },
 
   // Optimisations de build
   experimental: {
     payloadExtraction: false
+  },
+
+  // Optimisations de rendu
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'fr'
+      }
+    }
   }
 });
