@@ -65,59 +65,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'vercel',
-    compressPublicAssets: true,
-    minify: true,
-    prerender: {
-      concurrency: 1,
-    },
-    storage: {
-      'vercel-build': {
-        driver: 'memory'
-      }
-    },
-    experimental: {
-      wasm: false
-    }
-  },
-
-  experimental: {
-    payloadExtraction: false,
-    componentIslands: false
-  },
-
-  build: {
-    transpile: ['vue-i18n']
-  },
-
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['vue', 'vue-i18n']
-          }
-        }
-      },
-      chunkSizeWarningLimit: 1000,
-      target: 'esnext',
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      }
-    },
-    optimizeDeps: {
-      exclude: ['@nuxt/kit']
-    },
-    ssr: {
-      noExternal: ['@nuxt/icon']
-    },
-    define: {
-      __VUE_OPTIONS_API__: false,
-      __VUE_PROD_DEVTOOLS__: false
-    }
+    preset: 'vercel'
   }
 });

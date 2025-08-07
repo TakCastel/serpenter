@@ -1,5 +1,0 @@
-{
-  "framework": "nuxtjs",
-  "buildCommand": "NODE_OPTIONS='--max-old-space-size=3072 --optimize-for-size' npm run build",
-  "installCommand": "npm install"
-}
