@@ -75,12 +75,6 @@ export default defineNuxtConfig({
     // Optimisations de build
     prerender: {
       crawlLinks: false
-    },
-    // Réduction de la taille du bundle
-    storage: {
-      'vercel-blob': {
-        driver: 'vercelBlob'
-      }
     }
   },
 
