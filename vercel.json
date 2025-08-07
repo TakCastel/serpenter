@@ -1,9 +1,0 @@
-{
-  "buildCommand": "npm run build",
-  "installCommand": "npm ci",
-  "build": {
-    "env": {
-      "NODE_OPTIONS": "--max-old-space-size=6144"
-    }
-  }
-}

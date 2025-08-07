@@ -64,7 +64,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'vercel',
+    preset: 'netlify',
     minify: true,
     experimental: {
       wasm: false
