@@ -3,15 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "NODE_OPTIONS='--max-old-space-size=6144' nuxt build",
-    "build:vercel": "NODE_OPTIONS='--max-old-space-size=6144' nuxt build && cp -r .output .vercel/output",
-    "prepare:vercel": "bash scripts/prepare-vercel.sh",
-    "deploy": "bash scripts/deploy.sh",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate",
+    "build:vercel": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate",
+    "build:vercel-simple": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate",
+    "build:vercel-copy": "cross-env NODE_OPTIONS=--max-old-space-size=2048 nuxt generate && cp -r .output .vercel/output",
+    "prepare:vercel": "powershell -ExecutionPolicy Bypass -File scripts/prepare-vercel.ps1",
+    "deploy": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "build:analyze": "ANALYZE=true nuxt build"
+    "build:analyze": "cross-env ANALYZE=true nuxt build"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.8.0",
@@ -31,6 +33,7 @@
     "@iconify-json/fluent": "^1.2.28",
     "@iconify-json/fluent-emoji": "^1.2.3",
     "@iconify-json/heroicons": "^1.2.2",
-    "@nuxtjs/tailwindcss": "^6.14.0"
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "cross-env": "^7.0.3"
   }
 }

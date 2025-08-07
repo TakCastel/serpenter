@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: false,
 
-  ssr: true,
+  ssr: false,
 
   modules: [
     '@nuxt/icon',
@@ -65,48 +65,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'vercel',
-    // Optimisations pour réduire la consommation mémoire
-    minify: true,
-    compressPublicAssets: true,
-    experimental: {
-      wasm: false
-    },
-    // Optimisations de build
-    prerender: {
-      crawlLinks: false
-    }
-  },
-
-  // Optimisations Vite pour réduire la taille du bundle
-  vite: {
-    build: {
-      // Réduction de la mémoire utilisée
-      target: 'esnext',
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      },
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['vue', 'vue-router'],
-            pinia: ['pinia'],
-            i18n: ['@nuxtjs/i18n']
-          }
-        }
-      }
-    },
-    optimizeDeps: {
-      include: ['vue', 'vue-router', 'pinia']
-    },
-    // Optimisations pour réduire la mémoire
-    ssr: {
-      noExternal: ['@nuxtjs/i18n']
-    }
+    preset: 'static'
   },
 
   // Optimisations de build
