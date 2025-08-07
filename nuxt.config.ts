@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: false, // inutile de garder l'objet complet
+  devtools: false,
 
   ssr: true,
 
@@ -21,8 +21,7 @@ export default defineNuxtConfig({
 
   i18n: {
     defaultLocale: 'fr',
-    lazy: true,
-    langDir: 'locales/', // si tu places fr.json et en.json dans /locales
+    langDir: 'locales/',
     locales: [
       { code: 'fr', name: 'Français', file: 'fr.json' },
       { code: 'en', name: 'English', file: 'en.json' }
@@ -70,7 +69,12 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     minify: true,
     prerender: {
-      concurrency: 1, // réduit la charge mémoire
+      concurrency: 1,
+    },
+    storage: {
+      'vercel-build': {
+        driver: 'memory'
+      }
     }
   },
 
@@ -90,10 +94,14 @@ export default defineNuxtConfig({
             vendor: ['vue', 'vue-i18n']
           }
         }
-      }
+      },
+      chunkSizeWarningLimit: 1000
     },
     optimizeDeps: {
       exclude: ['@nuxt/kit']
+    },
+    ssr: {
+      noExternal: ['@nuxt/icon']
     }
   }
 });
