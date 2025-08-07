@@ -65,6 +65,45 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'vercel'
+    preset: 'vercel',
+    // Optimisations pour réduire la consommation mémoire
+    minify: true,
+    compressPublicAssets: true,
+    experimental: {
+      wasm: false
+    },
+    // Optimisations de build
+    prerender: {
+      crawlLinks: false
+    },
+    // Réduction de la taille du bundle
+    storage: {
+      'vercel-blob': {
+        driver: 'vercelBlob'
+      }
+    }
+  },
+
+  // Optimisations Vite pour réduire la taille du bundle
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['vue', 'vue-router'],
+            pinia: ['pinia'],
+            i18n: ['@nuxtjs/i18n']
+          }
+        }
+      }
+    },
+    optimizeDeps: {
+      include: ['vue', 'vue-router', 'pinia']
+    }
+  },
+
+  // Optimisations de build
+  experimental: {
+    payloadExtraction: false
   }
 });
