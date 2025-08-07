@@ -136,7 +136,7 @@
         </div>
         
         <button
-          v-if="currentProjectId"
+          v-if="currentProjectId && isClient"
           @click="resetProgress"
           class="px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center space-x-2 hover:bg-opacity-80"
           style="background-color: var(--bg-primary); border: 1px solid var(--bg-border);"
@@ -216,6 +216,7 @@ const isScrolled = ref(false)
 const progressPercentage = ref(null)
 const showLanguageMenu = ref(false)
 const showResetModal = ref(false)
+const isClient = ref(false)
 
 const handleScroll = () => {
   if (process.client) {
@@ -280,6 +281,8 @@ const handleClickOutside = (event) => {
 }
 
 onMounted(() => {
+  isClient.value = true
+  
   if (process.client) {
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme === 'light') {

@@ -1,0 +1,133 @@
+{
+  "items": [
+    {
+      "id": "google-analytics",
+      "label": "Google Analytics configuré",
+      "description": "Suivi des performances et comportement",
+      "details": {
+        "explication": "Google Analytics permet de mesurer les performances de votre site, comprendre le comportement des utilisateurs et optimiser votre stratégie SEO. Il fournit des données précieuses pour améliorer l'expérience utilisateur.",
+        "commentFaire": [
+          "Créez un compte Google Analytics et obtenez votre ID de mesure",
+          "Installez le code de suivi dans le <head> de votre site",
+          "Configurez les objectifs et événements personnalisés",
+          "Vérifiez l'installation avec 'Google Tag Assistant'",
+          "Testez avec 'Real-time' dans Google Analytics"
+        ],
+        "outils": [
+          {
+            "nom": "Google Analytics",
+            "url": "https://analytics.google.com/",
+            "description": "Plateforme d'analyse web de Google"
+          },
+          {
+            "nom": "Google Tag Assistant",
+            "url": "https://chrome.google.com/webstore/detail/tag-assistant-legacy-by-g/kejbdjndbnbjgmefkgdddjlbokphdefk",
+            "description": "Extension pour vérifier l'installation des tags"
+          },
+          {
+            "nom": "Google Analytics Debugger",
+            "url": "https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna",
+            "description": "Debuggez les événements Google Analytics"
+          }
+        ],
+        "bonnesPratiques": [
+          "Respecter le RGPD et demander le consentement",
+          "Configurer les objectifs de conversion",
+          "Implémenter le suivi des événements",
+          "Exclure les IPs internes",
+          "Configurer les filtres et segments"
+        ],
+        "exemple": {
+          "html": "<!-- Google Analytics 4 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'GA_MEASUREMENT_ID');\n</script>\n\n<!-- Événement personnalisé -->\n<script>\ngtag('event', 'button_click', {\n  'event_category': 'engagement',\n  'event_label': 'contact_form'\n});\n</script>",
+          "description": "Installation Google Analytics 4 avec événements personnalisés"
+        }
+      }
+    },
+    {
+      "id": "rgpd-respect",
+      "label": "Respecter le RGPD",
+      "description": "Consentement et politique de confidentialité",
+      "details": {
+        "explication": "Le RGPD (Règlement Général sur la Protection des Données) impose des obligations strictes pour la collecte et le traitement des données personnelles. Tous les sites web doivent respecter ces règles.",
+        "commentFaire": [
+          "Créez une politique de confidentialité claire",
+          "Implémentez un système de consentement (bannière cookie)",
+          "Utilisez 'Cookiebot' ou 'OneTrust' pour la conformité",
+          "Vérifiez avec 'GDPR Checklist' pour vous assurer de la conformité",
+          "Testez avec 'Lighthouse' → Best Practices → Privacy"
+        ],
+        "outils": [
+          {
+            "nom": "Cookiebot",
+            "url": "https://www.cookiebot.com/",
+            "description": "Solution de gestion des cookies RGPD"
+          },
+          {
+            "nom": "OneTrust",
+            "url": "https://www.onetrust.com/",
+            "description": "Plateforme de conformité RGPD"
+          },
+          {
+            "nom": "GDPR Checklist",
+            "url": "https://gdprchecklist.io/",
+            "description": "Checklist de conformité RGPD"
+          }
+        ],
+        "bonnesPratiques": [
+          "Demander le consentement avant tout tracking",
+          "Permettre de retirer le consentement facilement",
+          "Documenter toutes les données collectées",
+          "Limiter la collecte au minimum nécessaire",
+          "Sécuriser les données collectées"
+        ],
+        "exemple": {
+          "html": "<!-- Bannière de consentement RGPD -->\n<div id=\"cookie-banner\" class=\"cookie-banner\">\n  <p>Nous utilisons des cookies pour améliorer votre expérience.</p>\n  <button onclick=\"acceptCookies()\">Accepter</button>\n  <button onclick=\"rejectCookies()\">Refuser</button>\n  <a href=\"/privacy\">En savoir plus</a>\n</div>\n\n<script>\nfunction acceptCookies() {\n  localStorage.setItem('cookies-accepted', 'true');\n  document.getElementById('cookie-banner').style.display = 'none';\n  // Activer Google Analytics\n  gtag('consent', 'update', {\n    'analytics_storage': 'granted'\n  });\n}\n\nfunction rejectCookies() {\n  localStorage.setItem('cookies-accepted', 'false');\n  document.getElementById('cookie-banner').style.display = 'none';\n  // Désactiver Google Analytics\n  gtag('consent', 'update', {\n    'analytics_storage': 'denied'\n  });\n}\n</script>",
+          "description": "Exemple de bannière de consentement RGPD avec gestion des cookies"
+        }
+      }
+    },
+    {
+      "id": "evenements-personnalises",
+      "label": "Événements personnalisés",
+      "description": "Suivi des actions importantes",
+      "details": {
+        "explication": "Les événements personnalisés permettent de suivre des actions spécifiques des utilisateurs (clics, soumissions de formulaire, téléchargements) pour mieux comprendre le comportement et optimiser les conversions.",
+        "commentFaire": [
+          "Identifiez les actions importantes à tracker (clics, formulaires, téléchargements)",
+          "Implémentez les événements avec gtag() ou dataLayer.push()",
+          "Testez avec 'Google Analytics Debugger'",
+          "Vérifiez dans Google Analytics → Real-time → Events",
+          "Analysez avec 'Google Tag Manager' pour une gestion avancée"
+        ],
+        "outils": [
+          {
+            "nom": "Google Analytics Debugger",
+            "url": "https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna",
+            "description": "Debuggez vos événements personnalisés"
+          },
+          {
+            "nom": "Google Tag Manager",
+            "url": "https://tagmanager.google.com/",
+            "description": "Gérez vos tags et événements de manière centralisée"
+          },
+          {
+            "nom": "Google Analytics",
+            "url": "https://analytics.google.com/",
+            "description": "Analysez vos événements personnalisés"
+          }
+        ],
+        "bonnesPratiques": [
+          "Nommer les événements de manière cohérente",
+          "Inclure des paramètres pertinents (category, label, value)",
+          "Ne pas surcharger avec trop d'événements",
+          "Tester en développement avant production",
+          "Documenter les événements implémentés"
+        ],
+        "exemple": {
+          "html": "<!-- Événements personnalisés -->\n<script>\n// Clic sur bouton CTA\nfunction trackCTAClick(buttonText) {\n  gtag('event', 'click', {\n    'event_category': 'engagement',\n    'event_label': buttonText,\n    'value': 1\n  });\n}\n\n// Soumission de formulaire\nfunction trackFormSubmission(formName) {\n  gtag('event', 'form_submit', {\n    'event_category': 'conversion',\n    'event_label': formName,\n    'value': 1\n  });\n}\n\n// Téléchargement de fichier\nfunction trackDownload(fileName) {\n  gtag('event', 'download', {\n    'event_category': 'engagement',\n    'event_label': fileName,\n    'value': 1\n  });\n}\n</script>\n\n<!-- Utilisation dans le HTML -->\n<button onclick=\"trackCTAClick('Contact Button')\">Contactez-nous</button>\n<form onsubmit=\"trackFormSubmission('Contact Form')\">\n  <!-- Formulaire -->\n</form>\n<a href=\"/download.pdf\" onclick=\"trackDownload('PDF Guide')\">Télécharger</a>",
+          "description": "Exemples d'événements personnalisés pour différents types d'actions"
+        }
+      }
+    }
+  ]
+}

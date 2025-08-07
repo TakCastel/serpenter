@@ -1,0 +1,204 @@
+{
+  "items": [
+    {
+      "id": "contraste",
+      "label": "Contrastes suffisants (WCAG AA minimum)",
+      "description": "Texte lisible sur fond sombre ou clair",
+      "details": {
+        "explication": "Le contraste entre le texte et l'arrière-plan doit être suffisant pour être lisible par tous les utilisateurs, y compris ceux ayant des déficiences visuelles. Le niveau WCAG AA exige un ratio de contraste minimum de 4.5:1 pour le texte normal et 3:1 pour le texte large.",
+        "commentFaire": [
+          "Utilisez l'outil 'WebAIM Contrast Checker' pour tester vos couleurs",
+          "Testez avec l'extension Chrome 'Color Contrast Analyzer'",
+          "Vérifiez avec 'Lighthouse' dans les DevTools → Accessibility",
+          "Utilisez 'axe DevTools' pour un audit complet d'accessibilité"
+        ],
+        "bonnesPratiques": [
+          "Ratio de contraste minimum 4.5:1 (texte normal)",
+          "Ratio de contraste minimum 3:1 (texte large)",
+          "Tester avec différents types de daltonisme",
+          "Vérifier sur écrans de différentes qualités",
+          "Inclure des alternatives pour les couleurs"
+        ],
+        "exemple": {
+          "html": "/* Bon contraste */\n.text-primary {\n  color: #1a1a1a;\n  background-color: #ffffff;\n  /* Ratio: 15.6:1 */\n}\n\n/* Mauvais contraste */\n.text-secondary {\n  color: #666666;\n  background-color: #ffffff;\n  /* Ratio: 2.8:1 */\n}",
+          "description": "Exemples de contrastes WCAG AA conformes vs non conformes"
+        }
+      }
+    },
+    {
+      "id": "navigation-clavier",
+      "label": "Navigation clavier fonctionnelle",
+      "description": "Focus visible, tab-index cohérent",
+      "details": {
+        "explication": "Tous les éléments interactifs doivent être accessibles au clavier et avoir un indicateur de focus visible. L'ordre de tabulation doit être logique et cohérent avec la structure visuelle de la page.",
+        "commentFaire": [
+          "Testez la navigation avec Tab, Shift+Tab, Entrée, Espace",
+          "Utilisez l'extension 'Focus Indicator' pour visualiser le focus",
+          "Vérifiez avec 'axe DevTools' → Keyboard navigation",
+          "Testez avec 'Lighthouse' → Accessibility → Keyboard navigation"
+        ],
+        "bonnesPratiques": [
+          "Tous les éléments cliquables accessibles au clavier",
+          "Indicateur de focus visible et contrasté",
+          "Ordre de tabulation logique",
+          "Pas de piège au clavier",
+          "Raccourcis clavier cohérents"
+        ],
+        "exemple": {
+          "html": "/* Focus visible */\nbutton:focus {\n  outline: 2px solid #007acc;\n  outline-offset: 2px;\n}\n\n/* Ordre de tabulation logique */\n<nav>\n  <a href=\"#\" tabindex=\"0\">Accueil</a>\n  <a href=\"#\" tabindex=\"0\">Services</a>\n  <a href=\"#\" tabindex=\"0\">Contact</a>\n</nav>",
+          "description": "Styles CSS pour focus visible et structure HTML pour navigation clavier"
+        }
+      }
+    },
+    {
+      "id": "labels-formulaires",
+      "label": "Labels explicites pour les champs de formulaire",
+      "description": "Ex : <label for=\"email\">Email</label>",
+      "details": {
+        "explication": "Chaque champ de formulaire doit avoir un label explicite associé via l'attribut 'for' ou en utilisant l'élément <label> englobant. Cela améliore l'accessibilité pour les lecteurs d'écran et l'expérience utilisateur.",
+        "commentFaire": [
+          "Inspectez vos formulaires (F12) → Cherchez les balises <label>",
+          "Utilisez l'extension 'axe DevTools' → Forms",
+          "Testez avec un lecteur d'écran (NVDA, JAWS, VoiceOver)",
+          "Vérifiez avec 'Lighthouse' → Accessibility → Form labels"
+        ],
+        "bonnesPratiques": [
+          "Label explicite et descriptif",
+          "Association via attribut 'for' ou englobant",
+          "Placeholder ne remplace pas le label",
+          "Labels pour tous les types de champs",
+          "Messages d'erreur accessibles"
+        ],
+        "exemple": {
+          "html": "<!-- Label explicite -->\n<div>\n  <label for=\"email\">Adresse email</label>\n  <input type=\"email\" id=\"email\" name=\"email\" required>\n</div>\n\n<!-- Label englobant -->\n<label>\n  Mot de passe\n  <input type=\"password\" name=\"password\" required>\n</label>",
+          "description": "Exemples de labels explicites et accessibles pour les formulaires"
+        }
+      }
+    },
+    {
+      "id": "aria-labels-roles",
+      "label": "Attributs ARIA appropriés",
+      "description": "Roles, labels, et états pour les éléments complexes",
+      "details": {
+        "explication": "Les attributs ARIA (Accessible Rich Internet Applications) améliorent l'accessibilité des éléments complexes comme les menus, accordéons, sliders, etc. Ils fournissent des informations supplémentaires aux lecteurs d'écran.",
+        "commentFaire": [
+          "Inspectez les éléments complexes → Vérifiez les attributs ARIA",
+          "Utilisez l'extension 'axe DevTools' → ARIA",
+          "Testez avec un lecteur d'écran (NVDA, JAWS, VoiceOver)",
+          "Vérifiez avec 'Lighthouse' → Accessibility → ARIA attributes"
+        ],
+        "bonnesPratiques": [
+          "Utiliser role=\"button\" pour les éléments cliquables",
+          "Utiliser aria-label pour les éléments sans texte",
+          "Utiliser aria-expanded pour les accordéons",
+          "Utiliser aria-hidden=\"true\" pour le contenu décoratif",
+          "Éviter les rôles redondants avec les éléments HTML"
+        ],
+        "exemple": {
+          "html": "<!-- Bouton avec ARIA -->\n<button aria-label=\"Fermer la modal\" onclick=\"closeModal()\">\n  <span aria-hidden=\"true\">×</span>\n</button>\n\n<!-- Accordéon avec ARIA -->\n<div role=\"button\" aria-expanded=\"false\" aria-controls=\"content-1\">\n  Titre de l'accordéon\n</div>\n<div id=\"content-1\" aria-hidden=\"true\">\n  Contenu de l'accordéon\n</div>\n\n<!-- Navigation avec ARIA -->\n<nav role=\"navigation\" aria-label=\"Menu principal\">\n  <ul>\n    <li><a href=\"/\">Accueil</a></li>\n    <li><a href=\"/services\">Services</a></li>\n  </ul>\n</nav>",
+          "description": "Exemples d'utilisation appropriée des attributs ARIA"
+        }
+      }
+    },
+    {
+      "id": "skip-links",
+      "label": "Liens d'évitement (Skip links)",
+      "description": "Liens pour sauter la navigation et aller au contenu",
+      "details": {
+        "explication": "Les liens d'évitement permettent aux utilisateurs de clavier de sauter directement au contenu principal, évitant ainsi de naviguer à travers tous les éléments de navigation. Ils sont essentiels pour l'accessibilité.",
+        "commentFaire": [
+          "Ajoutez des liens d'évitement au début de votre page",
+          "Testez avec Tab → Vérifiez que les liens apparaissent",
+          "Utilisez l'extension 'axe DevTools' → Skip links",
+          "Testez avec un lecteur d'écran (NVDA, JAWS, VoiceOver)"
+        ],
+        "bonnesPratiques": [
+          "Liens visibles au focus uniquement",
+          "Position en haut de page",
+          "Liens vers le contenu principal et la navigation",
+          "Style distinct et visible",
+          "Test avec clavier et lecteur d'écran"
+        ],
+        "exemple": {
+          "html": "<!-- Liens d'évitement -->\n<a href=\"#main-content\" class=\"skip-link\">Aller au contenu principal</a>\n<a href=\"#navigation\" class=\"skip-link\">Aller à la navigation</a>\n\n<!-- CSS pour les liens d'évitement -->\n.skip-link {\n  position: absolute;\n  top: -40px;\n  left: 6px;\n  background: #000;\n  color: #fff;\n  padding: 8px;\n  text-decoration: none;\n  z-index: 1000;\n}\n\n.skip-link:focus {\n  top: 6px;\n}\n\n<!-- Contenu principal avec ID -->\n<main id=\"main-content\">\n  <h1>Contenu principal</h1>\n  <p>Contenu de la page...</p>\n</main>",
+          "description": "Exemple de liens d'évitement avec CSS et structure HTML"
+        }
+      }
+    },
+    {
+      "id": "color-blindness",
+      "label": "Test avec différents types de daltonisme",
+      "description": "Vérifier la lisibilité pour les daltoniens",
+      "details": {
+        "explication": "Environ 8% des hommes et 0.5% des femmes sont daltoniens. Il est important de tester votre site avec différents types de daltonisme pour s'assurer que les informations ne sont pas transmises uniquement par la couleur.",
+        "commentFaire": [
+          "Utilisez l'extension 'Colorblindly' pour simuler le daltonisme",
+          "Testez avec 'axe DevTools' → Color contrast",
+          "Vérifiez que les informations ne dépendent pas uniquement de la couleur",
+          "Utilisez 'Lighthouse' → Accessibility → Color contrast"
+        ],
+        "bonnesPratiques": [
+          "Ne pas transmettre d'information uniquement par la couleur",
+          "Utiliser des icônes ou du texte en plus des couleurs",
+          "Tester avec protanopie, deutéranopie, tritanopie",
+          "Vérifier les graphiques et diagrammes",
+          "S'assurer que les liens sont identifiables sans couleur"
+        ],
+        "exemple": {
+          "html": "<!-- Bon : Information par couleur ET icône -->\n<div class=\"status\">\n  <span class=\"status-icon\">✓</span>\n  <span class=\"status-text\">Succès</span>\n</div>\n\n<!-- Mauvais : Information uniquement par couleur -->\n<div class=\"status success\">Succès</div>\n\n<!-- CSS pour le bon exemple -->\n.status {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n\n.status-icon {\n  font-weight: bold;\n}",
+          "description": "Exemples de transmission d'information accessible vs non accessible"
+        }
+      }
+    },
+    {
+      "id": "motion-reduced",
+      "label": "Respecter les préférences de mouvement réduit",
+      "description": "Media query prefers-reduced-motion",
+      "details": {
+        "explication": "Certains utilisateurs sont sensibles aux animations et mouvements. La media query 'prefers-reduced-motion' permet de respecter leurs préférences et d'améliorer l'accessibilité.",
+        "commentFaire": [
+          "Ajoutez @media (prefers-reduced-motion: reduce) à votre CSS",
+          "Testez en activant 'Réduire le mouvement' dans les paramètres système",
+          "Utilisez l'extension 'axe DevTools' → Motion",
+          "Vérifiez avec 'Lighthouse' → Accessibility → Motion"
+        ],
+        "bonnesPratiques": [
+          "Utiliser prefers-reduced-motion: reduce",
+          "Désactiver les animations non essentielles",
+          "Remplacer les animations par des transitions simples",
+          "Tester avec les paramètres système",
+          "Respecter les préférences utilisateur"
+        ],
+        "exemple": {
+          "css": "/* Animation normale */\n@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n\n.element {\n  animation: fadeIn 0.5s ease-in;\n}\n\n/* Respecter les préférences de mouvement réduit */\n@media (prefers-reduced-motion: reduce) {\n  .element {\n    animation: none;\n    opacity: 1;\n  }\n  \n  * {\n    animation-duration: 0.01ms !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: 0.01ms !important;\n  }\n}",
+          "description": "Exemple de CSS respectant les préférences de mouvement réduit"
+        }
+      }
+    },
+    {
+      "id": "screen-reader-test",
+      "label": "Test avec un lecteur d'écran",
+      "description": "Vérifier l'expérience avec NVDA, JAWS, VoiceOver",
+      "details": {
+        "explication": "Tester votre site avec un lecteur d'écran est essentiel pour comprendre l'expérience des utilisateurs aveugles ou malvoyants. Cela révèle des problèmes d'accessibilité invisibles autrement.",
+        "commentFaire": [
+          "Installez NVDA (gratuit) ou utilisez VoiceOver (Mac)",
+          "Naviguez sur votre site uniquement avec le clavier",
+          "Vérifiez que tous les éléments sont annoncés correctement",
+          "Testez la navigation par titres et liens"
+        ],
+        "bonnesPratiques": [
+          "Tester la navigation par titres (H, Shift+H)",
+          "Tester la navigation par liens (L, Shift+L)",
+          "Vérifier les annonces des images et boutons",
+          "Tester les formulaires et la navigation clavier",
+          "Vérifier la cohérence des annonces"
+        ],
+        "exemple": {
+          "html": "<!-- Structure testable avec lecteur d'écran -->\n<nav aria-label=\"Navigation principale\">\n  <ul>\n    <li><a href=\"/\" aria-current=\"page\">Accueil</a></li>\n    <li><a href=\"/services\">Services</a></li>\n  </ul>\n</nav>\n\n<main>\n  <h1>Page d'accueil</h1>\n  <p>Bienvenue sur notre site.</p>\n  \n  <form>\n    <label for=\"search\">Rechercher :</label>\n    <input type=\"search\" id=\"search\" aria-describedby=\"search-help\">\n    <div id=\"search-help\">Tapez votre recherche ici</div>\n  </form>\n</main>",
+          "description": "Exemple de structure HTML optimisée pour les lecteurs d'écran"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "items": [
+    {
+      "id": "title-tag",
+      "label": "<title> tag present and optimized",
+      "description": "Unique and relevant title with keywords",
+      "details": {
+        "explication": "The title tag is one of the most important elements for SEO. It appears in the browser tab and in search results. It must be unique for each page and contain the main keywords naturally.",
+        "commentFaire": [
+          "Right-click on your page -> 'View page source' -> Look for the <title> tag",
+          "Use Chrome extension 'SEO Meta in 1 Click' to analyze your titles",
+          "Test with Google Search Console tool to see appearance in SERPs",
+          "Check length with online tool 'Title Tag Length Checker'"
+        ],
+        "bonnesPratiques": [
+          "Length between 50 and 60 characters (visible in SERPs)",
+          "Include main keyword at the beginning of title",
+          "Unique for each page of the site",
+          "Descriptive and attractive to encourage clicks",
+          "Include brand name at the end"
+        ],
+        "exemple": {
+          "html": "<head>\n  <title>SEO Agency Paris - Natural Search Engine Optimization | Serpenter</title>\n</head>",
+          "description": "Example of optimized title with main keyword, description and brand"
+        }
+      }
+    },
+    {
+      "id": "meta-description",
+      "label": "<meta description> tag filled",
+      "description": "Attractive summary related to content",
+      "details": {
+        "explication": "The meta description appears in search results under the title. It directly influences click-through rate (CTR) and must summarize the page content attractively while including important keywords.",
+        "commentFaire": [
+          "Inspect your page (F12) -> Look for <meta name=\"description\"> tag",
+          "Use 'Meta Description Generator' tool to create optimized descriptions",
+          "Test appearance with 'Google SERP Simulator'",
+          "Check length with 'Meta Description Length Checker'"
+        ],
+        "bonnesPratiques": [
+          "Length between 150 and 160 characters (Google limit)",
+          "Include main keyword naturally",
+          "Descriptive and click-inducing",
+          "Unique for each page",
+          "Summarize main page content"
+        ],
+        "exemple": {
+          "html": "<head>\n  <meta name=\"description\" content=\"SEO agency in Paris specialized in search engine optimization. Improve your visibility with our natural referencing services.\">\n</head>",
+          "description": "Optimized meta description with keyword and call-to-action"
+        }
+      }
+    },
+    {
+      "id": "h1-unique",
+      "label": "Single <h1> tag per page",
+      "description": "Clear structure of main content",
+      "details": {
+        "explication": "The H1 is the main title of the page and has the most SEO weight. There should only be one per page for clear hierarchy and good understanding by search engines. It's the most important title on your page.",
+        "commentFaire": [
+          "Use Chrome extension 'Web Developer' -> Information -> View Document Outline",
+          "Search for 'h1' in source code (Ctrl+F)",
+          "Use 'Heading Structure Checker' tool to analyze your hierarchy",
+          "Check with 'HTML Validator' to detect errors"
+        ],
+        "bonnesPratiques": [
+          "One H1 per page (absolute rule)",
+          "Include main keyword naturally",
+          "Descriptive and relevant to content",
+          "Length between 20 and 60 characters",
+          "Consistent with title tag"
+        ],
+        "exemple": {
+          "html": "<h1>SEO Agency Paris - Natural Search Engine Optimization</h1>",
+          "description": "Example of optimized H1 with main keyword"
+        }
+      }
+    },
+    {
+      "id": "heading-structure",
+      "label": "Logical heading structure (H1 > H2 > H3)",
+      "description": "No level skipping, readable for engines",
+      "details": {
+        "explication": "The heading hierarchy must be logical and respect the order H1 > H2 > H3. Avoid level skips that can confuse search engines and harm content understanding. It's like a document outline.",
+        "commentFaire": [
+          "Use 'Web Developer' extension -> Information -> View Document Outline",
+          "Analyze with 'Heading Structure Checker' to detect skips",
+          "Use 'Screaming Frog' to audit your entire structure",
+          "Check with 'HTML Validator' for structure errors"
+        ],
+        "bonnesPratiques": [
+          "Logical hierarchy: H1 -> H2 -> H3 -> H4...",
+          "No level skipping (H1 -> H3)",
+          "One H1 per page",
+          "Descriptive and informative titles",
+          "Consistency across all pages"
+        ],
+        "exemple": {
+          "html": "<h1>Main title</h1>\n<h2>Section 1</h2>\n<h3>Sub-section 1.1</h3>\n<h2>Section 2</h2>\n<h3>Sub-section 2.1</h3>",
+          "description": "Example of logical and accessible heading hierarchy"
+        }
+      }
+    },
+    {
+      "id": "url-structure",
+      "label": "Readable and short URL",
+      "description": "Ex: /services/seo rather than /page?id=24",
+      "details": {
+        "explication": "URLs must be descriptive, short and include relevant keywords. Avoid technical parameters and special characters. A good URL helps with SEO and user understanding.",
+        "commentFaire": [
+          "Analyze your current URLs with 'URL Structure Checker'",
+          "Use 'Google Search Console' to see indexed URLs",
+          "Test with 'URL Rewrite Tool' to optimize your URLs",
+          "Check with 'Screaming Frog' to audit all your URLs"
+        ],
+        "bonnesPratiques": [
+          "Descriptive and short URLs",
+          "Include relevant keywords",
+          "Avoid technical parameters",
+          "Use hyphens (-) instead of spaces",
+          "No special characters"
+        ],
+        "exemple": {
+          "bon": "/services/seo-optimization",
+          "mauvais": "/page.php?id=24&cat=seo",
+          "description": "Example of optimized vs non-optimized URL"
+        }
+      }
+    },
+    {
+      "id": "image-alt",
+      "label": "Alt text on all images",
+      "description": "For image SEO and accessibility",
+      "details": {
+        "explication": "The alt attribute describes the image content for search engines and screen readers. It improves accessibility and can help with image ranking in Google Images.",
+        "commentFaire": [
+          "Inspect your images (right-click -> Inspect) -> Look for alt attribute",
+          "Use 'Web Developer' extension -> Images -> Display Alt Attributes",
+          "Test with 'Alt Text Checker' to analyze your images",
+          "Check with 'Google Images' to see your image indexing"
+        ],
+        "bonnesPratiques": [
+          "Clear and concise description",
+          "Include relevant keywords",
+          "Avoid keyword stuffing",
+          "Descriptive for users",
+          "Consistent with content"
+        ],
+        "exemple": {
+          "html": "<img src=\"seo-optimization.jpg\" alt=\"SEO Agency Paris - Natural search engine optimization\" />",
+          "description": "Image with alt text optimized for SEO"
+        }
+      }
+    },
+    {
+      "id": "internal-links",
+      "label": "Internal links present",
+      "description": "Contextual navigation",
+      "details": {
+        "explication": "Internal links help search engines understand your site structure and distribute PageRank between your pages. They also improve user experience by facilitating navigation.",
+        "commentFaire": [
+          "Use 'Screaming Frog' to analyze all your internal links",
+          "Test with 'Internal Link Checker' to identify opportunities",
+          "Check with 'Google Search Console' -> Links -> Internal links",
+          "Analyze with 'Ahrefs' or 'Majestic' for complete audit"
+        ],
+        "bonnesPratiques": [
+          "Contextual and natural links",
+          "Descriptive anchors",
+          "Avoid generic links",
+          "Distribute PageRank fairly",
+          "Improve user experience"
+        ],
+        "exemple": {
+          "html": "<p>Discover our <a href=\"/services/seo\">SEO optimization services</a> to improve your visibility.</p>",
+          "description": "Internal link with descriptive and contextual anchor"
+        }
+      }
+    },
+    {
+      "id": "canonical",
+      "label": "Canonical tag present",
+      "description": "To avoid duplicate content",
+      "details": {
+        "explication": "The canonical tag tells search engines which is the main version of a page when there are multiple URLs pointing to the same content. It avoids duplicate content issues.",
+        "commentFaire": [
+          "Inspect your page (F12) -> Look for <link rel=\"canonical\">",
+          "Use 'Canonical URL Checker' to analyze your canonicals",
+          "Check with 'Google Search Console' -> Coverage -> Duplicate content errors",
+          "Test with 'Screaming Frog' to audit all your canonicals"
+        ],
+        "bonnesPratiques": [
+          "Absolute canonical URL",
+          "Consistent with site structure",
+          "Avoid canonical chains",
+          "Check regularly",
+          "Follow Google guidelines"
+        ],
+        "exemple": {
+          "html": "<head>\n  <link rel=\"canonical\" href=\"https://serpenter.fr/services/seo\" />\n</head>",
+          "description": "Canonical tag with absolute URL"
+        }
+      }
+    },
+    {
+      "id": "sitemap-xml",
+      "label": "XML sitemap present and valid",
+      "description": "Helps engines discover your pages",
+      "details": {
+        "explication": "The XML sitemap lists all important pages on your site and helps search engines discover and index them. It must be submitted to Google Search Console and be accessible via /sitemap.xml.",
+        "commentFaire": [
+          "Check sitemap existence: yoursite.com/sitemap.xml",
+          "Submit your sitemap in Google Search Console -> Sitemaps",
+          "Validate your sitemap with 'XML Sitemap Validator'",
+          "Check that all your important pages are included"
+        ],
+        "bonnesPratiques": [
+          "Include all important pages",
+          "Absolute URLs",
+          "Regular updates",
+          "Submission to Google Search Console",
+          "XML validation"
+        ],
+        "exemple": {
+          "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url>\n    <loc>https://serpenter.fr/</loc>\n    <lastmod>2024-01-01</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>",
+          "description": "XML sitemap with complete metadata"
+        }
+      }
+    },
+    {
+      "id": "robots-txt",
+      "label": "Robots.txt file configured",
+      "description": "Guides indexing robots",
+      "details": {
+        "explication": "The robots.txt file tells search engine robots which pages they can or cannot explore. It must be accessible at the root of your site (yoursite.com/robots.txt).",
+        "commentFaire": [
+          "Access yoursite.com/robots.txt to check existence",
+          "Check syntax with 'Robots.txt Validator'",
+          "Test with 'Google Search Console' -> URL Inspection -> robots.txt",
+          "Make sure sitemap is referenced"
+        ],
+        "bonnesPratiques": [
+          "Correct syntax",
+          "Reference sitemap",
+          "Avoid syntax errors",
+          "Test with Google tools",
+          "Regular updates"
+        ],
+        "exemple": {
+          "txt": "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /private/\nSitemap: https://serpenter.fr/sitemap.xml",
+          "description": "Robots.txt with clear directives and referenced sitemap"
+        }
+      }
+    },
+    {
+      "id": "structured-data",
+      "label": "Structured data (Schema.org)",
+      "description": "Improves visibility in SERPs",
+      "details": {
+        "explication": "Structured data helps search engines understand your page content and can generate rich snippets in search results. They improve visibility and click-through rate.",
+        "commentFaire": [
+          "Identify content type (Article, Organization, LocalBusiness...)",
+          "Use 'Schema.org Generator' to create your structured data",
+          "Test with 'Google Rich Results Test' to validate",
+          "Check with 'Structured Data Testing Tool'"
+        ],
+        "bonnesPratiques": [
+          "Choose the right schema type",
+          "Data consistent with content",
+          "Avoid spam and misleading data",
+          "Test regularly",
+          "Follow Google guidelines"
+        ],
+        "exemple": {
+          "html": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Serpenter\",\n  \"url\": \"https://serpenter.fr\",\n  \"logo\": \"https://serpenter.fr/logo.png\",\n  \"description\": \"SEO Agency in Paris\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"streetAddress\": \"123 Rue de la Paix\",\n    \"addressLocality\": \"Paris\",\n    \"postalCode\": \"75001\",\n    \"addressCountry\": \"FR\"\n  }\n}\n</script>",
+          "description": "Structured data for organization with address"
+        }
+      }
+    },
+    {
+      "id": "breadcrumbs",
+      "label": "Breadcrumbs present",
+      "description": "Navigation and local SEO",
+      "details": {
+        "explication": "Breadcrumbs improve user navigation and can appear in search results. They also help with local SEO by showing your site hierarchy to search engines.",
+        "commentFaire": [
+          "Check breadcrumbs presence on your pages",
+          "Implement with BreadcrumbList structured data",
+          "Test with 'Google Rich Results Test'",
+          "Check appearance in SERPs"
+        ],
+        "bonnesPratiques": [
+          "Visible breadcrumbs on all pages",
+          "BreadcrumbList structured data",
+          "Functional and accessible links",
+          "Consistency with site structure",
+          "Regular testing in SERPs"
+        ],
+        "exemple": {
+          "html": "<nav aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"/\">Home</a></li>\n    <li><a href=\"/services\">Services</a></li>\n    <li>SEO Audit</li>\n  </ol>\n</nav>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BreadcrumbList\",\n  \"itemListElement\": [\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 1,\n      \"name\": \"Home\",\n      \"item\": \"https://serpenter.fr\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 2,\n      \"name\": \"Services\",\n      \"item\": \"https://serpenter.fr/services\"\n    },\n    {\n      \"@type\": \"ListItem\",\n      \"position\": 3,\n      \"name\": \"SEO Audit\"\n    }\n  ]\n}\n</script>",
+          "description": "Breadcrumbs with semantic HTML and structured data"
+        }
+      }
+    }
+  ]
+}

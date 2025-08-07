@@ -1,0 +1,211 @@
+{
+  "items": [
+    {
+      "id": "https",
+      "label": "Site in HTTPS",
+      "description": "Active SSL certificate",
+      "details": {
+        "explication": "HTTPS encrypts data exchanged between the browser and server, protecting the confidentiality and integrity of information. It is now a mandatory standard for all websites.",
+        "commentFaire": [
+          "Check your SSL certificate with 'SSL Checker'",
+          "Test with 'SSL Labs' to evaluate your SSL quality",
+          "Check with 'Lighthouse' → Security → HTTPS",
+          "Analyze with 'Security Headers' to see your security headers"
+        ],
+        "outils": [
+          {
+            "nom": "SSL Checker",
+            "url": "https://www.sslshopper.com/ssl-checker.html",
+            "description": "Check the validity of your SSL certificate"
+          },
+          {
+            "nom": "SSL Labs",
+            "url": "https://www.ssllabs.com/ssltest/",
+            "description": "Complete test of your SSL configuration"
+          },
+          {
+            "nom": "Security Headers",
+            "url": "https://securityheaders.com/",
+            "description": "Analyze your security headers"
+          }
+        ],
+        "bonnesPratiques": [
+          "Valid and up-to-date SSL certificate",
+          "Automatic HTTP → HTTPS redirection",
+          "HSTS (HTTP Strict Transport Security)",
+          "Certificate for all subdomains",
+          "Verify the trust chain"
+        ],
+        "exemple": {
+          "html": "<!-- HTTPS redirection in .htaccess -->\nRewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n<!-- Security headers -->\nHeader always set Strict-Transport-Security \"max-age=31536000; includeSubDomains\"\nHeader always set X-Content-Type-Options nosniff\nHeader always set X-Frame-Options DENY",
+          "description": "Apache configuration for HTTPS and security headers"
+        }
+      }
+    },
+    {
+      "id": "csp-policy",
+      "label": "Content Security Policy (CSP) configured",
+      "description": "Protection against XSS attacks",
+      "details": {
+        "explication": "CSP defines which resources (scripts, styles, images) can be loaded by the browser. It protects against XSS attacks by controlling the execution of malicious code.",
+        "commentFaire": [
+          "Check your CSP with 'CSP Evaluator'",
+          "Test with 'Security Headers' to analyze your policy",
+          "Use 'CSP Scanner' to detect violations",
+          "Analyze with 'Lighthouse' → Security → CSP"
+        ],
+        "bonnesPratiques": [
+          "Define a strict but functional policy",
+          "Use 'self' for internal resources",
+          "Avoid 'unsafe-inline' when possible",
+          "Test in report-only mode first",
+          "Monitor violations"
+        ],
+        "exemple": {
+          "html": "<!-- CSP Headers -->\nContent-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:;\n\n<!-- CSP in report-only mode -->\nContent-Security-Policy-Report-Only: default-src 'self'; report-uri /csp-report;",
+          "description": "Example of strict CSP configuration with report-only mode"
+        }
+      }
+    },
+    {
+      "id": "rate-limiting",
+      "label": "Rate limiting configured",
+      "description": "Protection against brute force attacks",
+      "details": {
+        "explication": "Rate limiting restricts the number of requests a user can make in a given time period. It protects against brute force attacks, spam and server overload.",
+        "commentFaire": [
+          "Configure rate limiting on your web server",
+          "Test with 'Load Impact' to simulate attacks",
+          "Check with 'Apache Bench' to test limits",
+          "Analyze logs to detect abuse"
+        ],
+        "outils": [
+          {
+            "nom": "Load Impact",
+            "url": "https://loadimpact.com/",
+            "description": "Test your site under load"
+          },
+          {
+            "nom": "Apache Bench",
+            "url": "https://httpd.apache.org/docs/2.4/programs/ab.html",
+            "description": "Test your server's performance and limits"
+          },
+          {
+            "nom": "Fail2ban",
+            "url": "https://www.fail2ban.org/",
+            "description": "Automatic protection against attacks"
+          }
+        ],
+        "bonnesPratiques": [
+          "Limit login attempts",
+          "Protect sensitive forms",
+          "Configure progressive delays",
+          "Monitor access logs",
+          "Alert in case of attack"
+        ],
+        "exemple": {
+          "apache": "# .htaccess - Rate limiting\n<IfModule mod_ratelimit.c>\n  SetOutputFilter RATE_LIMIT\n  SetEnv rate-limit 400\n</IfModule>\n\n# Form protection\n<Location \"/login\">\n  SetEnv rate-limit 10\n</Location>",
+          "nginx": "# nginx.conf - Rate limiting\nlimit_req_zone $binary_remote_addr zone=login:10m rate=10r/m;\n\nlocation /login {\n  limit_req zone=login burst=5 nodelay;\n}",
+          "description": "Rate limiting configuration for Apache and Nginx"
+        }
+      }
+    },
+    {
+      "id": "file-upload-security",
+      "label": "File upload security",
+      "description": "File type validation and restriction",
+      "details": {
+        "explication": "File uploads can be an entry point for attacks. You need to validate file types, limit sizes, scan contents and store files securely.",
+        "commentFaire": [
+          "Check your upload forms with 'OWASP ZAP'",
+          "Test with 'Burp Suite' for upload vulnerabilities",
+          "Analyze with 'File Upload Security Checker'",
+          "Check your server configuration"
+        ],
+        "outils": [
+          {
+            "nom": "OWASP ZAP",
+            "url": "https://owasp.org/www-project-zap/",
+            "description": "Test upload vulnerabilities"
+          },
+          {
+            "nom": "Burp Suite Community",
+            "url": "https://portswigger.net/burp/communitydownload",
+            "description": "Analyze file uploads"
+          },
+          {
+            "nom": "File Upload Security Checker",
+            "url": "https://www.owasp.org/index.php/Unrestricted_File_Upload",
+            "description": "File upload security guide"
+          }
+        ],
+        "bonnesPratiques": [
+          "Validate extensions and MIME types",
+          "Limit file sizes",
+          "Scan files with antivirus",
+          "Store outside web root",
+          "Generate unique filenames"
+        ],
+        "exemple": {
+          "php": "<?php\n// Upload validation\n$allowed_types = ['image/jpeg', 'image/png', 'image/gif'];\n$max_size = 5 * 1024 * 1024; // 5MB\n\nif ($_FILES['upload']['error'] === UPLOAD_ERR_OK) {\n  $file_info = finfo_open(FILEINFO_MIME_TYPE);\n  $mime_type = finfo_file($file_info, $_FILES['upload']['tmp_name']);\n  \n  if (!in_array($mime_type, $allowed_types)) {\n    die('File type not allowed');\n  }\n  \n  if ($_FILES['upload']['size'] > $max_size) {\n    die('File too large');\n  }\n  \n  $filename = uniqid() . '_' . basename($_FILES['upload']['name']);\n  move_uploaded_file($_FILES['upload']['tmp_name'], '/secure/uploads/' . $filename);\n}\n?>",
+          "description": "Secure file upload validation in PHP"
+        }
+      }
+    },
+     {
+      "id": "headers-securite",
+      "label": "Security headers configured",
+      "description": "Content-Security-Policy, etc.",
+      "details": {
+        "explication": "HTTP security headers protect against various attacks (XSS, clickjacking, MIME sniffing). They are configured server-side and apply to all pages on the site.",
+        "commentFaire": [
+          "Check your headers with 'Security Headers'",
+          "Test with 'Mozilla Observatory' for a complete audit",
+          "Use 'Lighthouse' → Security → Security headers",
+          "Analyze with 'Security Headers Checker' for recommendations"
+        ]}
+    },
+    {
+      "id": "protection-injection",
+      "label": "Basic protection against injection",
+      "description": "Avoid unfiltered input",
+      "details": {
+        "explication": "Injection attacks (XSS, SQL injection) exploit unfiltered user input. You need to validate, escape and filter all data entered by users.",
+        "commentFaire": [
+          "Use 'OWASP ZAP' to test injection vulnerabilities",
+          "Test with 'Burp Suite Community' for security audit",
+          "Check with 'Lighthouse' → Security → XSS protection",
+          "Analyze with 'Security Headers' for CSP protections"
+        ],
+        "outils": [
+          {
+            "nom": "OWASP ZAP",
+            "url": "https://owasp.org/www-project-zap/",
+            "description": "Free web vulnerability scanner"
+          },
+          {
+            "nom": "Burp Suite Community",
+            "url": "https://portswigger.net/burp/communitydownload",
+            "description": "Web security audit tool"
+          },
+          {
+            "nom": "Security Headers",
+            "url": "https://securityheaders.com/",
+            "description": "Check your XSS protections"
+          }
+        ],
+        "bonnesPratiques": [
+          "Validate all user inputs",
+          "Escape data before display",
+          "Use prepared statements (SQL)",
+          "Implement strict CSP",
+          "Regularly test vulnerabilities"
+        ],
+        "exemple": {
+          "html": "<!-- Client-side XSS protection -->\n<script>\n// Escape HTML\nfunction escapeHtml(text) {\n  const div = document.createElement('div');\n  div.textContent = text;\n  return div.innerHTML;\n}\n\n// Secure usage\ndocument.getElementById('output').innerHTML = escapeHtml(userInput);\n</script>\n\n<!-- Server-side protection (PHP) -->\n<?php\n// Escape data\n$safeOutput = htmlspecialchars($userInput, ENT_QUOTES, 'UTF-8');\necho $safeOutput;\n\n// Prepared statement (SQL)\n$stmt = $pdo->prepare('SELECT * FROM users WHERE id = ?');\n$stmt->execute([$userId]);\n?>",
+          "description": "Examples of protection against XSS and SQL injection"
+        }
+      }
+    }
+  ]
+}

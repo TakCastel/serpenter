@@ -212,32 +212,30 @@ const loadCategories = async () => {
   try {
     isLoading.value = true
     
-    // Charger le fichier principal de checklist
-    const response = await fetch('/data/seo-checklist.json')
-    if (response.ok) {
-      const checklistData = await response.json()
-      categories.value = checklistData.categories
+    // Charger les catégories via l'API
+    const response = await $fetch('/api/categories')
+    if (response && response.categories) {
+      categories.value = response.categories
       
       // Charger les items pour chaque catégorie
       for (const category of categories.value) {
-                    if (category.dataFile) {
-              try {
-                // Charger le fichier traduit selon la langue
-                const translatedFileName = category.dataFile.replace('.json', `-${locale.value}.json`)
-                const itemsResponse = await fetch(`/data/i18n/${translatedFileName}`)
-                
-                if (itemsResponse.ok) {
-                  const itemsData = await itemsResponse.json()
-                  category.items = itemsData.items
-                } else {
-                  console.error(`Erreur lors du chargement de ${translatedFileName}`)
-                  category.items = []
-                }
-              } catch (error) {
-                console.error(`Erreur lors du chargement de ${category.dataFile}:`, error)
-                category.items = []
-              }
+        if (category.dataFile) {
+          try {
+            // Extraire le nom de la catégorie du nom de fichier
+            const categoryName = category.dataFile.replace('-items.json', '')
+            const itemsResponse = await $fetch(`/api/items/${categoryName}?locale=${locale.value}`)
+            
+            if (itemsResponse && itemsResponse.items) {
+              category.items = itemsResponse.items
+            } else {
+              console.error(`Erreur lors du chargement des items pour ${categoryName}`)
+              category.items = []
             }
+          } catch (error) {
+            console.error(`Erreur lors du chargement des items pour ${category.dataFile}:`, error)
+            category.items = []
+          }
+        }
         
         // Assigner l'icône à la catégorie
         category.icon = getCategoryIcon(category.id)
