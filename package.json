@@ -5,6 +5,7 @@
   "scripts": {
     "build": "NODE_OPTIONS='--max-old-space-size=6144' nuxt build",
     "build:vercel": "NODE_OPTIONS='--max-old-space-size=6144' nuxt build && cp -r .output .vercel/output",
+    "prepare:vercel": "bash scripts/prepare-vercel.sh",
     "deploy": "bash scripts/deploy.sh",
     "dev": "nuxt dev",
     "generate": "nuxt generate",

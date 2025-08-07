@@ -1,6 +1,6 @@
 # 🚀 Guide de Déploiement
 
-## Déploiement Local vers Vercel
+## Déploiement avec Fichiers Pré-buildés
 
 Ce projet est configuré pour faire un build local et déployer les fichiers générés sur Vercel, évitant ainsi les problèmes de mémoire lors du build sur Vercel.
 
@@ -22,19 +22,26 @@ Ce projet est configuré pour faire un build local et déployer les fichiers gé
 npm run deploy
 ```
 
-### Option 2 : Déploiement manuel
+### Option 2 : Préparation manuelle puis déploiement
 
 ```bash
-# 1. Installation des dépendances
-npm ci
+# 1. Préparer les fichiers pour Vercel
+npm run prepare:vercel
 
-# 2. Build local
+# 2. Déployer sur Vercel
+vercel --prod
+```
+
+### Option 3 : Build local puis déploiement
+
+```bash
+# 1. Build local
 npm run build
 
-# 3. Préparation pour Vercel
+# 2. Préparer pour Vercel
 npm run build:vercel
 
-# 4. Déploiement
+# 3. Déployer
 vercel --prod
 ```
 
@@ -42,6 +49,7 @@ vercel --prod
 
 - `.output/` : Fichiers générés par Nuxt (local)
 - `.vercel/output/` : Fichiers copiés pour Vercel
+- `scripts/prepare-vercel.sh` : Script de préparation
 - `scripts/deploy.sh` : Script de déploiement automatique
 
 ## ⚙️ Configuration
@@ -49,13 +57,16 @@ vercel --prod
 ### vercel.json
 ```json
 {
-  "buildCommand": "npm run build:vercel",
+  "buildCommand": "echo 'Using pre-built files'",
   "installCommand": "npm ci",
   "outputDirectory": ".vercel/output"
 }
 ```
 
+**Note :** Vercel n'exécute plus de build, il utilise directement les fichiers pré-buildés.
+
 ### package.json
+- `prepare:vercel` : Préparation des fichiers pour Vercel
 - `build:vercel` : Build + copie vers `.vercel/output`
 - `deploy` : Script de déploiement complet
 
@@ -65,6 +76,7 @@ vercel --prod
 2. **Plus rapide** : Pas de build sur Vercel
 3. **Contrôle total** : Debug local possible
 4. **Fiabilité** : Moins de dépendance aux ressources Vercel
+5. **Pas de timeout** : Build local sans limite de temps
 
 ## 🐛 Dépannage
 
@@ -77,12 +89,21 @@ npm run build
 
 ### Erreur de permissions
 ```bash
-# Rendre le script exécutable
+# Rendre les scripts exécutables
 chmod +x scripts/deploy.sh
+chmod +x scripts/prepare-vercel.sh
+```
+
+### Vérifier les fichiers générés
+```bash
+# Vérifier que les fichiers existent
+ls -la .vercel/output/
 ```
 
 ## 📝 Notes
 
 - Les fichiers `.vercel/output` sont ignorés par Git
 - Le build local utilise 6GB de mémoire par défaut
+- Vercel utilise directement les fichiers pré-buildés
 - Vérifiez toujours le build local avant de déployer
+- Le build sur Vercel est désactivé pour éviter les erreurs OOM

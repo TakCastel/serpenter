@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build:vercel",
+  "buildCommand": "echo 'Using pre-built files'",
   "installCommand": "npm ci",
   "outputDirectory": ".vercel/output",
   "build": {
