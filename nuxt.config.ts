@@ -63,6 +63,14 @@ export default defineNuxtConfig({
     }
   },
 
+  nitro: {
+    preset: 'netlify',
+    minify: true,
+    experimental: {
+      wasm: false
+    }
+  },
+
   app: {
     head: {
       htmlAttrs: {

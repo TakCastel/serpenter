@@ -212,10 +212,10 @@ const loadCategories = async () => {
   try {
     isLoading.value = true
     
-    // Charger les catégories via l'API
-    const response = await $fetch('/api/categories')
-    if (response && response.categories) {
-      categories.value = response.categories
+    // Charger les catégories directement depuis les données statiques
+    const categoriesResponse = await $fetch('/data/seo-checklist.json')
+    if (categoriesResponse && categoriesResponse.categories) {
+      categories.value = categoriesResponse.categories
       
       // Charger les items pour chaque catégorie
       for (const category of categories.value) {
@@ -223,7 +223,7 @@ const loadCategories = async () => {
           try {
             // Extraire le nom de la catégorie du nom de fichier
             const categoryName = category.dataFile.replace('-items.json', '')
-            const itemsResponse = await $fetch(`/api/items/${categoryName}?locale=${locale.value}`)
+            const itemsResponse = await $fetch(`/data/i18n/${categoryName}-items-${locale.value}.json`)
             
             if (itemsResponse && itemsResponse.items) {
               category.items = itemsResponse.items
