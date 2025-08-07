@@ -127,6 +127,7 @@ Desktop.ini
 
 # Vercel
 .vercel
+.vercel/output
 
 # TypeScript
 *.tsbuildinfo
