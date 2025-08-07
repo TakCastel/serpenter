@@ -67,11 +67,13 @@ export default defineNuxtConfig({
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ['vue', 'vue-i18n'],
-            utils: ['@nuxt/icon']
+            vendor: ['vue', 'vue-i18n']
           }
         }
       }
+    },
+    optimizeDeps: {
+      exclude: ['@nuxt/kit']
     }
   },
   experimental: {
