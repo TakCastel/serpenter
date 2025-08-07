@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: false,
 
-  ssr: false,
+  ssr: true,
 
   modules: [
     '@nuxt/icon',
