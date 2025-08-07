@@ -213,9 +213,9 @@ const loadCategories = async () => {
     isLoading.value = true
     
     // Charger les catégories directement depuis les données statiques
-    const categoriesResponse = await $fetch('/data/seo-checklist.json')
-    if (categoriesResponse && categoriesResponse.categories) {
-      categories.value = categoriesResponse.categories
+    const response = await $fetch('/data/seo-checklist.json')
+    if (response && response.categories) {
+      categories.value = response.categories
       
       // Charger les items pour chaque catégorie
       for (const category of categories.value) {
