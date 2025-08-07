@@ -105,8 +105,12 @@
     "deleteConfirm": "Êtes-vous sûr de vouloir supprimer le projet \"{name}\" ? Cette action ne peut pas être annulée."
   },
   "emptyState": {
-    "title": "Aucun projet trouvé",
-    "description": "Commencez par créer votre premier projet pour organiser vos vérifications de pré-déploiement.",
+    "title": "Bienvenue dans Serpenter",
+    "description": "Créez votre premier projet pour commencer à organiser vos vérifications de pré-déploiement. Donnez un nom à votre projet et ajoutez une description optionnelle.",
     "createButton": "Créer mon premier projet"
+  },
+  "sidebar": {
+    "welcome": "Bienvenue",
+    "createProjectMessage": "Créez un nouveau projet pour utiliser Serpenter"
   }
 }

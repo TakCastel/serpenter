@@ -105,8 +105,12 @@
     "deleteConfirm": "Are you sure you want to delete the project \"{name}\" ? This action cannot be undone."
   },
   "emptyState": {
-    "title": "No project found",
-    "description": "Start by creating your first project to organize your pre-deployment checks.",
+    "title": "Welcome to Serpenter",
+    "description": "Create your first project to start organizing your pre-deployment checks. Give your project a name and add an optional description.",
     "createButton": "Create my first project"
+  },
+  "sidebar": {
+    "welcome": "Welcome",
+    "createProjectMessage": "Create a new project to use Serpenter"
   }
 }

@@ -1,55 +1,64 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style="min-height: calc(100vh + 200px);">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8 py-12" style="min-height: calc(100vh + 200px);">
     <!-- Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-6 transition-colors duration-200" style="color: var(--text-primary);">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-bold mb-8 transition-colors duration-200 tracking-tight" style="color: var(--text-primary);">
         {{ $t('app.hero.title') }}
       </h1>
-      <p class="text-xl transition-colors duration-200 mb-8" style="color: var(--text-secondary);">
+      <p class="text-xl transition-colors duration-200 mb-12 max-w-3xl mx-auto" style="color: var(--text-secondary);">
         {{ $t('app.hero.description') }}
       </p>
       
       <!-- Stats Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-8">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border transition-all duration-200" style="background-color: var(--bg-surface); border-color: var(--bg-border);">
-          <div class="flex items-center justify-center space-x-3">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200" style="background-color: var(--accent-primary);">
-              <Icon name="heroicons:check-circle" class="w-6 h-6" style="color: var(--bg-primary);" />
-            </div>
-            <div class="text-left">
-              <div class="text-3xl font-bold transition-colors duration-200" style="color: var(--text-primary);">
-                {{ completedCount }}
-              </div>
-              <div class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
-                {{ $t('app.progress.completedCount', { count: totalCount }) }}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
+        <!-- Skeleton pour les stats cards pendant le chargement -->
+        <template v-if="isLoading">
+          <SkeletonCard />
+          <SkeletonCard />
+        </template>
         
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border transition-all duration-200" style="background-color: var(--bg-surface); border-color: var(--bg-border);">
-          <div class="flex items-center justify-center space-x-3">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200" style="background-color: var(--accent-primary);">
-              <Icon name="heroicons:chart-bar" class="w-6 h-6" style="color: var(--bg-primary);" />
-            </div>
-            <div class="text-left">
-              <div class="text-3xl font-bold transition-colors duration-200" style="color: var(--text-primary);">
-                {{ Math.round(progressPercentage) }}%
+        <!-- Stats cards réelles -->
+        <template v-else>
+          <div class="card p-8">
+            <div class="flex items-center justify-center space-x-4">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-colors duration-200" style="background-color: var(--accent-primary);">
+                <Icon name="heroicons:check-circle" class="w-8 h-8" style="color: white;" />
               </div>
-              <div class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
-                {{ $t('app.progress.percentage') }}
+              <div class="text-left">
+                <div class="text-4xl font-bold transition-colors duration-200" style="color: var(--text-primary);">
+                  {{ completedCount }}
+                </div>
+                <div class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
+                  {{ $t('app.progress.completedCount', { count: totalCount }) }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          
+          <div class="card p-8">
+            <div class="flex items-center justify-center space-x-4">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-colors duration-200" style="background-color: var(--accent-primary);">
+                <Icon name="heroicons:chart-bar" class="w-8 h-8" style="color: white;" />
+              </div>
+              <div class="text-left">
+                <div class="text-4xl font-bold transition-colors duration-200" style="color: var(--text-primary);">
+                  {{ Math.round(progressPercentage) }}%
+                </div>
+                <div class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
+                  {{ $t('app.progress.percentage') }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
 
     <!-- Progress Bar -->
-    <div class="mb-8 progress-section">
-      <div class="w-full bg-gray-200 rounded-full h-2 transition-colors duration-200" style="background-color: var(--bg-border);">
+    <div class="mb-12 progress-section">
+      <div class="w-full rounded-full h-3 transition-colors duration-200" style="background-color: var(--bg-border);">
         <div 
-          class="h-2 rounded-full transition-all duration-300 ease-out"
+          class="h-3 rounded-full transition-all duration-500 ease-out"
           style="background-color: var(--accent-primary);"
           :style="{ width: progressPercentage + '%' }"
         ></div>
@@ -57,99 +66,101 @@
     </div>
 
     <!-- Categories -->
-    <div class="space-y-8" role="region" aria-label="Catégories de la checklist">
-      <template v-for="(category, index) in categories" :key="category.id">
-        <div 
-          class="rounded-lg border transition-colors duration-200"
-          style="background-color: var(--bg-primary); border-color: var(--bg-border);"
-          role="region"
-          :aria-label="`Catégorie ${category.name}`"
-        >
-        <!-- Category Header -->
-        <div 
-          class="p-6 cursor-pointer transition-colors duration-200 hover:opacity-80"
-          @click="toggleCategory(category.id)"
-          @keydown.enter="toggleCategory(category.id)"
-          @keydown.space.prevent="toggleCategory(category.id)"
-          role="button"
-          :aria-expanded="isCategoryExpanded(category.id)"
-          :aria-controls="`category-${category.id}`"
-          :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
-          tabindex="0"
-        >
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <Icon :name="getCategoryIcon(category.id)" class="w-8 h-8 transition-colors duration-200" style="color: var(--accent-primary);" aria-hidden="true" />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold transition-colors duration-200" style="color: var(--text-primary);">{{ $t(`categories.${category.id}.name`) }}</h2>
-                <p class="text-sm transition-colors duration-200" style="color: var(--text-secondary);">{{ $t(`categories.${category.id}.description`) }}</p>
-              </div>
-            </div>
-            <div class="flex items-center space-x-4">
-                      <div class="text-right">
-          <div class="text-sm font-medium transition-colors duration-200" style="color: var(--text-primary);">
-            {{ getCategoryCompletedCount(category) }} / {{ category.items?.length || 0 }}
-          </div>
-          <div class="text-xs transition-colors duration-200" style="color: var(--text-muted);">{{ $t('app.progress.completed') }}</div>
-        </div>
-              <button 
-                class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:opacity-80"
-                style="background-color: var(--bg-border);"
-                :class="{ 'rotate-180': isCategoryExpanded(category.id) }"
-                :aria-expanded="isCategoryExpanded(category.id)"
-                :aria-controls="`category-${category.id}`"
-                :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
-              >
-                <Icon 
-                  name="heroicons:chevron-down" 
-                  class="w-4 h-4 transition-colors duration-200"
-                  style="color: var(--text-primary);"
-                  aria-hidden="true"
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Category Items -->
-        <div 
-          v-if="category.items" 
-          :id="`category-${category.id}`"
-          class="border-t transition-all duration-300 ease-in-out overflow-hidden"
-          style="border-color: var(--bg-border);"
-          :class="{ 'max-h-0': !isCategoryExpanded(category.id) }"
-          role="region"
-          :aria-label="$t('common.categoryItems', { name: category.name })"
-        >
-          <div class="p-6 space-y-4">
-            <ItemAccordion
-              v-for="item in category.items" 
-              :key="item.id"
-              :item="item"
-              :is-item-checked="isItemChecked(item.id)"
-              @toggle-item="toggleItem"
-            />
-          </div>
-        </div>
-
-        <!-- Loading state -->
-        <div v-else class="p-6 text-center" role="status" aria-live="polite">
-          <p class="transition-colors duration-200" style="color: var(--text-muted);">{{ $t('common.loading') }}</p>
-        </div>
-      </div>
+    <div class="space-y-12" role="region" aria-label="Catégories de la checklist">
+      <!-- Skeleton pour les catégories pendant le chargement -->
+      <template v-if="isLoading">
+        <SkeletonCategory v-for="i in 3" :key="`skeleton-category-${i}`" />
       </template>
-    </div>
+      
+      <!-- Catégories réelles -->
+      <template v-else>
+        <template v-for="(category, index) in categories" :key="category.id">
+          <div 
+            class="card"
+            role="region"
+            :aria-label="`Catégorie ${category.name}`"
+          >
+          <!-- Category Header -->
+          <div 
+            class="p-8 cursor-pointer transition-colors duration-200 hover:bg-opacity-80"
+            @click="toggleCategory(category.id)"
+            @keydown.enter="toggleCategory(category.id)"
+            @keydown.space.prevent="toggleCategory(category.id)"
+            role="button"
+            :aria-expanded="isCategoryExpanded(category.id)"
+            :aria-controls="`category-${category.id}`"
+            :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
+            tabindex="0"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-6">
+                <div class="flex-shrink-0">
+                  <Icon :name="getCategoryIcon(category.id)" class="w-10 h-10 transition-colors duration-200" style="color: var(--accent-primary);" aria-hidden="true" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h2 class="text-2xl font-semibold leading-tight transition-colors duration-200 mb-2" style="color: var(--text-primary);">
+                    {{ category.name }}
+                  </h2>
+                  <p class="text-base transition-colors duration-200" style="color: var(--text-secondary);">
+                    {{ category.description }}
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="text-right">
+                  <div class="text-sm font-medium transition-colors duration-200" style="color: var(--text-primary);">
+                    {{ getCategoryCompletedCount(category) }} / {{ category.items?.length || 0 }}
+                  </div>
+                  <div class="text-xs transition-colors duration-200" style="color: var(--text-muted);">{{ $t('app.progress.completed') }}</div>
+                </div>
+                <button 
+                  class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
+                  :class="{ 'rotate-180': isCategoryExpanded(category.id) }"
+                  :aria-expanded="isCategoryExpanded(category.id)"
+                  :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
+                  aria-hidden="true"
+                >
+                  <Icon 
+                    name="heroicons:chevron-down" 
+                    class="w-6 h-6 transition-colors duration-200"
+                    style="color: var(--text-muted);"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
 
-    <!-- Footer -->
-    <div class="mt-12 text-center">
-      <p class="text-sm mb-2 transition-colors duration-200" style="color: var(--text-muted);">
-        Vos progrès sont automatiquement sauvegardés dans votre navigateur
-      </p>
-      <p class="text-xs transition-colors duration-200" style="color: var(--text-muted); opacity: 0.7;">
-        Checklist complète pour un déploiement réussi : SEO, accessibilité, performance et sécurité
-      </p>
+          <!-- Category Content -->
+          <div 
+            :id="`category-${category.id}`"
+            class="border-t transition-all duration-500 ease-in-out overflow-hidden"
+            style="border-color: var(--bg-border); background-color: var(--bg-primary);"
+            :class="{ 'max-h-0': !isCategoryExpanded(category.id) }"
+            role="region"
+            :aria-label="`Contenu de la catégorie ${category.name}`"
+          >
+            <div class="p-8 space-y-6">
+              <!-- Skeleton pour les items pendant le chargement -->
+              <template v-if="category.isLoading">
+                <SkeletonItem v-for="i in 3" :key="`skeleton-item-${i}`" />
+              </template>
+              
+              <!-- Items réels -->
+              <template v-else>
+                <ItemAccordion 
+                  v-for="item in category.items" 
+                  :key="item.id" 
+                  :item="item"
+                  :is-item-checked="isItemChecked(item.id)"
+                  @toggle-item="toggleItem"
+                />
+              </template>
+            </div>
+          </div>
+          </div>
+        </template>
+      </template>
     </div>
   </div>
 </template>
@@ -157,6 +168,9 @@
 <script setup>
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import ItemAccordion from './ItemAccordion.vue'
+import SkeletonCard from './SkeletonCard.vue'
+import SkeletonCategory from './SkeletonCategory.vue'
+import SkeletonItem from './SkeletonItem.vue' // Added SkeletonItem import
 import { useI18n } from 'vue-i18n'
 import { useProjectsStore } from '~/stores/projects'
 
@@ -176,6 +190,7 @@ const props = defineProps({
 const categories = ref([])
 const checkedItems = ref(new Set())
 const expandedCategories = ref(new Set())
+const isLoading = ref(true)
 
 // Computed properties
 const totalCount = computed(() => {
@@ -195,6 +210,8 @@ const progressPercentage = computed(() => {
 // Méthodes
 const loadCategories = async () => {
   try {
+    isLoading.value = true
+    
     // Charger le fichier principal de checklist
     const response = await fetch('/data/seo-checklist.json')
     if (response.ok) {
@@ -233,6 +250,8 @@ const loadCategories = async () => {
     }
   } catch (error) {
     console.error('Erreur lors du chargement de la checklist:', error)
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -256,11 +275,19 @@ const loadCheckedItems = () => {
       if (saved) {
         const parsed = JSON.parse(saved)
         checkedItems.value = new Set(parsed.checkedItems || [])
+      } else {
+        // Si aucun progrès sauvegardé pour ce projet, réinitialiser
+        checkedItems.value.clear()
       }
     }
   } catch (error) {
     console.error('Erreur lors du chargement du progrès:', error)
+    checkedItems.value.clear()
   }
+}
+
+const resetCheckedItems = () => {
+  checkedItems.value.clear()
 }
 
 const saveCheckedItems = () => {

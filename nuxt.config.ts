@@ -7,6 +7,13 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia/nuxt'
   ],
+  icon: {
+    size: '24px',
+    class: 'icon',
+    aliases: {
+      'nuxt': 'logos:nuxt-icon',
+    }
+  },
   i18n: {
     defaultLocale: 'fr',
     locales: [

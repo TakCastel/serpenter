@@ -1,24 +1,24 @@
 <template>
-  <div class="rounded-lg border transition-colors duration-200" style="background-color: var(--bg-primary); border-color: var(--bg-border);" role="region" :aria-label="$t('common.item', { label: item.label })">
+  <div class="card" role="region" :aria-label="$t('common.item', { label: item.label })">
     <!-- Item Header -->
     <div 
-      class="p-4 cursor-pointer transition-colors duration-200 hover:opacity-80"
+      class="p-6 cursor-pointer transition-all duration-200 hover:bg-opacity-80"
       @click="toggleAccordion"
       @keydown.enter="toggleAccordion"
       @keydown.space.prevent="toggleAccordion"
       role="button"
       :aria-expanded="isExpanded"
       :aria-controls="`item-details-${item.id}`"
-                :aria-label="`${isExpanded ? $t('items.accordion.closeDetails') : $t('items.accordion.openDetails')} de ${item.label}`"
+      :aria-label="`${isExpanded ? $t('items.accordion.closeDetails') : $t('items.accordion.openDetails')} de ${item.label}`"
       tabindex="0"
     >
       <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-3 flex-1">
+        <div class="flex items-center space-x-4 flex-1">
           <button
             @click.stop="toggleItem"
             @keydown.enter.stop="toggleItem"
             @keydown.space.stop.prevent="toggleItem"
-            class="flex-shrink-0 w-6 h-6 rounded border-2 flex items-center justify-center transition-colors duration-200"
+            class="flex-shrink-0 w-8 h-8 rounded-xl border-2 flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
             :class="{ 'bg-accent': isItemChecked }"
             :aria-checked="isItemChecked"
             :aria-label="`${isItemChecked ? $t('items.accordion.uncheck') : $t('items.accordion.check')} ${item.label}`"
@@ -30,22 +30,22 @@
             <Icon 
               v-if="isItemChecked"
               name="heroicons:check" 
-              class="w-3.5 h-3.5 transition-colors duration-200"
-              style="color: var(--bg-primary);"
+              class="w-4 h-4 transition-colors duration-200"
+              style="color: white;"
               aria-hidden="true"
             />
           </button>
           <div class="flex-1 min-w-0">
-            <h3 class="text-sm font-medium leading-tight transition-colors duration-200" style="color: var(--text-primary);">
+            <h3 class="text-lg font-semibold leading-tight transition-colors duration-200 mb-2" style="color: var(--text-primary);">
               {{ item.label }}
             </h3>
-            <p class="text-xs mt-1 transition-colors duration-200" style="color: var(--text-secondary);">
+            <p class="text-base transition-colors duration-200" style="color: var(--text-secondary);">
               {{ item.description }}
             </p>
           </div>
         </div>
         <button 
-          class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center transition-all duration-200 hover:opacity-80"
+          class="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
           :class="{ 'rotate-180': isExpanded }"
           :aria-expanded="isExpanded"
           :aria-label="`${isExpanded ? $t('items.accordion.close') : $t('items.accordion.open')} les détails`"
@@ -53,7 +53,7 @@
         >
           <Icon 
             name="heroicons:chevron-down" 
-            class="w-4 h-4 transition-colors duration-200"
+            class="w-5 h-5 transition-colors duration-200"
             style="color: var(--text-muted);"
             aria-hidden="true"
           />
@@ -64,37 +64,37 @@
     <!-- Item Details -->
     <div 
       :id="`item-details-${item.id}`"
-      class="border-t transition-all duration-300 ease-in-out overflow-hidden"
-      style="border-color: var(--bg-border); background-color: var(--bg-surface);"
+      class="border-t transition-all duration-500 ease-in-out overflow-hidden"
+      style="border-color: var(--bg-border); background-color: var(--bg-primary);"
       :class="{ 'max-h-0': !isExpanded }"
       role="region"
       :aria-label="`Détails de ${item.label}`"
     >
-      <div class="p-4 space-y-4">
+      <div class="p-6 space-y-6">
         <!-- Message si pas de détails -->
-        <div v-if="!item.details" class="text-center py-4">
-          <p class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
+        <div v-if="!item.details" class="text-center py-8">
+          <p class="text-base transition-colors duration-200" style="color: var(--text-muted);">
             {{ $t('items.details.noDetails') }}
           </p>
         </div>
         
         <!-- Explication -->
-        <div v-if="item.details && item.details.explication" class="space-y-2">
-          <h4 class="text-sm font-medium transition-colors duration-200" style="color: var(--accent-primary);">
+        <div v-if="item.details && item.details.explication" class="space-y-3">
+          <h4 class="text-lg font-semibold transition-colors duration-200" style="color: var(--accent-primary);">
             {{ $t('items.details.explication') }}
           </h4>
-          <p class="text-sm leading-relaxed transition-colors duration-200" style="color: var(--text-secondary);">
+          <p class="text-base leading-relaxed transition-colors duration-200" style="color: var(--text-secondary);">
             {{ item.details.explication }}
           </p>
         </div>
 
         <!-- Exemple -->
-        <div v-if="item.details && item.details.exemple" class="space-y-2">
-          <h4 class="text-sm font-medium transition-colors duration-200" style="color: var(--accent-primary);">
+        <div v-if="item.details && item.details.exemple" class="space-y-3">
+          <h4 class="text-lg font-semibold transition-colors duration-200" style="color: var(--accent-primary);">
             {{ $t('items.details.exemple') }}
           </h4>
-          <div class="space-y-3">
-            <div v-if="item.details.exemple && item.details.exemple.description" class="text-xs transition-colors duration-200" style="color: var(--text-muted);">
+          <div class="space-y-4">
+            <div v-if="item.details.exemple && item.details.exemple.description" class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
               {{ item.details.exemple.description }}
             </div>
             
@@ -187,12 +187,22 @@
                 </div>
               </div>
             </div>
+            
+            <!-- Image Example -->
+            <div v-if="item.details.exemple && item.details.exemple.image" class="rounded-xl overflow-hidden" style="background-color: var(--bg-code);">
+              <img 
+                :src="item.details.exemple.image" 
+                :alt="item.details.exemple.imageAlt || 'Exemple visuel'"
+                class="w-full h-auto"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
 
         <!-- Bonnes pratiques -->
         <div v-if="item.details && item.details.bonnesPratiques" class="space-y-2">
-          <h4 class="text-sm font-medium transition-colors duration-200" style="color: var(--accent-primary);">
+          <h4 class="text-lg font-semibold transition-colors duration-200" style="color: var(--accent-primary);">
             {{ $t('items.details.bonnesPratiques') }}
           </h4>
           <ul class="space-y-1" role="list">
@@ -206,7 +216,7 @@
               <Icon 
                 name="heroicons:check-circle" 
                 class="w-4 h-4 flex-shrink-0 mt-0.5 transition-colors duration-200"
-                style="color: var(--accent-primary);"
+                style="color: var(--accent-primary); position: relative; z-index: 0;"
                 aria-hidden="true"
               />
               <span>{{ pratique }}</span>
@@ -214,7 +224,64 @@
           </ul>
         </div>
 
+        <!-- Ressources -->
+        <div v-if="item.details && item.details.ressources && item.details.ressources.length > 0" class="space-y-3">
+          <h4 class="text-lg font-semibold transition-colors duration-200" style="color: var(--accent-primary);">
+            {{ $t('items.details.ressources') }}
+          </h4>
+          <div class="space-y-3">
+            <a 
+              v-for="ressource in item.details.ressources" 
+              :key="ressource.url"
+              :href="ressource.url" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center space-x-3 p-4 rounded-xl transition-all duration-200 hover:bg-opacity-80"
+              style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);"
+              :title="ressource.title"
+            >
+              <Icon 
+                name="heroicons:arrow-top-right-on-square" 
+                class="w-5 h-5 flex-shrink-0 transition-colors duration-200"
+                style="color: var(--accent-primary);"
+                aria-hidden="true"
+              />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium transition-colors duration-200" style="color: var(--text-primary);">
+                  {{ ressource.title }}
+                </div>
+                <div class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
+                  {{ ressource.description }}
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
 
+        <!-- Conseils -->
+        <div v-if="item.details && item.details.conseils && item.details.conseils.length > 0" class="space-y-3">
+          <h4 class="text-lg font-semibold transition-colors duration-200" style="color: var(--accent-primary);">
+            {{ $t('items.details.conseils') }}
+          </h4>
+          <div class="space-y-3">
+            <div 
+              v-for="conseil in item.details.conseils" 
+              :key="conseil"
+              class="flex items-start space-x-3 p-4 rounded-xl"
+              style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);"
+            >
+              <Icon 
+                name="heroicons:light-bulb" 
+                class="w-5 h-5 flex-shrink-0 mt-0.5 transition-colors duration-200"
+                style="color: var(--accent-primary);"
+                aria-hidden="true"
+              />
+              <p class="text-base transition-colors duration-200" style="color: var(--text-secondary);">
+                {{ conseil }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

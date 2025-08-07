@@ -2,16 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
-    projects: [
-      {
-        id: 'default',
-        name: 'Projet par défaut',
-        description: 'Projet initial',
-        createdAt: '2024-01-01T00:00:00.000Z',
-        lastModified: '2024-01-01T00:00:00.000Z'
-      }
-    ],
-    currentProjectId: 'default',
+    projects: [],
+    currentProjectId: null,
     projectScores: {}
   }),
 
@@ -25,6 +17,7 @@ export const useProjectsStore = defineStore('projects', {
     },
     
     getProjectScores: (state) => (projectId) => {
+      if (!projectId) return { totalItems: 0, completedItems: 0, percentage: 0 }
       return state.projectScores[projectId] || {
         totalItems: 0,
         completedItems: 0,
@@ -33,6 +26,7 @@ export const useProjectsStore = defineStore('projects', {
     },
     
     currentProjectScores: (state) => {
+      if (!state.currentProjectId) return { totalItems: 0, completedItems: 0, percentage: 0 }
       return state.projectScores[state.currentProjectId] || {
         totalItems: 0,
         completedItems: 0,
@@ -65,7 +59,7 @@ export const useProjectsStore = defineStore('projects', {
         // Supprimer les scores du projet
         delete this.projectScores[projectId]
         
-        // Si c'était le projet actuel, sélectionner le premier disponible
+        // Si c'était le projet actuel, sélectionner le premier disponible ou null
         if (this.currentProjectId === projectId) {
           this.currentProjectId = this.projects.length > 0 ? this.projects[0].id : null
         }
@@ -113,6 +107,10 @@ export const useProjectsStore = defineStore('projects', {
       }
       
       this.addProject(project)
+      
+      // Initialiser les scores du nouveau projet à 0
+      this.resetProjectScores(project.id)
+      
       return project
     },
 
