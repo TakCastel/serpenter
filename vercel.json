@@ -1,15 +1,3 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".output/public",
-  "framework": "nuxtjs",
-  "functions": {
-    "app/server/index.mjs": {
-      "maxDuration": 30
-    }
-  },
-  "build": {
-    "env": {
-      "NITRO_PRESET": "vercel"
-    }
-  }
+  "framework": "nuxtjs"
 }
