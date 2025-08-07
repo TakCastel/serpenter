@@ -1,0 +1,90 @@
+{
+  "welcome": "Bienvenue",
+  "app": {
+    "title": "Serpenter",
+    "subtitle": "Check, Check. Go.",
+    "hero": {
+      "title": "Checklist Pré-Déploiement",
+      "description": "Vérifiez tous les aspects essentiels avant de mettre votre site en ligne"
+    },
+    "navigation": {
+      "verifications": "Vérifications",
+      "verificationsDescription": "Vérifications de pré-déploiement"
+    },
+    "progress": {
+      "completed": "complétés",
+      "completedCount": "sur {count} complétés",
+      "percentage": "terminé",
+      "reset": "Réinitialiser",
+      "resetConfirm": "Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cette action ne peut pas être annulée.",
+      "resetTitle": "Réinitialiser tout le progrès",
+      "resetDescription": "Réinitialiser tout le progrès de la checklist"
+    },
+    "theme": {
+      "light": "Passer au thème clair",
+      "dark": "Passer au thème sombre"
+    },
+    "backToTop": "Retour en haut",
+    "language": {
+      "select": "Sélectionner la langue",
+      "french": "Français",
+      "english": "Anglais"
+    }
+  },
+  "categories": {
+    "seo": {
+      "name": "SEO",
+      "description": "Optimisation pour les moteurs de recherche"
+    },
+    "accessibilite": {
+      "name": "Accessibilité",
+      "description": "Rendre le site accessible à tous"
+    },
+    "performance": {
+      "name": "Performance",
+      "description": "Vitesse et optimisation"
+    },
+    "eco-conception": {
+      "name": "Éco-conception",
+      "description": "Réduire l'impact environnemental"
+    },
+    "responsive-ux": {
+      "name": "Responsive & UX",
+      "description": "Expérience utilisateur multi-devices"
+    },
+    "securite": {
+      "name": "Sécurité",
+      "description": "Protection et bonnes pratiques"
+    },
+    "analytics": {
+      "name": "Analytics",
+      "description": "Suivi et analyse des performances"
+    }
+  },
+  "items": {
+    "details": {
+      "noDetails": "Aucun détail disponible pour cet élément",
+      "explication": "Explication",
+      "exemple": "Exemple",
+      "bonnesPratiques": "Bonnes pratiques"
+    },
+    "accordion": {
+      "open": "Ouvrir",
+      "close": "Fermer",
+      "openDetails": "Ouvrir les détails",
+      "closeDetails": "Fermer les détails",
+      "check": "Cocher",
+      "uncheck": "Décocher"
+    }
+  },
+  "common": {
+    "loading": "Chargement des critères...",
+    "goToCategory": "Aller à la catégorie {name}",
+    "openCategory": "Ouvrir la catégorie {name}",
+    "closeCategory": "Fermer la catégorie {name}",
+    "category": "Catégorie {name}",
+    "categoryItems": "Éléments de la catégorie {name}",
+    "item": "Élément {label}",
+    "itemDetails": "Détails de {label}"
+  }
+}

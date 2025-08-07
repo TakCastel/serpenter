@@ -3,10 +3,10 @@
     <!-- Header -->
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold mb-6 transition-colors duration-200" style="color: var(--text-primary);">
-        Checklist Pré-Déploiement
+        {{ $t('app.hero.title') }}
       </h1>
       <p class="text-xl transition-colors duration-200 mb-8" style="color: var(--text-secondary);">
-        Vérifiez tous les aspects essentiels avant de mettre votre site en ligne
+        {{ $t('app.hero.description') }}
       </p>
       
       <!-- Stats Cards -->
@@ -21,7 +21,7 @@
                 {{ completedCount }}
               </div>
               <div class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
-                sur {{ totalCount }} complétés
+                {{ $t('app.progress.completedCount', { count: totalCount }) }}
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
                 {{ Math.round(progressPercentage) }}%
               </div>
               <div class="text-sm transition-colors duration-200" style="color: var(--text-muted);">
-                terminé
+                {{ $t('app.progress.percentage') }}
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@
           role="button"
           :aria-expanded="isCategoryExpanded(category.id)"
           :aria-controls="`category-${category.id}`"
-          :aria-label="`${isCategoryExpanded(category.id) ? 'Fermer' : 'Ouvrir'} la catégorie ${category.name}`"
+          :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
           tabindex="0"
         >
           <div class="flex items-center justify-between">
@@ -83,24 +83,24 @@
                 <Icon :name="getCategoryIcon(category.id)" class="w-8 h-8 transition-colors duration-200" style="color: var(--accent-primary);" aria-hidden="true" />
               </div>
               <div>
-                <h2 class="text-xl font-semibold transition-colors duration-200" style="color: var(--text-primary);">{{ category.name }}</h2>
-                <p class="text-sm transition-colors duration-200" style="color: var(--text-secondary);">{{ category.description }}</p>
+                <h2 class="text-xl font-semibold transition-colors duration-200" style="color: var(--text-primary);">{{ $t(`categories.${category.id}.name`) }}</h2>
+                <p class="text-sm transition-colors duration-200" style="color: var(--text-secondary);">{{ $t(`categories.${category.id}.description`) }}</p>
               </div>
             </div>
             <div class="flex items-center space-x-4">
-              <div class="text-right">
-                <div class="text-sm font-medium transition-colors duration-200" style="color: var(--text-primary);">
-                  {{ getCategoryCompletedCount(category) }} / {{ category.items?.length || 0 }}
-                </div>
-                <div class="text-xs transition-colors duration-200" style="color: var(--text-muted);">complétés</div>
-              </div>
+                      <div class="text-right">
+          <div class="text-sm font-medium transition-colors duration-200" style="color: var(--text-primary);">
+            {{ getCategoryCompletedCount(category) }} / {{ category.items?.length || 0 }}
+          </div>
+          <div class="text-xs transition-colors duration-200" style="color: var(--text-muted);">{{ $t('app.progress.completed') }}</div>
+        </div>
               <button 
                 class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:opacity-80"
                 style="background-color: var(--bg-border);"
                 :class="{ 'rotate-180': isCategoryExpanded(category.id) }"
                 :aria-expanded="isCategoryExpanded(category.id)"
                 :aria-controls="`category-${category.id}`"
-                :aria-label="`${isCategoryExpanded(category.id) ? 'Fermer' : 'Ouvrir'} la catégorie ${category.name}`"
+                :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
               >
                 <Icon 
                   name="heroicons:chevron-down" 
@@ -121,7 +121,7 @@
           style="border-color: var(--bg-border);"
           :class="{ 'max-h-0': !isCategoryExpanded(category.id) }"
           role="region"
-          :aria-label="`Éléments de la catégorie ${category.name}`"
+          :aria-label="$t('common.categoryItems', { name: category.name })"
         >
           <div class="p-6 space-y-4">
             <ItemAccordion
@@ -136,7 +136,7 @@
 
         <!-- Loading state -->
         <div v-else class="p-6 text-center" role="status" aria-live="polite">
-          <p class="transition-colors duration-200" style="color: var(--text-muted);">Chargement des critères...</p>
+          <p class="transition-colors duration-200" style="color: var(--text-muted);">{{ $t('common.loading') }}</p>
         </div>
       </div>
       </template>
@@ -157,8 +157,10 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import ItemAccordion from './ItemAccordion.vue'
+import { useI18n } from 'vue-i18n'
 
 const emit = defineEmits(['categories-loaded'])
+const { locale } = useI18n()
 
 // État réactif
 const categories = ref([])
@@ -192,21 +194,24 @@ const loadCategories = async () => {
       
       // Charger les items pour chaque catégorie
       for (const category of categories.value) {
-        if (category.dataFile) {
-          try {
-            const itemsResponse = await fetch(`/data/${category.dataFile}`)
-            if (itemsResponse.ok) {
-              const itemsData = await itemsResponse.json()
-              category.items = itemsData.items
-            } else {
-              console.error(`Erreur lors du chargement de ${category.dataFile}`)
-              category.items = []
+                    if (category.dataFile) {
+              try {
+                // Charger le fichier traduit selon la langue
+                const translatedFileName = category.dataFile.replace('.json', `-${locale.value}.json`)
+                const itemsResponse = await fetch(`/data/i18n/${translatedFileName}`)
+                
+                if (itemsResponse.ok) {
+                  const itemsData = await itemsResponse.json()
+                  category.items = itemsData.items
+                } else {
+                  console.error(`Erreur lors du chargement de ${translatedFileName}`)
+                  category.items = []
+                }
+              } catch (error) {
+                console.error(`Erreur lors du chargement de ${category.dataFile}:`, error)
+                category.items = []
+              }
             }
-          } catch (error) {
-            console.error(`Erreur lors du chargement de ${category.dataFile}:`, error)
-            category.items = []
-          }
-        }
         
         // Assigner l'icône à la catégorie
         category.icon = getCategoryIcon(category.id)
@@ -313,6 +318,19 @@ const toggleCategory = (categoryId) => {
       })
     }
   } else {
+    // Fermer tous les accordéons des items de toutes les catégories
+    if (process.client) {
+      categories.value.forEach(category => {
+        if (category.items) {
+          category.items.forEach(item => {
+            window.dispatchEvent(new CustomEvent('close-item-accordion', { 
+              detail: { itemId: item.id } 
+            }))
+          })
+        }
+      })
+    }
+    
     // Fermer toutes les autres catégories et ouvrir celle-ci
     expandedCategories.value.clear()
     expandedCategories.value.add(categoryId)
@@ -321,6 +339,19 @@ const toggleCategory = (categoryId) => {
 
 // Méthodes exposées
 const openCategory = (categoryId) => {
+  // Fermer tous les accordéons des items de toutes les catégories
+  if (process.client) {
+    categories.value.forEach(category => {
+      if (category.items) {
+        category.items.forEach(item => {
+          window.dispatchEvent(new CustomEvent('close-item-accordion', { 
+            detail: { itemId: item.id } 
+          }))
+        })
+      }
+    })
+  }
+  
   // Fermer toutes les autres catégories et ouvrir celle-ci
   expandedCategories.value.clear()
   expandedCategories.value.add(categoryId)
@@ -334,6 +365,11 @@ watch(progressPercentage, (newPercentage) => {
     }))
   }
 }, { immediate: true })
+
+// Watcher pour recharger les données quand la langue change
+watch(locale, async () => {
+  await loadCategories()
+}, { immediate: false })
 
 // Lifecycle
 onMounted(async () => {

@@ -14,9 +14,9 @@
       >
         <div class="sticky top-24 p-4">
           <h3 class="text-sm font-semibold mb-4 transition-colors duration-200 hidden sm:block" style="color: var(--text-primary);">
-            Vérifications
+            {{ $t('app.navigation.verifications') }}
           </h3>
-          <nav class="space-y-2" role="navigation" aria-label="Vérifications de pré-déploiement">
+          <nav class="space-y-2" role="navigation" :aria-label="$t('app.navigation.verificationsDescription')">
             <button
               v-for="category in categories"
               :key="category.id"
@@ -30,8 +30,8 @@
                 borderColor: 'transparent'
               }"
               :aria-current="activeCategory === category.id ? 'location' : undefined"
-              :aria-label="`Aller à la catégorie ${category.name}`"
-              :title="`Aller à la catégorie ${category.name}`"
+              :aria-label="$t('common.goToCategory', { name: $t(`categories.${category.id}.name`) })"
+              :title="$t('common.goToCategory', { name: $t(`categories.${category.id}.name`) })"
               role="menuitem"
               tabindex="0"
             >
@@ -42,7 +42,7 @@
                 :style="{ color: 'var(--text-primary)' }"
                 aria-hidden="true"
               />
-              <span class="text-sm sm:text-base font-medium truncate hidden sm:block">{{ category.name }}</span>
+              <span class="text-sm sm:text-base font-medium truncate hidden sm:block">{{ $t(`categories.${category.id}.name`) }}</span>
             </button>
           </nav>
         </div>

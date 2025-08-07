@@ -13,14 +13,14 @@
           :class="{ 'text-xl': isScrolled, 'text-2xl': !isScrolled }"
           style="color: var(--accent-primary);"
         >
-          Serpenter
+          {{ $t('app.title') }}
         </h1>
         <span 
           class="transition-all duration-300"
           :class="{ 'text-xs': isScrolled, 'text-sm': !isScrolled }"
           style="color: var(--text-secondary);"
         >
-          Checklist Pré-Déploiement
+          {{ $t('app.subtitle') }}
         </span>
       </div>
       
@@ -65,8 +65,8 @@
           @click="toggleTheme"
           class="w-10 h-10 rounded-lg transition-colors duration-200 flex items-center justify-center hover:opacity-80"
           style="background-color: var(--bg-surface);"
-          :title="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
-          :aria-label="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
+          :title="isDark ? $t('app.theme.light') : $t('app.theme.dark')"
+          :aria-label="isDark ? $t('app.theme.light') : $t('app.theme.dark')"
           role="button"
           tabindex="0"
         >
@@ -77,12 +77,66 @@
             aria-hidden="true"
           />
         </button>
+        <!-- Language Selector -->
+        <div class="relative">
+          <button
+            @click="toggleLanguageMenu"
+            class="px-3 py-1.5 rounded-lg transition-colors duration-200 flex items-center space-x-2 hover:opacity-80"
+            style="background-color: var(--bg-primary); border: 1px solid var(--bg-border);"
+                      :title="$t('app.language.select')"
+          :aria-label="$t('app.language.select')"
+            role="button"
+            tabindex="0"
+          >
+            <Icon 
+              name="heroicons:language" 
+              class="w-3.5 h-3.5 transition-colors duration-200"
+              style="color: var(--text-muted);"
+              aria-hidden="true"
+            />
+            <span class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">
+              {{ locale === 'fr' ? 'FR' : 'EN' }}
+            </span>
+          </button>
+          
+          <!-- Language Menu -->
+          <div 
+            v-if="showLanguageMenu"
+            :key="locale"
+            class="absolute top-full right-0 mt-2 w-32 rounded-lg border transition-all duration-200 z-50"
+            style="background-color: var(--bg-surface); border-color: var(--bg-border);"
+            role="menu"
+            :aria-label="$t('app.language.select')"
+          >
+            <button
+              @click="switchLanguage('fr')"
+              class="w-full px-3 py-2 text-left text-xs transition-colors duration-200 hover:opacity-80"
+              style="color: var(--text-primary);"
+              :class="{ 'font-semibold': locale === 'fr' }"
+              role="menuitem"
+              tabindex="0"
+            >
+              {{ $t('app.language.french') }}
+            </button>
+            <button
+              @click="switchLanguage('en')"
+              class="w-full px-3 py-2 text-left text-xs transition-colors duration-200 hover:opacity-80"
+              style="color: var(--text-primary);"
+              :class="{ 'font-semibold': locale === 'en' }"
+              role="menuitem"
+              tabindex="0"
+            >
+              {{ $t('app.language.english') }}
+            </button>
+          </div>
+        </div>
+        
         <button
           @click="resetProgress"
           class="px-3 py-1.5 rounded-lg transition-colors duration-200 flex items-center space-x-2 hover:opacity-80"
           style="background-color: var(--bg-primary); border: 1px solid var(--bg-border);"
-          title="Réinitialiser tout le progrès"
-          aria-label="Réinitialiser tout le progrès de la checklist"
+          :title="$t('app.progress.resetTitle')"
+          :aria-label="$t('app.progress.resetDescription')"
           role="button"
           tabindex="0"
         >
@@ -93,7 +147,7 @@
             aria-hidden="true"
           />
           <span class="text-xs font-medium transition-colors duration-200" style="color: var(--text-muted);">
-            Réinitialiser
+            {{ $t('app.progress.reset') }}
           </span>
         </button>
       </div>
@@ -106,9 +160,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const emit = defineEmits(['reset-progress'])
 
+const { locale, setLocale } = useI18n()
+
 const isDark = ref(true)
 const isScrolled = ref(false)
 const progressPercentage = ref(null)
+const showLanguageMenu = ref(false)
 
 const handleScroll = () => {
   if (process.client) {
@@ -129,8 +186,35 @@ const toggleTheme = () => {
 }
 
 const resetProgress = () => {
-  if (process.client && confirm('Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cette action ne peut pas être annulée.')) {
+  if (process.client && confirm($t('app.progress.resetConfirm'))) {
     emit('reset-progress')
+  }
+}
+
+const toggleLanguageMenu = () => {
+  console.log('Toggle language menu, current state:', showLanguageMenu.value)
+  showLanguageMenu.value = !showLanguageMenu.value
+  console.log('New state:', showLanguageMenu.value)
+}
+
+const switchLanguage = (locale) => {
+  if (process.client) {
+    console.log('Switching to locale:', locale)
+    setLocale(locale)
+    // Petit délai pour s'assurer que le changement est pris en compte
+    setTimeout(() => {
+      showLanguageMenu.value = false
+    }, 100)
+  }
+}
+
+const handleClickOutside = (event) => {
+  const languageMenu = document.querySelector('[role="menu"]')
+  const languageButton = event.target.closest('button[aria-label*="langue"]')
+  const languageButton2 = event.target.closest('button[aria-label*="language"]')
+  
+  if (languageMenu && !languageMenu.contains(event.target) && !languageButton && !languageButton2) {
+    showLanguageMenu.value = false
   }
 }
 
@@ -144,6 +228,7 @@ onMounted(() => {
     
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('progress-updated', handleProgressUpdate)
+    window.addEventListener('click', handleClickOutside)
     handleScroll() // Check initial scroll position
   }
 })
@@ -152,6 +237,7 @@ onUnmounted(() => {
   if (process.client) {
     window.removeEventListener('scroll', handleScroll)
     window.removeEventListener('progress-updated', handleProgressUpdate)
+    window.removeEventListener('click', handleClickOutside)
   }
 })
 </script> 

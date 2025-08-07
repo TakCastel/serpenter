@@ -4,7 +4,7 @@
     @click="scrollToTop"
     class="fixed bottom-6 right-6 w-12 h-12 rounded-full border transition-all duration-300 flex items-center justify-center hover:scale-110 z-50"
     style="background-color: var(--accent-primary);"
-    title="Retour en haut"
+    :title="$t('app.backToTop')"
   >
     <Icon 
       name="heroicons:arrow-up" 

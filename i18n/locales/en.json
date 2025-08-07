@@ -1,0 +1,90 @@
+{
+  "welcome": "Welcome",
+  "app": {
+    "title": "Serpenter",
+    "subtitle": "Check, Check. Go.",
+    "hero": {
+      "title": "Pre-Deployment Checklist",
+      "description": "Check all essential aspects before putting your site online"
+    },
+    "navigation": {
+      "verifications": "Verifications",
+      "verificationsDescription": "Pre-deployment verifications"
+    },
+    "progress": {
+      "completed": "completed",
+      "completedCount": "out of {count} completed",
+      "percentage": "done",
+      "reset": "Reset",
+      "resetConfirm": "Are you sure you want to reset all progress? This action cannot be undone.",
+      "resetTitle": "Reset all progress",
+      "resetDescription": "Reset all checklist progress"
+    },
+    "theme": {
+      "light": "Switch to light theme",
+      "dark": "Switch to dark theme"
+    },
+    "backToTop": "Back to top",
+    "language": {
+      "select": "Select language",
+      "french": "French",
+      "english": "English"
+    }
+  },
+  "categories": {
+    "seo": {
+      "name": "SEO",
+      "description": "Search engine optimization"
+    },
+    "accessibilite": {
+      "name": "Accessibility",
+      "description": "Make the site accessible to everyone"
+    },
+    "performance": {
+      "name": "Performance",
+      "description": "Speed and optimization"
+    },
+    "eco-conception": {
+      "name": "Eco-design",
+      "description": "Reduce environmental impact"
+    },
+    "responsive-ux": {
+      "name": "Responsive & UX",
+      "description": "Multi-device user experience"
+    },
+    "securite": {
+      "name": "Security",
+      "description": "Protection and best practices"
+    },
+    "analytics": {
+      "name": "Analytics",
+      "description": "Performance tracking and analysis"
+    }
+  },
+  "items": {
+    "details": {
+      "noDetails": "No details available for this item",
+      "explication": "Explanation",
+      "exemple": "Example",
+      "bonnesPratiques": "Best practices"
+    },
+    "accordion": {
+      "open": "Open",
+      "close": "Close",
+      "openDetails": "Open details",
+      "closeDetails": "Close details",
+      "check": "Check",
+      "uncheck": "Uncheck"
+    }
+  },
+  "common": {
+    "loading": "Loading criteria...",
+    "goToCategory": "Go to category {name}",
+    "openCategory": "Open category {name}",
+    "closeCategory": "Close category {name}",
+    "category": "Category {name}",
+    "categoryItems": "Items in category {name}",
+    "item": "Item {label}",
+    "itemDetails": "Details of {label}"
+  }
+}

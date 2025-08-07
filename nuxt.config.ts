@@ -3,8 +3,22 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   modules: [
     '@nuxt/icon',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n'
   ],
+  i18n: {
+    defaultLocale: 'fr',
+    locales: [
+      { code: 'fr', name: 'Français', file: 'fr.json' },
+      { code: 'en', name: 'English', file: 'en.json' }
+    ],
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    }
+  },
   css: ['~/assets/css/main.css'],
   tailwindcss: {
     config: {
@@ -34,5 +48,6 @@ export default defineNuxtConfig({
         }
       }
     }
-  }
+  },
+
 })
