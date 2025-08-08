@@ -7,13 +7,8 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
-    '@pinia/nuxt',
-    '@nuxtjs/google-tag-manager'
+    '@pinia/nuxt'
   ],
-
-  googleTagManager: {
-    id: 'GTM-KPRR33NW'
-  },
 
   icon: {
     size: '24px',
