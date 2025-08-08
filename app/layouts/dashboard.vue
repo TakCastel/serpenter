@@ -77,6 +77,9 @@
         <slot />
       </main>
     </div>
+
+    <!-- Back to top -->
+    <BackToTop />
   </div>
 </template>
 
@@ -85,6 +88,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useProjectsStore } from '~/stores/projects'
 import AppHeader from '~/components/dashboard/AppHeader.vue'
 import ProjectSelector from '~/components/dashboard/ProjectSelector.vue'
+import BackToTop from '~/components/common/BackToTop.vue'
 
 const categories = ref([])
 const activeCategory = ref(null)

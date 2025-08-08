@@ -1,26 +1,37 @@
 <template>
   <div class="max-w-4xl mx-auto px-4 lg:px-6 py-8" style="min-height: calc(100vh + 200px);">
-    <!-- Header -->
-    <ChecklistHeader />
-    
-    <!-- Stats Cards -->
-    <StatsCards 
-      :is-loading="isLoading"
-      :completed-count="completedCount"
-      :total-count="totalCount"
-      :progress-percentage="progressPercentage"
+    <!-- Carte de félicitations quand toutes les catégories sont complétées -->
+    <DeploymentReadyCard 
+      v-if="allCategoriesCompleted && !isLoading"
+      :total-items="totalCount"
+      :total-categories="totalCategoriesCount"
+      @deploy-click="handleDeployClick"
     />
+    
+    <!-- Header et contenu normal quand pas toutes les catégories sont complétées -->
+    <template v-else>
+      <!-- Header -->
+      <ChecklistHeader />
+      
+      <!-- Stats Cards -->
+      <StatsCards 
+        :is-loading="isLoading"
+        :completed-count="completedCount"
+        :total-count="totalCount"
+        :progress-percentage="progressPercentage"
+      />
 
-    <!-- Progress Bar -->
-    <div class="mb-8 progress-section">
-      <div class="w-full rounded-full h-2 transition-colors duration-200 max-w-full overflow-hidden" style="background-color: var(--bg-border);">
-        <div 
-          class="h-2 rounded-full transition-all duration-500 ease-out"
-          style="background-color: var(--accent-primary);"
-          :style="{ width: Math.min(progressPercentage, 100) + '%' }"
-        ></div>
+      <!-- Progress Bar -->
+      <div class="mb-8 progress-section">
+        <div class="w-full rounded-full h-2 transition-colors duration-200 max-w-full overflow-hidden" style="background-color: var(--bg-border);">
+          <div 
+            class="h-2 rounded-full transition-all duration-500 ease-out"
+            style="background-color: var(--accent-primary);"
+            :style="{ width: Math.min(progressPercentage, 100) + '%' }"
+          ></div>
+        </div>
       </div>
-    </div>
+    </template>
 
     <!-- Categories -->
     <div class="space-y-6" role="region" aria-label="Catégories de la checklist">
@@ -154,6 +165,7 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import ItemAccordion from './ItemAccordion.vue'
 import ChecklistHeader from './ChecklistHeader.vue'
 import StatsCards from './StatsCards.vue'
+import DeploymentReadyCard from './DeploymentReadyCard.vue'
 import SkeletonCard from '../common/SkeletonCard.vue'
 import SkeletonCategory from '../common/SkeletonCategory.vue'
 import SkeletonItem from '../common/SkeletonItem.vue'
@@ -196,6 +208,16 @@ const progressPercentage = computed(() => {
   return projectsStore.getProjectScores(props.currentProjectId).percentage
 })
 
+// Computed pour vérifier si toutes les catégories sont complétées
+const allCategoriesCompleted = computed(() => {
+  return categories.value.length > 0 && categories.value.every(category => isCategoryCompleted(category))
+})
+
+// Computed pour le nombre total de catégories
+const totalCategoriesCount = computed(() => {
+  return categories.value.length
+})
+
 // Méthodes
 const loadCategories = async () => {
   try {
@@ -226,6 +248,23 @@ const loadCategories = async () => {
     categories.value = []
   } finally {
     isLoading.value = false
+  }
+}
+
+// Fonction pour gérer le clic sur le bouton de déploiement
+const handleDeployClick = () => {
+  // Ici vous pouvez ajouter la logique pour le déploiement
+  // Par exemple, rediriger vers une page de déploiement ou afficher un modal
+  console.log('🚀 Déploiement en cours...')
+  
+  // Exemple : envoyer un événement GTM
+  if (process.client && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'deployment_ready',
+      category: 'checklist',
+      action: 'deploy_click',
+      label: 'all_categories_completed'
+    })
   }
 }
 
