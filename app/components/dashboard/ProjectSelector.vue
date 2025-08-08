@@ -220,7 +220,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-import SkeletonProjectSelector from './SkeletonProjectSelector.vue'
+import SkeletonProjectSelector from '../common/SkeletonProjectSelector.vue'
 import { useProjectsStore } from '~/stores/projects'
 
 const emit = defineEmits(['project-changed'])

@@ -56,11 +56,11 @@
 
     <!-- Progress Bar -->
     <div class="mb-12 progress-section">
-      <div class="w-full rounded-full h-3 transition-colors duration-200" style="background-color: var(--bg-border);">
+      <div class="w-full rounded-full h-3 transition-colors duration-200 max-w-full overflow-hidden" style="background-color: var(--bg-border);">
         <div 
           class="h-3 rounded-full transition-all duration-500 ease-out"
           style="background-color: var(--accent-primary);"
-          :style="{ width: progressPercentage + '%' }"
+          :style="{ width: Math.min(progressPercentage, 100) + '%' }"
         ></div>
       </div>
     </div>
@@ -134,9 +134,9 @@
           <!-- Category Content -->
           <div 
             :id="`category-${category.id}`"
-            class="border-t transition-all duration-500 ease-in-out overflow-hidden"
+            class="border-t transition-all duration-700 ease-out overflow-hidden"
             style="border-color: var(--bg-border); background-color: var(--bg-primary);"
-            :class="{ 'max-h-0': !isCategoryExpanded(category.id) }"
+            :class="{ 'max-h-0 opacity-0': !isCategoryExpanded(category.id), 'max-h-[10000px] opacity-100': isCategoryExpanded(category.id) }"
             role="region"
             :aria-label="`Contenu de la catégorie ${category.name}`"
           >
@@ -168,11 +168,12 @@
 <script setup>
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import ItemAccordion from './ItemAccordion.vue'
-import SkeletonCard from './SkeletonCard.vue'
-import SkeletonCategory from './SkeletonCategory.vue'
-import SkeletonItem from './SkeletonItem.vue' // Added SkeletonItem import
+import SkeletonCard from '../common/SkeletonCard.vue'
+import SkeletonCategory from '../common/SkeletonCategory.vue'
+import SkeletonItem from '../common/SkeletonItem.vue'
 import { useI18n } from 'vue-i18n'
 import { useProjectsStore } from '~/stores/projects'
+import { checklistData } from '~/data/checklist-data'
 
 const emit = defineEmits(['categories-loaded'])
 const { locale } = useI18n()
@@ -212,44 +213,60 @@ const loadCategories = async () => {
   try {
     isLoading.value = true
     
-    // Charger les catégories directement depuis les données statiques
-    const response = await $fetch('/data/seo-checklist.json')
-    if (response && response.categories) {
-      categories.value = response.categories
+    // Charger les catégories depuis le fichier JSON
+    const categoriesResponse = await $fetch('/data/seo-checklist.json')
+    
+    if (categoriesResponse && categoriesResponse.categories) {
+      categories.value = categoriesResponse.categories
       
-      // Charger les items pour chaque catégorie
+      // Assigner l'icône à chaque catégorie
       for (const category of categories.value) {
-        if (category.dataFile) {
-          try {
-            // Extraire le nom de la catégorie du nom de fichier
-            const categoryName = category.dataFile.replace('-items.json', '')
-            const itemsResponse = await $fetch(`/data/i18n/${categoryName}-items-${locale.value}.json`)
-            
-            if (itemsResponse && itemsResponse.items) {
-              category.items = itemsResponse.items
-            } else {
-              console.error(`Erreur lors du chargement des items pour ${categoryName}`)
-              category.items = []
-            }
-          } catch (error) {
-            console.error(`Erreur lors du chargement des items pour ${category.dataFile}:`, error)
-            category.items = []
-          }
-        }
-        
-        // Assigner l'icône à la catégorie
         category.icon = getCategoryIcon(category.id)
+        category.isLoading = true // Marquer comme en cours de chargement
       }
+      
+      // Charger les éléments pour chaque catégorie
+      await loadItemsForAllCategories()
       
       // Émettre l'événement avec les catégories chargées
       emit('categories-loaded', categories.value)
     } else {
-      console.error('Erreur lors du chargement de la checklist')
+      categories.value = []
     }
   } catch (error) {
     console.error('Erreur lors du chargement de la checklist:', error)
+    // Fallback vers les données intégrées en cas d'erreur
+    categories.value = checklistData.categories
+    for (const category of categories.value) {
+      category.icon = getCategoryIcon(category.id)
+    }
   } finally {
     isLoading.value = false
+  }
+}
+
+const loadItemsForAllCategories = async () => {
+  try {
+    const promises = categories.value.map(async (category) => {
+      try {
+        const response = await $fetch(`/data/i18n/${category.id}-items-${locale.value}.json`)
+        
+        if (response && response.items) {
+          category.items = response.items
+        } else {
+          category.items = []
+        }
+      } catch (error) {
+        console.error(`Erreur lors du chargement des éléments pour ${category.id}:`, error)
+        category.items = []
+      } finally {
+        category.isLoading = false
+      }
+    })
+    
+    await Promise.all(promises)
+  } catch (error) {
+    console.error('Erreur lors du chargement des éléments:', error)
   }
 }
 
@@ -317,6 +334,15 @@ const resetProgress = () => {
       checkedItems.value.clear()
       localStorage.removeItem(`checklist-progress-${props.currentProjectId}`)
       projectsStore.resetProjectScores(props.currentProjectId)
+      
+      // Sauvegarder les changements
+      saveCheckedItems()
+      
+      // Émettre un événement de mise à jour de la progression
+      window.dispatchEvent(new CustomEvent('progress-updated', {
+        detail: { percentage: 0 }
+      }))
+      
       console.log('Progrès réinitialisé avec succès')
     }
   } catch (error) {

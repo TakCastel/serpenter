@@ -64,9 +64,9 @@
     <!-- Item Details -->
     <div 
       :id="`item-details-${item.id}`"
-      class="border-t transition-all duration-500 ease-in-out overflow-hidden"
+      class="border-t transition-all duration-700 ease-out overflow-hidden"
       style="border-color: var(--bg-border); background-color: var(--bg-primary);"
-      :class="{ 'max-h-0': !isExpanded }"
+      :class="{ 'max-h-0 opacity-0': !isExpanded, 'max-h-[10000px] opacity-100': isExpanded }"
       role="region"
       :aria-label="`Détails de ${item.label}`"
     >
