@@ -14,38 +14,42 @@ export const useChecklistData = () => {
       const description = t(item.descriptionKey)
       const explication = t(item.details.explicationKey)
       
-      // Récupérer les listes en utilisant une approche sans warnings
+      // Récupérer les listes commentFaire et bonnesPratiques
       let commentFaire = []
       let bonnesPratiques = []
       
-      // Récupérer commentFaire - on sait qu'il y a 4 éléments max
-      for (let i = 1; i <= 4; i++) {
-        try {
-          const key = `${item.details.commentFaireKey}.item${i}`
-          const value = t(key, [], { fallback: `__MISSING_${key}__` })
-          if (value && !value.startsWith('__MISSING_')) {
+      // Récupérer commentFaire
+      try {
+        const commentFaireKey = item.details.commentFaireKey
+        for (let i = 1; i <= 4; i++) {
+          const key = `${commentFaireKey}.item${i}`
+          const value = t(key, [], { fallback: null })
+          if (value && value !== key && !value.startsWith('__MISSING_')) {
             commentFaire.push(value)
           }
-        } catch {
-          // Ignore silencieusement
         }
+      } catch (error) {
+        console.warn(`Erreur lors de la récupération de commentFaire pour ${item.id}:`, error)
       }
       
-      // Récupérer bonnesPratiques - on sait qu'il y a 5 éléments max
-      for (let i = 1; i <= 5; i++) {
-        try {
-          const key = `${item.details.bonnesPratiquesKey}.item${i}`
-          const value = t(key, [], { fallback: `__MISSING_${key}__` })
-          if (value && !value.startsWith('__MISSING_')) {
+      // Récupérer bonnesPratiques
+      try {
+        const bonnesPratiquesKey = item.details.bonnesPratiquesKey
+        for (let i = 1; i <= 5; i++) {
+          const key = `${bonnesPratiquesKey}.item${i}`
+          const value = t(key, [], { fallback: null })
+          if (value && value !== key && !value.startsWith('__MISSING_')) {
             bonnesPratiques.push(value)
           }
-        } catch {
-          // Ignore silencieusement
         }
+      } catch (error) {
+        console.warn(`Erreur lors de la récupération de bonnesPratiques pour ${item.id}:`, error)
       }
       
-      // Le code reste en anglais (pas de traduction)
-      const exemple = item.details.exemple || {}
+      // Gérer l'exemple HTML
+      const exemple = item.details.html ? {
+        html: item.details.html
+      } : {}
 
       return {
         id: item.id,

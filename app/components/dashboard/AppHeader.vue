@@ -160,45 +160,37 @@
   </header>
 
   <!-- Modal de confirmation de réinitialisation -->
-  <div
-    v-if="showResetModal"
-    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm"
-    style="overflow: hidden;"
-    @click="cancelReset"
+  <Modal
+    v-model:is-open="showResetModal"
+    :title="$t('app.progress.resetTitle')"
+    @close="cancelReset"
   >
-    <div
-      @click.stop
-      class="card p-8 w-full max-w-md mx-4"
-      style="background-color: var(--bg-surface);"
-    >
-      <h3 class="text-xl font-semibold mb-4" style="color: var(--text-primary);">
-        {{ $t('app.progress.resetTitle') }}
-      </h3>
-      
-      <p class="mb-8 text-base" style="color: var(--text-secondary);">
-        {{ $t('app.progress.resetConfirm') }}
-      </p>
-      
-      <div class="flex justify-end space-x-4">
-        <button
-          @click="cancelReset"
-          class="btn"
-        >
-          {{ $t('common.cancel') }}
-        </button>
-        <button
-          @click="confirmReset"
-          class="btn btn-primary"
-        >
-          {{ $t('app.progress.reset') }}
-        </button>
-      </div>
-    </div>
-  </div>
+    <p class="text-base" style="color: var(--text-secondary);">
+      {{ $t('app.progress.resetConfirm') }}
+    </p>
+
+    <template #footer>
+      <button
+        @click="cancelReset"
+        class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+        style="background-color: var(--bg-primary); border: 1px solid var(--bg-border); color: var(--text-primary);"
+      >
+        {{ $t('common.cancel') }}
+      </button>
+      <button
+        @click="confirmReset"
+        class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+        style="background-color: var(--accent-primary); color: white;"
+      >
+        {{ $t('app.progress.reset') }}
+      </button>
+    </template>
+  </Modal>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue'
+import Modal from '../common/Modal.vue'
 
 const props = defineProps({
   currentProjectId: {

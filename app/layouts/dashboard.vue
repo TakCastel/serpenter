@@ -152,6 +152,12 @@ const scrollToCategory = (categoryId) => {
     const element = document.getElementById(`category-${categoryId}`)
     if (element) {
       isScrollingProgrammatically.value = true
+      
+      // Ouvrir l'accordéon de la catégorie
+      window.dispatchEvent(new CustomEvent('open-category', { 
+        detail: { categoryId } 
+      }))
+      
       setTimeout(() => {
         const headerElement = document.querySelector('header')
         const headerHeight = headerElement ? headerElement.offsetHeight : 80

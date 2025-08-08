@@ -32,13 +32,38 @@
     }
   },
   "projects": {
-    "selectProject": "Select a project"
+    "selectProject": "Select a project",
+    "name": "Project name",
+    "namePlaceholder": "Enter your project name",
+    "description": "Description",
+    "descriptionPlaceholder": "Optional project description",
+    "createNew": "Create a new project",
+    "create": "Create",
+    "createTitle": "Create a new project",
+    "deleteCurrent": "Delete current project",
+    "delete": "Delete",
+    "deleteTitle": "Delete project",
+    "deleteConfirm": "Are you sure you want to delete the project \"{name}\"? This action cannot be undone.",
+    "projectList": "Project list"
+  },
+  "emptyState": {
+    "title": "No projects found",
+    "description": "Create your first project to start using the checklist",
+    "createButton": "Create a project"
+  },
+  "sidebar": {
+    "welcome": "Welcome",
+    "createProjectMessage": "Create your first project to get started"
   },
   "common": {
     "goToCategory": "Go to category {name}",
     "openCategory": "Open category {name}",
     "closeCategory": "Close category {name}",
-    "item": "Item {label}"
+    "item": "Item {label}",
+    "cancel": "Cancel"
+  },
+  "modal": {
+    "close": "Close"
   },
   "categories": {
     "seo": {
@@ -105,8 +130,8 @@
         }
       },
       "metaDescription": {
-        "label": "&lt;meta description&gt; tag present and optimized",
-        "description": "Unique and attractive description for SERPs",
+        "label": "&lt;meta name=\"description\"&gt; tag filled",
+        "description": "Attractive summary related to content",
         "explication": "The meta description appears in search results under the title. It must be descriptive, attractive and contain the main keywords to encourage clicks.",
         "commentFaire": {
           "item1": "Inspect your page (F12) -> Look for &lt;meta name=\"description\"&gt; tag",
@@ -122,22 +147,184 @@
           "item5": "Avoid special characters that can be truncated"
         }
       },
+      "singleH1": {
+        "label": "Single &lt;h1&gt; tag per page",
+        "description": "Clear structure of main content",
+        "explication": "Each page should have a single H1 tag that represents the main title of the page. This helps search engines understand the content hierarchy.",
+        "commentFaire": {
+          "item1": "Inspect your page with F12",
+          "item2": "Search for all &lt;h1&gt; tags",
+          "item3": "Check that there is only one",
+          "item4": "Use 'axe DevTools' extension to verify"
+        },
+        "bonnesPratiques": {
+          "item1": "Single H1 tag per page",
+          "item2": "Descriptive and relevant H1",
+          "item3": "Include main keywords",
+          "item4": "Consistent with title tag",
+          "item5": "Represent main content"
+        }
+      },
+      "headingsStructure": {
+        "label": "Logical heading structure (H1 > H2 > H3)",
+        "description": "No level skipping",
+        "explication": "A clear heading structure helps search engines understand content and improves accessibility.",
+        "commentFaire": {
+          "item1": "Check that there is only one H1 per page",
+          "item2": "Use headings in logical order (H1 > H2 > H3)",
+          "item3": "Include keywords in headings",
+          "item4": "Test with 'HeadingMap' tool"
+        },
+        "bonnesPratiques": {
+          "item1": "Single H1 per page",
+          "item2": "Logical hierarchical structure",
+          "item3": "Keywords in headings",
+          "item4": "Descriptive and informative",
+          "item5": "No level skipping (H1 > H3)"
+        }
+      },
+      "cleanUrls": {
+        "label": "Readable and short URL",
+        "description": "Ex: /services/seo instead of ?id=24",
+        "explication": "Clean and descriptive URLs improve SEO and user experience. They should be short, readable and contain relevant keywords.",
+        "commentFaire": {
+          "item1": "Check your URL structure",
+          "item2": "Use keywords in URLs",
+          "item3": "Avoid unnecessary parameters",
+          "item4": "Test with SEO tools"
+        },
+        "bonnesPratiques": {
+          "item1": "Short and descriptive URLs",
+          "item2": "Include relevant keywords",
+          "item3": "Avoid special characters",
+          "item4": "Logical and consistent structure",
+          "item5": "Easy to remember"
+        }
+      },
+      "altText": {
+        "label": "Alt text on all images",
+        "description": "For image SEO and accessibility",
+        "explication": "Alt text allows screen readers to describe images to visually impaired users and improves image SEO.",
+        "commentFaire": {
+          "item1": "Inspect your images with F12",
+          "item2": "Check that each image has an alt attribute",
+          "item3": "Use 'Web Developer' extension",
+          "item4": "Test with a screen reader"
+        },
+        "bonnesPratiques": {
+          "item1": "Descriptive and informative",
+          "item2": "Avoid 'image of', 'photo of'",
+          "item3": "For decorative images, use alt=\"\"",
+          "item4": "Include context if necessary",
+          "item5": "Appropriate length"
+        }
+      },
+      "internalLinks": {
+        "label": "Internal links present",
+        "description": "Contextual navigation",
+        "explication": "Internal links help distribute PageRank and improve navigation. They should be relevant and use descriptive anchors.",
+        "commentFaire": {
+          "item1": "Create links to important pages",
+          "item2": "Use descriptive anchors",
+          "item3": "Avoid broken links",
+          "item4": "Test links regularly"
+        },
+        "bonnesPratiques": {
+          "item1": "Descriptive and natural anchors",
+          "item2": "Link to relevant pages",
+          "item3": "Avoid broken links",
+          "item4": "Distribute evenly",
+          "item5": "Use keywords in anchors"
+        }
+      },
       "canonical": {
-        "label": "Canonical URL defined",
-        "description": "Avoid duplicate content with canonical tags",
+        "label": "Canonical tag present",
+        "description": "To avoid duplicate content",
         "explication": "The canonical tag tells search engines which is the main version of a page. It avoids duplicate content issues and improves SEO.",
         "commentFaire": {
           "item1": "Inspect your page (F12) -> Look for &lt;link rel=\"canonical\"&gt;",
-          "item2": "Check that the canonical URL points to the correct page",
+          "item2": "Check that canonical URL points to correct page",
           "item3": "Use Google Search Console tool to detect errors",
           "item4": "Test with 'SEO Meta in 1 Click' extension"
         },
         "bonnesPratiques": {
           "item1": "Absolute canonical URL (with https://)",
-          "item2": "One canonical tag per page",
+          "item2": "Single canonical tag per page",
           "item3": "Canonical URL different from current URL if needed",
           "item4": "Consistent with site structure",
           "item5": "No redirect in canonical URL"
+        }
+      },
+      "sitemapXml": {
+        "label": "XML sitemap present and valid",
+        "description": "Helps search engines discover your pages",
+        "explication": "The XML sitemap lists all URLs of your site to facilitate indexing by search engines.",
+        "commentFaire": {
+          "item1": "Generate sitemap with online tools",
+          "item2": "Submit to Google Search Console",
+          "item3": "Add link in robots.txt",
+          "item4": "Update regularly"
+        },
+        "bonnesPratiques": {
+          "item1": "Include all important pages",
+          "item2": "Update after each modification",
+          "item3": "Submit to Google and Bing",
+          "item4": "Check errors in Search Console",
+          "item5": "Limit to 50,000 URLs per sitemap"
+        }
+      },
+      "robotsTxt": {
+        "label": "robots.txt file configured",
+        "description": "Guide indexing robots",
+        "explication": "The robots.txt file tells search engines which pages can be indexed.",
+        "commentFaire": {
+          "item1": "Create robots.txt file at root",
+          "item2": "Add User-agent and Disallow directives",
+          "item3": "Include link to your sitemap",
+          "item4": "Test with Google Search Console"
+        },
+        "bonnesPratiques": {
+          "item1": "Place at site root",
+          "item2": "Include link to sitemap",
+          "item3": "Protect sensitive pages",
+          "item4": "Test syntax",
+          "item5": "Check errors in Search Console"
+        }
+      },
+      "schemaOrg": {
+        "label": "Structured data (Schema.org)",
+        "description": "Improves visibility in SERPs",
+        "explication": "Structured data helps search engines understand your site content and can improve display in search results.",
+        "commentFaire": {
+          "item1": "Identify main content type",
+          "item2": "Use Schema.org generator",
+          "item3": "Test with Google Rich Results Test",
+          "item4": "Implement progressively"
+        },
+        "bonnesPratiques": {
+          "item1": "Choose appropriate schema type",
+          "item2": "Accurate and up-to-date data",
+          "item3": "Test with Google tools",
+          "item4": "Implement progressively",
+          "item5": "Monitor errors"
+        }
+      },
+      "breadcrumbs": {
+        "label": "Breadcrumbs present",
+        "description": "Navigation and local SEO",
+        "explication": "Breadcrumbs improve user navigation and can improve local SEO by showing site structure.",
+        "commentFaire": {
+          "item1": "Add breadcrumbs to your template",
+          "item2": "Use structured data",
+          "item3": "Test navigation",
+          "item4": "Check mobile display"
+        },
+        "bonnesPratiques": {
+          "item1": "Clear and logical navigation",
+          "item2": "Functional links",
+          "item3": "Responsive display",
+          "item4": "Consistent with structure",
+          "item5": "Keyboard accessible"
         }
       }
     },
@@ -161,8 +348,8 @@
         }
       },
       "contrastRatio": {
-        "label": "Sufficient contrast ratio (4.5:1 minimum)",
-        "description": "Readability guaranteed for all users",
+        "label": "Sufficient contrast ratios (WCAG AA minimum)",
+        "description": "Readable text on dark or light background",
         "explication": "Contrast ratio measures the brightness difference between text and background. A 4.5:1 minimum ratio ensures readability for visually impaired users.",
         "commentFaire": {
           "item1": "Use online tool 'WebAIM Contrast Checker'",
@@ -195,12 +382,210 @@
           "item4": "Use article for standalone content",
           "item5": "Use footer for footer"
         }
+      },
+      "keyboardNavigation": {
+        "label": "Functional keyboard navigation",
+        "description": "Visible focus, consistent tabindex",
+        "explication": "Keyboard navigation is essential for users who cannot use a mouse. All interactive elements must be accessible via Tab, Enter and Space.",
+        "commentFaire": {
+          "item1": "Test with Tab to navigate between elements",
+          "item2": "Check that all links and buttons are focusable",
+          "item3": "Test with Enter and Space to activate",
+          "item4": "Use 'axe DevTools' extension to verify"
+        },
+        "bonnesPratiques": {
+          "item1": "Logical tab order",
+          "item2": "All interactive elements focusable",
+          "item3": "No trapped focus elements",
+          "item4": "Consistent keyboard shortcuts",
+          "item5": "Test without mouse"
+        }
+      },
+      "focusIndicators": {
+        "label": "Visible focus indicators",
+        "description": "Clear visual feedback for keyboard navigation",
+        "explication": "Focus indicators allow users to know which element is currently selected during keyboard navigation.",
+        "commentFaire": {
+          "item1": "Test with Tab to see indicators",
+          "item2": "Check that focus is visible on all elements",
+          "item3": "Use outline or border for focus",
+          "item4": "Test with different browsers"
+        },
+        "bonnesPratiques": {
+          "item1": "Visible and contrasted focus indicator",
+          "item2": "Consistency across the site",
+          "item3": "Don't remove default outline",
+          "item4": "Test with different themes",
+          "item5": "Respect user preferences"
+        }
+      },
+      "formLabels": {
+        "label": "Explicit labels for form fields",
+        "description": "Ex: &lt;label for=\"email\"&gt;Email&lt;/label&gt;",
+        "explication": "Form labels help users understand what is expected in each field. They are essential for accessibility and user experience.",
+        "commentFaire": {
+          "item1": "Check that each field has a label",
+          "item2": "Use for attribute to associate label and input",
+          "item3": "Test with a screen reader",
+          "item4": "Check with 'WAVE' tool"
+        },
+        "bonnesPratiques": {
+          "item1": "Descriptive and clear labels",
+          "item2": "Correct association with for attribute",
+          "item3": "Logical label placement",
+          "item4": "Indication of required fields",
+          "item5": "Associated error messages"
+        }
+      },
+      "ariaAttributes": {
+        "label": "Appropriate ARIA attributes",
+        "description": "Roles, labels and states for complex elements",
+        "explication": "ARIA (Accessible Rich Internet Applications) attributes help make complex elements accessible to assistive technologies.",
+        "commentFaire": {
+          "item1": "Identify complex elements",
+          "item2": "Use appropriate ARIA roles",
+          "item3": "Add necessary labels and states",
+          "item4": "Test with a screen reader"
+        },
+        "bonnesPratiques": {
+          "item1": "Use appropriate ARIA roles",
+          "item2": "Descriptive and clear labels",
+          "item3": "Up-to-date and consistent states",
+          "item4": "Avoid redundancy",
+          "item5": "Test with assistive technologies"
+        }
+      },
+      "skipLinks": {
+        "label": "Skip links present",
+        "description": "Links to skip navigation and go to content",
+        "explication": "Skip links allow keyboard users to jump directly to main content, improving navigation experience.",
+        "commentFaire": {
+          "item1": "Add skip links at the beginning of the page",
+          "item2": "Place them first in tab order",
+          "item3": "Make them visible on focus",
+          "item4": "Test with keyboard navigation"
+        },
+        "bonnesPratiques": {
+          "item1": "Visible links on focus",
+          "item2": "Placement at page beginning",
+          "item3": "Descriptive and clear text",
+          "item4": "Target main content",
+          "item5": "Test with different browsers"
+        }
+      },
+      "errorMessages": {
+        "label": "Accessible error messages",
+        "description": "Clear and accessible error feedback",
+        "explication": "Error messages must be clear, informative and accessible to assistive technologies to help all users correct their errors.",
+        "commentFaire": {
+          "item1": "Test messages with a screen reader",
+          "item2": "Check that errors are announced",
+          "item3": "Use aria-describedby to associate messages",
+          "item4": "Test with different browsers"
+        },
+        "bonnesPratiques": {
+          "item1": "Clear and constructive messages",
+          "item2": "Association with concerned fields",
+          "item3": "Automatic announcement by screen readers",
+          "item4": "Color AND text for errors",
+          "item5": "Correction suggestions"
+        }
+      },
+      "colorBlindness": {
+        "label": "Test with different types of colorblindness",
+        "description": "Check readability for colorblind users",
+        "explication": "Colorblind users have difficulty distinguishing certain colors. It is important not to use color alone to convey information.",
+        "commentFaire": {
+          "item1": "Use colorblindness simulation tools",
+          "item2": "Test with color filters",
+          "item3": "Check that information doesn't depend only on color",
+          "item4": "Use icons AND colors"
+        },
+        "bonnesPratiques": {
+          "item1": "Don't use color alone",
+          "item2": "Sufficient contrast for all types",
+          "item3": "Use icons and text",
+          "item4": "Avoid red/green for errors/success",
+          "item5": "Test with different types of colorblindness"
+        }
+      },
+      "reducedMotion": {
+        "label": "Respect reduced motion preferences",
+        "description": "media query prefers-reduced-motion",
+        "explication": "Some users are sensitive to animations and movements. It is important to respect their preferences to avoid health issues.",
+        "commentFaire": {
+          "item1": "Use prefers-reduced-motion media query",
+          "item2": "Disable non-essential animations",
+          "item3": "Test with preferences enabled",
+          "item4": "Check in system settings"
+        },
+        "bonnesPratiques": {
+          "item1": "Respect user preferences",
+          "item2": "Disable non-essential animations",
+          "item3": "Maintain functionality",
+          "item4": "Test with different browsers",
+          "item5": "Document changes"
+        }
+      },
+      "screenReader": {
+        "label": "Test with a screen reader",
+        "description": "Check experience with NVDA, JAWS, VoiceOver",
+        "explication": "Screen readers are assistive technologies used by visually impaired people. Testing with these tools ensures accessibility.",
+        "commentFaire": {
+          "item1": "Install a screen reader (NVDA free)",
+          "item2": "Test complete navigation",
+          "item3": "Check element announcements",
+          "item4": "Test with different readers"
+        },
+        "bonnesPratiques": {
+          "item1": "Logical and consistent navigation",
+          "item2": "Clear element announcements",
+          "item3": "Avoid decorative elements",
+          "item4": "Test regularly",
+          "item5": "Train team on accessibility"
+        }
+      },
+      "fontSize": {
+        "label": "Sufficient font size",
+        "description": "Readable text without zoom (16px minimum)",
+        "explication": "A sufficient font size improves readability for all users, especially for visually impaired people.",
+        "commentFaire": {
+          "item1": "Check font size in developer tools",
+          "item2": "Test with different screen sizes",
+          "item3": "Use relative units (rem, em)",
+          "item4": "Test browser zoom"
+        },
+        "bonnesPratiques": {
+          "item1": "16px minimum base size",
+          "item2": "Use relative units",
+          "item3": "Respect user preferences",
+          "item4": "Clear size hierarchy",
+          "item5": "Test with 200% zoom"
+        }
       }
     },
     "performance": {
+      "lazyLoading": {
+        "label": "Lazy loading images",
+        "description": "loading=\"lazy\" attribute on images",
+        "explication": "Lazy loading allows images to load only when needed, improving page loading performance.",
+        "commentFaire": {
+          "item1": "Add loading=\"lazy\" to images",
+          "item2": "Use explicit dimensions",
+          "item3": "Test with developer tools",
+          "item4": "Check mobile behavior"
+        },
+        "bonnesPratiques": {
+          "item1": "Use loading=\"lazy\" for images",
+          "item2": "Define image dimensions",
+          "item3": "Avoid lazy loading for above the fold images",
+          "item4": "Test on different browsers",
+          "item5": "Monitor performance"
+        }
+      },
       "imageOptimization": {
-        "label": "Images optimized and compressed",
-        "description": "Reduced size and modern formats (WebP)",
+        "label": "Optimized image size",
+        "description": "No 4K for an icon",
         "explication": "Image optimization reduces loading time and improves performance. Use modern formats like WebP and appropriate compression.",
         "commentFaire": {
           "item1": "Use online tools like TinyPNG or Squoosh",
@@ -216,9 +601,27 @@
           "item5": "Optimize images for web"
         }
       },
+      "modernFormats": {
+        "label": "Use of modern formats (WebP, AVIF)",
+        "description": "Lighter than JPEG/PNG",
+        "explication": "Modern formats like WebP and AVIF offer better compression than JPEG and PNG, reducing file size and improving performance.",
+        "commentFaire": {
+          "item1": "Convert your images to WebP",
+          "item2": "Use tools like Squoosh or ImageOptim",
+          "item3": "Implement fallback for older browsers",
+          "item4": "Test compatibility"
+        },
+        "bonnesPratiques": {
+          "item1": "Use WebP as primary format",
+          "item2": "Provide fallbacks for compatibility",
+          "item3": "Test on different browsers",
+          "item4": "Monitor performance",
+          "item5": "Maintain quality"
+        }
+      },
       "minification": {
-        "label": "CSS and JS files minified",
-        "description": "Reduced size for faster loading",
+        "label": "CSS and JS minified",
+        "description": "Compressed files",
         "explication": "Minification removes spaces, comments and unnecessary characters from CSS and JavaScript files to reduce their size.",
         "commentFaire": {
           "item1": "Use tools like UglifyJS for JavaScript",
@@ -234,10 +637,28 @@
           "item5": "Monitor file sizes"
         }
       },
-      "caching": {
-        "label": "Cache configured correctly",
-        "description": "Appropriate cache headers for static resources",
-        "explication": "Caching allows browsers to store static resources locally, reducing server requests and improving performance.",
+      "gzipCompression": {
+        "label": "GZIP compression enabled",
+        "description": "70% reduction in file size",
+        "explication": "GZIP compression significantly reduces the size of transmitted files, improving loading times and reducing bandwidth usage.",
+        "commentFaire": {
+          "item1": "Configure GZIP on your server",
+          "item2": "Check with developer tools",
+          "item3": "Test with online tools",
+          "item4": "Monitor performance"
+        },
+        "bonnesPratiques": {
+          "item1": "Enable GZIP for all text files",
+          "item2": "Configure appropriate MIME types",
+          "item3": "Test regularly",
+          "item4": "Monitor compression",
+          "item5": "Maintain configuration"
+        }
+      },
+      "browserCache": {
+        "label": "Browser cache configured",
+        "description": "Reduced repeated requests",
+        "explication": "Browser cache allows browsers to store static resources locally, reducing server requests and improving performance.",
         "commentFaire": {
           "item1": "Configure Expires or Cache-Control headers",
           "item2": "Use hashed filenames for invalidation",
@@ -251,86 +672,122 @@
           "item4": "Configure cache invalidation",
           "item5": "Test cache regularly"
         }
+      },
+      "criticalCss": {
+        "label": "Critical CSS inlined",
+        "description": "Faster initial rendering",
+        "explication": "Critical CSS is the CSS needed for initial page rendering. Inlining this CSS improves performance by avoiding blocking requests.",
+        "commentFaire": {
+          "item1": "Identify critical CSS",
+          "item2": "Use tools like Critical",
+          "item3": "Inline critical CSS in head",
+          "item4": "Load non-critical CSS asynchronously"
+        },
+        "bonnesPratiques": {
+          "item1": "Inline only critical CSS",
+          "item2": "Load non-critical CSS asynchronously",
+          "item3": "Maintain separation of concerns",
+          "item4": "Test regularly",
+          "item5": "Monitor performance"
+        }
       }
     },
     "ecoConception": {
-      "greenHosting": {
-        "label": "Green hosting chosen",
-        "description": "Host using renewable energies",
-        "explication": "Green hosting uses renewable energies and eco-responsible practices to reduce the environmental impact of your site.",
+      "reducedRequests": {
+        "label": "Reduced number of requests",
+        "description": "Less unnecessary external JS/CSS",
+        "explication": "Reducing the number of HTTP requests improves performance and reduces environmental impact by decreasing energy consumption.",
         "commentFaire": {
-          "item1": "Research certified green hosts",
-          "item2": "Check their environmental certifications",
-          "item3": "Compare prices and services",
-          "item4": "Contact support for more information"
+          "item1": "Combine CSS and JS files",
+          "item2": "Use sprites for images",
+          "item3": "Avoid unnecessary third-party scripts",
+          "item4": "Optimize resource loading"
         },
         "bonnesPratiques": {
-          "item1": "Choose certified hosts",
-          "item2": "Check environmental policies",
-          "item3": "Prioritize renewable energies",
-          "item4": "Consider carbon impact",
-          "item5": "Monitor performance"
+          "item1": "Combine files when possible",
+          "item2": "Avoid unnecessary third-party scripts",
+          "item3": "Use sprites for icons",
+          "item4": "Optimize loading",
+          "item5": "Monitor number of requests"
         }
       },
-      "codeOptimization": {
-        "label": "Optimized and efficient code",
-        "description": "Reduced resource consumption",
-        "explication": "Code optimization reduces CPU and memory consumption, thus decreasing the environmental impact of your application.",
+      "pageWeight": {
+        "label": "Page weight under 1 MB",
+        "description": "Good environmental practice",
+        "explication": "A reduced page weight improves performance and reduces environmental impact by decreasing energy and bandwidth consumption.",
         "commentFaire": {
-          "item1": "Analyze your code with profiling tools",
-          "item2": "Optimize loops and algorithms",
-          "item3": "Reduce unnecessary queries",
-          "item4": "Use minification tools"
+          "item1": "Optimize images",
+          "item2": "Minify CSS and JS files",
+          "item3": "Use GZIP compression",
+          "item4": "Monitor total size"
         },
         "bonnesPratiques": {
-          "item1": "Avoid unnecessary loops",
-          "item2": "Optimize database queries",
-          "item3": "Use efficient data structures",
-          "item4": "Reduce algorithmic complexity",
-          "item5": "Monitor performance"
+          "item1": "Maintain weight under 1 MB",
+          "item2": "Optimize regularly",
+          "item3": "Monitor trends",
+          "item4": "Test on different devices",
+          "item5": "Document optimizations"
         }
       },
-      "resourceReduction": {
-        "label": "Resource usage reduction",
-        "description": "Minimizing environmental impact",
-        "explication": "Reducing resources (CPU, memory, bandwidth) decreases energy consumption and environmental impact of your site.",
+      "noUnnecessaryTracking": {
+        "label": "No unnecessary tracking",
+        "description": "Avoid non-essential third-party scripts",
+        "explication": "Third-party tracking scripts can slow down the site and consume unnecessary resources. It's important to only use those that are really necessary.",
         "commentFaire": {
-          "item1": "Analyze resource usage",
-          "item2": "Optimize images and media",
-          "item3": "Reduce HTTP requests",
-          "item4": "Implement compression"
+          "item1": "Audit all third-party scripts",
+          "item2": "Remove unnecessary scripts",
+          "item3": "Load scripts asynchronously",
+          "item4": "Test impact on performance"
         },
         "bonnesPratiques": {
-          "item1": "Compress all assets",
-          "item2": "Reduce number of requests",
-          "item3": "Optimize images",
-          "item4": "Use caching",
-          "item5": "Monitor consumption"
+          "item1": "Use only necessary scripts",
+          "item2": "Load asynchronously",
+          "item3": "Audit regularly",
+          "item4": "Test impact",
+          "item5": "Document choices"
+        }
+      },
+      "systemFonts": {
+        "label": "Use of system fonts or local hosting",
+        "description": "Fewer external requests",
+        "explication": "Using system fonts or hosting fonts locally reduces external requests and improves performance.",
+        "commentFaire": {
+          "item1": "Use system fonts",
+          "item2": "Host fonts locally",
+          "item3": "Avoid Google Fonts when possible",
+          "item4": "Optimize font loading"
+        },
+        "bonnesPratiques": {
+          "item1": "Prioritize system fonts",
+          "item2": "Host locally if necessary",
+          "item3": "Optimize loading",
+          "item4": "Test compatibility",
+          "item5": "Monitor performance"
         }
       }
     },
     "responsiveUx": {
-      "mobileFirst": {
-        "label": "Mobile-first approach implemented",
-        "description": "Mobile-optimized design priority",
-        "explication": "Mobile-first approach consists of designing first for mobile devices, then adapting for larger screens.",
+      "responsiveDesign": {
+        "label": "Responsive design (mobile → desktop)",
+        "description": "Optimized display for all screen sizes",
+        "explication": "Responsive design allows your site to automatically adapt to all screen sizes, providing an optimal user experience on all devices.",
         "commentFaire": {
-          "item1": "Design first for mobile (320px+)",
-          "item2": "Use min-width media queries",
-          "item3": "Test on different devices",
-          "item4": "Check touch navigation"
+          "item1": "Use media queries",
+          "item2": "Test on different devices",
+          "item3": "Check breakpoints",
+          "item4": "Optimize for mobile-first"
         },
         "bonnesPratiques": {
-          "item1": "Start with mobile",
-          "item2": "Use logical breakpoints",
+          "item1": "Mobile-first approach",
+          "item2": "Logical breakpoints",
           "item3": "Test on real devices",
-          "item4": "Optimize for touch",
-          "item5": "Think about performance"
+          "item4": "Optimized performance",
+          "item5": "Consistent experience"
         }
       },
       "touchTargets": {
-        "label": "Touch targets sufficiently large",
-        "description": "Minimum 44x44px for interactive elements",
+        "label": "Appropriate button size (min. 44 px)",
+        "description": "Easy to click on mobile",
         "explication": "Touch targets must be large enough to be easily usable on touch devices.",
         "commentFaire": {
           "item1": "Measure your buttons and links",
@@ -346,29 +803,47 @@
           "item5": "Avoid elements too small"
         }
       },
-      "loadingStates": {
-        "label": "Loading states implemented",
-        "description": "Visual feedback during actions",
-        "explication": "Loading states inform the user that an action is in progress, improving user experience.",
+      "noHorizontalScroll": {
+        "label": "No overflowing elements / horizontal scroll",
+        "description": "Especially on mobile",
+        "explication": "Horizontal scrolling on mobile is a poor user experience. All elements must adapt to screen width.",
         "commentFaire": {
-          "item1": "Add spinners for actions",
-          "item2": "Use disabled states",
-          "item3": "Implement skeletons",
-          "item4": "Test different states"
+          "item1": "Use relative units (%, vw, rem)",
+          "item2": "Avoid fixed widths",
+          "item3": "Test on different screens",
+          "item4": "Check images and tables"
         },
         "bonnesPratiques": {
-          "item1": "Immediate feedback",
-          "item2": "Clear visual states",
-          "item3": "Informative messages",
-          "item4": "Reasonable wait time",
-          "item5": "Test all scenarios"
+          "item1": "Use relative units",
+          "item2": "Avoid fixed widths",
+          "item3": "Test on different screens",
+          "item4": "Optimize images",
+          "item5": "Check tables"
+        }
+      },
+      "perceivedSpeed": {
+        "label": "Fast perceived loading speed",
+        "description": "Skeletons, smooth transitions",
+        "explication": "Perceived speed is more important than actual speed. Use techniques like skeletons and smooth transitions to improve experience.",
+        "commentFaire": {
+          "item1": "Add skeletons for loading",
+          "item2": "Use smooth transitions",
+          "item3": "Optimize images",
+          "item4": "Test user experience"
+        },
+        "bonnesPratiques": {
+          "item1": "Use skeletons",
+          "item2": "Smooth transitions",
+          "item3": "Immediate feedback",
+          "item4": "Optimize images",
+          "item5": "Test experience"
         }
       }
     },
     "securite": {
       "https": {
-        "label": "HTTPS enabled and configured",
-        "description": "Secure connection mandatory",
+        "label": "Site in HTTPS",
+        "description": "Active SSL certificate",
         "explication": "HTTPS encrypts data exchanged between browser and server, protecting user privacy.",
         "commentFaire": {
           "item1": "Get SSL certificate (Let's Encrypt free)",
@@ -384,9 +859,63 @@
           "item5": "Test regularly"
         }
       },
+      "contentSecurityPolicy": {
+        "label": "Content Security Policy (CSP) configured",
+        "description": "Protection against XSS attacks",
+        "explication": "CSP defines authorized sources for resources, protecting against XSS attacks and content injection.",
+        "commentFaire": {
+          "item1": "Define authorized sources",
+          "item2": "Test in report-only mode first",
+          "item3": "Implement progressively",
+          "item4": "Monitor violations"
+        },
+        "bonnesPratiques": {
+          "item1": "Strict default policy",
+          "item2": "Minimal authorized sources",
+          "item3": "Report-only mode at first",
+          "item4": "Violation monitoring",
+          "item5": "Regular updates"
+        }
+      },
+      "rateLimiting": {
+        "label": "Rate limiting configured",
+        "description": "Protection against brute force attacks",
+        "explication": "Rate limiting limits the number of requests a user can make in a certain time period, protecting against brute force attacks.",
+        "commentFaire": {
+          "item1": "Configure rate limiting on your server",
+          "item2": "Define appropriate limits",
+          "item3": "Test limits",
+          "item4": "Monitor violations"
+        },
+        "bonnesPratiques": {
+          "item1": "Appropriate limits per IP",
+          "item2": "Clear error messages",
+          "item3": "Monitor violations",
+          "item4": "Adjust as needed",
+          "item5": "Document limits"
+        }
+      },
+      "fileUploadSecurity": {
+        "label": "File upload security",
+        "description": "Validation and restriction of file types",
+        "explication": "File uploads can be a source of vulnerabilities. It's important to validate and restrict allowed file types.",
+        "commentFaire": {
+          "item1": "Validate file types",
+          "item2": "Limit file size",
+          "item3": "Scan files for viruses",
+          "item4": "Store files securely"
+        },
+        "bonnesPratiques": {
+          "item1": "Strict file type validation",
+          "item2": "File size limitation",
+          "item3": "Antivirus scanning",
+          "item4": "Secure storage",
+          "item5": "Upload monitoring"
+        }
+      },
       "securityHeaders": {
         "label": "Security headers configured",
-        "description": "Protection against common attacks",
+        "description": "CSP, HSTS, X-Frame-Options, etc.",
         "explication": "Security headers protect against XSS, clickjacking and other common vulnerabilities.",
         "commentFaire": {
           "item1": "Configure X-Content-Type-Options",
@@ -402,29 +931,29 @@
           "item5": "Test regularly"
         }
       },
-      "contentSecurityPolicy": {
-        "label": "Content Security Policy configured",
-        "description": "Protection against content injection",
-        "explication": "CSP defines authorized sources for resources, protecting against XSS attacks and content injection.",
+      "injectionProtection": {
+        "label": "Basic protection against injection",
+        "description": "Avoid unfiltered input",
+        "explication": "Injections (SQL, XSS, etc.) are common vulnerabilities. It's important to validate and filter all user input.",
         "commentFaire": {
-          "item1": "Define authorized sources",
-          "item2": "Test in report-only mode first",
-          "item3": "Implement progressively",
-          "item4": "Monitor violations"
+          "item1": "Validate all user input",
+          "item2": "Use prepared statements",
+          "item3": "Escape outputs",
+          "item4": "Test with security tools"
         },
         "bonnesPratiques": {
-          "item1": "Strict default policy",
-          "item2": "Minimal authorized sources",
-          "item3": "Report-only mode at first",
-          "item4": "Violation monitoring",
-          "item5": "Regular updates"
+          "item1": "Strict input validation",
+          "item2": "Prepared statements",
+          "item3": "Output escaping",
+          "item4": "Regular security testing",
+          "item5": "Team training"
         }
       }
     },
     "analytics": {
       "googleAnalytics": {
         "label": "Google Analytics configured",
-        "description": "Performance and traffic tracking",
+        "description": "Performance and behavior tracking",
         "explication": "Google Analytics allows tracking traffic, user behaviors and site performance.",
         "commentFaire": {
           "item1": "Create Google Analytics account",
@@ -440,39 +969,39 @@
           "item5": "Regular monitoring"
         }
       },
-      "conversionTracking": {
-        "label": "Conversion tracking configured",
-        "description": "Business goals measurement",
-        "explication": "Conversion tracking allows measuring site effectiveness in terms of business goals (sales, registrations, etc.).",
+      "gdprCompliance": {
+        "label": "Respect GDPR",
+        "description": "Consent and privacy policy",
+        "explication": "GDPR imposes strict obligations regarding personal data protection. It's essential to respect these rules.",
         "commentFaire": {
-          "item1": "Define conversion goals",
-          "item2": "Configure tracking events",
-          "item3": "Test conversions",
+          "item1": "Implement consent system",
+          "item2": "Write privacy policy",
+          "item3": "Configure cookies",
+          "item4": "Test compliance"
+        },
+        "bonnesPratiques": {
+          "item1": "Explicit consent",
+          "item2": "Clear privacy policy",
+          "item3": "Cookie management",
+          "item4": "Right to be forgotten",
+          "item5": "Team training"
+        }
+      },
+      "customEvents": {
+        "label": "Custom events",
+        "description": "Tracking important actions",
+        "explication": "Custom events allow tracking specific actions on your site, such as button clicks or form submissions.",
+        "commentFaire": {
+          "item1": "Identify important actions",
+          "item2": "Configure events",
+          "item3": "Test tracking",
           "item4": "Analyze data"
         },
         "bonnesPratiques": {
-          "item1": "Clear and measurable goals",
-          "item2": "Relevant events",
+          "item1": "Relevant events",
+          "item2": "Consistent naming",
           "item3": "Regular testing",
           "item4": "Data analysis",
-          "item5": "Continuous optimization"
-        }
-      },
-      "performanceMonitoring": {
-        "label": "Performance monitoring",
-        "description": "Performance metrics tracking",
-        "explication": "Performance monitoring allows detecting issues and optimizing user experience.",
-        "commentFaire": {
-          "item1": "Configure Google PageSpeed Insights",
-          "item2": "Implement Real User Monitoring",
-          "item3": "Monitor Core Web Vitals",
-          "item4": "Analyze trends"
-        },
-        "bonnesPratiques": {
-          "item1": "Core Web Vitals metrics",
-          "item2": "Real-time monitoring",
-          "item3": "Automatic alerts",
-          "item4": "Trend analysis",
           "item5": "Continuous optimization"
         }
       }

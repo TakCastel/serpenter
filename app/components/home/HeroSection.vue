@@ -1,20 +1,48 @@
 <template>
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Background gradient -->
-    <div class="absolute inset-0 transition-all duration-300" style="background: linear-gradient(to bottom right, var(--bg-surface), var(--bg-primary), var(--bg-surface));"></div>
+    <!-- Background avec motif serpent -->
+    <div class="absolute inset-0 transition-all duration-300" style="background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-primary) 100%);"></div>
     
-    <!-- Animated background elements -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute -top-40 -right-40 w-80 h-80 bg-green-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-      <div class="absolute top-40 left-40 w-80 h-80 bg-teal-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    <!-- Motif serpent en arrière-plan -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-10 left-10 w-96 h-96">
+        <svg viewBox="0 0 400 400" class="w-full h-full">
+          <path 
+            d="M50,200 Q100,150 150,200 T250,200 T350,200" 
+            stroke="var(--accent-primary)" 
+            stroke-width="8" 
+            fill="none" 
+            stroke-linecap="round"
+            class="animate-snake-path"
+          />
+          <circle cx="350" cy="200" r="6" fill="var(--accent-primary)" class="animate-pulse" />
+        </svg>
+      </div>
+      <div class="absolute bottom-20 right-20 w-64 h-64">
+        <svg viewBox="0 0 300 300" class="w-full h-full">
+          <path 
+            d="M30,150 Q80,100 130,150 T230,150" 
+            stroke="var(--accent-primary)" 
+            stroke-width="6" 
+            fill="none" 
+            stroke-linecap="round"
+            class="animate-snake-path-delayed"
+          />
+          <circle cx="230" cy="150" r="4" fill="var(--accent-primary)" class="animate-pulse" />
+        </svg>
+      </div>
+    </div>
+    
+    <!-- Grille subtile -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, var(--accent-primary) 1px, transparent 0); background-size: 40px 40px;"></div>
     </div>
     
     <!-- Theme Toggle Button -->
     <div class="absolute top-6 right-6 z-20">
       <button
         @click="toggleTheme"
-        class="w-10 h-10 rounded-xl transition-all duration-200 flex items-center justify-center hover:bg-opacity-80 backdrop-blur-sm border shadow-lg"
+        class="w-10 h-10 rounded-xl transition-all duration-200 flex items-center justify-center hover:scale-105 backdrop-blur-sm border shadow-lg"
         style="background-color: var(--bg-surface); border-color: var(--bg-border);"
         :title="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
         :aria-label="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
@@ -31,96 +59,77 @@
     </div>
     
     <!-- Content -->
-    <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
+    <div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center">
       <!-- Logo/Brand -->
-      <div class="mb-6">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-2xl">
-          <Icon name="fluent-emoji:snake" class="w-8 h-8" style="color: var(--accent-primary);" />
+      <div class="mb-8">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl shadow-2xl transition-all duration-300 hover:scale-110" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
+          <Icon name="fluent-emoji:snake" class="w-10 h-10 text-white" />
         </div>
       </div>
       
       <!-- Main heading -->
-      <h1 class="text-4xl md:text-6xl font-bold mb-4 transition-all duration-300" style="color: var(--text-primary);">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 transition-all duration-300" style="color: var(--text-primary);">
         Serpenter
       </h1>
       
-      <!-- Subtitle with humor -->
-      <div class="mb-6 max-w-3xl mx-auto">
-        <p class="text-lg md:text-xl mb-2 leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
-          Vous en avez marre d'oublier la balise <code class="px-2 py-1 rounded text-sm font-mono transition-colors duration-300" style="background-color: var(--bg-code); color: var(--text-code);">title</code> ?
+      <!-- Subtitle clair et direct -->
+      <div class="mb-8 max-w-3xl mx-auto">
+        <p class="text-xl md:text-2xl mb-4 leading-relaxed transition-colors duration-300 font-medium" style="color: var(--text-primary);">
+          La checklist complète pour vérifier votre site avant le déploiement
         </p>
-        <p class="text-base md:text-lg leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
-          La checklist complète pour vérifier votre site <strong>avant</strong> de le déployer. 
-          <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">Parce qu'un site parfait, ça se prépare !</span>
+        <p class="text-lg md:text-xl leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
+          Plus de 200 points de vérification organisés par catégories. 
+          <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">Cochez, validez, déployez en toute sérénité !</span>
         </p>
       </div>
       
-      <!-- Pain points -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
-        <div class="card p-4 text-center transition-all duration-300">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-lg flex items-center justify-center" style="background-color: var(--accent-primary);">
-            <Icon name="heroicons:face-frown" class="w-5 h-5 text-white" />
+      <!-- Avantages clés -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+        <div class="card p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
+            <Icon name="heroicons:check-circle" class="w-6 h-6 text-white" />
           </div>
-          <h3 class="text-base font-semibold mb-1 transition-colors duration-300" style="color: var(--text-primary);">Oups, j'ai oublié...</h3>
-          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">La meta description, les alt text, le HTTPS...</p>
+          <h3 class="text-lg font-semibold mb-2 transition-colors duration-300" style="color: var(--text-primary);">Vérification complète</h3>
+          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">SEO, performance, accessibilité, sécurité et plus encore</p>
         </div>
         
-        <div class="card p-4 text-center transition-all duration-300">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-lg flex items-center justify-center" style="background-color: var(--accent-primary);">
-            <Icon name="heroicons:exclamation-triangle" class="w-5 h-5 text-white" />
+        <div class="card p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
+            <Icon name="heroicons:light-bulb" class="w-6 h-6 text-white" />
           </div>
-          <h3 class="text-base font-semibold mb-1 transition-colors duration-300" style="color: var(--text-primary);">Ça charge trop lentement</h3>
-          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">Images non optimisées, pas de cache...</p>
+          <h3 class="text-lg font-semibold mb-2 transition-colors duration-300" style="color: var(--text-primary);">Conseils pratiques</h3>
+          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">Explications détaillées et bonnes pratiques pour chaque point</p>
         </div>
         
-        <div class="card p-4 text-center transition-all duration-300">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-lg flex items-center justify-center" style="background-color: var(--accent-primary);">
-            <Icon name="heroicons:question-mark-circle" class="w-5 h-5 text-white" />
+        <div class="card p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
+            <Icon name="heroicons:rocket-launch" class="w-6 h-6 text-white" />
           </div>
-          <h3 class="text-base font-semibold mb-1 transition-colors duration-300" style="color: var(--text-primary);">Comment vérifier ?</h3>
-          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">Trop de choses à penser, pas assez de temps...</p>
+          <h3 class="text-lg font-semibold mb-2 transition-colors duration-300" style="color: var(--text-primary);">Déploiement serein</h3>
+          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">Confiance totale avant de mettre votre site en ligne</p>
         </div>
       </div>
       
-      <!-- Solution -->
-      <div class="mb-8 max-w-2xl mx-auto">
-        <div class="card p-6" style="background-color: var(--accent-primary);">
-          <h2 class="text-xl md:text-2xl font-bold mb-2 text-white">
-            🎯 La solution : Une checklist intelligente
-          </h2>
-          <p class="text-base opacity-90 text-white">
-            Plus de 200 points de vérification organisés par catégories. 
-            <strong>Cochez, validez, déployez en toute sérénité !</strong>
-          </p>
-        </div>
-      </div>
-      
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mb-16">
+      <!-- CTA Principal -->
+      <div class="mb-16 text-center">
         <button 
           @click="navigateToDashboard"
-          class="px-6 py-3 font-semibold rounded-xl transition-all duration-300"
-          style="background-color: var(--accent-primary); color: white;"
+          class="px-12 py-6 text-2xl font-bold rounded-3xl transition-all duration-300 hover:scale-105"
+          style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white;"
         >
-          <span class="flex items-center space-x-2">
-            <Icon name="heroicons:play" class="w-4 h-4" />
-            <span>Commencer la vérification</span>
+          <span class="flex items-center space-x-4">
+            <Icon name="heroicons:play" class="w-7 h-7" />
+            <span>Commencer maintenant</span>
           </span>
-        </button>
-        
-        <button 
-          @click="scrollToFeatures"
-          class="px-6 py-3 border-2 font-semibold rounded-xl transition-all duration-300"
-          style="border-color: var(--bg-border); color: var(--text-primary);"
-        >
-          Voir toutes les vérifications
         </button>
       </div>
     </div>
     
     <!-- Scroll indicator -->
-    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
-      <Icon name="heroicons:chevron-down" class="w-5 h-5 transition-colors duration-300" style="color: var(--text-muted);" />
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background-color: var(--bg-surface); border: 2px solid var(--bg-border);">
+        <Icon name="heroicons:chevron-down" class="w-4 h-4 transition-colors duration-300" style="color: var(--text-muted);" />
+      </div>
     </div>
   </section>
 </template>
@@ -166,30 +175,45 @@ onMounted(() => {
 </script>
 
 <style scoped>
-@keyframes blob {
+@keyframes snake-path {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    stroke-dasharray: 0 1000;
+    stroke-dashoffset: 0;
   }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+  50% {
+    stroke-dasharray: 1000 0;
+    stroke-dashoffset: 0;
   }
   100% {
-    transform: translate(0px, 0px) scale(1);
+    stroke-dasharray: 1000 0;
+    stroke-dashoffset: -1000;
   }
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
+@keyframes snake-path-delayed {
+  0% {
+    stroke-dasharray: 0 1000;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 1000 0;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 1000 0;
+    stroke-dashoffset: -1000;
+  }
 }
 
-.animation-delay-2000 {
+.animate-snake-path {
+  animation: snake-path 8s ease-in-out infinite;
+  stroke-dasharray: 0 1000;
+}
+
+.animate-snake-path-delayed {
+  animation: snake-path-delayed 8s ease-in-out infinite;
   animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
+  stroke-dasharray: 0 1000;
 }
 </style>
+

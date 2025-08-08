@@ -118,109 +118,91 @@
     </div>
 
     <!-- Modal de création de projet -->
-    <div
-      v-if="showCreateModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm"
-      style="overflow: hidden;"
-      @click="closeCreateProjectModal"
+    <Modal
+      v-model:is-open="showCreateModal"
+      :title="$t('projects.createTitle')"
+      @close="closeCreateProjectModal"
     >
-      <div
-        @click.stop
-        class="card p-6 w-full max-w-md mx-4"
-        style="background-color: var(--bg-surface); max-height: 90vh; overflow-y: auto;"
-      >
-        <h3 class="text-lg font-semibold mb-4" style="color: var(--text-primary);">
-          {{ $t('projects.createTitle') }}
-        </h3>
-        
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">
-              {{ $t('projects.name') }}
-            </label>
-            <input
-              v-model="newProject.name"
-              type="text"
-              class="input w-full"
-              :placeholder="$t('projects.namePlaceholder')"
-              @keydown.enter="createProject"
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">
-              {{ $t('projects.description') }}
-            </label>
-            <textarea
-              v-model="newProject.description"
-              rows="3"
-              class="input w-full resize-none"
-              :placeholder="$t('projects.descriptionPlaceholder')"
-            ></textarea>
-          </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">
+            {{ $t('projects.name') }}
+          </label>
+          <input
+            v-model="newProject.name"
+            type="text"
+            class="input w-full"
+            :placeholder="$t('projects.namePlaceholder')"
+            @keydown.enter="createProject"
+          />
         </div>
         
-        <div class="flex justify-end space-x-3 mt-6">
-          <button
-            @click="closeCreateProjectModal"
-            class="btn"
-          >
-            {{ $t('common.cancel') }}
-          </button>
-          <button
-            @click="createProject"
-            class="btn btn-primary"
-            :disabled="!newProject.name.trim()"
-          >
-            {{ $t('projects.create') }}
-          </button>
+        <div>
+          <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">
+            {{ $t('projects.description') }}
+          </label>
+          <textarea
+            v-model="newProject.description"
+            rows="3"
+            class="input w-full resize-none"
+            :placeholder="$t('projects.descriptionPlaceholder')"
+          ></textarea>
         </div>
       </div>
-    </div>
+
+      <template #footer>
+        <button
+          @click="closeCreateProjectModal"
+          class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+          style="background-color: var(--bg-primary); border: 1px solid var(--bg-border); color: var(--text-primary);"
+        >
+          {{ $t('common.cancel') }}
+        </button>
+        <button
+          @click="createProject"
+          class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+          style="background-color: var(--accent-primary); color: white;"
+          :disabled="!newProject.name.trim()"
+        >
+          {{ $t('projects.create') }}
+        </button>
+      </template>
+    </Modal>
 
     <!-- Modal de suppression de projet -->
-    <div
-      v-if="showDeleteModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm"
-      style="overflow: hidden;"
-      @click="closeDeleteProjectModal"
+    <Modal
+      v-model:is-open="showDeleteModal"
+      :title="$t('projects.deleteTitle')"
+      @close="closeDeleteProjectModal"
     >
-      <div
-        @click.stop
-        class="card p-6 w-full max-w-md mx-4"
-        style="background-color: var(--bg-surface);"
-      >
-        <h3 class="text-lg font-semibold mb-4" style="color: var(--text-primary);">
-          {{ $t('projects.deleteTitle') }}
-        </h3>
-        
-        <p class="mb-6 text-sm" style="color: var(--text-secondary);">
-          {{ $t('projects.deleteConfirm', { name: currentProject?.name }) }}
-        </p>
-        
-        <div class="flex justify-end space-x-3">
-          <button
-            @click="closeDeleteProjectModal"
-            class="btn"
-          >
-            {{ $t('common.cancel') }}
-          </button>
-          <button
-            @click="deleteCurrentProject"
-            class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
-            style="background-color: #dc2626; border-color: #dc2626; color: white;"
-          >
-            {{ $t('projects.delete') }}
-          </button>
-        </div>
-      </div>
-    </div>
+      <p class="text-sm" style="color: var(--text-secondary);">
+        {{ $t('projects.deleteConfirm', { name: currentProject?.name }) }}
+      </p>
+
+      <template #footer>
+        <button
+          @click="closeDeleteProjectModal"
+          class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+          style="background-color: var(--bg-primary); border: 1px solid var(--bg-border); color: var(--text-primary);"
+        >
+          {{ $t('common.cancel') }}
+        </button>
+        <button
+          @click="deleteCurrentProject"
+          class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+          style="background-color: #dc2626; border-color: #dc2626; color: white;"
+        >
+          {{ $t('projects.delete') }}
+        </button>
+      </template>
+    </Modal>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import SkeletonProjectSelector from '../common/SkeletonProjectSelector.vue'
+import Modal from '../common/Modal.vue'
 import { useProjectsStore } from '~/stores/projects'
 
 const emit = defineEmits(['project-changed'])

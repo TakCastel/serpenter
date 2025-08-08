@@ -32,13 +32,38 @@
     }
   },
   "projects": {
-    "selectProject": "Sélectionner un projet"
+    "selectProject": "Sélectionner un projet",
+    "name": "Nom du projet",
+    "namePlaceholder": "Entrez le nom de votre projet",
+    "description": "Description",
+    "descriptionPlaceholder": "Description optionnelle du projet",
+    "createNew": "Créer un nouveau projet",
+    "create": "Créer",
+    "createTitle": "Créer un nouveau projet",
+    "deleteCurrent": "Supprimer le projet actuel",
+    "delete": "Supprimer",
+    "deleteTitle": "Supprimer le projet",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer le projet \"{name}\" ? Cette action ne peut pas être annulée.",
+    "projectList": "Liste des projets"
+  },
+  "emptyState": {
+    "title": "Aucun projet trouvé",
+    "description": "Créez votre premier projet pour commencer à utiliser la checklist",
+    "createButton": "Créer un projet"
+  },
+  "sidebar": {
+    "welcome": "Bienvenue",
+    "createProjectMessage": "Créez votre premier projet pour commencer"
   },
   "common": {
     "goToCategory": "Aller à la catégorie {name}",
     "openCategory": "Ouvrir la catégorie {name}",
     "closeCategory": "Fermer la catégorie {name}",
-    "item": "Élément {label}"
+    "item": "Élément {label}",
+    "cancel": "Annuler"
+  },
+  "modal": {
+    "close": "Fermer"
   },
   "categories": {
     "seo": {
@@ -105,8 +130,8 @@
         }
       },
       "metaDescription": {
-        "label": "Balise &lt;meta description&gt; présente et optimisée",
-        "description": "Description unique et attractive pour les SERP",
+        "label": "Balise &lt;meta name=\"description\"&gt; renseignée",
+        "description": "Résumé attrayant et en lien avec le contenu",
         "explication": "La meta description apparaît dans les résultats de recherche sous le titre. Elle doit être descriptive, attractive et contenir les mots-clés principaux pour inciter au clic.",
         "commentFaire": {
           "item1": "Inspectez votre page (F12) -> Cherchez la balise &lt;meta name=\"description\"&gt;",
@@ -122,9 +147,99 @@
           "item5": "Éviter les caractères spéciaux qui peuvent être tronqués"
         }
       },
+      "singleH1": {
+        "label": "Une seule balise &lt;h1&gt; par page",
+        "description": "Structuration claire du contenu principal",
+        "explication": "Chaque page doit avoir une seule balise H1 qui représente le titre principal de la page. Cela aide les moteurs de recherche à comprendre la hiérarchie du contenu.",
+        "commentFaire": {
+          "item1": "Inspectez votre page avec F12",
+          "item2": "Recherchez toutes les balises &lt;h1&gt;",
+          "item3": "Vérifiez qu'il n'y en a qu'une seule",
+          "item4": "Utilisez l'extension 'axe DevTools' pour vérifier"
+        },
+        "bonnesPratiques": {
+          "item1": "Une seule balise H1 par page",
+          "item2": "H1 descriptif et pertinent",
+          "item3": "Inclure les mots-clés principaux",
+          "item4": "Cohérent avec la balise title",
+          "item5": "Représenter le contenu principal"
+        }
+      },
+      "headingsStructure": {
+        "label": "Structure des titres logique (H1 > H2 > H3)",
+        "description": "Pas de saut de niveau",
+        "explication": "Une structure de headings claire aide les moteurs de recherche à comprendre le contenu et améliore l'accessibilité.",
+        "commentFaire": {
+          "item1": "Vérifiez qu'il n'y a qu'un seul H1 par page",
+          "item2": "Utilisez les headings dans l'ordre logique (H1 > H2 > H3)",
+          "item3": "Incluez les mots-clés dans les headings",
+          "item4": "Testez avec l'outil 'HeadingMap'"
+        },
+        "bonnesPratiques": {
+          "item1": "Un seul H1 par page",
+          "item2": "Structure hiérarchique logique",
+          "item3": "Mots-clés dans les headings",
+          "item4": "Descriptif et informatif",
+          "item5": "Pas de saut de niveau (H1 > H3)"
+        }
+      },
+      "cleanUrls": {
+        "label": "URL lisible et courte",
+        "description": "Ex : /services/seo plutôt que ?id=24",
+        "explication": "Les URLs propres et descriptives améliorent le SEO et l'expérience utilisateur. Elles doivent être courtes, lisibles et contenir des mots-clés pertinents.",
+        "commentFaire": {
+          "item1": "Vérifiez la structure de vos URLs",
+          "item2": "Utilisez des mots-clés dans les URLs",
+          "item3": "Évitez les paramètres inutiles",
+          "item4": "Testez avec des outils SEO"
+        },
+        "bonnesPratiques": {
+          "item1": "URLs courtes et descriptives",
+          "item2": "Inclure des mots-clés pertinents",
+          "item3": "Éviter les caractères spéciaux",
+          "item4": "Structure logique et cohérente",
+          "item5": "Faciles à mémoriser"
+        }
+      },
+      "altText": {
+        "label": "Texte alternatif (alt) sur toutes les images",
+        "description": "Pour le SEO image et l'accessibilité",
+        "explication": "Le texte alternatif (alt) permet aux lecteurs d'écran de décrire les images aux utilisateurs malvoyants et améliore le SEO des images.",
+        "commentFaire": {
+          "item1": "Inspectez vos images avec F12",
+          "item2": "Vérifiez que chaque image a un attribut alt",
+          "item3": "Utilisez l'extension 'Web Developer'",
+          "item4": "Testez avec un lecteur d'écran"
+        },
+        "bonnesPratiques": {
+          "item1": "Descriptif et informatif",
+          "item2": "Éviter 'image de', 'photo de'",
+          "item3": "Pour les images décoratives, utiliser alt=\"\"",
+          "item4": "Inclure le contexte si nécessaire",
+          "item5": "Longueur appropriée"
+        }
+      },
+      "internalLinks": {
+        "label": "Liens internes présents",
+        "description": "Navigation contextuelle",
+        "explication": "Les liens internes aident à distribuer le PageRank et améliorent la navigation. Ils doivent être pertinents et utiliser des ancres descriptives.",
+        "commentFaire": {
+          "item1": "Créez des liens vers les pages importantes",
+          "item2": "Utilisez des ancres descriptives",
+          "item3": "Évitez les liens cassés",
+          "item4": "Testez régulièrement les liens"
+        },
+        "bonnesPratiques": {
+          "item1": "Ancres descriptives et naturelles",
+          "item2": "Lier vers des pages pertinentes",
+          "item3": "Éviter les liens cassés",
+          "item4": "Répartir équitablement",
+          "item5": "Utiliser des mots-clés dans les ancres"
+        }
+      },
       "canonical": {
-        "label": "URL canonique définie",
-        "description": "Éviter le contenu dupliqué avec les balises canonical",
+        "label": "Balise canonical présente",
+        "description": "Pour éviter le contenu dupliqué",
         "explication": "La balise canonical indique aux moteurs de recherche quelle est la version principale d'une page. Elle évite les problèmes de contenu dupliqué et améliore le SEO.",
         "commentFaire": {
           "item1": "Inspectez votre page (F12) -> Cherchez &lt;link rel=\"canonical\"&gt;",
@@ -138,6 +253,78 @@
           "item3": "URL canonique différente de l'URL actuelle si nécessaire",
           "item4": "Cohérente avec la structure du site",
           "item5": "Pas de redirection dans l'URL canonique"
+        }
+      },
+      "sitemapXml": {
+        "label": "Sitemap XML présente et valide",
+        "description": "Aide les moteurs à découvrir vos pages",
+        "explication": "Le sitemap XML liste toutes les URLs de votre site pour faciliter l'indexation par les moteurs de recherche.",
+        "commentFaire": {
+          "item1": "Générez un sitemap avec des outils en ligne",
+          "item2": "Soumettez-le à Google Search Console",
+          "item3": "Ajoutez le lien dans robots.txt",
+          "item4": "Mettez à jour régulièrement"
+        },
+        "bonnesPratiques": {
+          "item1": "Inclure toutes les pages importantes",
+          "item2": "Mettre à jour après chaque modification",
+          "item3": "Soumettre à Google et Bing",
+          "item4": "Vérifier les erreurs dans Search Console",
+          "item5": "Limiter à 50 000 URLs par sitemap"
+        }
+      },
+      "robotsTxt": {
+        "label": "Fichier robots.txt configuré",
+        "description": "Guide les robots d'indexation",
+        "explication": "Le fichier robots.txt indique aux moteurs de recherche quelles pages peuvent être indexées.",
+        "commentFaire": {
+          "item1": "Créez un fichier robots.txt à la racine",
+          "item2": "Ajoutez les directives User-agent et Disallow",
+          "item3": "Incluez le lien vers votre sitemap",
+          "item4": "Testez avec Google Search Console"
+        },
+        "bonnesPratiques": {
+          "item1": "Placer à la racine du site",
+          "item2": "Inclure le lien vers le sitemap",
+          "item3": "Protéger les pages sensibles",
+          "item4": "Tester la syntaxe",
+          "item5": "Vérifier les erreurs dans Search Console"
+        }
+      },
+      "schemaOrg": {
+        "label": "Données structurées (Schema.org)",
+        "description": "Améliore la visibilité dans les SERP",
+        "explication": "Les données structurées aident les moteurs de recherche à comprendre le contenu de votre site et peuvent améliorer l'affichage dans les résultats de recherche.",
+        "commentFaire": {
+          "item1": "Identifiez le type de contenu principal",
+          "item2": "Utilisez le générateur Schema.org",
+          "item3": "Testez avec Google Rich Results Test",
+          "item4": "Implémentez progressivement"
+        },
+        "bonnesPratiques": {
+          "item1": "Choisir le bon type de schéma",
+          "item2": "Données précises et à jour",
+          "item3": "Tester avec les outils Google",
+          "item4": "Implémenter progressivement",
+          "item5": "Surveiller les erreurs"
+        }
+      },
+      "breadcrumbs": {
+        "label": "Fil d'Ariane (breadcrumbs) présent",
+        "description": "Navigation et SEO local",
+        "explication": "Les breadcrumbs améliorent la navigation utilisateur et peuvent améliorer le SEO local en montrant la structure du site.",
+        "commentFaire": {
+          "item1": "Ajoutez les breadcrumbs à votre template",
+          "item2": "Utilisez les données structurées",
+          "item3": "Testez la navigation",
+          "item4": "Vérifiez l'affichage mobile"
+        },
+        "bonnesPratiques": {
+          "item1": "Navigation claire et logique",
+          "item2": "Liens fonctionnels",
+          "item3": "Affichage responsive",
+          "item4": "Cohérent avec la structure",
+          "item5": "Accessible au clavier"
         }
       }
     },
@@ -161,8 +348,8 @@
         }
       },
       "contrastRatio": {
-        "label": "Ratio de contraste suffisant (4.5:1 minimum)",
-        "description": "Lisibilité garantie pour tous les utilisateurs",
+        "label": "Contrastes suffisants (WCAG AA minimum)",
+        "description": "Texte lisible sur fond sombre ou clair",
         "explication": "Le ratio de contraste mesure la différence de luminosité entre le texte et l'arrière-plan. Un ratio de 4.5:1 minimum garantit la lisibilité pour les utilisateurs malvoyants.",
         "commentFaire": {
           "item1": "Utilisez l'outil en ligne 'WebAIM Contrast Checker'",
@@ -195,12 +382,210 @@
           "item4": "Utiliser article pour le contenu autonome",
           "item5": "Utiliser footer pour le pied de page"
         }
+      },
+      "keyboardNavigation": {
+        "label": "Navigation clavier fonctionnelle",
+        "description": "Focus visible, tabindex cohérent",
+        "explication": "La navigation au clavier est essentielle pour les utilisateurs qui ne peuvent pas utiliser la souris. Tous les éléments interactifs doivent être accessibles via Tab, Entrée et Espace.",
+        "commentFaire": {
+          "item1": "Testez avec Tab pour naviguer entre les éléments",
+          "item2": "Vérifiez que tous les liens et boutons sont focusables",
+          "item3": "Testez avec Entrée et Espace pour activer",
+          "item4": "Utilisez l'extension 'axe DevTools' pour vérifier"
+        },
+        "bonnesPratiques": {
+          "item1": "Ordre de tabulation logique",
+          "item2": "Tous les éléments interactifs focusables",
+          "item3": "Pas d'éléments piégés dans le focus",
+          "item4": "Raccourcis clavier cohérents",
+          "item5": "Testez sans souris"
+        }
+      },
+      "focusIndicators": {
+        "label": "Indicateurs de focus visibles",
+        "description": "Feedback visuel clair pour la navigation au clavier",
+        "explication": "Les indicateurs de focus permettent aux utilisateurs de savoir quel élément est actuellement sélectionné lors de la navigation au clavier.",
+        "commentFaire": {
+          "item1": "Testez avec Tab pour voir les indicateurs",
+          "item2": "Vérifiez que le focus est visible sur tous les éléments",
+          "item3": "Utilisez outline ou border pour le focus",
+          "item4": "Testez avec différents navigateurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Indicateur de focus visible et contrasté",
+          "item2": "Cohérence dans tout le site",
+          "item3": "Pas de suppression de l'outline par défaut",
+          "item4": "Testez avec différents thèmes",
+          "item5": "Respecter les préférences utilisateur"
+        }
+      },
+      "formLabels": {
+        "label": "Labels explicites pour les champs de formulaire",
+        "description": "Ex : &lt;label for=\"email\"&gt;Email&lt;/label&gt;",
+        "explication": "Les labels de formulaire aident les utilisateurs à comprendre ce qui est attendu dans chaque champ. Ils sont essentiels pour l'accessibilité et l'expérience utilisateur.",
+        "commentFaire": {
+          "item1": "Vérifiez que chaque champ a un label",
+          "item2": "Utilisez l'attribut for pour associer label et input",
+          "item3": "Testez avec un lecteur d'écran",
+          "item4": "Vérifiez avec l'outil 'WAVE'"
+        },
+        "bonnesPratiques": {
+          "item1": "Labels descriptifs et clairs",
+          "item2": "Association correcte avec l'attribut for",
+          "item3": "Placement logique des labels",
+          "item4": "Indication des champs obligatoires",
+          "item5": "Messages d'erreur associés"
+        }
+      },
+      "ariaAttributes": {
+        "label": "Attributs ARIA appropriés",
+        "description": "Rôles, labels et états pour les éléments complexes",
+        "explication": "Les attributs ARIA (Accessible Rich Internet Applications) permettent de rendre les éléments complexes accessibles aux technologies d'assistance.",
+        "commentFaire": {
+          "item1": "Identifiez les éléments complexes",
+          "item2": "Utilisez les rôles ARIA appropriés",
+          "item3": "Ajoutez les labels et états nécessaires",
+          "item4": "Testez avec un lecteur d'écran"
+        },
+        "bonnesPratiques": {
+          "item1": "Utiliser les rôles ARIA appropriés",
+          "item2": "Labels descriptifs et clairs",
+          "item3": "États à jour et cohérents",
+          "item4": "Éviter la redondance",
+          "item5": "Tester avec les technologies d'assistance"
+        }
+      },
+      "skipLinks": {
+        "label": "Liens d'évitement (skip links)",
+        "description": "Liens pour sauter la navigation et aller au contenu",
+        "explication": "Les liens d'évitement permettent aux utilisateurs de clavier de sauter directement au contenu principal, améliorant l'expérience de navigation.",
+        "commentFaire": {
+          "item1": "Ajoutez des liens d'évitement au début de la page",
+          "item2": "Placez-les en premier dans l'ordre de tabulation",
+          "item3": "Rendez-les visibles au focus",
+          "item4": "Testez avec la navigation clavier"
+        },
+        "bonnesPratiques": {
+          "item1": "Liens visibles au focus",
+          "item2": "Placement en début de page",
+          "item3": "Texte descriptif et clair",
+          "item4": "Ciblage du contenu principal",
+          "item5": "Test avec différents navigateurs"
+        }
+      },
+      "errorMessages": {
+        "label": "Messages d'erreur accessibles",
+        "description": "Feedback d'erreur clair et accessible",
+        "explication": "Les messages d'erreur doivent être clairs, informatifs et accessibles aux technologies d'assistance pour aider tous les utilisateurs à corriger leurs erreurs.",
+        "commentFaire": {
+          "item1": "Testez les messages avec un lecteur d'écran",
+          "item2": "Vérifiez que les erreurs sont annoncées",
+          "item3": "Utilisez aria-describedby pour associer les messages",
+          "item4": "Testez avec différents navigateurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Messages clairs et constructifs",
+          "item2": "Association avec les champs concernés",
+          "item3": "Annulation automatique par les lecteurs d'écran",
+          "item4": "Couleur ET texte pour les erreurs",
+          "item5": "Suggestions de correction"
+        }
+      },
+      "colorBlindness": {
+        "label": "Test avec différents types de daltonisme",
+        "description": "Vérifier la lisibilité pour les daltoniens",
+        "explication": "Les daltoniens ont des difficultés à distinguer certaines couleurs. Il est important de ne pas utiliser uniquement la couleur pour transmettre des informations.",
+        "commentFaire": {
+          "item1": "Utilisez des outils de simulation de daltonisme",
+          "item2": "Testez avec des filtres de couleur",
+          "item3": "Vérifiez que les informations ne dépendent pas que de la couleur",
+          "item4": "Utilisez des icônes ET des couleurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Ne pas utiliser uniquement la couleur",
+          "item2": "Contraste suffisant pour tous les types",
+          "item3": "Utiliser des icônes et du texte",
+          "item4": "Éviter rouge/vert pour les erreurs/succès",
+          "item5": "Tester avec différents types de daltonisme"
+        }
+      },
+      "reducedMotion": {
+        "label": "Respecter les préférences de mouvement réduit",
+        "description": "media query prefers-reduced-motion",
+        "explication": "Certains utilisateurs sont sensibles aux animations et mouvements. Il est important de respecter leurs préférences pour éviter les problèmes de santé.",
+        "commentFaire": {
+          "item1": "Utilisez la media query prefers-reduced-motion",
+          "item2": "Désactivez les animations non essentielles",
+          "item3": "Testez avec les préférences activées",
+          "item4": "Vérifiez dans les paramètres système"
+        },
+        "bonnesPratiques": {
+          "item1": "Respecter les préférences utilisateur",
+          "item2": "Désactiver les animations non essentielles",
+          "item3": "Maintenir la fonctionnalité",
+          "item4": "Tester avec différents navigateurs",
+          "item5": "Documenter les changements"
+        }
+      },
+      "screenReader": {
+        "label": "Test avec un lecteur d'écran",
+        "description": "Vérifier l'expérience avec NVDA, JAWS, VoiceOver",
+        "explication": "Les lecteurs d'écran sont des technologies d'assistance utilisées par les personnes malvoyantes. Tester avec ces outils permet de s'assurer de l'accessibilité.",
+        "commentFaire": {
+          "item1": "Installez un lecteur d'écran (NVDA gratuit)",
+          "item2": "Testez la navigation complète",
+          "item3": "Vérifiez l'annonce des éléments",
+          "item4": "Testez avec différents lecteurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Navigation logique et cohérente",
+          "item2": "Annonce claire des éléments",
+          "item3": "Éviter les éléments décoratifs",
+          "item4": "Tester régulièrement",
+          "item5": "Former l'équipe à l'accessibilité"
+        }
+      },
+      "fontSize": {
+        "label": "Taille de police suffisante",
+        "description": "Texte lisible sans zoom (16px minimum)",
+        "explication": "Une taille de police suffisante améliore la lisibilité pour tous les utilisateurs, particulièrement pour les personnes malvoyantes.",
+        "commentFaire": {
+          "item1": "Vérifiez la taille de police dans les outils de développement",
+          "item2": "Testez avec différentes tailles d'écran",
+          "item3": "Utilisez des unités relatives (rem, em)",
+          "item4": "Testez le zoom du navigateur"
+        },
+        "bonnesPratiques": {
+          "item1": "Taille de base de 16px minimum",
+          "item2": "Utiliser des unités relatives",
+          "item3": "Respecter les préférences utilisateur",
+          "item4": "Hiérarchie claire des tailles",
+          "item5": "Testez avec le zoom 200%"
+        }
       }
     },
     "performance": {
+      "lazyLoading": {
+        "label": "Images en lazy loading",
+        "description": "Attribut loading=\"lazy\" sur les images",
+        "explication": "Le lazy loading permet de charger les images uniquement quand elles sont nécessaires, améliorant les performances de chargement de la page.",
+        "commentFaire": {
+          "item1": "Ajoutez loading=\"lazy\" aux images",
+          "item2": "Utilisez des dimensions explicites",
+          "item3": "Testez avec les outils de développement",
+          "item4": "Vérifiez le comportement sur mobile"
+        },
+        "bonnesPratiques": {
+          "item1": "Utiliser loading=\"lazy\" pour les images",
+          "item2": "Définir les dimensions des images",
+          "item3": "Éviter le lazy loading pour les images above the fold",
+          "item4": "Tester sur différents navigateurs",
+          "item5": "Surveiller les performances"
+        }
+      },
       "imageOptimization": {
-        "label": "Images optimisées et compressées",
-        "description": "Taille réduite et formats modernes (WebP)",
+        "label": "Taille d'image optimisée",
+        "description": "Pas de 4K pour une icône",
         "explication": "L'optimisation des images réduit le temps de chargement et améliore les performances. Utilisez des formats modernes comme WebP et la compression appropriée.",
         "commentFaire": {
           "item1": "Utilisez des outils en ligne comme TinyPNG ou Squoosh",
@@ -216,9 +601,27 @@
           "item5": "Optimisez les images pour le web"
         }
       },
+      "modernFormats": {
+        "label": "Utilisation de formats modernes (WebP, AVIF)",
+        "description": "Plus légers que JPEG/PNG",
+        "explication": "Les formats modernes comme WebP et AVIF offrent une meilleure compression que JPEG et PNG, réduisant la taille des fichiers et améliorant les performances.",
+        "commentFaire": {
+          "item1": "Convertissez vos images en WebP",
+          "item2": "Utilisez des outils comme Squoosh ou ImageOptim",
+          "item3": "Implémentez le fallback pour les anciens navigateurs",
+          "item4": "Testez la compatibilité"
+        },
+        "bonnesPratiques": {
+          "item1": "Utiliser WebP comme format principal",
+          "item2": "Fournir des fallbacks pour la compatibilité",
+          "item3": "Tester sur différents navigateurs",
+          "item4": "Surveiller les performances",
+          "item5": "Maintenir la qualité"
+        }
+      },
       "minification": {
-        "label": "Fichiers CSS et JS minifiés",
-        "description": "Taille réduite pour un chargement plus rapide",
+        "label": "CSS et JS minifiés",
+        "description": "Fichiers compressés",
         "explication": "La minification supprime les espaces, commentaires et caractères inutiles des fichiers CSS et JavaScript pour réduire leur taille.",
         "commentFaire": {
           "item1": "Utilisez des outils comme UglifyJS pour JavaScript",
@@ -234,10 +637,28 @@
           "item5": "Surveillez la taille des fichiers"
         }
       },
-      "caching": {
-        "label": "Cache configuré correctement",
-        "description": "Headers de cache appropriés pour les ressources statiques",
-        "explication": "Le cache permet aux navigateurs de stocker les ressources statiques localement, réduisant les requêtes au serveur et améliorant les performances.",
+      "gzipCompression": {
+        "label": "Compression GZIP activée",
+        "description": "Réduction de 70 % de la taille des fichiers",
+        "explication": "La compression GZIP réduit significativement la taille des fichiers transmis, améliorant les temps de chargement et réduisant la bande passante utilisée.",
+        "commentFaire": {
+          "item1": "Configurez GZIP sur votre serveur",
+          "item2": "Vérifiez avec les outils de développement",
+          "item3": "Testez avec des outils en ligne",
+          "item4": "Surveillez les performances"
+        },
+        "bonnesPratiques": {
+          "item1": "Activer GZIP pour tous les fichiers textuels",
+          "item2": "Configurer les types MIME appropriés",
+          "item3": "Tester régulièrement",
+          "item4": "Surveiller la compression",
+          "item5": "Maintenir la configuration"
+        }
+      },
+      "browserCache": {
+        "label": "Cache navigateur configuré",
+        "description": "Réduction des requêtes répétées",
+        "explication": "Le cache navigateur permet aux navigateurs de stocker les ressources statiques localement, réduisant les requêtes au serveur et améliorant les performances.",
         "commentFaire": {
           "item1": "Configurez les headers Expires ou Cache-Control",
           "item2": "Utilisez des noms de fichiers avec hash pour l'invalidation",
@@ -251,86 +672,122 @@
           "item4": "Configurez l'invalidation de cache",
           "item5": "Testez régulièrement le cache"
         }
+      },
+      "criticalCss": {
+        "label": "CSS critique inliné",
+        "description": "Rendu initial plus rapide",
+        "explication": "Le CSS critique est le CSS nécessaire pour le rendu initial de la page. L'inliner ce CSS améliore les performances en évitant les requêtes bloquantes.",
+        "commentFaire": {
+          "item1": "Identifiez le CSS critique",
+          "item2": "Utilisez des outils comme Critical",
+          "item3": "Inliner le CSS critique dans le head",
+          "item4": "Charger le CSS non critique de manière asynchrone"
+        },
+        "bonnesPratiques": {
+          "item1": "Inliner seulement le CSS critique",
+          "item2": "Charger le CSS non critique de manière asynchrone",
+          "item3": "Maintenir la séparation des préoccupations",
+          "item4": "Tester régulièrement",
+          "item5": "Surveiller les performances"
+        }
       }
     },
     "ecoConception": {
-      "greenHosting": {
-        "label": "Hébergement vert choisi",
-        "description": "Hébergeur utilisant des énergies renouvelables",
-        "explication": "L'hébergement vert utilise des énergies renouvelables et des pratiques éco-responsables pour réduire l'impact environnemental de votre site.",
+      "reducedRequests": {
+        "label": "Nombre de requêtes réduit",
+        "description": "Moins de JS/CSS externes inutiles",
+        "explication": "Réduire le nombre de requêtes HTTP améliore les performances et réduit l'impact environnemental en diminuant la consommation d'énergie.",
         "commentFaire": {
-          "item1": "Recherchez des hébergeurs certifiés verts",
-          "item2": "Vérifiez leurs certifications environnementales",
-          "item3": "Comparez les prix et services",
-          "item4": "Contactez le support pour plus d'informations"
+          "item1": "Combinez les fichiers CSS et JS",
+          "item2": "Utilisez des sprites pour les images",
+          "item3": "Évitez les scripts tiers inutiles",
+          "item4": "Optimisez le chargement des ressources"
         },
         "bonnesPratiques": {
-          "item1": "Choisissez des hébergeurs certifiés",
-          "item2": "Vérifiez leurs politiques environnementales",
-          "item3": "Privilégiez les énergies renouvelables",
-          "item4": "Considérez l'impact carbone",
-          "item5": "Surveillez les performances"
+          "item1": "Combiner les fichiers quand possible",
+          "item2": "Éviter les scripts tiers inutiles",
+          "item3": "Utiliser des sprites pour les icônes",
+          "item4": "Optimiser le chargement",
+          "item5": "Surveiller le nombre de requêtes"
         }
       },
-      "codeOptimization": {
-        "label": "Code optimisé et efficace",
-        "description": "Réduction de la consommation de ressources",
-        "explication": "L'optimisation du code réduit la consommation de CPU et de mémoire, diminuant ainsi l'impact environnemental de votre application.",
+      "pageWeight": {
+        "label": "Poids de la page inférieur à 1 MB",
+        "description": "Bonne pratique environnementale",
+        "explication": "Un poids de page réduit améliore les performances et réduit l'impact environnemental en diminuant la consommation d'énergie et de bande passante.",
         "commentFaire": {
-          "item1": "Analysez votre code avec des outils de profilage",
-          "item2": "Optimisez les boucles et algorithmes",
-          "item3": "Réduisez les requêtes inutiles",
-          "item4": "Utilisez des outils de minification"
+          "item1": "Optimisez les images",
+          "item2": "Minifiez les fichiers CSS et JS",
+          "item3": "Utilisez la compression GZIP",
+          "item4": "Surveillez la taille totale"
         },
         "bonnesPratiques": {
-          "item1": "Évitez les boucles inutiles",
-          "item2": "Optimisez les requêtes de base de données",
-          "item3": "Utilisez des structures de données efficaces",
-          "item4": "Réduisez la complexité algorithmique",
-          "item5": "Surveillez les performances"
+          "item1": "Maintenir un poids inférieur à 1 MB",
+          "item2": "Optimiser régulièrement",
+          "item3": "Surveiller les tendances",
+          "item4": "Tester sur différents appareils",
+          "item5": "Documenter les optimisations"
         }
       },
-      "resourceReduction": {
-        "label": "Réduction des ressources utilisées",
-        "description": "Minimisation de l'impact environnemental",
-        "explication": "La réduction des ressources (CPU, mémoire, bande passante) diminue la consommation d'énergie et l'impact environnemental de votre site.",
+      "noUnnecessaryTracking": {
+        "label": "Pas de tracking inutile",
+        "description": "Éviter les scripts tiers non essentiels",
+        "explication": "Les scripts de tracking tiers peuvent ralentir le site et consommer des ressources inutiles. Il est important de n'utiliser que ceux qui sont vraiment nécessaires.",
         "commentFaire": {
-          "item1": "Analysez l'utilisation des ressources",
-          "item2": "Optimisez les images et médias",
-          "item3": "Réduisez les requêtes HTTP",
-          "item4": "Implémentez la compression"
+          "item1": "Auditez tous les scripts tiers",
+          "item2": "Supprimez les scripts inutiles",
+          "item3": "Chargez les scripts de manière asynchrone",
+          "item4": "Testez l'impact sur les performances"
         },
         "bonnesPratiques": {
-          "item1": "Compressez tous les assets",
-          "item2": "Réduisez le nombre de requêtes",
-          "item3": "Optimisez les images",
-          "item4": "Utilisez la mise en cache",
-          "item5": "Surveillez la consommation"
+          "item1": "Utiliser seulement les scripts nécessaires",
+          "item2": "Charger de manière asynchrone",
+          "item3": "Auditer régulièrement",
+          "item4": "Tester l'impact",
+          "item5": "Documenter les choix"
+        }
+      },
+      "systemFonts": {
+        "label": "Utilisation de polices système ou en local",
+        "description": "Moins de requêtes externes",
+        "explication": "Utiliser les polices système ou héberger les polices localement réduit les requêtes externes et améliore les performances.",
+        "commentFaire": {
+          "item1": "Utilisez les polices système",
+          "item2": "Hébergez les polices localement",
+          "item3": "Évitez Google Fonts quand possible",
+          "item4": "Optimisez le chargement des polices"
+        },
+        "bonnesPratiques": {
+          "item1": "Privilégier les polices système",
+          "item2": "Héberger localement si nécessaire",
+          "item3": "Optimiser le chargement",
+          "item4": "Tester la compatibilité",
+          "item5": "Surveiller les performances"
         }
       }
     },
     "responsiveUx": {
-      "mobileFirst": {
-        "label": "Approche mobile-first implémentée",
-        "description": "Design optimisé pour mobile en priorité",
-        "explication": "L'approche mobile-first consiste à concevoir d'abord pour les appareils mobiles, puis d'adapter pour les écrans plus grands.",
+      "responsiveDesign": {
+        "label": "Design responsive (mobile → desktop)",
+        "description": "Affichage optimisé pour toutes les tailles d'écran",
+        "explication": "Le design responsive permet à votre site de s'adapter automatiquement à toutes les tailles d'écran, offrant une expérience utilisateur optimale sur tous les appareils.",
         "commentFaire": {
-          "item1": "Concevez d'abord pour mobile (320px+)",
-          "item2": "Utilisez des media queries min-width",
-          "item3": "Testez sur différents appareils",
-          "item4": "Vérifiez la navigation tactile"
+          "item1": "Utilisez des media queries",
+          "item2": "Testez sur différents appareils",
+          "item3": "Vérifiez les breakpoints",
+          "item4": "Optimisez pour mobile-first"
         },
         "bonnesPratiques": {
-          "item1": "Commencez par le mobile",
-          "item2": "Utilisez des breakpoints logiques",
-          "item3": "Testez sur de vrais appareils",
-          "item4": "Optimisez pour le tactile",
-          "item5": "Pensez aux performances"
+          "item1": "Approche mobile-first",
+          "item2": "Breakpoints logiques",
+          "item3": "Test sur de vrais appareils",
+          "item4": "Performance optimisée",
+          "item5": "Expérience cohérente"
         }
       },
       "touchTargets": {
-        "label": "Zones de toucher suffisamment grandes",
-        "description": "Minimum 44x44px pour les éléments interactifs",
+        "label": "Taille des boutons adaptée (min. 44 px)",
+        "description": "Facile à cliquer sur mobile",
         "explication": "Les zones de toucher doivent être suffisamment grandes pour être facilement utilisables sur les appareils tactiles.",
         "commentFaire": {
           "item1": "Mesurez vos boutons et liens",
@@ -346,29 +803,47 @@
           "item5": "Évitez les éléments trop petits"
         }
       },
-      "loadingStates": {
-        "label": "États de chargement implémentés",
-        "description": "Feedback visuel pendant les actions",
-        "explication": "Les états de chargement informent l'utilisateur qu'une action est en cours, améliorant l'expérience utilisateur.",
+      "noHorizontalScroll": {
+        "label": "Pas d'éléments qui débordent / scroll horizontal",
+        "description": "Sur mobile surtout",
+        "explication": "Le scroll horizontal sur mobile est une mauvaise expérience utilisateur. Tous les éléments doivent s'adapter à la largeur de l'écran.",
         "commentFaire": {
-          "item1": "Ajoutez des spinners pour les actions",
-          "item2": "Utilisez des états disabled",
-          "item3": "Implémentez des skeletons",
-          "item4": "Testez les différents états"
+          "item1": "Utilisez des unités relatives (%, vw, rem)",
+          "item2": "Évitez les largeurs fixes",
+          "item3": "Testez sur différents écrans",
+          "item4": "Vérifiez les images et tableaux"
         },
         "bonnesPratiques": {
-          "item1": "Feedback immédiat",
-          "item2": "États visuels clairs",
-          "item3": "Messages informatifs",
-          "item4": "Temps d'attente raisonnable",
-          "item5": "Testez tous les scénarios"
+          "item1": "Utiliser des unités relatives",
+          "item2": "Éviter les largeurs fixes",
+          "item3": "Tester sur différents écrans",
+          "item4": "Optimiser les images",
+          "item5": "Vérifier les tableaux"
+        }
+      },
+      "perceivedSpeed": {
+        "label": "Vitesse de chargement perçue rapide",
+        "description": "Skeletons, transitions douces",
+        "explication": "La vitesse perçue est plus importante que la vitesse réelle. Utilisez des techniques comme les skeletons et les transitions douces pour améliorer l'expérience.",
+        "commentFaire": {
+          "item1": "Ajoutez des skeletons pour le chargement",
+          "item2": "Utilisez des transitions douces",
+          "item3": "Optimisez les images",
+          "item4": "Testez l'expérience utilisateur"
+        },
+        "bonnesPratiques": {
+          "item1": "Utiliser des skeletons",
+          "item2": "Transitions douces",
+          "item3": "Feedback immédiat",
+          "item4": "Optimiser les images",
+          "item5": "Tester l'expérience"
         }
       }
     },
     "securite": {
       "https": {
-        "label": "HTTPS activé et configuré",
-        "description": "Connexion sécurisée obligatoire",
+        "label": "Site en HTTPS",
+        "description": "Certificat SSL actif",
         "explication": "HTTPS chiffre les données échangées entre le navigateur et le serveur, protégeant la confidentialité des utilisateurs.",
         "commentFaire": {
           "item1": "Obtenez un certificat SSL (Let's Encrypt gratuit)",
@@ -384,9 +859,63 @@
           "item5": "Testez régulièrement"
         }
       },
+      "contentSecurityPolicy": {
+        "label": "Content Security Policy (CSP) configurée",
+        "description": "Protection contre les attaques XSS",
+        "explication": "La CSP définit les sources autorisées pour les ressources, protégeant contre les attaques XSS et les injections de contenu.",
+        "commentFaire": {
+          "item1": "Définissez les sources autorisées",
+          "item2": "Testez en mode report-only d'abord",
+          "item3": "Implémentez progressivement",
+          "item4": "Surveillez les violations"
+        },
+        "bonnesPratiques": {
+          "item1": "Politique stricte par défaut",
+          "item2": "Sources autorisées minimales",
+          "item3": "Mode report-only au début",
+          "item4": "Surveillance des violations",
+          "item5": "Mise à jour régulière"
+        }
+      },
+      "rateLimiting": {
+        "label": "Rate limiting configuré",
+        "description": "Protection contre les attaques par force brute",
+        "explication": "Le rate limiting limite le nombre de requêtes qu'un utilisateur peut faire dans un certain laps de temps, protégeant contre les attaques par force brute.",
+        "commentFaire": {
+          "item1": "Configurez le rate limiting sur votre serveur",
+          "item2": "Définissez des limites appropriées",
+          "item3": "Testez les limites",
+          "item4": "Surveillez les violations"
+        },
+        "bonnesPratiques": {
+          "item1": "Limites appropriées par IP",
+          "item2": "Messages d'erreur clairs",
+          "item3": "Surveillance des violations",
+          "item4": "Ajustement selon les besoins",
+          "item5": "Documentation des limites"
+        }
+      },
+      "fileUploadSecurity": {
+        "label": "Sécurisation des uploads de fichiers",
+        "description": "Validation et restriction des types de fichiers",
+        "explication": "Les uploads de fichiers peuvent être une source de vulnérabilités. Il est important de valider et restreindre les types de fichiers autorisés.",
+        "commentFaire": {
+          "item1": "Validez les types de fichiers",
+          "item2": "Limitez la taille des fichiers",
+          "item3": "Scannez les fichiers pour les virus",
+          "item4": "Stockez les fichiers de manière sécurisée"
+        },
+        "bonnesPratiques": {
+          "item1": "Validation stricte des types",
+          "item2": "Limitation de la taille",
+          "item3": "Scan antivirus",
+          "item4": "Stockage sécurisé",
+          "item5": "Surveillance des uploads"
+        }
+      },
       "securityHeaders": {
         "label": "Headers de sécurité configurés",
-        "description": "Protection contre les attaques courantes",
+        "description": "CSP, HSTS, X-Frame-Options, etc.",
         "explication": "Les headers de sécurité protègent contre les attaques XSS, clickjacking et autres vulnérabilités courantes.",
         "commentFaire": {
           "item1": "Configurez X-Content-Type-Options",
@@ -402,29 +931,29 @@
           "item5": "Testez régulièrement"
         }
       },
-      "contentSecurityPolicy": {
-        "label": "Content Security Policy configurée",
-        "description": "Protection contre les injections de contenu",
-        "explication": "La CSP définit les sources autorisées pour les ressources, protégeant contre les attaques XSS et les injections de contenu.",
+      "injectionProtection": {
+        "label": "Protection basique contre l'injection",
+        "description": "Éviter l'input non filtré",
+        "explication": "Les injections (SQL, XSS, etc.) sont des vulnérabilités courantes. Il est important de valider et filtrer toutes les entrées utilisateur.",
         "commentFaire": {
-          "item1": "Définissez les sources autorisées",
-          "item2": "Testez en mode report-only d'abord",
-          "item3": "Implémentez progressivement",
-          "item4": "Surveillez les violations"
+          "item1": "Validez toutes les entrées utilisateur",
+          "item2": "Utilisez des requêtes préparées",
+          "item3": "Échappez les sorties",
+          "item4": "Testez avec des outils de sécurité"
         },
         "bonnesPratiques": {
-          "item1": "Politique stricte par défaut",
-          "item2": "Sources autorisées minimales",
-          "item3": "Mode report-only au début",
-          "item4": "Surveillance des violations",
-          "item5": "Mise à jour régulière"
+          "item1": "Validation stricte des entrées",
+          "item2": "Requêtes préparées",
+          "item3": "Échappement des sorties",
+          "item4": "Tests de sécurité réguliers",
+          "item5": "Formation de l'équipe"
         }
       }
     },
     "analytics": {
       "googleAnalytics": {
         "label": "Google Analytics configuré",
-        "description": "Suivi des performances et du trafic",
+        "description": "Suivi des performances et comportement",
         "explication": "Google Analytics permet de suivre le trafic, les comportements utilisateurs et les performances de votre site.",
         "commentFaire": {
           "item1": "Créez un compte Google Analytics",
@@ -440,39 +969,39 @@
           "item5": "Surveillance régulière"
         }
       },
-      "conversionTracking": {
-        "label": "Suivi des conversions configuré",
-        "description": "Mesure des objectifs business",
-        "explication": "Le suivi des conversions permet de mesurer l'efficacité de votre site en termes d'objectifs business (ventes, inscriptions, etc.).",
+      "gdprCompliance": {
+        "label": "Respecter le RGPD",
+        "description": "Consentement et politique de confidentialité",
+        "explication": "Le RGPD impose des obligations strictes en matière de protection des données personnelles. Il est essentiel de respecter ces règles.",
         "commentFaire": {
-          "item1": "Définissez vos objectifs de conversion",
-          "item2": "Configurez les événements de suivi",
-          "item3": "Testez les conversions",
+          "item1": "Implémentez un système de consentement",
+          "item2": "Rédigez une politique de confidentialité",
+          "item3": "Configurez les cookies",
+          "item4": "Testez la conformité"
+        },
+        "bonnesPratiques": {
+          "item1": "Consentement explicite",
+          "item2": "Politique de confidentialité claire",
+          "item3": "Gestion des cookies",
+          "item4": "Droit à l'oubli",
+          "item5": "Formation de l'équipe"
+        }
+      },
+      "customEvents": {
+        "label": "Événements personnalisés",
+        "description": "Suivi des actions importantes",
+        "explication": "Les événements personnalisés permettent de suivre des actions spécifiques sur votre site, comme les clics sur des boutons ou les soumissions de formulaires.",
+        "commentFaire": {
+          "item1": "Identifiez les actions importantes",
+          "item2": "Configurez les événements",
+          "item3": "Testez le suivi",
           "item4": "Analysez les données"
         },
         "bonnesPratiques": {
-          "item1": "Objectifs clairs et mesurables",
-          "item2": "Événements pertinents",
+          "item1": "Événements pertinents",
+          "item2": "Nommage cohérent",
           "item3": "Tests réguliers",
           "item4": "Analyse des données",
-          "item5": "Optimisation continue"
-        }
-      },
-      "performanceMonitoring": {
-        "label": "Surveillance des performances",
-        "description": "Suivi des métriques de performance",
-        "explication": "La surveillance des performances permet de détecter les problèmes et d'optimiser l'expérience utilisateur.",
-        "commentFaire": {
-          "item1": "Configurez Google PageSpeed Insights",
-          "item2": "Implémentez Real User Monitoring",
-          "item3": "Surveillez les Core Web Vitals",
-          "item4": "Analysez les tendances"
-        },
-        "bonnesPratiques": {
-          "item1": "Métriques Core Web Vitals",
-          "item2": "Surveillance en temps réel",
-          "item3": "Alertes automatiques",
-          "item4": "Analyse des tendances",
           "item5": "Optimisation continue"
         }
       }

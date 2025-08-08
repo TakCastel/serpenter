@@ -1,74 +1,74 @@
 export const featuresData = [
   {
-    id: 'seo',
-    title: 'SEO',
-    description: 'Vérifiez que Google (et les autres) comprennent parfaitement votre site.',
+    id: 'seo-optimization',
+    title: 'SEO & Visibilité',
+    description: 'Vérifiez votre référencement : balises title/meta, sitemap, Open Graph, données structurées.',
     icon: 'heroicons:magnifying-glass',
     items: [
-      'Mots-clés et meta descriptions',
-      'Structure des titres (H1, H2, H3...)',
-      'Balises Open Graph',
-      'Sitemap et robots.txt'
+      'Balises title et meta optimisées',
+      'Sitemap et robots.txt configurés',
+      'Open Graph et réseaux sociaux',
+      'Données structurées et Schema.org'
     ]
   },
   {
-    id: 'accessibilite',
-    title: 'Accessibilité',
-    description: 'Rendez votre site accessible à tous, y compris aux utilisateurs avec des handicaps.',
-    icon: 'heroicons:user-group',
-    items: [
-      'Navigation au clavier',
-      'Contraste des couleurs (WCAG)',
-      'Textes alternatifs',
-      'ARIA labels et rôles'
-    ]
-  },
-  {
-    id: 'performance',
-    title: 'Performance',
-    description: 'Optimisez la vitesse de chargement pour une expérience utilisateur parfaite.',
+    id: 'accessibility-performance',
+    title: 'Accessibilité & Performance',
+    description: 'Checkez l\'accessibilité et la vitesse : textes alternatifs, contraste, cache, Core Web Vitals.',
     icon: 'heroicons:bolt',
     items: [
-      'Optimisation des images',
-      'Compression et cache',
-      'Minification du code',
-      'Lazy loading'
+      'Textes alternatifs et navigation clavier',
+      'Contraste et HTML sémantique',
+      'Images optimisées et lazy loading',
+      'Cache et Core Web Vitals'
     ]
   },
   {
-    id: 'securite',
-    title: 'Sécurité',
-    description: 'Protégez votre site et vos utilisateurs contre les menaces de sécurité.',
+    id: 'security-protection',
+    title: 'Sécurité & Protection',
+    description: 'Vérifiez la sécurité : HTTPS, headers, protection XSS, RGPD, sauvegardes.',
     icon: 'heroicons:shield-check',
     items: [
-      'HTTPS obligatoire',
-      'Headers de sécurité',
-      'Protection XSS',
-      'Validation des formulaires'
+      'HTTPS et certificats SSL',
+      'Headers de sécurité configurés',
+      'Protection XSS et CSRF',
+      'Conformité RGPD et sauvegardes'
     ]
   },
   {
-    id: 'eco-conception',
-    title: 'Éco-conception',
-    description: 'Réduisez l\'impact environnemental de votre site web.',
-    icon: 'heroicons:globe-alt',
+    id: 'user-experience',
+    title: 'Expérience Utilisateur',
+    description: 'Checkez l\'UX : design responsive, zones de toucher, tests utilisateurs, analytics.',
+    icon: 'heroicons:device-phone-mobile',
     items: [
-      'Optimisation énergétique',
-      'Réduction des requêtes',
-      'Hébergement vert',
-      'Code optimisé'
+      'Design responsive et mobile-first',
+      'Zones de toucher et navigation',
+      'Tests utilisateurs et feedback',
+      'Analytics comportementales'
     ]
   },
   {
-    id: 'analytics',
-    title: 'Analytics',
-    description: 'Mesurez et analysez les performances de votre site.',
+    id: 'eco-analytics',
+    title: 'Éco-conception & Analytics',
+    description: 'Vérifiez l\'impact environnemental et les métriques : hébergement vert, Google Analytics.',
     icon: 'heroicons:chart-bar',
     items: [
-      'Google Analytics',
-      'Suivi des conversions',
-      'Rapports détaillés',
-      'Monitoring des erreurs'
+      'Hébergement vert et optimisation',
+      'Google Analytics et conversions',
+      'Monitoring des performances',
+      'Impact environnemental mesuré'
+    ]
+  },
+  {
+    id: 'technical-quality',
+    title: 'Qualité Technique',
+    description: 'Checkez la qualité technique : code propre, tests, CI/CD, monitoring, documentation.',
+    icon: 'heroicons:wrench-screwdriver',
+    items: [
+      'Code propre et documenté',
+      'Tests automatisés et CI/CD',
+      'Monitoring et alerting',
+      'Architecture scalable'
     ]
   }
 ]

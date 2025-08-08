@@ -2,14 +2,14 @@
   <button
     v-show="isVisible"
     @click="scrollToTop"
-    class="fixed bottom-8 right-8 w-14 h-14 rounded-2xl border-2 transition-all duration-300 flex items-center justify-center hover:bg-opacity-80 z-50"
-    style="background-color: var(--accent-primary); border-color: var(--accent-primary);"
+    class="fixed bottom-8 right-8 w-16 h-16 rounded-3xl transition-all duration-300 flex items-center justify-center hover:scale-105 z-50"
+    style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border: 1px solid var(--bg-border);"
     :title="$t('app.backToTop')"
     :aria-label="$t('app.backToTop')"
   >
     <Icon 
       name="heroicons:arrow-up" 
-      class="w-6 h-6 transition-colors duration-200"
+      class="w-7 h-7 transition-colors duration-200"
       style="color: white;"
     />
   </button>
