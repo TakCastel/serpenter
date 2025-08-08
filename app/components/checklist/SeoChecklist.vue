@@ -136,6 +136,8 @@
                   :item="item"
                   :is-item-checked="isItemChecked(item.id)"
                   @toggle-item="toggleItem"
+                  @accordion-opened="handleAccordionOpened"
+                  @accordion-closed="handleAccordionClosed"
                 />
               </template>
             </div>
@@ -307,6 +309,30 @@ const resetProgress = () => {
   }
 }
 
+// Nouvelle fonction pour vérifier si un item était ouvert avant d'être coché
+const checkIfItemWasExpanded = (itemId) => {
+  return expandedItems.value.has(itemId)
+}
+
+// Fonction pour marquer un item comme ouvert
+const markItemAsExpanded = (itemId) => {
+  expandedItems.value.add(itemId)
+}
+
+// Fonction pour marquer un item comme fermé
+const markItemAsCollapsed = (itemId) => {
+  expandedItems.value.delete(itemId)
+}
+
+// Gestionnaires d'événements pour les accordéons
+const handleAccordionOpened = (itemId) => {
+  markItemAsExpanded(itemId)
+}
+
+const handleAccordionClosed = (itemId) => {
+  markItemAsCollapsed(itemId)
+}
+
 const toggleItem = (itemId) => {
   const wasChecked = checkedItems.value.has(itemId)
   
@@ -337,25 +363,31 @@ const toggleItem = (itemId) => {
       const currentItemIndex = category.items.findIndex(item => item.id === itemId)
       if (currentItemIndex !== -1 && currentItemIndex < category.items.length - 1) {
         const nextItem = category.items[currentItemIndex + 1]
-        if (nextItem && !isItemChecked(nextItem.id)) {
-          // Vérifier si l'accordéon de l'item actuel était ouvert avant d'être coché
-          const wasCurrentItemExpanded = checkIfItemWasExpanded(itemId)
-          
-          if (wasCurrentItemExpanded) {
-            // Ouvrir l'accordéon de la catégorie si elle n'est pas déjà ouverte
-            if (!expandedCategories.value.has(category.id)) {
-              expandedCategories.value.add(category.id)
-            }
-            
-            // Ouvrir l'accordéon du prochain élément
-            nextTick(() => {
-              if (process.client) {
-                window.dispatchEvent(new CustomEvent('open-item-accordion', { 
-                  detail: { itemId: nextItem.id } 
-                }))
-              }
-            })
+        
+        // Vérifier si l'accordéon de l'item actuel était ouvert avant d'être coché
+        const wasCurrentItemExpanded = checkIfItemWasExpanded(itemId)
+        
+        // Ouvrir l'élément suivant seulement si :
+        // 1. L'élément actuel était ouvert avant d'être coché
+        // 2. L'élément suivant existe et n'est pas déjà coché
+        if (wasCurrentItemExpanded && nextItem && !isItemChecked(nextItem.id)) {
+          // Ouvrir l'accordéon de la catégorie si elle n'est pas déjà ouverte
+          if (!expandedCategories.value.has(category.id)) {
+            expandedCategories.value.add(category.id)
           }
+          
+          // Ouvrir l'accordéon du prochain élément et le marquer comme ouvert
+          nextTick(() => {
+            if (process.client) {
+              // Marquer l'élément suivant comme ouvert dans notre système de tracking
+              markItemAsExpanded(nextItem.id)
+              
+              // Ouvrir l'accordéon du prochain élément
+              window.dispatchEvent(new CustomEvent('open-item-accordion', { 
+                detail: { itemId: nextItem.id } 
+              }))
+            }
+          })
         }
       }
     }
@@ -369,21 +401,6 @@ const isItemChecked = (itemId) => {
 const isCategoryCompleted = (category) => {
   if (!category.items || category.items.length === 0) return false
   return category.items.every(item => isItemChecked(item.id))
-}
-
-// Nouvelle fonction pour vérifier si un item était ouvert avant d'être coché
-const checkIfItemWasExpanded = (itemId) => {
-  return expandedItems.value.has(itemId)
-}
-
-// Fonction pour marquer un item comme ouvert
-const markItemAsExpanded = (itemId) => {
-  expandedItems.value.add(itemId)
-}
-
-// Fonction pour marquer un item comme fermé
-const markItemAsCollapsed = (itemId) => {
-  expandedItems.value.delete(itemId)
 }
 
 const showCategoryExplosion = ref(null)

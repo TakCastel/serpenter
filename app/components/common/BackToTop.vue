@@ -2,7 +2,7 @@
   <button
     v-show="isVisible"
     @click="scrollToTop"
-    class="fixed bottom-8 right-8 w-16 h-16 rounded-3xl transition-all duration-300 flex items-center justify-center hover:scale-105 z-50"
+    class="fixed bottom-8 right-8 w-16 h-16 rounded-3xl transition-all duration-300 flex items-center justify-center z-50"
     style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border: 1px solid var(--bg-border);"
     :title="$t('app.backToTop')"
     :aria-label="$t('app.backToTop')"

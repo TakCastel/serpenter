@@ -42,7 +42,7 @@
     <div class="absolute top-6 right-6 z-20">
       <button
         @click="toggleTheme"
-        class="w-10 h-10 rounded-xl transition-all duration-200 flex items-center justify-center hover:scale-105 backdrop-blur-sm border shadow-lg"
+        class="w-10 h-10 rounded-xl transition-all duration-200 flex items-center justify-center backdrop-blur-sm border"
         style="background-color: var(--bg-surface); border-color: var(--bg-border);"
         :title="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
         :aria-label="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
@@ -62,13 +62,13 @@
     <div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center">
       <!-- Logo/Brand -->
       <div class="mb-8">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl shadow-2xl transition-all duration-300 hover:scale-110" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-          <Icon name="fluent-emoji:snake" class="w-10 h-10 text-white" />
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl transition-all duration-300 bg-white">
+          <Icon name="fluent-emoji:snake" class="w-10 h-10" style="color: var(--accent-primary);" />
         </div>
       </div>
       
       <!-- Main heading -->
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 transition-all duration-300" style="color: var(--text-primary);">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 transition-all duration-300" style="color: var(--accent-primary);">
         Serpenter
       </h1>
       
@@ -85,7 +85,7 @@
       
       <!-- Avantages clés -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-        <div class="card p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
+        <div class="card p-6 text-center transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
             <Icon name="heroicons:check-circle" class="w-6 h-6 text-white" />
           </div>
@@ -93,7 +93,7 @@
           <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">SEO, performance, accessibilité, sécurité et plus encore</p>
         </div>
         
-        <div class="card p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
+        <div class="card p-6 text-center transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
             <Icon name="heroicons:light-bulb" class="w-6 h-6 text-white" />
           </div>
@@ -101,7 +101,7 @@
           <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">Explications détaillées et bonnes pratiques pour chaque point</p>
         </div>
         
-        <div class="card p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
+        <div class="card p-6 text-center transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
             <Icon name="heroicons:rocket-launch" class="w-6 h-6 text-white" />
           </div>
@@ -114,7 +114,7 @@
       <div class="mb-16 text-center">
         <button 
           @click="navigateToDashboard"
-          class="px-12 py-6 text-2xl font-bold rounded-3xl transition-all duration-300 hover:scale-105"
+          class="px-12 py-6 text-2xl font-bold rounded-3xl transition-all duration-300"
           style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white;"
         >
           <span class="flex items-center space-x-4">
@@ -128,7 +128,7 @@
     <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
       <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background-color: var(--bg-surface); border: 2px solid var(--bg-border);">
-        <Icon name="heroicons:chevron-down" class="w-4 h-4 transition-colors duration-300" style="color: var(--text-muted);" />
+        <Icon name="heroicons:chevron-down" class="w-4 h-4 transition-colors duration-300" style="color: var(--text-primary);" />
       </div>
     </div>
   </section>

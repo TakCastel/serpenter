@@ -20,7 +20,7 @@
         </p>
         <button 
           @click="navigateToDashboard"
-          class="px-12 py-6 text-xl font-bold rounded-3xl transition-all duration-300 hover:scale-105 bg-white text-gray-900 hover:bg-gray-100"
+          class="px-12 py-6 text-xl font-bold rounded-3xl transition-all duration-300 bg-white text-gray-900"
         >
           <span class="flex items-center space-x-4">
             <Icon name="heroicons:play" class="w-6 h-6" />

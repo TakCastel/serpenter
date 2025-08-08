@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-8 transition-all duration-300 hover:scale-105" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
+  <div class="card p-8 transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
     <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
       <Icon :name="icon" class="w-8 h-8" style="color: white;" />
     </div>

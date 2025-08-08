@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Main heading -->
-    <h1 class="text-4xl md:text-6xl font-bold mb-4 transition-all duration-300" style="color: var(--text-primary);">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 transition-all duration-300" style="color: var(--accent-primary);">
       Serpenter
     </h1>
     

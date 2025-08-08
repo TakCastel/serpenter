@@ -49,10 +49,10 @@
                 </h2>
               </slot>
               <button
-                v-if="showCloseButton"
-                @click="close"
-                class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-105"
-                style="background-color: var(--bg-primary); color: var(--text-muted);"
+                @click="$emit('close')"
+                class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
+                style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);"
+                :title="$t('modal.close')"
                 :aria-label="$t('modal.close')"
               >
                 <Icon name="heroicons:x-mark" class="w-4 h-4" />
