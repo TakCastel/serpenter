@@ -173,11 +173,12 @@ import SkeletonCategory from '../common/SkeletonCategory.vue'
 import SkeletonItem from '../common/SkeletonItem.vue'
 import { useI18n } from 'vue-i18n'
 import { useProjectsStore } from '~/stores/projects'
-import { checklistData } from '~/data/checklist-data'
+import { useChecklistData } from '~/composables/useChecklistData'
 
 const emit = defineEmits(['categories-loaded'])
 const { locale } = useI18n()
 const projectsStore = useProjectsStore()
+const { getCategoryItems, getAllCategories, getCategoryData } = useChecklistData()
 
 // Props pour recevoir l'ID du projet actuel
 const props = defineProps({
@@ -213,60 +214,31 @@ const loadCategories = async () => {
   try {
     isLoading.value = true
     
-    // Charger les catégories depuis le fichier JSON
-    const categoriesResponse = await $fetch('/data/seo-checklist.json')
+    // Utiliser le nouveau système de données
+    const categoryIds = getAllCategories()
     
-    if (categoriesResponse && categoriesResponse.categories) {
-      categories.value = categoriesResponse.categories
+    categories.value = categoryIds.map(categoryId => {
+      const categoryData = getCategoryData(categoryId)
+      const categoryName = $t(`categories.${categoryId}.name`)
+      const categoryDescription = $t(`categories.${categoryId}.description`)
       
-      // Assigner l'icône à chaque catégorie
-      for (const category of categories.value) {
-        category.icon = getCategoryIcon(category.id)
-        category.isLoading = true // Marquer comme en cours de chargement
-      }
-      
-      // Charger les éléments pour chaque catégorie
-      await loadItemsForAllCategories()
-      
-      // Émettre l'événement avec les catégories chargées
-      emit('categories-loaded', categories.value)
-    } else {
-      categories.value = []
-    }
-  } catch (error) {
-    console.error('Erreur lors du chargement de la checklist:', error)
-    // Fallback vers les données intégrées en cas d'erreur
-    categories.value = checklistData.categories
-    for (const category of categories.value) {
-      category.icon = getCategoryIcon(category.id)
-    }
-  } finally {
-    isLoading.value = false
-  }
-}
-
-const loadItemsForAllCategories = async () => {
-  try {
-    const promises = categories.value.map(async (category) => {
-      try {
-        const response = await $fetch(`/data/i18n/${category.id}-items-${locale.value}.json`)
-        
-        if (response && response.items) {
-          category.items = response.items
-        } else {
-          category.items = []
-        }
-      } catch (error) {
-        console.error(`Erreur lors du chargement des éléments pour ${category.id}:`, error)
-        category.items = []
-      } finally {
-        category.isLoading = false
+      return {
+        id: categoryId,
+        name: categoryName,
+        description: categoryDescription,
+        items: categoryData.items,
+        icon: getCategoryIcon(categoryId),
+        isLoading: false
       }
     })
     
-    await Promise.all(promises)
+    // Émettre l'événement avec les catégories chargées
+    emit('categories-loaded', categories.value)
   } catch (error) {
-    console.error('Erreur lors du chargement des éléments:', error)
+    console.error('Erreur lors du chargement de la checklist:', error)
+    categories.value = []
+  } finally {
+    isLoading.value = false
   }
 }
 

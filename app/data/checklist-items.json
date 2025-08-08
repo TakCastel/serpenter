@@ -1,0 +1,323 @@
+{
+  "seo": {
+    "items": [
+      {
+        "id": "title-tag",
+        "labelKey": "items.seo.titleTag.label",
+        "descriptionKey": "items.seo.titleTag.description",
+        "details": {
+          "explicationKey": "items.seo.titleTag.explication",
+          "commentFaireKey": "items.seo.titleTag.commentFaire",
+          "bonnesPratiquesKey": "items.seo.titleTag.bonnesPratiques",
+          "exemple": {
+            "html": "<head>\n  <title>SEO Agency Paris - Natural Search Engine Optimization | Serpenter</title>\n</head>",
+            "description": "Example of optimized title with main keyword, description and brand"
+          }
+        }
+      },
+      {
+        "id": "meta-description",
+        "labelKey": "items.seo.metaDescription.label",
+        "descriptionKey": "items.seo.metaDescription.description",
+        "details": {
+          "explicationKey": "items.seo.metaDescription.explication",
+          "commentFaireKey": "items.seo.metaDescription.commentFaire",
+          "bonnesPratiquesKey": "items.seo.metaDescription.bonnesPratiques",
+          "exemple": {
+            "html": "<head>\n  <meta name=\"description\" content=\"Agence SEO Paris - Optimisation naturelle pour les moteurs de recherche. Améliorons votre visibilité en ligne.\">\n</head>",
+            "description": "Example of optimized meta description"
+          }
+        }
+      },
+      {
+        "id": "canonical-url",
+        "labelKey": "items.seo.canonical.label",
+        "descriptionKey": "items.seo.canonical.description",
+        "details": {
+          "explicationKey": "items.seo.canonical.explication",
+          "commentFaireKey": "items.seo.canonical.commentFaire",
+          "bonnesPratiquesKey": "items.seo.canonical.bonnesPratiques",
+          "exemple": {
+            "html": "<head>\n  <link rel=\"canonical\" href=\"https://www.example.com/page\">\n</head>",
+            "description": "Example of canonical URL implementation"
+          }
+        }
+      }
+    ]
+  },
+  "accessibilite": {
+    "items": [
+      {
+        "id": "alt-text",
+        "labelKey": "items.accessibilite.altText.label",
+        "descriptionKey": "items.accessibilite.altText.description",
+        "details": {
+          "explicationKey": "items.accessibilite.altText.explication",
+          "commentFaireKey": "items.accessibilite.altText.commentFaire",
+          "bonnesPratiquesKey": "items.accessibilite.altText.bonnesPratiques",
+          "exemple": {
+            "html": "<img src=\"logo.png\" alt=\"Logo de notre entreprise - Design moderne et professionnel\" />",
+            "description": "Example of descriptive alt text"
+          }
+        }
+      },
+      {
+        "id": "contrast-ratio",
+        "labelKey": "items.accessibilite.contrastRatio.label",
+        "descriptionKey": "items.accessibilite.contrastRatio.description",
+        "details": {
+          "explicationKey": "items.accessibilite.contrastRatio.explication",
+          "commentFaireKey": "items.accessibilite.contrastRatio.commentFaire",
+          "bonnesPratiquesKey": "items.accessibilite.contrastRatio.bonnesPratiques",
+          "exemple": {
+            "css": "body {\n  color: #333333;\n  background-color: #ffffff;\n  /* Ratio de contraste: 12.6:1 */\n}",
+            "description": "Example of good contrast ratio"
+          }
+        }
+      },
+      {
+        "id": "semantic-html",
+        "labelKey": "items.accessibilite.semanticHtml.label",
+        "descriptionKey": "items.accessibilite.semanticHtml.description",
+        "details": {
+          "explicationKey": "items.accessibilite.semanticHtml.explication",
+          "commentFaireKey": "items.accessibilite.semanticHtml.commentFaire",
+          "bonnesPratiquesKey": "items.accessibilite.semanticHtml.bonnesPratiques",
+          "exemple": {
+            "html": "<header>\n  <nav>\n    <ul>\n      <li><a href=\"/\">Accueil</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <article>\n    <h1>Titre principal</h1>\n    <p>Contenu...</p>\n  </article>\n</main>\n<footer>\n  <p>© 2024</p>\n</footer>",
+            "description": "Example of semantic HTML structure"
+          }
+        }
+      }
+    ]
+  },
+  "performance": {
+    "items": [
+      {
+        "id": "image-optimization",
+        "labelKey": "items.performance.imageOptimization.label",
+        "descriptionKey": "items.performance.imageOptimization.description",
+        "details": {
+          "explicationKey": "items.performance.imageOptimization.explication",
+          "commentFaireKey": "items.performance.imageOptimization.commentFaire",
+          "bonnesPratiquesKey": "items.performance.imageOptimization.bonnesPratiques",
+          "exemple": {
+            "html": "<picture>\n  <source srcset=\"image.webp\" type=\"image/webp\">\n  <source srcset=\"image.jpg\" type=\"image/jpeg\">\n  <img src=\"image.jpg\" alt=\"Description\" loading=\"lazy\">\n</picture>",
+            "description": "Example of optimized image with WebP and lazy loading"
+          }
+        }
+      },
+      {
+        "id": "minification",
+        "labelKey": "items.performance.minification.label",
+        "descriptionKey": "items.performance.minification.description",
+        "details": {
+          "explicationKey": "items.performance.minification.explication",
+          "commentFaireKey": "items.performance.minification.commentFaire",
+          "bonnesPratiquesKey": "items.performance.minification.bonnesPratiques",
+          "exemple": {
+            "css": "/* Avant minification */\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: Arial, sans-serif;\n}\n\n/* Après minification */\nbody{margin:0;padding:0;font-family:Arial,sans-serif}",
+            "description": "Example of CSS minification"
+          }
+        }
+      },
+      {
+        "id": "caching",
+        "labelKey": "items.performance.caching.label",
+        "descriptionKey": "items.performance.caching.description",
+        "details": {
+          "explicationKey": "items.performance.caching.explication",
+          "commentFaireKey": "items.performance.caching.commentFaire",
+          "bonnesPratiquesKey": "items.performance.caching.bonnesPratiques",
+          "exemple": {
+            "apache": "<IfModule mod_expires.c>\n  ExpiresActive On\n  ExpiresByType text/css \"access plus 1 year\"\n  ExpiresByType application/javascript \"access plus 1 year\"\n  ExpiresByType image/png \"access plus 1 year\"\n</IfModule>",
+            "description": "Example of Apache caching configuration"
+          }
+        }
+      }
+    ]
+  },
+  "eco-conception": {
+    "items": [
+      {
+        "id": "green-hosting",
+        "labelKey": "items.ecoConception.greenHosting.label",
+        "descriptionKey": "items.ecoConception.greenHosting.description",
+        "details": {
+          "explicationKey": "items.ecoConception.greenHosting.explication",
+          "commentFaireKey": "items.ecoConception.greenHosting.commentFaire",
+          "bonnesPratiquesKey": "items.ecoConception.greenHosting.bonnesPratiques",
+          "exemple": {
+            "description": "Exemples d'hébergeurs verts : GreenGeeks, Hostinger, A2 Hosting"
+          }
+        }
+      },
+      {
+        "id": "code-optimization",
+        "labelKey": "items.ecoConception.codeOptimization.label",
+        "descriptionKey": "items.ecoConception.codeOptimization.description",
+        "details": {
+          "explicationKey": "items.ecoConception.codeOptimization.explication",
+          "commentFaireKey": "items.ecoConception.codeOptimization.commentFaire",
+          "bonnesPratiquesKey": "items.ecoConception.codeOptimization.bonnesPratiques",
+          "exemple": {
+            "javascript": "// Code non optimisé\nfor(let i=0;i<1000;i++){\n  console.log('Hello');\n}\n\n// Code optimisé\nconst message='Hello';\nfor(let i=0;i<1000;i++){\n  console.log(message);\n}",
+            "description": "Example of optimized JavaScript code"
+          }
+        }
+      },
+      {
+        "id": "resource-reduction",
+        "labelKey": "items.ecoConception.resourceReduction.label",
+        "descriptionKey": "items.ecoConception.resourceReduction.description",
+        "details": {
+          "explicationKey": "items.ecoConception.resourceReduction.explication",
+          "commentFaireKey": "items.ecoConception.resourceReduction.commentFaire",
+          "bonnesPratiquesKey": "items.ecoConception.resourceReduction.bonnesPratiques",
+          "exemple": {
+            "html": "<!-- Éviter les requêtes inutiles -->\n<link rel=\"preload\" href=\"critical.css\" as=\"style\">\n<link rel=\"preload\" href=\"critical.js\" as=\"script\">",
+            "description": "Example of resource preloading"
+          }
+        }
+      }
+    ]
+  },
+  "responsive-ux": {
+    "items": [
+      {
+        "id": "mobile-first",
+        "labelKey": "items.responsiveUx.mobileFirst.label",
+        "descriptionKey": "items.responsiveUx.mobileFirst.description",
+        "details": {
+          "explicationKey": "items.responsiveUx.mobileFirst.explication",
+          "commentFaireKey": "items.responsiveUx.mobileFirst.commentFaire",
+          "bonnesPratiquesKey": "items.responsiveUx.mobileFirst.bonnesPratiques",
+          "exemple": {
+            "css": "/* Mobile-first approach */\n.container {\n  width: 100%;\n  padding: 1rem;\n}\n\n@media (min-width: 768px) {\n  .container {\n    width: 750px;\n    margin: 0 auto;\n  }\n}",
+            "description": "Example of mobile-first CSS approach"
+          }
+        }
+      },
+      {
+        "id": "touch-targets",
+        "labelKey": "items.responsiveUx.touchTargets.label",
+        "descriptionKey": "items.responsiveUx.touchTargets.description",
+        "details": {
+          "explicationKey": "items.responsiveUx.touchTargets.explication",
+          "commentFaireKey": "items.responsiveUx.touchTargets.commentFaire",
+          "bonnesPratiquesKey": "items.responsiveUx.touchTargets.bonnesPratiques",
+          "exemple": {
+            "css": "/* Touch targets minimum 44x44px */\n.button {\n  min-width: 44px;\n  min-height: 44px;\n  padding: 12px 16px;\n}",
+            "description": "Example of touch-friendly button sizing"
+          }
+        }
+      },
+      {
+        "id": "loading-states",
+        "labelKey": "items.responsiveUx.loadingStates.label",
+        "descriptionKey": "items.responsiveUx.loadingStates.description",
+        "details": {
+          "explicationKey": "items.responsiveUx.loadingStates.explication",
+          "commentFaireKey": "items.responsiveUx.loadingStates.commentFaire",
+          "bonnesPratiquesKey": "items.responsiveUx.loadingStates.bonnesPratiques",
+          "exemple": {
+            "html": "<button class=\"btn\" disabled>\n  <span class=\"spinner\"></span>\n  Chargement...\n</button>",
+            "description": "Example of loading state button"
+          }
+        }
+      }
+    ]
+  },
+  "securite": {
+    "items": [
+      {
+        "id": "https",
+        "labelKey": "items.securite.https.label",
+        "descriptionKey": "items.securite.https.description",
+        "details": {
+          "explicationKey": "items.securite.https.explication",
+          "commentFaireKey": "items.securite.https.commentFaire",
+          "bonnesPratiquesKey": "items.securite.https.bonnesPratiques",
+          "exemple": {
+            "nginx": "server {\n  listen 443 ssl;\n  ssl_certificate /path/to/cert.pem;\n  ssl_certificate_key /path/to/key.pem;\n  return 301 https://$server_name$request_uri;\n}",
+            "description": "Example of HTTPS redirect configuration"
+          }
+        }
+      },
+      {
+        "id": "security-headers",
+        "labelKey": "items.securite.securityHeaders.label",
+        "descriptionKey": "items.securite.securityHeaders.description",
+        "details": {
+          "explicationKey": "items.securite.securityHeaders.explication",
+          "commentFaireKey": "items.securite.securityHeaders.commentFaire",
+          "bonnesPratiquesKey": "items.securite.securityHeaders.bonnesPratiques",
+          "exemple": {
+            "apache": "Header always set X-Content-Type-Options nosniff\nHeader always set X-Frame-Options DENY\nHeader always set X-XSS-Protection \"1; mode=block\"\nHeader always set Strict-Transport-Security \"max-age=31536000; includeSubDomains\"",
+            "description": "Example of security headers configuration"
+          }
+        }
+      },
+      {
+        "id": "content-security-policy",
+        "labelKey": "items.securite.contentSecurityPolicy.label",
+        "descriptionKey": "items.securite.contentSecurityPolicy.description",
+        "details": {
+          "explicationKey": "items.securite.contentSecurityPolicy.explication",
+          "commentFaireKey": "items.securite.contentSecurityPolicy.commentFaire",
+          "bonnesPratiquesKey": "items.securite.contentSecurityPolicy.bonnesPratiques",
+          "exemple": {
+            "html": "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';\">",
+            "description": "Example of Content Security Policy"
+          }
+        }
+      }
+    ]
+  },
+  "analytics": {
+    "items": [
+      {
+        "id": "google-analytics",
+        "labelKey": "items.analytics.googleAnalytics.label",
+        "descriptionKey": "items.analytics.googleAnalytics.description",
+        "details": {
+          "explicationKey": "items.analytics.googleAnalytics.explication",
+          "commentFaireKey": "items.analytics.googleAnalytics.commentFaire",
+          "bonnesPratiquesKey": "items.analytics.googleAnalytics.bonnesPratiques",
+          "exemple": {
+            "html": "<!-- Google Analytics 4 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'GA_MEASUREMENT_ID');\n</script>",
+            "description": "Example of Google Analytics 4 implementation"
+          }
+        }
+      },
+      {
+        "id": "conversion-tracking",
+        "labelKey": "items.analytics.conversionTracking.label",
+        "descriptionKey": "items.analytics.conversionTracking.description",
+        "details": {
+          "explicationKey": "items.analytics.conversionTracking.explication",
+          "commentFaireKey": "items.analytics.conversionTracking.commentFaire",
+          "bonnesPratiquesKey": "items.analytics.conversionTracking.bonnesPratiques",
+          "exemple": {
+            "javascript": "// Conversion tracking\nfunction trackConversion(conversionId) {\n  gtag('event', 'conversion', {\n    'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',\n    'value': 1.0,\n    'currency': 'EUR'\n  });\n}",
+            "description": "Example of conversion tracking implementation"
+          }
+        }
+      },
+      {
+        "id": "performance-monitoring",
+        "labelKey": "items.analytics.performanceMonitoring.label",
+        "descriptionKey": "items.analytics.performanceMonitoring.description",
+        "details": {
+          "explicationKey": "items.analytics.performanceMonitoring.explication",
+          "commentFaireKey": "items.analytics.performanceMonitoring.commentFaire",
+          "bonnesPratiquesKey": "items.analytics.performanceMonitoring.bonnesPratiques",
+          "exemple": {
+            "javascript": "// Performance monitoring\nwindow.addEventListener('load', function() {\n  const perfData = performance.getEntriesByType('navigation')[0];\n  gtag('event', 'timing_complete', {\n    'name': 'load',\n    'value': perfData.loadEventEnd - perfData.loadEventStart\n  });\n});",
+            "description": "Example of performance monitoring"
+          }
+        }
+      }
+    ]
+  }
+}
