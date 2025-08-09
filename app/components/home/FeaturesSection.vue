@@ -59,70 +59,9 @@
           </ul>
         </div>
       </div>
-      
-      <!-- Section explicative -->
-      <div class="max-w-4xl mx-auto mb-20">
-        <div class="card p-12 transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 transition-colors duration-300" style="color: var(--text-primary);">
-              Pourquoi Serpenter ?
-            </h2>
-            <p class="text-xl leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
-              Une solution complète pour tous les professionnels du web
-            </p>
-          </div>
-          
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Problème -->
-            <div>
-              <h3 class="text-2xl font-bold mb-6 transition-colors duration-300" style="color: var(--text-primary);">
-                Le problème
-              </h3>
-              <div class="space-y-4 text-lg leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
-                <p>
-                  Combien de fois avez-vous déployé un site en vous demandant si vous n'aviez rien oublié ? 
-                  <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">SEO, performance, accessibilité, sécurité...</span> 
-                  La liste est longue et les enjeux sont importants.
-                </p>
-                <p>
-                  Un oubli peut coûter cher : <span class="font-semibold">rangs dans Google, expérience utilisateur dégradée, problèmes de sécurité, ou même des amendes pour non-conformité.</span>
-                </p>
-                <p>
-                  Et quand on travaille seul ou en équipe, il est facile de passer à côté de points critiques qui peuvent faire la différence entre un site qui performe et un site qui déçoit.
-                </p>
-              </div>
-            </div>
-            
-            <!-- Solution -->
-            <div>
-              <h3 class="text-2xl font-bold mb-6 transition-colors duration-300" style="color: var(--text-primary);">
-                La solution
-              </h3>
-              <div class="space-y-4 text-lg leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
-                <p>
-                  <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">Serpenter</span> 
-                  est une checklist exhaustive et intelligente qui vous guide pas à pas dans la vérification de votre site avant déploiement.
-                </p>
-                <p>
-                  <strong>Pour tous les professionnels du web :</strong> Que vous soyez freelance, développeur en équipe, ou QA testeur, Serpenter vous assure de livrer un travail irréprochable, standardise vos processus de validation et vous donne une base solide pour vos tests. Ne laissez rien au hasard dans vos vérifications.
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mt-12 p-8 rounded-2xl" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-            <div class="text-center">
-              <h4 class="text-2xl font-bold text-white mb-4">
-                Plus de 200 points de vérification organisés
-              </h4>
-              <p class="text-white/90 text-lg">
-                De la balise title aux bonnes pratiques de sécurité, en passant par l'accessibilité et la performance. 
-                <span class="font-semibold">Tout est couvert, rien n'est laissé au hasard.</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <!-- Pricing inserted here -->
+      <PricingSection />
       
       <!-- CTA Section -->
       <div class="text-center">
@@ -134,8 +73,8 @@
           </div>
           
           <div class="relative z-10">
-            <div class="w-20 h-20 mx-auto mb-8 rounded-3xl flex items-center justify-center bg-white backdrop-blur-sm">
-              <Icon name="fluent-emoji:snake" class="w-10 h-10" style="color: var(--accent-primary);" />
+            <div class="w-20 h-20 mx-auto mb-8 rounded-3xl flex items-center justify-center bg-white/20 backdrop-blur-sm">
+              <Icon name="fluent-emoji:snake" class="w-10 h-10 text-white" />
             </div>
             
             <h3 class="text-3xl md:text-4xl font-bold mb-6 text-white">
@@ -162,6 +101,7 @@
 
 <script setup>
 import { featuresData } from '~/data/features-data.js'
+import PricingSection from '~/components/home/PricingSection.vue'
 
 const router = useRouter()
 

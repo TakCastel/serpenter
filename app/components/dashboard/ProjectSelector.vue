@@ -207,35 +207,25 @@ import { useProjectsStore } from '~/stores/projects'
 
 const emit = defineEmits(['project-changed'])
 const projectsStore = useProjectsStore()
+const { currentUser } = useAuth()
 
 const isDropdownOpen = ref(false)
 const showCreateModal = ref(false)
 const showDeleteModal = ref(false)
 const isLoading = ref(false)
 const isClient = ref(false)
-const newProject = ref({
-  name: '',
-  description: ''
-})
+const newProject = ref({ name: '', description: '' })
 
 const currentProject = computed(() => projectsStore.currentProject)
 const projects = computed(() => projectsStore.projects)
 const currentProjectId = computed(() => projectsStore.currentProjectId)
 
-// Computed pour éviter l'hydratation mismatch
 const displayText = computed(() => {
-  if (!isClient.value) {
-    return $t('projects.selectProject')
-  }
+  if (!isClient.value) return $t('projects.selectProject')
   return currentProject.value?.name || $t('projects.selectProject')
 })
 
-// Les projets sont maintenant gérés par le store Pinia
-// Pas besoin de charger/sauvegarder manuellement
-
-const toggleDropdown = () => {
-  isDropdownOpen.value = !isDropdownOpen.value
-}
+const toggleDropdown = () => { isDropdownOpen.value = !isDropdownOpen.value }
 
 const selectProject = (projectId) => {
   projectsStore.setCurrentProject(projectId)
@@ -249,66 +239,48 @@ const openCreateProjectModal = () => {
   newProject.value = { name: '', description: '' }
 }
 
-const closeCreateProjectModal = () => {
-  showCreateModal.value = false
-}
+const closeCreateProjectModal = () => { showCreateModal.value = false }
 
-const createProject = () => {
-  if (!newProject.value.name.trim()) return
-  
-  const project = projectsStore.createProject(
-    newProject.value.name.trim(),
-    newProject.value.description.trim()
-  )
-  
-  emit('project-changed', project.id)
+const createProject = async () => {
+  if (!newProject.value.name.trim() || !currentUser.value) return
+  const p = await projectsStore.addProjectRemote(currentUser.value.uid, {
+    name: newProject.value.name.trim(),
+    description: newProject.value.description.trim()
+  })
+  emit('project-changed', p.id)
   closeCreateProjectModal()
 }
 
-const openDeleteProjectModal = () => {
-  showDeleteModal.value = true
-  isDropdownOpen.value = false
-}
+const openDeleteProjectModal = () => { showDeleteModal.value = true; isDropdownOpen.value = false }
+const closeDeleteProjectModal = () => { showDeleteModal.value = false }
 
-const closeDeleteProjectModal = () => {
-  showDeleteModal.value = false
-}
-
-const deleteCurrentProject = () => {
-  projectsStore.deleteProject(currentProjectId.value)
-  // Si c'était le dernier projet, ne pas créer automatiquement un nouveau
-  if (projects.value.length === 0) {
-    // Rediriger vers la section vide
-    emit('project-changed', null)
-  } else {
-    emit('project-changed', projectsStore.currentProjectId)
-  }
+const deleteCurrentProject = async () => {
+  if (!currentUser.value || !currentProjectId.value) return
+  await projectsStore.deleteProjectRemote(currentUser.value.uid, currentProjectId.value)
+  if (projects.value.length === 0) emit('project-changed', null)
+  else emit('project-changed', projectsStore.currentProjectId)
   closeDeleteProjectModal()
 }
 
 const handleOutsideClick = (event) => {
-  if (!event.target.closest('.relative')) {
-    isDropdownOpen.value = false
-  }
+  if (!event.target.closest('.relative')) isDropdownOpen.value = false
 }
 
-// Watcher pour gérer le loading si nécessaire (pour les cas où les projets seraient chargés de manière asynchrone)
 watch(projects, (newProjects) => {
-  if (newProjects.length > 0 && isLoading.value) {
-    isLoading.value = false
-  }
+  if (newProjects.length > 0 && isLoading.value) isLoading.value = false
 }, { immediate: true })
 
-onMounted(() => {
+onMounted(async () => {
   if (process.client) {
     isClient.value = true
     document.addEventListener('click', handleOutsideClick)
+    if (currentUser.value && !projectsStore.isSynced) {
+      await projectsStore.subscribeUserProjects(currentUser.value.uid)
+    }
   }
 })
 
 onUnmounted(() => {
-  if (process.client) {
-    document.removeEventListener('click', handleOutsideClick)
-  }
+  if (process.client) document.removeEventListener('click', handleOutsideClick)
 })
 </script>

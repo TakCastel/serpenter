@@ -17,6 +17,7 @@
     "@nuxtjs/i18n": "latest",
     "@pinia/nuxt": "^0.11.2",
     "eslint": "^9.32.0",
+    "firebase": "^12.0.0",
     "nuxt": "^4.0.1",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.4.1",

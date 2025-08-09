@@ -70,15 +70,17 @@ import { useProjectsStore } from '~/stores/projects'
 
 const emit = defineEmits(['create-project'])
 const projectsStore = useProjectsStore()
+const { currentUser } = useAuth()
 
 const projectName = ref('')
 const projectDescription = ref('')
 
-const createProject = () => {
-  if (projectName.value.trim()) {
-    const project = projectsStore.createProject(projectName.value.trim(), projectDescription.value.trim())
-    console.log('Projet créé:', project)
-    emit('create-project', project)
-  }
+const createProject = async () => {
+  if (!projectName.value.trim() || !currentUser.value) return
+  const project = await projectsStore.addProjectRemote(currentUser.value.uid, {
+    name: projectName.value.trim(),
+    description: projectDescription.value.trim()
+  })
+  emit('create-project', project)
 }
 </script>

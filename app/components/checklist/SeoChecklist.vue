@@ -166,7 +166,6 @@ import ItemAccordion from './ItemAccordion.vue'
 import ChecklistHeader from './ChecklistHeader.vue'
 import StatsCards from './StatsCards.vue'
 import DeploymentReadyCard from './DeploymentReadyCard.vue'
-import SkeletonCard from '../common/SkeletonCard.vue'
 import SkeletonCategory from '../common/SkeletonCategory.vue'
 import SkeletonItem from '../common/SkeletonItem.vue'
 import { useI18n } from 'vue-i18n'
@@ -177,6 +176,7 @@ const emit = defineEmits(['categories-loaded'])
 const { locale } = useI18n()
 const projectsStore = useProjectsStore()
 const { getCategoryItems, getAllCategories, getCategoryData } = useChecklistData()
+const { currentUser } = useAuth()
 
 // Props pour recevoir l'ID du projet actuel
 const props = defineProps({
@@ -253,11 +253,7 @@ const loadCategories = async () => {
 
 // Fonction pour gérer le clic sur le bouton de déploiement
 const handleDeployClick = () => {
-  // Ici vous pouvez ajouter la logique pour le déploiement
-  // Par exemple, rediriger vers une page de déploiement ou afficher un modal
   console.log('🚀 Déploiement en cours...')
-  
-  // Exemple : envoyer un événement GTM
   if (process.client && window.dataLayer) {
     window.dataLayer.push({
       event: 'deployment_ready',
@@ -281,150 +277,82 @@ const getCategoryIcon = (categoryId) => {
   return icons[categoryId] || 'fluent-emoji:clipboard'
 }
 
-const loadCheckedItems = () => {
+// Chargement depuis Firestore via le store
+const loadCheckedItems = async () => {
   try {
-    if (process.client) {
-      const saved = localStorage.getItem(`checklist-progress-${props.currentProjectId}`)
-      if (saved) {
-        const parsed = JSON.parse(saved)
-        checkedItems.value = new Set(parsed.checkedItems || [])
-      } else {
-        // Si aucun progrès sauvegardé pour ce projet, réinitialiser
-        checkedItems.value.clear()
-      }
+    if (!currentUser.value || !props.currentProjectId) {
+      checkedItems.value = new Set()
+      return
     }
+    await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
+    checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
   } catch (error) {
     console.error('Erreur lors du chargement du progrès:', error)
-    checkedItems.value.clear()
+    checkedItems.value = new Set()
   }
 }
 
-const resetCheckedItems = () => {
+const resetCheckedItems = async () => {
   checkedItems.value.clear()
+  if (currentUser.value && props.currentProjectId) {
+    projectsStore.setCheckedForProject(props.currentProjectId, checkedItems.value)
+    await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
+  }
 }
 
-const saveCheckedItems = () => {
+const saveCheckedItems = async () => {
   try {
-    if (process.client) {
-      const data = {
-        checkedItems: Array.from(checkedItems.value),
-        timestamp: Date.now()
-      }
-      localStorage.setItem(`checklist-progress-${props.currentProjectId}`, JSON.stringify(data))
-      
-      // Mettre à jour les scores dans le store
-      const allItems = []
-      categories.value.forEach(category => {
-        if (category.items) {
-          allItems.push(...category.items)
-        }
-      })
-      projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
-    }
+    if (!currentUser.value || !props.currentProjectId) return
+    projectsStore.setCheckedForProject(props.currentProjectId, checkedItems.value)
+    await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
+    
+    // Mettre à jour les scores dans le store
+    const allItems = []
+    categories.value.forEach(category => {
+      if (category.items) allItems.push(...category.items)
+    })
+    projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
   } catch (error) {
     console.error('Erreur lors de la sauvegarde du progrès:', error)
   }
 }
 
-const resetProgress = () => {
-  try {
-    if (process.client) {
-      checkedItems.value.clear()
-      localStorage.removeItem(`checklist-progress-${props.currentProjectId}`)
-      projectsStore.resetProjectScores(props.currentProjectId)
-      
-      // Sauvegarder les changements
-      saveCheckedItems()
-      
-      // Émettre un événement de mise à jour de la progression
-      window.dispatchEvent(new CustomEvent('progress-updated', {
-        detail: { percentage: 0 }
-      }))
-      
-      console.log('Progrès réinitialisé avec succès')
-    }
-  } catch (error) {
-    console.error('Erreur lors de la réinitialisation du progrès:', error)
-  }
-}
-
 // Nouvelle fonction pour vérifier si un item était ouvert avant d'être coché
-const checkIfItemWasExpanded = (itemId) => {
-  return expandedItems.value.has(itemId)
-}
-
-// Fonction pour marquer un item comme ouvert
-const markItemAsExpanded = (itemId) => {
-  expandedItems.value.add(itemId)
-}
-
-// Fonction pour marquer un item comme fermé
-const markItemAsCollapsed = (itemId) => {
-  expandedItems.value.delete(itemId)
-}
+const checkIfItemWasExpanded = (itemId) => expandedItems.value.has(itemId)
+const markItemAsExpanded = (itemId) => { expandedItems.value.add(itemId) }
+const markItemAsCollapsed = (itemId) => { expandedItems.value.delete(itemId) }
 
 // Gestionnaires d'événements pour les accordéons
-const handleAccordionOpened = (itemId) => {
-  markItemAsExpanded(itemId)
-}
+const handleAccordionOpened = (itemId) => { markItemAsExpanded(itemId) }
+const handleAccordionClosed = (itemId) => { markItemAsCollapsed(itemId) }
 
-const handleAccordionClosed = (itemId) => {
-  markItemAsCollapsed(itemId)
-}
-
-const toggleItem = (itemId) => {
+const toggleItem = async (itemId) => {
   const wasChecked = checkedItems.value.has(itemId)
+  if (wasChecked) checkedItems.value.delete(itemId)
+  else checkedItems.value.add(itemId)
   
-  if (wasChecked) {
-    checkedItems.value.delete(itemId)
-  } else {
-    checkedItems.value.add(itemId)
-  }
+  await saveCheckedItems()
   
-  saveCheckedItems()
-  
-  // Vérifier si une catégorie vient d'être complétée
   const category = categories.value.find(cat => cat.items?.some(item => item.id === itemId))
   if (category) {
     if (!wasChecked && isCategoryCompleted(category)) {
-      // La catégorie vient d'être complétée, déclencher l'effet d'explosion
-      nextTick(() => {
-        generateCategoryExplosion(category.id)
-      })
-      
-      // Fermer directement l'accordéon de la catégorie quand elle est complétée
+      nextTick(() => { generateCategoryExplosion(category.id) })
       expandedCategories.value.delete(category.id)
     } else if (wasChecked && !isCategoryCompleted(category)) {
-      // Un item a été décoché, rouvrir l'accordéon de la catégorie
       expandedCategories.value.add(category.id)
     } else if (!wasChecked) {
-      // Un item vient d'être coché, vérifier si l'accordéon était ouvert avant
       const currentItemIndex = category.items.findIndex(item => item.id === itemId)
       if (currentItemIndex !== -1 && currentItemIndex < category.items.length - 1) {
         const nextItem = category.items[currentItemIndex + 1]
-        
-        // Vérifier si l'accordéon de l'item actuel était ouvert avant d'être coché
         const wasCurrentItemExpanded = checkIfItemWasExpanded(itemId)
-        
-        // Ouvrir l'élément suivant seulement si :
-        // 1. L'élément actuel était ouvert avant d'être coché
-        // 2. L'élément suivant existe et n'est pas déjà coché
         if (wasCurrentItemExpanded && nextItem && !isItemChecked(nextItem.id)) {
-          // Ouvrir l'accordéon de la catégorie si elle n'est pas déjà ouverte
           if (!expandedCategories.value.has(category.id)) {
             expandedCategories.value.add(category.id)
           }
-          
-          // Ouvrir l'accordéon du prochain élément et le marquer comme ouvert
           nextTick(() => {
             if (process.client) {
-              // Marquer l'élément suivant comme ouvert dans notre système de tracking
               markItemAsExpanded(nextItem.id)
-              
-              // Ouvrir l'accordéon du prochain élément
-              window.dispatchEvent(new CustomEvent('open-item-accordion', { 
-                detail: { itemId: nextItem.id } 
-              }))
+              window.dispatchEvent(new CustomEvent('open-item-accordion', { detail: { itemId: nextItem.id } }))
             }
           })
         }
@@ -433,9 +361,7 @@ const toggleItem = (itemId) => {
   }
 }
 
-const isItemChecked = (itemId) => {
-  return checkedItems.value.has(itemId)
-}
+const isItemChecked = (itemId) => checkedItems.value.has(itemId)
 
 const isCategoryCompleted = (category) => {
   if (!category.items || category.items.length === 0) return false
@@ -446,63 +372,32 @@ const showCategoryExplosion = ref(null)
 const categoryParticles = computed(() => {
   const particles = []
   for (let i = 0; i < 12; i++) {
-    particles.push({
-      id: i,
-      angle: (i / 12) * 360,
-      delay: i * 40,
-      distance: 80 + Math.random() * 40
-    })
+    particles.push({ id: i, angle: (i / 12) * 360, delay: i * 40, distance: 80 + Math.random() * 40 })
   }
   return particles
 })
 
-const generateCategoryExplosion = (categoryId) => {
-  showCategoryExplosion.value = categoryId
-  // L'effet sera automatiquement nettoyé par l'événement animationend
-}
-
-const isCategoryExpanded = (categoryId) => {
-  return expandedCategories.value.has(categoryId)
-}
-
-const getCategoryCompletedCount = (category) => {
-  if (!category.items) return 0
-  return category.items.filter(item => isItemChecked(item.id)).length
-}
+const generateCategoryExplosion = (categoryId) => { showCategoryExplosion.value = categoryId }
+const isCategoryExpanded = (categoryId) => expandedCategories.value.has(categoryId)
+const getCategoryCompletedCount = (category) => (category.items ? category.items.filter(item => isItemChecked(item.id)).length : 0)
 
 const toggleCategory = (categoryId) => {
   if (expandedCategories.value.has(categoryId)) {
-    // Fermer la catégorie si elle est déjà ouverte
     expandedCategories.value.delete(categoryId)
-    
-    // Fermer tous les accordéons des items de cette catégorie
     const category = categories.value.find(cat => cat.id === categoryId)
     if (category && category.items && process.client) {
-      category.items.forEach(item => {
-        // Émettre un événement pour fermer l'accordéon de l'item
-        window.dispatchEvent(new CustomEvent('close-item-accordion', { 
-          detail: { itemId: item.id } 
-        }))
-      })
+      category.items.forEach(item => { window.dispatchEvent(new CustomEvent('close-item-accordion', { detail: { itemId: item.id } })) })
     }
   } else {
-    // Fermer tous les accordéons des items de toutes les catégories
     if (process.client) {
       categories.value.forEach(category => {
         if (category.items) {
-          category.items.forEach(item => {
-            window.dispatchEvent(new CustomEvent('close-item-accordion', { 
-              detail: { itemId: item.id } 
-            }))
-          })
+          category.items.forEach(item => { window.dispatchEvent(new CustomEvent('close-item-accordion', { detail: { itemId: item.id } })) })
         }
       })
     }
-    
-    // Fermer toutes les autres catégories et ouvrir celle-ci
     expandedCategories.value.clear()
     expandedCategories.value.add(categoryId)
-
     if (isCategoryCompleted(categories.value.find(cat => cat.id === categoryId))) {
       generateCategoryExplosion(categoryId)
     }
@@ -511,69 +406,47 @@ const toggleCategory = (categoryId) => {
 
 // Méthodes exposées
 const openCategory = (categoryId) => {
-  // Fermer tous les accordéons des items de toutes les catégories
   if (process.client) {
     categories.value.forEach(category => {
       if (category.items) {
-        category.items.forEach(item => {
-          window.dispatchEvent(new CustomEvent('close-item-accordion', { 
-            detail: { itemId: item.id } 
-          }))
-        })
+        category.items.forEach(item => { window.dispatchEvent(new CustomEvent('close-item-accordion', { detail: { itemId: item.id } })) })
       }
     })
   }
-  
-  // Fermer toutes les autres catégories et ouvrir celle-ci
   expandedCategories.value.clear()
   expandedCategories.value.add(categoryId)
 }
 
-// Watcher pour émettre les événements de progression
+// Émettre la progression
 watch(progressPercentage, (newPercentage) => {
   if (process.client) {
-    window.dispatchEvent(new CustomEvent('progress-updated', {
-      detail: { percentage: Math.round(newPercentage) }
-    }))
+    window.dispatchEvent(new CustomEvent('progress-updated', { detail: { percentage: Math.round(newPercentage) } }))
   }
 }, { immediate: true })
 
-// Watcher pour recharger les données quand la langue change
-watch(locale, async () => {
-  await loadCategories()
-}, { immediate: false })
+// Recharger la checklist quand la langue change
+watch(locale, async () => { await loadCategories() }, { immediate: false })
 
-// Watcher pour recharger les items cochés quand le projet change
-watch(() => props.currentProjectId, () => {
-  loadCheckedItems()
-  // Recalculer les scores après le chargement
+// Changement de projet → charger les checked depuis la BDD et recalculer les scores
+watch(() => props.currentProjectId, async () => {
+  await loadCheckedItems()
   nextTick(() => {
     const allItems = []
-    categories.value.forEach(category => {
-      if (category.items) {
-        allItems.push(...category.items)
-      }
-    })
+    categories.value.forEach(category => { if (category.items) allItems.push(...category.items) })
     projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
   })
 }, { immediate: false })
 
 // Lifecycle
 onMounted(async () => {
-  loadCheckedItems()
+  await loadCheckedItems()
   await loadCategories()
-  
-  // Ouvrir la première catégorie par défaut
   if (categories.value.length > 0) {
     expandedCategories.value.add(categories.value[0].id)
   }
-  
-  // Écouter l'événement open-category depuis le sommaire
   if (process.client) {
     window.addEventListener('open-category', (event) => {
-      if (event.detail && event.detail.categoryId) {
-        openCategory(event.detail.categoryId)
-      }
+      if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
     })
   }
 })
@@ -581,18 +454,31 @@ onMounted(async () => {
 onUnmounted(() => {
   if (process.client) {
     window.removeEventListener('open-category', (event) => {
-      if (event.detail && event.detail.categoryId) {
-        openCategory(event.detail.categoryId)
-      }
+      if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
     })
   }
 })
 
 // Exposer les méthodes
-defineExpose({
-  openCategory,
-  resetProgress
-})
+const resetProgress = async () => {
+  // Clear local set
+  checkedItems.value = new Set()
+  // Sauvegarder en BDD si possible
+  if (currentUser.value && props.currentProjectId) {
+    projectsStore.setCheckedForProject(props.currentProjectId, checkedItems.value)
+    await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
+  }
+  // Mettre à jour scores
+  const allItems = []
+  categories.value.forEach(category => { if (category.items) allItems.push(...category.items) })
+  projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
+  // Événement progression
+  if (process.client) {
+    window.dispatchEvent(new CustomEvent('progress-updated', { detail: { percentage: 0 } }))
+  }
+}
+
+defineExpose({ openCategory, resetProgress })
 </script>
 
 <style scoped>

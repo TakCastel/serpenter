@@ -27,11 +27,11 @@
         </div>
       </div>
       
-      <div class="flex items-center space-x-4" role="toolbar" aria-label="Actions de l'application">
+      <div class="flex items-center space-x-3 sm:space-x-4" role="toolbar" aria-label="Actions de l'application">
         <!-- Progress Indicator (visible only when scrolled and project selected) -->
         <div 
           v-if="isScrolled && progressPercentage !== null && currentProjectId"
-          class="flex items-center space-x-4 mr-2"
+          class="hidden sm:flex items-center space-x-4 mr-2"
         >
           <!-- Progress Circle -->
           <div class="relative w-12 h-12">
@@ -64,9 +64,21 @@
           </div>
         </div>
         
+        <!-- Mobile menu trigger (small screens) -->
+        <button
+          @click="toggleMobileMenu"
+          class="sm:hidden w-9 h-9 rounded-xl flex items-center justify-center transition-all"
+          style="background-color: var(--bg-primary); border: 1px solid var(--bg-border);"
+          :aria-expanded="showMobileMenu"
+          aria-label="Ouvrir le menu"
+        >
+          <Icon name="heroicons:ellipsis-vertical" class="w-5 h-5" :style="{ color: 'var(--text-primary)' }" />
+        </button>
+
+        <!-- Theme toggle (desktop only) -->
         <button
           @click="toggleTheme"
-          class="w-8 h-8 rounded-xl transition-all duration-200 flex items-center justify-center hover:bg-opacity-80"
+          class="hidden sm:flex w-8 h-8 rounded-xl transition-all duration-200 items-center justify-center hover:bg-opacity-80"
           style="background-color: var(--bg-primary); border: 1px solid var(--bg-border);"
           :title="isDark ? $t('app.theme.light') : $t('app.theme.dark')"
           :aria-label="isDark ? $t('app.theme.light') : $t('app.theme.dark')"
@@ -81,8 +93,8 @@
           />
         </button>
         
-        <!-- Language Selector -->
-        <div class="relative">
+        <!-- Language Selector (desktop only) -->
+        <div class="relative hidden sm:block">
           <button
             @click="toggleLanguageMenu"
             class="px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center space-x-2 hover:bg-opacity-80"
@@ -135,10 +147,11 @@
           </div>
         </div>
         
+        <!-- Reset (desktop only) -->
         <button
           v-if="currentProjectId && isClient"
           @click="resetProgress"
-          class="px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center space-x-2 hover:bg-opacity-80"
+          class="hidden sm:flex px-3 py-1.5 rounded-xl transition-all duration-200 items-center space-x-2 hover:bg-opacity-80"
           style="background-color: var(--bg-primary); border: 1px solid var(--bg-border);"
           :title="$t('app.progress.resetTitle')"
           :aria-label="$t('app.progress.resetDescription')"
@@ -155,6 +168,59 @@
             {{ $t('app.progress.reset') }}
           </span>
         </button>
+
+        <!-- User avatar (always shown when logged in) -->
+        <div v-if="userLoggedIn" class="relative">
+          <button
+            @click="toggleUserMenu"
+            class="w-9 h-9 rounded-full flex items-center justify-center"
+            style="background-color: var(--bg-border);"
+            aria-label="Menu utilisateur"
+            :aria-expanded="showUserMenu"
+          >
+            <span class="sr-only">Utilisateur</span>
+            <!-- Simple cercle/Avatar neutre -->
+            <div class="w-7 h-7 rounded-full" style="background-color: var(--bg-primary);"></div>
+          </button>
+
+          <!-- User Menu -->
+          <div 
+            v-if="showUserMenu"
+            class="absolute top-full right-0 mt-3 w-44 rounded-xl border z-50"
+            style="background-color: var(--bg-surface); border-color: var(--bg-border);"
+            role="menu"
+            aria-label="Menu utilisateur"
+          >
+            <button
+              @click="logoutUser"
+              class="w-full px-4 py-2 text-left text-sm rounded-xl transition-colors duration-200 hover:bg-opacity-50"
+              style="color: var(--text-primary); background-color: var(--bg-primary);"
+            >
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div v-if="showMobileMenu" class="sm:hidden mt-3 px-1" role="menu" aria-label="Menu mobile">
+      <div class="rounded-xl border" style="background-color: var(--bg-surface); border-color: var(--bg-border);">
+        <div class="p-2 space-y-1">
+          <button @click="toggleTheme" class="w-full px-3 py-2 rounded-lg flex items-center justify-between" style="background-color: var(--bg-primary); color: var(--text-primary);">
+            <span>Thème</span>
+            <Icon :name="isDark ? 'heroicons:sun' : 'heroicons:moon'" class="w-5 h-5" :style="{ color: 'var(--accent-primary)' }" />
+          </button>
+          <div class="px-3 pt-2 text-xs" style="color: var(--text-muted);">Langue</div>
+          <div class="grid grid-cols-2 gap-2 px-2">
+            <button @click="switchLanguage('fr'); closeMobileMenu()" class="px-3 py-2 rounded-lg text-sm" style="background-color: var(--bg-primary); color: var(--text-primary);">FR</button>
+            <button @click="switchLanguage('en'); closeMobileMenu()" class="px-3 py-2 rounded-lg text-sm" style="background-color: var(--bg-primary); color: var(--text-primary);">EN</button>
+          </div>
+          <button v-if="currentProjectId" @click="handleMobileReset" class="w-full px-3 py-2 rounded-lg flex items-center justify-between" style="background-color: var(--bg-primary); color: var(--text-primary);">
+            <span>{{ $t('app.progress.reset') }}</span>
+            <Icon name="heroicons:arrow-path" class="w-5 h-5" :style="{ color: 'var(--text-muted)' }" />
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -189,7 +255,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import Modal from '../common/Modal.vue'
 
 const props = defineProps({
@@ -202,6 +268,7 @@ const props = defineProps({
 const emit = defineEmits(['reset-progress'])
 
 const { locale, setLocale } = useI18n()
+const { currentUser, logout } = useAuth()
 
 const isDark = ref(true)
 const isScrolled = ref(false)
@@ -209,6 +276,10 @@ const progressPercentage = ref(null)
 const showLanguageMenu = ref(false)
 const showResetModal = ref(false)
 const isClient = ref(false)
+const showUserMenu = ref(false)
+const showMobileMenu = ref(false)
+
+const userLoggedIn = computed(() => !!currentUser.value)
 
 const handleScroll = () => {
   if (process.client) {
@@ -235,6 +306,14 @@ const toggleTheme = () => {
   }
 }
 
+const toggleMobileMenu = () => {
+  showMobileMenu.value = !showMobileMenu.value
+}
+
+const closeMobileMenu = () => {
+  showMobileMenu.value = false
+}
+
 const resetProgress = () => {
   showResetModal.value = true
 }
@@ -255,21 +334,40 @@ const toggleLanguageMenu = () => {
 const switchLanguage = (locale) => {
   if (process.client) {
     setLocale(locale)
-    // Petit délai pour s'assurer que le changement est pris en compte
     setTimeout(() => {
       showLanguageMenu.value = false
     }, 100)
   }
 }
 
+const toggleUserMenu = () => {
+  showUserMenu.value = !showUserMenu.value
+}
+
+const logoutUser = async () => {
+  try {
+    await logout()
+    showUserMenu.value = false
+    navigateTo('/login')
+  } catch (e) {
+    // noop
+  }
+}
+
 const handleClickOutside = (event) => {
-  const languageMenu = document.querySelector('[role="menu"]')
-  const languageButton = event.target.closest('button[aria-label*="langue"]')
-  const languageButton2 = event.target.closest('button[aria-label*="language"]')
-  
-  if (languageMenu && !languageMenu.contains(event.target) && !languageButton && !languageButton2) {
+  const languageMenu = document.querySelector('[role="menu"][aria-label*="langue"], [role="menu"][aria-label*="language"]')
+  const userMenu = document.querySelector('[aria-label="Menu utilisateur"]')
+  if (showLanguageMenu.value && languageMenu && !languageMenu.contains(event.target)) {
     showLanguageMenu.value = false
   }
+  if (showUserMenu.value && userMenu && !userMenu.contains(event.target)) {
+    showUserMenu.value = false
+  }
+}
+
+const handleMobileReset = () => {
+  resetProgress()
+  closeMobileMenu()
 }
 
 onMounted(() => {
@@ -285,14 +383,12 @@ onMounted(() => {
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('progress-updated', handleProgressUpdate)
     window.addEventListener('click', handleClickOutside)
-    handleScroll() // Check initial scroll position
+    handleScroll()
     
-    // Réinitialiser le pourcentage au montage si pas de projet
     resetProgressWhenNoProject()
   }
 })
 
-// Surveiller les changements de currentProjectId
 watch(() => props.currentProjectId, (newValue) => {
   if (!newValue) {
     progressPercentage.value = 0
