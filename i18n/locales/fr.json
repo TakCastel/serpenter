@@ -31,6 +31,100 @@
       "english": "Anglais"
     }
   },
+  "home": {
+    "hero": {
+      "subtitleMain": "La checklist complète pour vérifier votre site avant le déploiement",
+      "subtitleAccent": "Cochez, validez, déployez en toute sérénité !",
+      "cta": "Commencer maintenant"
+    },
+    "features": {
+      "header": "Plus de 200 vérifications organisées",
+      "subtitle1": {
+        "before": "Une checklist complète pour vérifier votre site",
+        "em": "avant",
+        "after": "le déploiement."
+      },
+      "subtitle2": "Parce qu'il vaut mieux prévenir que guérir !",
+      "title": "Plus de 200 points de vérification organisés par catégories."
+    },
+    "cards": {
+      "checklist": {
+        "title": "Système de checklist guidée",
+        "desc": "Parcours par catégories avec éléments clairs et coche sauvegardée.",
+        "items": [
+          "Catégories SEO, Performance, Accessibilité, Sécurité",
+          "Explications et bonnes pratiques intégrées",
+          "Progression suivie et sauvegardée"
+        ]
+      },
+      "lighthouse": {
+        "title": "Audit Lighthouse intégré",
+        "desc": "Analyse d’une URL en mobile/desktop directement dans l’app.",
+        "items": [
+          "Scores Performance, SEO, Best Practices, Accessibilité",
+          "Indicateurs clés: LCP, INP, CLS, TTFB",
+          "Options avancées (HTTP Basic)"
+        ]
+      },
+      "projects": {
+        "title": "Multi‑projets",
+        "desc": "Gérez plusieurs projets et basculez en un clic.",
+        "items": [
+          "Progrès isolé par projet",
+          "Sauvegarde en base/Cloud",
+          "Passage rapide entre projets"
+        ]
+      }
+    },
+    "story": {
+      "whyChip": "Pourquoi Serpenter ?",
+      "title": "Une solution complète pour tous les professionnels du web",
+      "subtitle": "Évitez les oublis avant déploiement avec une checklist claire, un audit intégré et une gestion multi‑projets.",
+      "problemTitle": "Le problème",
+      "p1": {
+        "before": "Combien de fois avez-vous déployé un site en vous demandant si vous n'aviez rien oublié ?",
+        "listEm": "SEO, performance, accessibilité, sécurité",
+        "afterBefore": "... La liste est longue et les",
+        "stakesEm": "enjeux sont importants"
+      },
+      "p2": {
+        "before": "Un oubli peut coûter cher :",
+        "item1": "rangs dans Google",
+        "item2": "expérience utilisateur dégradée",
+        "item3": "problèmes de sécurité",
+        "connector": "ou même des",
+        "item4": "amendes pour non-conformité"
+      },
+      "p3": {
+        "before": "Et quand on travaille",
+        "em1": "seul ou en équipe",
+        "middle": ", il est facile de passer à côté de",
+        "em2": "points critiques",
+        "after": "qui peuvent faire la différence entre un site qui performe et un site qui déçoit."
+      },
+      "solutionTitle": "La solution",
+      "s1": {
+        "before": "Serpenter est une",
+        "em1": "checklist exhaustive et intelligente",
+        "middle": "qui vous guide pas à pas dans la vérification de votre site",
+        "em2": "avant déploiement"
+      },
+      "s2": {
+        "before": "Pour tous les professionnels du web : Que vous soyez",
+        "em1": "freelance, développeur en équipe, ou QA testeur",
+        "middle": ", Serpenter vous assure de livrer un travail irréprochable,",
+        "em2": "standardise vos processus de validation",
+        "afterBefore": "et vous donne une",
+        "em3": "base solide",
+        "after": "pour vos tests. Ne laissez rien au hasard dans vos vérifications."
+      }
+    },
+    "cta": {
+      "title": "Prêt à vérifier votre site ?",
+      "subtitle": "Rejoignez des milliers de développeurs qui ne déploient plus sans vérifier !",
+      "button": "Commencer maintenant"
+    }
+  },
   "projects": {
     "selectProject": "Sélectionner un projet",
     "name": "Nom du projet",

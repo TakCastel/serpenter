@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 lg:px-6 py-8" style="min-height: calc(100vh + 200px);">
+  <div class="w-full" style="min-height: calc(100vh + 200px);">
     <!-- Carte de félicitations quand toutes les catégories sont complétées -->
     <DeploymentReadyCard 
       v-if="allCategoriesCompleted && !isLoading"
@@ -8,30 +8,7 @@
       @deploy-click="handleDeployClick"
     />
     
-    <!-- Header et contenu normal quand pas toutes les catégories sont complétées -->
-    <template v-else>
-      <!-- Header -->
-      <ChecklistHeader />
-      
-      <!-- Stats Cards -->
-      <StatsCards 
-        :is-loading="isLoading"
-        :completed-count="completedCount"
-        :total-count="totalCount"
-        :progress-percentage="progressPercentage"
-      />
-
-      <!-- Progress Bar -->
-      <div class="mb-8 progress-section">
-        <div class="w-full rounded-full h-2 transition-colors duration-200 max-w-full overflow-hidden" style="background-color: var(--bg-border);">
-          <div 
-            class="h-2 rounded-full transition-all duration-500 ease-out"
-            style="background-color: var(--accent-primary);"
-            :style="{ width: Math.min(progressPercentage, 100) + '%' }"
-          ></div>
-        </div>
-      </div>
-    </template>
+    <!-- En-tête, stats et barre de progression supprimés pour n'afficher que les accordéons -->
 
     <!-- Categories -->
     <div class="space-y-6" role="region" aria-label="Catégories de la checklist">
@@ -50,7 +27,7 @@
           >
           <!-- Category Header -->
           <div 
-            class="p-6 cursor-pointer transition-all duration-300 hover:bg-opacity-80 relative overflow-hidden"
+            class="p-4 md:p-5 cursor-pointer transition-all duration-300 hover:bg-opacity-80 relative overflow-hidden"
             :class="{ 
               'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-t-xl': isCategoryCompleted(category) && isCategoryExpanded(category.id),
               'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-xl': isCategoryCompleted(category) && !isCategoryExpanded(category.id),
@@ -133,7 +110,7 @@
             role="region"
             :aria-label="`Contenu de la catégorie ${category.name}`"
           >
-            <div class="p-6 space-y-4">
+            <div class="p-4 md:p-5 space-y-4">
               <!-- Skeleton pour les items pendant le chargement -->
               <template v-if="category.isLoading">
                 <SkeletonItem v-for="i in 3" :key="`skeleton-item-${i}`" />
@@ -163,8 +140,7 @@
 <script setup>
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import ItemAccordion from './ItemAccordion.vue'
-import ChecklistHeader from './ChecklistHeader.vue'
-import StatsCards from './StatsCards.vue'
+// Imports supprimés: ChecklistHeader, StatsCards
 import DeploymentReadyCard from './DeploymentReadyCard.vue'
 import SkeletonCategory from '../common/SkeletonCategory.vue'
 import SkeletonItem from '../common/SkeletonItem.vue'
@@ -448,6 +424,21 @@ onMounted(async () => {
     window.addEventListener('open-category', (event) => {
       if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
     })
+    // Réception des mises à jour auto-check depuis l'audit Lighthouse
+    window.addEventListener('checked-items-updated', async (event) => {
+      try {
+        if (!currentUser.value || !props.currentProjectId) return
+        // Recharger l'état depuis Firestore via le store
+        await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
+        checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
+        // Recalcule des scores
+        const allItems = []
+        categories.value.forEach(category => { if (category.items) allItems.push(...category.items) })
+        projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
+      } catch (e) {
+        // noop
+      }
+    })
   }
 })
 
@@ -456,6 +447,7 @@ onUnmounted(() => {
     window.removeEventListener('open-category', (event) => {
       if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
     })
+    window.removeEventListener('checked-items-updated', () => {})
   }
 })
 

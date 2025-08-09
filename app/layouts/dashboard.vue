@@ -6,8 +6,8 @@
       @reset-progress="handleResetProgress" 
     />
     
-    <!-- Layout principal avec sidebar -->
-    <div class="pt-[85px] flex">
+    <!-- Layout principal avec sidebar (offset ajusté pour le header plus petit) -->
+    <div class="pt-[72px] flex">
       <!-- Sidebar avec sommaire -->
       <aside 
         class="w-16 sm:w-72 flex-shrink-0 border-r transition-all duration-300" 
@@ -15,7 +15,7 @@
         role="navigation"
         aria-label="Navigation des vérifications"
       >
-        <div class="sticky top-24 p-4">
+        <div class="sticky top-20 p-4">
           <!-- Sélecteur de projet -->
           <div class="mb-6 hidden sm:block">
             <ProjectSelector @project-changed="handleProjectChanged" />

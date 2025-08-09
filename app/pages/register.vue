@@ -24,6 +24,15 @@
         </div>
         <button type="submit" class="w-full btn btn-primary mt-2">S'inscrire</button>
       </form>
+      <div class="my-4 flex items-center gap-3">
+        <div class="h-px flex-1" style="background-color: var(--bg-border);"></div>
+        <span class="text-xs" style="color: var(--text-muted);">ou</span>
+        <div class="h-px flex-1" style="background-color: var(--bg-border);"></div>
+      </div>
+      <button @click="onGoogle" class="w-full px-4 py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-3" style="background-color: var(--bg-primary); border: 1px solid var(--bg-border); color: var(--text-primary);">
+        <Icon name="logos:google-icon" class="w-5 h-5" aria-hidden="true" />
+        <span>Continuer avec Google</span>
+      </button>
       <div class="mt-4 text-sm" style="color: var(--text-secondary);">
         <NuxtLink to="/login">Déjà un compte ? Se connecter</NuxtLink>
       </div>
@@ -34,7 +43,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-const { register } = useAuth()
+const { register, loginWithGoogle } = useAuth()
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
@@ -49,6 +58,16 @@ const onSubmit = async () => {
     navigateTo('/dashboard')
   } catch (e: any) {
     error.value = e?.message || "Erreur lors de l'inscription"
+  }
+}
+
+const onGoogle = async () => {
+  error.value = ''
+  try {
+    await loginWithGoogle()
+    navigateTo('/dashboard')
+  } catch (e: any) {
+    error.value = e?.message || "Erreur avec Google"
   }
 }
 </script>

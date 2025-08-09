@@ -1,7 +1,10 @@
 <template>
-  <div class="min-h-screen grid grid-cols-1 md:grid-cols-2" style="background-color: var(--bg-primary);">
+  <div class="min-h-screen grid grid-cols-1 md:grid-cols-3" style="background-color: var(--bg-primary);">
+    <div class="fixed top-6 right-6 z-50">
+      <LangThemeSwitcher />
+    </div>
     <!-- Branding / Intro gauche -->
-    <aside class="hidden md:flex flex-col justify-between p-10 lg:p-14 border-r" style="border-color: var(--bg-border); background-color: var(--bg-surface);">
+    <aside class="hidden md:flex md:col-span-1 flex-col justify-between p-10 lg:p-14 border-r" style="border-color: var(--bg-border); background-color: var(--bg-surface);">
       <div>
         <NuxtLink to="/" class="inline-flex items-center gap-3 group">
           <Icon name="fluent-emoji:snake" class="w-8 h-8" />
@@ -18,8 +21,8 @@
     </aside>
 
     <!-- Zone formulaire droite -->
-    <main class="min-h-screen flex items-center justify-center md:justify-end px-6 lg:px-12 py-12">
-      <div class="w-full md:max-w-md md:mr-6 lg:mr-12">
+    <main class="min-h-screen md:col-span-2 flex items-center justify-center px-6 lg:px-12 py-12">
+      <div class="w-full md:max-w-lg lg:max-w-xl mx-auto">
         <slot />
       </div>
     </main>
@@ -27,4 +30,5 @@
 </template>
 
 <script setup>
+import LangThemeSwitcher from '~/components/common/LangThemeSwitcher.vue'
 </script>

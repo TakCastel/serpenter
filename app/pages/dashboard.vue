@@ -1,8 +1,43 @@
 <template>
-  <div>
-    <EmptyState v-if="isClient && !hasProjects" @create-project="handleCreateFirstProject" />
-    <SeoChecklist v-else-if="isClient && currentProjectId" ref="seoChecklist" :current-project-id="currentProjectId" @categories-loaded="handleCategoriesLoaded" />
-    <EmptyState v-else-if="isClient" @create-project="handleCreateFirstProject" />
+  <div class="px-4 lg:px-6 py-6">
+    <!-- Header global avec titre, description et statistiques (visible seulement si projet sélectionné) -->
+    <div v-if="isClient && currentProjectId" class="card p-6 mb-6" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
+      <div class="text-center mb-2">
+        <h1 class="text-2xl font-bold" style="color: var(--text-primary);">Checklist Pré-Déploiement</h1>
+        <p class="text-sm" style="color: var(--text-secondary);">Vérifiez tous les aspects essentiels avant de mettre votre site en ligne</p>
+      </div>
+      <div class="flex items-center justify-center gap-6 text-sm">
+        <div class="text-center">
+          <div class="text-2xl font-bold" style="color: var(--text-primary);">{{ projectsStore.currentProjectScores?.completedItems || 0 }}</div>
+          <div class="text-xs" style="color: var(--text-secondary);">sur {{ projectsStore.currentProjectScores?.totalItems || 44 }} complétés</div>
+        </div>
+        <div class="w-px h-8" style="background-color: var(--bg-border);"></div>
+        <div class="text-center">
+          <div class="text-2xl font-bold" style="color: var(--text-primary);">{{ Math.round(projectsStore.currentProjectScores?.percentage || 0) }}%</div>
+          <div class="text-xs" style="color: var(--text-secondary);">terminé</div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="isClient && currentProjectId" class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+      <div class="lg:col-span-2">
+        <SeoChecklist ref="seoChecklist" :current-project-id="currentProjectId" @categories-loaded="handleCategoriesLoaded" />
+      </div>
+      <div class="lg:col-span-1">
+        <!-- Desktop: accordéon visible par défaut -->
+        <div class="hidden lg:block">
+          <LighthouseAccordion :default-expanded="true" />
+        </div>
+        <!-- Mobile: accordéon replié, placé en dessous -->
+        <div class="block lg:hidden">
+          <LighthouseAccordion :default-expanded="false" />
+        </div>
+      </div>
+    </div>
+
+    <div v-else>
+      <EmptyState @create-project="handleCreateFirstProject" />
+    </div>
   </div>
 </template>
 
@@ -11,6 +46,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useProjectsStore } from '~/stores/projects'
 import EmptyState from '~/components/dashboard/EmptyState.vue'
 import SeoChecklist from '~/components/checklist/SeoChecklist.vue'
+import LighthouseAccordion from '~/components/dashboard/LighthouseAccordion.vue'
 
 definePageMeta({
   layout: 'dashboard'

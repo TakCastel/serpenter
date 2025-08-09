@@ -38,33 +38,13 @@
       <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, var(--accent-primary) 1px, transparent 0); background-size: 40px 40px;"></div>
     </div>
     
-    <!-- Theme Toggle Button -->
-    <div class="absolute top-6 right-6 z-20">
-      <button
-        @click="toggleTheme"
-        class="w-10 h-10 rounded-xl transition-all duration-200 flex items-center justify-center backdrop-blur-sm border"
-        style="background-color: var(--bg-surface); border-color: var(--bg-border);"
-        :title="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
-        :aria-label="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
-        role="button"
-        tabindex="0"
-      >
-        <Icon 
-          :name="isDark ? 'heroicons:sun' : 'heroicons:moon'" 
-          class="w-5 h-5 transition-colors duration-200"
-          style="color: var(--text-primary);"
-          aria-hidden="true"
-        />
-      </button>
-    </div>
+    
     
     <!-- Content -->
     <div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center">
-      <!-- Logo/Brand -->
-      <div class="mb-8">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl transition-all duration-300 bg-white">
-          <Icon name="fluent-emoji:snake" class="w-10 h-10" style="color: var(--accent-primary);" />
-        </div>
+      <!-- Logo/Brand (sans carte) -->
+      <div class="mb-10">
+        <Icon name="fluent-emoji:snake" class="w-12 h-12" style="color: var(--accent-primary);" />
       </div>
       
       <!-- Main heading -->
@@ -75,52 +55,25 @@
       <!-- Subtitle clair et direct -->
       <div class="mb-8 max-w-3xl mx-auto">
         <p class="text-xl md:text-2xl mb-4 leading-relaxed transition-colors duration-300 font-medium" style="color: var(--text-primary);">
-          La checklist complète pour vérifier votre site avant le déploiement
+          {{ $t('home.hero.subtitleMain') }}
         </p>
         <p class="text-lg md:text-xl leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
-          Plus de 200 points de vérification organisés par catégories. 
-          <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">Cochez, validez, déployez en toute sérénité !</span>
+          {{ $t('home.features.title') }}
+          <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">{{ $t('home.hero.subtitleAccent') }}</span>
         </p>
       </div>
       
-      <!-- Avantages clés -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-        <div class="card p-6 text-center transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-            <Icon name="heroicons:check-circle" class="w-6 h-6 text-white" />
-          </div>
-          <h3 class="text-lg font-semibold mb-2 transition-colors duration-300" style="color: var(--text-primary);">Vérification complète</h3>
-          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">SEO, performance, accessibilité, sécurité et plus encore</p>
-        </div>
-        
-        <div class="card p-6 text-center transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-            <Icon name="heroicons:light-bulb" class="w-6 h-6 text-white" />
-          </div>
-          <h3 class="text-lg font-semibold mb-2 transition-colors duration-300" style="color: var(--text-primary);">Conseils pratiques</h3>
-          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">Explications détaillées et bonnes pratiques pour chaque point</p>
-        </div>
-        
-        <div class="card p-6 text-center transition-all duration-300" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-            <Icon name="heroicons:rocket-launch" class="w-6 h-6 text-white" />
-          </div>
-          <h3 class="text-lg font-semibold mb-2 transition-colors duration-300" style="color: var(--text-primary);">Déploiement serein</h3>
-          <p class="text-sm transition-colors duration-300" style="color: var(--text-secondary);">Confiance totale avant de mettre votre site en ligne</p>
-        </div>
-      </div>
+      <!-- Avantages clés retirés pour un Hero épuré -->
       
       <!-- CTA Principal -->
       <div class="mb-16 text-center">
         <button 
           @click="navigateToDashboard"
-          class="px-12 py-6 text-2xl font-bold rounded-3xl transition-all duration-300"
-          style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white;"
+          class="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-200 shadow-sm hover:shadow-md hover:opacity-95 active:scale-[.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          style="background-color: var(--accent-primary); color: white;"
         >
-          <span class="flex items-center space-x-4">
-            <Icon name="heroicons:play" class="w-7 h-7" />
-            <span>Commencer maintenant</span>
-          </span>
+          <Icon name="heroicons:play" class="w-5 h-5" />
+          <span>{{ $t('home.hero.cta') }}</span>
         </button>
       </div>
     </div>
@@ -136,6 +89,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import LangThemeSwitcher from '~/components/common/LangThemeSwitcher.vue'
 
 const router = useRouter()
 
@@ -159,6 +113,7 @@ const toggleTheme = () => {
     localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
   }
 }
+
 
 onMounted(() => {
   if (process.client) {

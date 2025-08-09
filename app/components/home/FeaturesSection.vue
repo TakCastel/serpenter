@@ -26,18 +26,20 @@
       <!-- Section header -->
       <div class="text-center mb-20">
         <h2 class="text-4xl md:text-6xl font-bold mb-8 transition-colors duration-300" style="color: var(--text-primary);">
-          Plus de 200 vérifications organisées
+          {{ $t('home.features.header') }}
         </h2>
         <p class="text-xl md:text-2xl transition-colors duration-300 max-w-4xl mx-auto leading-relaxed" style="color: var(--text-secondary);">
-          Une checklist complète pour vérifier votre site <strong>avant</strong> le déploiement. 
-          <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">Parce qu'il vaut mieux prévenir que guérir !</span> 🎯
+          {{ $t('home.features.subtitle1.before') }} 
+          <strong>{{ $t('home.features.subtitle1.em') }}</strong>
+          {{ ' ' + $t('home.features.subtitle1.after') }} 
+          <span class="font-semibold transition-colors duration-300" style="color: var(--accent-primary);">{{ $t('home.features.subtitle2') }}</span> 🎯
         </p>
       </div>
       
-      <!-- Features grid -->
+      <!-- Features grid (3 cartes ciblées) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
         <div 
-          v-for="feature in featuresData" 
+          v-for="feature in homepageFeatures" 
           :key="feature.id"
           class="card p-8 transition-all duration-300"
           style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);"
@@ -46,26 +48,82 @@
             <Icon :name="feature.icon" class="w-8 h-8 text-white" />
           </div>
           <h3 class="text-2xl font-bold mb-4 transition-colors duration-300" style="color: var(--text-primary);">
-            {{ feature.title }}
+            {{ $t(feature.titleKey) }}
           </h3>
           <p class="mb-6 text-lg leading-relaxed transition-colors duration-300" style="color: var(--text-secondary);">
-            {{ feature.description }}
+            {{ $t(feature.descriptionKey) }}
           </p>
           <ul class="space-y-3 text-base transition-colors duration-300" style="color: var(--text-muted);">
-            <li v-for="item in feature.items" :key="item" class="flex items-center">
-              <Icon name="heroicons:check-circle" class="w-5 h-5 mr-3" style="color: var(--accent-primary);" />
-              {{ item }}
+            <li v-for="itemKey in feature.itemsKeys" :key="itemKey" class="flex items-center">
+              <Icon name="heroicons:check-circle" class="w-5 h-5 mr-3 shrink-0" style="color: var(--accent-primary);" />
+              <span class="flex-1">{{ $t(itemKey) }}</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <!-- Pricing inserted here -->
-      <PricingSection />
+      <!-- Bloc storytelling: Problème / Solution, sans icônes -->
+      <div class="my-24 md:my-32">
+        <!-- En-tête concis -->
+        <div class="px-6 md:px-10 pt-2 pb-8 text-center">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-3" style="background-color: var(--bg-primary); color: var(--text-secondary); border: 1px solid var(--bg-border);">{{ $t('home.story.whyChip') }}</span>
+          <h3 class="text-3xl md:text-4xl font-bold" style="color: var(--text-primary);">{{ $t('home.story.title') }}</h3>
+          <p class="text-base md:text-lg mt-3 max-w-3xl mx-auto" style="color: var(--text-secondary);">{{ $t('home.story.subtitle') }}</p>
+        </div>
+        <!-- Deux colonnes texte uniquement -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+          <!-- Problème -->
+          <div class="flex flex-col gap-4">
+            <h4 class="text-lg font-semibold" style="color: var(--text-primary);">{{ $t('home.story.problemTitle') }}</h4>
+            <p class="text-sm md:text-base leading-relaxed" style="color: var(--text-secondary);">
+              {{ $t('home.story.p1.before') }} 
+              <strong>{{ $t('home.story.p1.listEm') }}</strong>
+              {{ ' ' + $t('home.story.p1.afterBefore') }} 
+              <strong>{{ $t('home.story.p1.stakesEm') }}</strong>
+            </p>
+            <p class="text-sm md:text-base leading-relaxed" style="color: var(--text-secondary);">
+              {{ $t('home.story.p2.before') }} 
+              <strong>{{ $t('home.story.p2.item1') }}</strong>, 
+              <strong>{{ $t('home.story.p2.item2') }}</strong>, 
+              <strong>{{ $t('home.story.p2.item3') }}</strong>, 
+              {{ $t('home.story.p2.connector') }} 
+              <strong>{{ $t('home.story.p2.item4') }}</strong>.
+            </p>
+            <p class="text-sm md:text-base leading-relaxed" style="color: var(--text-secondary);">
+              {{ $t('home.story.p3.before') }} 
+              <strong>{{ $t('home.story.p3.em1') }}</strong>
+              {{ $t('home.story.p3.middle') }} 
+              <strong>{{ $t('home.story.p3.em2') }}</strong> 
+              {{ $t('home.story.p3.after') }}
+            </p>
+          </div>
+          <!-- Solution -->
+          <div class="flex flex-col gap-4">
+            <h4 class="text-lg font-semibold" style="color: var(--text-primary);">{{ $t('home.story.solutionTitle') }}</h4>
+            <p class="text-sm md:text-base leading-relaxed" style="color: var(--text-secondary);">
+              {{ $t('home.story.s1.before') }} 
+              <strong>{{ $t('home.story.s1.em1') }}</strong> 
+              {{ $t('home.story.s1.middle') }} 
+              <strong>{{ $t('home.story.s1.em2') }}</strong>.
+            </p>
+            <p class="text-sm md:text-base leading-relaxed" style="color: var(--text-secondary);">
+              {{ $t('home.story.s2.before') }} 
+              <strong>{{ $t('home.story.s2.em1') }}</strong>, 
+              {{ $t('home.story.s2.middle') }} 
+              <strong>{{ $t('home.story.s2.em2') }}</strong> 
+              {{ ' ' + $t('home.story.s2.afterBefore') }} 
+              <strong>{{ $t('home.story.s2.em3') }}</strong> 
+              {{ ' ' + $t('home.story.s2.after') }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing removed -->
       
       <!-- CTA Section -->
       <div class="text-center">
-        <div class="card p-12 max-w-4xl mx-auto relative overflow-hidden" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border: 1px solid var(--bg-border);">
+        <div class="rounded-2xl p-12 max-w-4xl mx-auto relative overflow-hidden" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border: 1px solid var(--bg-border);">
           <!-- Éléments décoratifs -->
           <div class="absolute top-0 left-0 w-full h-full opacity-10">
             <div class="absolute top-4 right-4 w-16 h-16 rounded-full bg-white/20"></div>
@@ -73,24 +131,22 @@
           </div>
           
           <div class="relative z-10">
-            <div class="w-20 h-20 mx-auto mb-8 rounded-3xl flex items-center justify-center bg-white/20 backdrop-blur-sm">
-              <Icon name="fluent-emoji:snake" class="w-10 h-10 text-white" />
+            <div class="w-20 h-20 mx-auto mb-8 rounded-3xl flex items-center justify-center bg-white">
+              <Icon name="fluent-emoji:snake" class="w-10 h-10" :style="{ color: 'var(--accent-primary)' }" />
             </div>
             
             <h3 class="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Prêt à vérifier votre site ?
+              {{ $t('home.cta.title') }}
             </h3>
             <p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-              Rejoignez des milliers de développeurs qui ne déploient plus sans vérifier !
+              {{ $t('home.cta.subtitle') }}
             </p>
             <button 
               @click="navigateToDashboard"
-              class="px-12 py-6 text-xl font-bold rounded-3xl transition-all duration-300 bg-white text-gray-900"
+              class="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-200 shadow-sm hover:shadow-md hover:opacity-95 active:scale-[.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 bg-white text-gray-900"
             >
-              <span class="flex items-center space-x-4">
-                <Icon name="heroicons:play" class="w-6 h-6" />
-                <span>Commencer maintenant</span>
-              </span>
+              <Icon name="heroicons:play" class="w-5 h-5" />
+              <span>{{ $t('home.cta.button') }}</span>
             </button>
           </div>
         </div>
@@ -100,7 +156,41 @@
 </template>
 
 <script setup>
-import { featuresData } from '~/data/features-data.js'
+const homepageFeatures = [
+  {
+    id: 'checklist-system',
+    titleKey: 'home.cards.checklist.title',
+    descriptionKey: 'home.cards.checklist.desc',
+    icon: 'heroicons:clipboard-document-check',
+    itemsKeys: [
+      'home.cards.checklist.items.0',
+      'home.cards.checklist.items.1',
+      'home.cards.checklist.items.2'
+    ]
+  },
+  {
+    id: 'lighthouse-integrated',
+    titleKey: 'home.cards.lighthouse.title',
+    descriptionKey: 'home.cards.lighthouse.desc',
+    icon: 'heroicons:bolt',
+    itemsKeys: [
+      'home.cards.lighthouse.items.0',
+      'home.cards.lighthouse.items.1',
+      'home.cards.lighthouse.items.2'
+    ]
+  },
+  {
+    id: 'multi-projects',
+    titleKey: 'home.cards.projects.title',
+    descriptionKey: 'home.cards.projects.desc',
+    icon: 'heroicons:folder',
+    itemsKeys: [
+      'home.cards.projects.items.0',
+      'home.cards.projects.items.1',
+      'home.cards.projects.items.2'
+    ]
+  }
+]
 import PricingSection from '~/components/home/PricingSection.vue'
 
 const router = useRouter()
