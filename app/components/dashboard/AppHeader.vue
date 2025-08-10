@@ -7,6 +7,24 @@
   >
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center space-x-3">
+        <!-- Bouton toggle sidebar (style YouTube) -->
+        <button
+          @click="toggleSidebar"
+          class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-opacity-80 mr-2"
+          :title="isSidebarCollapsed ? 'Ouvrir la barre latérale' : 'Réduire la barre latérale'"
+          :aria-label="isSidebarCollapsed ? 'Ouvrir la barre latérale' : 'Réduire la barre latérale'"
+          :style="{
+            backgroundColor: isSidebarCollapsed ? 'var(--bg-primary)' : 'var(--accent-primary)',
+            color: isSidebarCollapsed ? 'var(--text-primary)' : 'white'
+          }"
+        >
+          <Icon 
+            :name="isSidebarCollapsed ? 'heroicons:bars-3' : 'heroicons:x-mark'" 
+            class="w-5 h-5 transition-transform duration-300"
+            :class="{ 'rotate-180': !isSidebarCollapsed }"
+          />
+        </button>
+        
         <Icon name="fluent-emoji:snake" class="w-8 h-8 sm:w-10 sm:h-10" aria-hidden="true" />
         <div class="flex flex-col transition-all duration-300">
           <h1 
@@ -79,7 +97,7 @@
         
         <!-- Reset (desktop only) -->
         <button
-          v-if="currentProjectId && isClient"
+          v-if="currentProjectId && isClient && currentProjectHasChecklistType"
           @click="resetProgress"
           class="hidden sm:flex px-3 py-1.5 rounded-xl transition-all duration-200 items-center space-x-2 hover:bg-opacity-80"
           style="background-color: var(--bg-primary); border: 1px solid var(--bg-border);"
@@ -146,7 +164,7 @@
             <button @click="switchLanguage('fr'); closeMobileMenu()" class="px-3 py-2 rounded-lg text-sm" style="background-color: var(--bg-primary); color: var(--text-primary);">FR</button>
             <button @click="switchLanguage('en'); closeMobileMenu()" class="px-3 py-2 rounded-lg text-sm" style="background-color: var(--bg-primary); color: var(--text-primary);">EN</button>
           </div>
-          <button v-if="currentProjectId" @click="handleMobileReset" class="w-full px-3 py-2 rounded-lg flex items-center justify-between" style="background-color: var(--bg-primary); color: var(--text-primary);">
+          <button v-if="currentProjectId && currentProjectHasChecklistType" @click="handleMobileReset" class="w-full px-3 py-2 rounded-lg flex items-center justify-between" style="background-color: var(--bg-primary); color: var(--text-primary);">
             <span>{{ $t('app.progress.reset') }}</span>
             <Icon name="heroicons:arrow-path" class="w-5 h-5" :style="{ color: 'var(--text-muted)' }" />
           </button>
@@ -193,10 +211,22 @@ const props = defineProps({
   currentProjectId: {
     type: String,
     default: null
+  },
+  isSidebarCollapsed: {
+    type: Boolean,
+    default: false
+  }
+})
+const projectsStore = useProjectsStore?.() || null
+const currentProjectHasChecklistType = computed(() => {
+  try {
+    return !!projectsStore?.currentProject?.checklistType
+  } catch (e) {
+    return false
   }
 })
 
-const emit = defineEmits(['reset-progress'])
+const emit = defineEmits(['reset-progress', 'toggle-sidebar'])
 
 const { locale, setLocale } = useI18n()
 const { currentUser, logout } = useAuth()
@@ -273,6 +303,10 @@ const switchLanguage = (locale) => {
 
 const toggleUserMenu = () => {
   showUserMenu.value = !showUserMenu.value
+}
+
+const toggleSidebar = () => {
+  emit('toggle-sidebar')
 }
 
 const logoutUser = async () => {

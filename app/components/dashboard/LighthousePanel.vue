@@ -7,7 +7,23 @@
       <div>
         <label class="block text-sm mb-1" style="color: var(--text-secondary);">URL</label>
         <div class="flex gap-2">
-          <input v-model="url" type="url" required placeholder="https://preprod.example.com" class="input w-full" autocomplete="off" spellcheck="false" autocapitalize="none" />
+          <div class="flex-1">
+            <input 
+              v-model="url" 
+              type="url" 
+              required 
+              placeholder="https://preprod.example.com" 
+              class="input w-full" 
+              :class="{ 'border-red-500': url && !isValidUrl }"
+              autocomplete="off" 
+              spellcheck="false" 
+              autocapitalize="none"
+              @input="validateUrl"
+            />
+            <div v-if="url && !isValidUrl" class="text-sm text-red-500 mt-1">
+              Veuillez entrer une URL valide (ex: https://example.com)
+            </div>
+          </div>
           <select v-model="formFactor" class="input w-36">
             <option value="mobile">Mobile</option>
             <option value="desktop">Desktop</option>
@@ -41,8 +57,20 @@
       </details>
 
       <div class="flex items-center gap-3">
-        <button :disabled="loading || !url" class="btn btn-primary">
-          <span v-if="!loading">Lancer l'audit</span>
+        <button 
+          :disabled="loading || !url || !isValidUrl" 
+          class="btn btn-primary"
+          :class="{ 'opacity-50 cursor-not-allowed': !url || !isValidUrl }"
+        >
+          <span v-if="!loading && url && isValidUrl">Lancer l'audit</span>
+          <span v-else-if="!loading && !url" class="flex items-center gap-2">
+            <Icon name="heroicons:information-circle" class="w-4 h-4" />
+            Entrez l'URL du site web
+          </span>
+          <span v-else-if="!loading && !isValidUrl" class="flex items-center gap-2">
+            <Icon name="heroicons:information-circle" class="w-4 h-4" />
+            URL invalide
+          </span>
           <span v-else class="inline-flex items-center gap-2">
             <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" style="color: white;"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path></svg>
             Audit en cours…
@@ -50,6 +78,7 @@
         </button>
         <span v-if="error" class="text-sm" style="color:#fca5a5;">{{ error }}</span>
       </div>
+      
     </form>
 
     <!-- Results -->
@@ -105,6 +134,7 @@ const error = ref('')
 const report = ref<any>(null)
 const emit = defineEmits(['items-autochecked'])
 const advanced = ref(false)
+const isValidUrl = ref(false)
 
 const cats = [
   { key: 'performance', label: 'Performance' },
@@ -128,6 +158,12 @@ const pass = (key: string) => {
 }
 
 const runAudit = async () => {
+  // Validation supplémentaire avant l'envoi
+  if (!url.value || !isValidUrl.value) {
+    error.value = 'Veuillez entrer une URL valide'
+    return
+  }
+  
   error.value = ''
   report.value = null
   loading.value = true
@@ -147,4 +183,57 @@ const runAudit = async () => {
     loading.value = false
   }
 }
+
+const validateUrl = () => {
+  if (!url.value) {
+    isValidUrl.value = false
+    return
+  }
+  
+  try {
+    // Vérifier que c'est une URL valide
+    const urlObj = new URL(url.value)
+    
+    // Vérifier que c'est bien HTTP ou HTTPS
+    if (!['http:', 'https:'].includes(urlObj.protocol)) {
+      isValidUrl.value = false
+      return
+    }
+    
+    // Vérifier qu'il y a un nom de domaine
+    if (!urlObj.hostname || urlObj.hostname.length < 3) {
+      isValidUrl.value = false
+      return
+    }
+    
+    // Vérifier que le nom de domaine contient au moins un point (ex: .com, .fr)
+    if (!urlObj.hostname.includes('.')) {
+      isValidUrl.value = false
+      return
+    }
+    
+    isValidUrl.value = true
+  } catch {
+    isValidUrl.value = false
+  }
+}
+
+// Méthode pour réinitialiser l'état du composant
+const reset = () => {
+  url.value = ''
+  basicUser.value = ''
+  basicPass.value = ''
+  showPass.value = false
+  formFactor.value = 'mobile'
+  loading.value = false
+  error.value = ''
+  report.value = null
+  advanced.value = false
+  isValidUrl.value = false
+}
+
+// Exposer la méthode reset
+defineExpose({
+  reset
+})
 </script>

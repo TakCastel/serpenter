@@ -138,7 +138,161 @@
     "delete": "Supprimer",
     "deleteTitle": "Supprimer le projet",
     "deleteConfirm": "Êtes-vous sûr de vouloir supprimer le projet \"{name}\" ? Cette action ne peut pas être annulée.",
-    "projectList": "Liste des projets"
+    "projectList": "Liste des projets",
+    "checklistType": "Type de checklist",
+    "checklistTypePlaceholder": "Choisissez un type (peut être défini plus tard)",
+    "checklistTypes": {
+      "webPrelaunch": "Web — Pré‑déploiement (actuelle)",
+      "appStore": "iOS — Pré‑soumission App Store",
+      "wordpress": "WordPress — Audit de configuration"
+    }
+  },
+  "ios": {
+    "preparation": {
+      "bundleId": {
+        "label": "Identifiant d’app (Bundle ID) configuré",
+        "description": "Identifiant unique pour l’app",
+        "explication": "Le Bundle ID identifie de manière unique votre application dans l’écosystème Apple.",
+        "commentFaire": {
+          "item1": "Définissez le Bundle ID dans Apple Developer",
+          "item2": "Assurez la cohérence avec Xcode",
+          "item3": "Vérifiez les profils de signature"
+        },
+        "bonnesPratiques": {
+          "item1": "N’utilisez pas d’espaces",
+          "item2": "Respectez le reverse‑DNS",
+          "item3": "Documentez le choix"
+        }
+      },
+      "appIcons": {
+        "label": "Icônes et assets fournis",
+        "description": "Tous les formats requis",
+        "explication": "L’App Store requiert des icônes et visuels à des tailles précises.",
+        "commentFaire": {
+          "item1": "Générez les tailles via un outil",
+          "item2": "Ajoutez dans l’Asset Catalog",
+          "item3": "Vérifiez dans App Store Connect"
+        },
+        "bonnesPratiques": {
+          "item1": "Respecter les marges de sécurité",
+          "item2": "Éviter le texte dans l’icône",
+          "item3": "Tester en mode sombre"
+        }
+      },
+      "testflightBuild": {
+        "label": "Build TestFlight disponible",
+        "description": "Distribution interne/externe prête",
+        "explication": "TestFlight permet de tester votre app avant soumission.",
+        "commentFaire": {
+          "item1": "Uploader un build via Xcode",
+          "item2": "Créer un groupe de test",
+          "item3": "Inviter des testeurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Notes de version détaillées",
+          "item2": "Scénarios de test clairs",
+          "item3": "Collecte de feedback"
+        }
+      }
+    },
+    "conformite": {
+      "confidentialite": {
+        "label": "Formulaire confidentialité rempli",
+        "description": "Déclarations d’usage des données",
+        "explication": "Apple exige de déclarer l’usage des données personnelles.",
+        "commentFaire": {
+          "item1": "Renseigner App Privacy dans App Store Connect",
+          "item2": "Mettre à jour la politique de confidentialité",
+          "item3": "Vérifier la conformité aux SDKs"
+        },
+        "bonnesPratiques": {
+          "item1": "Transparence sur les données",
+          "item2": "Consentement explicite si nécessaire",
+          "item3": "Limiter la collecte"
+        }
+      },
+      "permissions": {
+        "label": "Descriptions NS*UsageDescription",
+        "description": "Textes explicites pour les permissions",
+        "explication": "Chaque permission iOS doit avoir une explication claire dans Info.plist.",
+        "commentFaire": {
+          "item1": "Ajouter NSCameraUsageDescription si caméra",
+          "item2": "Ajouter NSLocationWhenInUseUsageDescription si localisation",
+          "item3": "Tester l’apparition des prompts"
+        },
+        "bonnesPratiques": {
+          "item1": "Phrase simple et honnête",
+          "item2": "Expliquer la valeur pour l’utilisateur",
+          "item3": "Demander au bon moment"
+        }
+      }
+    }
+  },
+  "wp": {
+    "installation": {
+      "latestVersion": {
+        "label": "WordPress en dernière version",
+        "description": "Core, thèmes, plugins à jour",
+        "explication": "Mettre à jour réduit les risques de sécurité et bugs.",
+        "commentFaire": {
+          "item1": "Vérifier Mises à jour dans l’admin",
+          "item2": "Mettre à jour le thème et plugins",
+          "item3": "Tester sur un staging"
+        },
+        "bonnesPratiques": {
+          "item1": "Sauvegarde avant mise à jour",
+          "item2": "Changelog et compatibilité",
+          "item3": "Rollback prêt"
+        }
+      },
+      "themeChild": {
+        "label": "Thème enfant configuré",
+        "description": "Personnalisations isolées",
+        "explication": "Le thème enfant protège vos surcharges lors des mises à jour.",
+        "commentFaire": {
+          "item1": "Créer un child theme avec style.css",
+          "item2": "Importer les styles du parent",
+          "item3": "Limiter les edits dans le parent"
+        },
+        "bonnesPratiques": {
+          "item1": "Versionner le thème enfant",
+          "item2": "Doc des modifications",
+          "item3": "Respecter les standards WP"
+        }
+      }
+    },
+    "securite": {
+      "updates": {
+        "label": "Mises à jour automatiques ou planifiées",
+        "description": "Politique d’updates définie",
+        "explication": "Des updates régulières sont essentielles pour la sécurité.",
+        "commentFaire": {
+          "item1": "Activer auto‑updates si pertinent",
+          "item2": "Planifier des fenêtres de maintenance",
+          "item3": "Surveiller avec un outil"
+        },
+        "bonnesPratiques": {
+          "item1": "Tester avant production",
+          "item2": "Sauvegarde et rollback",
+          "item3": "Alertes en cas d’échec"
+        }
+      },
+      "backups": {
+        "label": "Sauvegardes régulières",
+        "description": "Base de données et fichiers",
+        "explication": "Les backups permettent de restaurer en cas d’incident.",
+        "commentFaire": {
+          "item1": "Installer une solution de backup",
+          "item2": "Stocker hors serveur",
+          "item3": "Tester la restauration"
+        },
+        "bonnesPratiques": {
+          "item1": "Rétention suffisante",
+          "item2": "Chiffrement des sauvegardes",
+          "item3": "Monitoring des jobs"
+        }
+      }
+    }
   },
   "emptyState": {
     "title": "Aucun projet trouvé",
@@ -187,6 +341,18 @@
     "analytics": {
       "name": "Analytics",
       "description": "Suivi et analyse des performances"
+    },
+    "preparation": {
+      "name": "Préparation",
+      "description": "Préparer les éléments de soumission"
+    },
+    "conformite": {
+      "name": "Conformité",
+      "description": "Exigences et conformité App Store"
+    },
+    "installation": {
+      "name": "Installation",
+      "description": "Configuration de base de WordPress"
     }
   },
   "items": {

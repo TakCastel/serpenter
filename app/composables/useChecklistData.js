@@ -1,14 +1,28 @@
-import checklistData from '~/data/checklist-items.json'
+import defaultChecklistData from '~/data/checklist-items.json'
+import iosChecklist from '~/data/checklist-items-ios.json'
+import wordpressChecklist from '~/data/checklist-items-wordpress.json'
 
-export const useChecklistData = () => {
+export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
   const { t } = useI18n()
 
+  // Pour l'instant, tous les types pointent vers le dataset par défaut.
+  // Plus tard, on pourra importer des datasets spécifiques ici.
+  const datasetMap = {
+    'web-prelaunch': defaultChecklistData,
+    'appstore-preflight': iosChecklist,
+    'wordpress-audit': wordpressChecklist
+  }
+
+  const selectedType = ref(initialChecklistType)
+  const dataRef = computed(() => datasetMap[selectedType.value] || defaultChecklistData)
+  const setChecklistType = (type) => { selectedType.value = type }
+
   const getCategoryItems = (category) => {
-    if (!checklistData[category] || !checklistData[category].items) {
+    if (!dataRef.value[category] || !dataRef.value[category].items) {
       return []
     }
 
-    return checklistData[category].items.map(item => {
+    return dataRef.value[category].items.map(item => {
       // Récupérer les traductions
       const label = t(item.labelKey)
       const description = t(item.descriptionKey)
@@ -66,7 +80,7 @@ export const useChecklistData = () => {
   }
 
   const getAllCategories = () => {
-    return Object.keys(checklistData)
+    return Object.keys(dataRef.value)
   }
 
   const getCategoryData = (category) => {
@@ -78,6 +92,7 @@ export const useChecklistData = () => {
   return {
     getCategoryItems,
     getAllCategories,
-    getCategoryData
+    getCategoryData,
+    setChecklistType
   }
 }

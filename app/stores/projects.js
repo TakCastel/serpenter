@@ -55,16 +55,26 @@ export const useProjectsStore = defineStore('projects', {
       if (!userId) return
       const db = this._db()
       const colRef = collection(db, 'users', userId, 'projects')
-      // Snapshot en temps réel
-      onSnapshot(colRef, (snap) => {
-        const list = []
-        snap.forEach((d) => list.push({ id: d.id, ...d.data() }))
-        this.projects = list.sort((a,b) => (b.lastModified||'').localeCompare(a.lastModified||''))
-        if (!this.currentProjectId && this.projects.length > 0) {
-          this.currentProjectId = this.projects[0].id
+      // Snapshot en temps réel avec gestion d'erreur (permissions, etc.)
+      onSnapshot(
+        colRef,
+        {
+          next: (snap) => {
+            const list = []
+            snap.forEach((d) => list.push({ id: d.id, ...d.data() }))
+            this.projects = list.sort((a, b) => (b.lastModified || '').localeCompare(a.lastModified || ''))
+            if (!this.currentProjectId && this.projects.length > 0) {
+              this.currentProjectId = this.projects[0].id
+            }
+            this.isSynced = true
+          },
+          error: (error) => {
+            console.error('Erreur abonnement projets (Firestore):', error)
+            this.projects = []
+            this.isSynced = false
+          }
         }
-      })
-      this.isSynced = true
+      )
     },
 
     // Charger les checked items d'un projet
@@ -89,7 +99,13 @@ export const useProjectsStore = defineStore('projects', {
       const db = this._db()
       const colRef = collection(db, 'users', userId, 'projects')
       const now = new Date().toISOString()
-      const payload = { name: project.name, description: project.description || '', createdAt: now, lastModified: now }
+      const payload = {
+        name: project.name,
+        description: project.description || '',
+        checklistType: project.checklistType || null,
+        createdAt: now,
+        lastModified: now
+      }
       const created = await addDoc(colRef, payload)
       this.currentProjectId = created.id
       return { id: created.id, ...payload }

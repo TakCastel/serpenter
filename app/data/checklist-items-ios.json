@@ -1,0 +1,63 @@
+{
+  "preparation": {
+    "items": [
+      {
+        "id": "bundle-id",
+        "labelKey": "ios.preparation.bundleId.label",
+        "descriptionKey": "ios.preparation.bundleId.description",
+        "details": {
+          "explicationKey": "ios.preparation.bundleId.explication",
+          "commentFaireKey": "ios.preparation.bundleId.commentFaire",
+          "bonnesPratiquesKey": "ios.preparation.bundleId.bonnesPratiques"
+        }
+      },
+      {
+        "id": "app-icons",
+        "labelKey": "ios.preparation.appIcons.label",
+        "descriptionKey": "ios.preparation.appIcons.description",
+        "details": {
+          "explicationKey": "ios.preparation.appIcons.explication",
+          "commentFaireKey": "ios.preparation.appIcons.commentFaire",
+          "bonnesPratiquesKey": "ios.preparation.appIcons.bonnesPratiques"
+        }
+      },
+      {
+        "id": "testflight-build",
+        "labelKey": "ios.preparation.testflightBuild.label",
+        "descriptionKey": "ios.preparation.testflightBuild.description",
+        "details": {
+          "explicationKey": "ios.preparation.testflightBuild.explication",
+          "commentFaireKey": "ios.preparation.testflightBuild.commentFaire",
+          "bonnesPratiquesKey": "ios.preparation.testflightBuild.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "conformite": {
+    "items": [
+      {
+        "id": "confidentialite",
+        "labelKey": "ios.conformite.confidentialite.label",
+        "descriptionKey": "ios.conformite.confidentialite.description",
+        "details": {
+          "explicationKey": "ios.conformite.confidentialite.explication",
+          "commentFaireKey": "ios.conformite.confidentialite.commentFaire",
+          "bonnesPratiquesKey": "ios.conformite.confidentialite.bonnesPratiques"
+        }
+      },
+      {
+        "id": "permissions",
+        "labelKey": "ios.conformite.permissions.label",
+        "descriptionKey": "ios.conformite.permissions.description",
+        "details": {
+          "explicationKey": "ios.conformite.permissions.explication",
+          "commentFaireKey": "ios.conformite.permissions.commentFaire",
+          "bonnesPratiquesKey": "ios.conformite.permissions.bonnesPratiques"
+        }
+      }
+    ]
+  }
+}
+
+
+

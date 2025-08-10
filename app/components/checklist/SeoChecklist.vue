@@ -151,16 +151,20 @@ import { useChecklistData } from '~/composables/useChecklistData'
 const emit = defineEmits(['categories-loaded'])
 const { locale } = useI18n()
 const projectsStore = useProjectsStore()
-const { getCategoryItems, getAllCategories, getCategoryData } = useChecklistData()
-const { currentUser } = useAuth()
-
-// Props pour recevoir l'ID du projet actuel
 const props = defineProps({
   currentProjectId: {
     type: String,
     default: 'default'
+  },
+  checklistType: {
+    type: String,
+    default: 'web-prelaunch'
   }
 })
+const { getCategoryItems, getAllCategories, getCategoryData, setChecklistType } = useChecklistData(props.checklistType)
+const { currentUser } = useAuth()
+
+// Props moved above
 
 // État réactif
 const categories = ref([])
@@ -400,8 +404,9 @@ watch(progressPercentage, (newPercentage) => {
   }
 }, { immediate: true })
 
-// Recharger la checklist quand la langue change
+// Recharger la checklist quand la langue ou le type changent
 watch(locale, async () => { await loadCategories() }, { immediate: false })
+watch(() => props.checklistType, async (newType) => { setChecklistType(newType); await loadCategories() }, { immediate: false })
 
 // Changement de projet → charger les checked depuis la BDD et recalculer les scores
 watch(() => props.currentProjectId, async () => {

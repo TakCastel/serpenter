@@ -1,0 +1,53 @@
+{
+  "installation": {
+    "items": [
+      {
+        "id": "latest-version",
+        "labelKey": "wp.installation.latestVersion.label",
+        "descriptionKey": "wp.installation.latestVersion.description",
+        "details": {
+          "explicationKey": "wp.installation.latestVersion.explication",
+          "commentFaireKey": "wp.installation.latestVersion.commentFaire",
+          "bonnesPratiquesKey": "wp.installation.latestVersion.bonnesPratiques"
+        }
+      },
+      {
+        "id": "theme-child",
+        "labelKey": "wp.installation.themeChild.label",
+        "descriptionKey": "wp.installation.themeChild.description",
+        "details": {
+          "explicationKey": "wp.installation.themeChild.explication",
+          "commentFaireKey": "wp.installation.themeChild.commentFaire",
+          "bonnesPratiquesKey": "wp.installation.themeChild.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "securite": {
+    "items": [
+      {
+        "id": "updates",
+        "labelKey": "wp.securite.updates.label",
+        "descriptionKey": "wp.securite.updates.description",
+        "details": {
+          "explicationKey": "wp.securite.updates.explication",
+          "commentFaireKey": "wp.securite.updates.commentFaire",
+          "bonnesPratiquesKey": "wp.securite.updates.bonnesPratiques"
+        }
+      },
+      {
+        "id": "backups",
+        "labelKey": "wp.securite.backups.label",
+        "descriptionKey": "wp.securite.backups.description",
+        "details": {
+          "explicationKey": "wp.securite.backups.explication",
+          "commentFaireKey": "wp.securite.backups.commentFaire",
+          "bonnesPratiquesKey": "wp.securite.backups.bonnesPratiques"
+        }
+      }
+    ]
+  }
+}
+
+
+

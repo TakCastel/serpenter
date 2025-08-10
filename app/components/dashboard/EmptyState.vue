@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen w-full px-4 py-12">
+  <div class="flex flex-col items-center justify-center w-full px-4 py-12"">
     <div class="text-center w-full max-w-md">
       <!-- Icône -->
       <div class="w-16 h-16 mx-auto mb-6 rounded-xl flex items-center justify-center" style="background-color: var(--bg-border);">
@@ -76,13 +76,18 @@ const { currentUser } = useAuth()
 
 const projectName = ref('')
 const projectDescription = ref('')
+const checklistType = ref(null)
 
 const createProject = async () => {
   if (!projectName.value.trim() || !currentUser.value) return
   const project = await projectsStore.addProjectRemote(currentUser.value.uid, {
     name: projectName.value.trim(),
-    description: projectDescription.value.trim()
+    description: projectDescription.value.trim(),
+    checklistType: checklistType.value
   })
   emit('create-project', project)
+  if (!project.checklistType) {
+    navigateTo('/select-checklist')
+  }
 }
 </script>
