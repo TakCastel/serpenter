@@ -56,11 +56,11 @@ import Modal from './Modal.vue'
 const isModalOpen = ref(false)
 
 const handleClose = () => {
-  console.log('Modal fermé')
+  // Modal fermé
 }
 
 const handleAction = () => {
-  console.log('Action effectuée')
+  // Action effectuée
   isModalOpen.value = false
 }
 </script>

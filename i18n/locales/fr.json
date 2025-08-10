@@ -9,7 +9,12 @@
     },
     "navigation": {
       "verifications": "Vérifications",
-      "verificationsDescription": "Vérifications de pré-déploiement"
+      "verificationsDescription": "Vérifications de pré-déploiement",
+      "noCategories": "Aucune catégorie disponible"
+    },
+    "sidebar": {
+      "welcome": "Bienvenue !",
+      "createProjectMessage": "Créez votre premier projet pour commencer"
     },
     "progress": {
       "completed": "complétés",
@@ -59,7 +64,7 @@
       },
       "lighthouse": {
         "title": "Audit Lighthouse intégré",
-        "desc": "Analyse d’une URL en mobile/desktop directement dans l’app.",
+        "desc": "Analyse d'une URL en mobile/desktop directement dans l'app.",
         "items": [
           "Scores Performance, SEO, Best Practices, Accessibilité",
           "Indicateurs clés: LCP, INP, CLS, TTFB",
@@ -143,23 +148,23 @@
     "checklistTypePlaceholder": "Choisissez un type (peut être défini plus tard)",
     "checklistTypes": {
       "webPrelaunch": "Web — Pré‑déploiement (actuelle)",
-      "appStore": "iOS — Pré‑soumission App Store",
+      "appStore": "iOS — Pré‑soumission App Store",
       "wordpress": "WordPress — Audit de configuration"
     }
   },
   "ios": {
     "preparation": {
       "bundleId": {
-        "label": "Identifiant d’app (Bundle ID) configuré",
-        "description": "Identifiant unique pour l’app",
-        "explication": "Le Bundle ID identifie de manière unique votre application dans l’écosystème Apple.",
+        "label": "Identifiant d'app (Bundle ID) configuré",
+        "description": "Identifiant unique pour l'app",
+        "explication": "Le Bundle ID identifie de manière unique votre application dans l'écosystème Apple.",
         "commentFaire": {
           "item1": "Définissez le Bundle ID dans Apple Developer",
           "item2": "Assurez la cohérence avec Xcode",
           "item3": "Vérifiez les profils de signature"
         },
         "bonnesPratiques": {
-          "item1": "N’utilisez pas d’espaces",
+          "item1": "N'utilisez pas d'espaces",
           "item2": "Respectez le reverse‑DNS",
           "item3": "Documentez le choix"
         }
@@ -167,15 +172,15 @@
       "appIcons": {
         "label": "Icônes et assets fournis",
         "description": "Tous les formats requis",
-        "explication": "L’App Store requiert des icônes et visuels à des tailles précises.",
+        "explication": "L'App Store requiert des icônes et visuels à des tailles précises.",
         "commentFaire": {
           "item1": "Générez les tailles via un outil",
-          "item2": "Ajoutez dans l’Asset Catalog",
+          "item2": "Ajoutez dans l'Asset Catalog",
           "item3": "Vérifiez dans App Store Connect"
         },
         "bonnesPratiques": {
           "item1": "Respecter les marges de sécurité",
-          "item2": "Éviter le texte dans l’icône",
+          "item2": "Éviter le texte dans l'icône",
           "item3": "Tester en mode sombre"
         }
       },
@@ -198,8 +203,8 @@
     "conformite": {
       "confidentialite": {
         "label": "Formulaire confidentialité rempli",
-        "description": "Déclarations d’usage des données",
-        "explication": "Apple exige de déclarer l’usage des données personnelles.",
+        "description": "Déclarations d'usage des données",
+        "explication": "Apple exige de déclarer l'usage des données personnelles.",
         "commentFaire": {
           "item1": "Renseigner App Privacy dans App Store Connect",
           "item2": "Mettre à jour la politique de confidentialité",
@@ -218,11 +223,11 @@
         "commentFaire": {
           "item1": "Ajouter NSCameraUsageDescription si caméra",
           "item2": "Ajouter NSLocationWhenInUseUsageDescription si localisation",
-          "item3": "Tester l’apparition des prompts"
+          "item3": "Tester l'apparition des prompts"
         },
         "bonnesPratiques": {
           "item1": "Phrase simple et honnête",
-          "item2": "Expliquer la valeur pour l’utilisateur",
+          "item2": "Expliquer la valeur pour l'utilisateur",
           "item3": "Demander au bon moment"
         }
       }
@@ -231,65 +236,77 @@
   "wp": {
     "installation": {
       "latestVersion": {
-        "label": "WordPress en dernière version",
-        "description": "Core, thèmes, plugins à jour",
-        "explication": "Mettre à jour réduit les risques de sécurité et bugs.",
+        "label": "Version WordPress à jour",
+        "description": "Utiliser la dernière version stable de WordPress",
+        "explication": "WordPress publie régulièrement des mises à jour de sécurité et de fonctionnalités. Utiliser la dernière version stable est essentiel pour la sécurité et les performances.",
         "commentFaire": {
-          "item1": "Vérifier Mises à jour dans l’admin",
-          "item2": "Mettre à jour le thème et plugins",
-          "item3": "Tester sur un staging"
+          "item1": "Vérifiez la version actuelle dans l'admin",
+          "item2": "Sauvegardez votre site avant mise à jour",
+          "item3": "Mettez à jour WordPress",
+          "item4": "Testez le site après mise à jour"
         },
         "bonnesPratiques": {
-          "item1": "Sauvegarde avant mise à jour",
-          "item2": "Changelog et compatibilité",
-          "item3": "Rollback prêt"
+          "item1": "Mises à jour automatiques activées",
+          "item2": "Tests sur environnement de staging",
+          "item3": "Sauvegardes régulières",
+          "item4": "Monitoring post-mise à jour",
+          "item5": "Plan de rollback en cas de problème"
         }
       },
       "themeChild": {
         "label": "Thème enfant configuré",
-        "description": "Personnalisations isolées",
-        "explication": "Le thème enfant protège vos surcharges lors des mises à jour.",
+        "description": "Utiliser un thème enfant pour les personnalisations",
+        "explication": "Un thème enfant hérite du thème parent et permet de personnaliser le design sans perdre les mises à jour. C'est une pratique recommandée pour la maintenance.",
         "commentFaire": {
-          "item1": "Créer un child theme avec style.css",
-          "item2": "Importer les styles du parent",
-          "item3": "Limiter les edits dans le parent"
+          "item1": "Créez un thème enfant",
+          "item2": "Activez le thème enfant",
+          "item3": "Personnalisez via le thème enfant",
+          "item4": "Testez les personnalisations"
         },
         "bonnesPratiques": {
-          "item1": "Versionner le thème enfant",
-          "item2": "Doc des modifications",
-          "item3": "Respecter les standards WP"
+          "item1": "Structure de thème enfant standard",
+          "item2": "Personnalisations dans functions.php",
+          "item3": "CSS personnalisé dans style.css",
+          "item4": "Documentation des modifications",
+          "item5": "Tests de compatibilité"
         }
       }
     },
     "securite": {
       "updates": {
-        "label": "Mises à jour automatiques ou planifiées",
-        "description": "Politique d’updates définie",
-        "explication": "Des updates régulières sont essentielles pour la sécurité.",
+        "label": "Mises à jour de sécurité",
+        "description": "Maintenir les plugins et thèmes à jour",
+        "explication": "Les plugins et thèmes obsolètes peuvent contenir des vulnérabilités de sécurité. Les maintenir à jour est crucial pour la protection de votre site.",
         "commentFaire": {
-          "item1": "Activer auto‑updates si pertinent",
-          "item2": "Planifier des fenêtres de maintenance",
-          "item3": "Surveiller avec un outil"
+          "item1": "Vérifiez les mises à jour disponibles",
+          "item2": "Sauvegardez avant mise à jour",
+          "item3": "Mettez à jour un par un",
+          "item4": "Testez après chaque mise à jour"
         },
         "bonnesPratiques": {
-          "item1": "Tester avant production",
-          "item2": "Sauvegarde et rollback",
-          "item3": "Alertes en cas d’échec"
+          "item1": "Mises à jour automatiques activées",
+          "item2": "Tests sur environnement de staging",
+          "item3": "Sauvegardes avant mise à jour",
+          "item4": "Monitoring post-mise à jour",
+          "item5": "Plan de rollback en cas de problème"
         }
       },
       "backups": {
-        "label": "Sauvegardes régulières",
-        "description": "Base de données et fichiers",
-        "explication": "Les backups permettent de restaurer en cas d’incident.",
+        "label": "Système de sauvegarde",
+        "description": "Sauvegardes automatiques et sécurisées",
+        "explication": "Un système de sauvegarde robuste est essentiel pour récupérer votre site en cas de problème. Les sauvegardes doivent être automatisées et stockées hors du serveur.",
         "commentFaire": {
-          "item1": "Installer une solution de backup",
-          "item2": "Stocker hors serveur",
-          "item3": "Tester la restauration"
+          "item1": "Configurez les sauvegardes automatiques",
+          "item2": "Testez la restauration",
+          "item3": "Stockez hors du serveur",
+          "item4": "Vérifiez l'intégrité des sauvegardes"
         },
         "bonnesPratiques": {
-          "item1": "Rétention suffisante",
-          "item2": "Chiffrement des sauvegardes",
-          "item3": "Monitoring des jobs"
+          "item1": "Sauvegardes quotidiennes automatiques",
+          "item2": "Stockage sur plusieurs supports",
+          "item3": "Tests de restauration réguliers",
+          "item4": "Chiffrement des sauvegardes",
+          "item5": "Documentation des procédures"
         }
       }
     }
@@ -312,6 +329,9 @@
   },
   "modal": {
     "close": "Fermer"
+  },
+  "common": {
+    "goToCategory": "Aller à la catégorie {name}"
   },
   "categories": {
     "seo": {
@@ -1263,6 +1283,180 @@
           "item3": "Tests réguliers",
           "item4": "Analyse des données",
           "item5": "Optimisation continue"
+        }
+      }
+    }
+  },
+  "ios": {
+    "preparation": {
+      "bundleId": {
+        "label": "Bundle ID configuré",
+        "description": "Identifiant unique de l'application",
+        "explication": "Le Bundle ID est l'identifiant unique de votre application iOS. Il doit être cohérent entre Xcode, App Store Connect et votre profil de provisionnement.",
+        "commentFaire": {
+          "item1": "Vérifiez le Bundle ID dans Xcode",
+          "item2": "Assurez-vous qu'il correspond à App Store Connect",
+          "item3": "Vérifiez le profil de provisionnement",
+          "item4": "Testez la compilation"
+        },
+        "bonnesPratiques": {
+          "item1": "Bundle ID unique et descriptif",
+          "item2": "Format com.entreprise.app",
+          "item3": "Cohérence entre environnements",
+          "item4": "Documentation du Bundle ID",
+          "item5": "Gestion des versions"
+        }
+      },
+      "appIcons": {
+        "label": "Icônes d'application configurées",
+        "description": "Toutes les tailles d'icônes requises",
+        "explication": "iOS nécessite plusieurs tailles d'icônes pour différents contextes (App Store, Spotlight, Settings, etc.). Assurez-vous que toutes les tailles requises sont présentes.",
+        "commentFaire": {
+          "item1": "Générez toutes les tailles d'icônes",
+          "item2": "Ajoutez-les dans Assets.xcassets",
+          "item3": "Vérifiez la qualité des icônes",
+          "item4": "Testez sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Icônes vectorielles de haute qualité",
+          "item2": "Toutes les tailles requises",
+          "item3": "Cohérence visuelle",
+          "item4": "Test sur appareils réels",
+          "item5": "Validation App Store"
+        }
+      },
+      "testflightBuild": {
+        "label": "Build TestFlight prête",
+        "description": "Version de test validée",
+        "explication": "Avant de soumettre à l'App Store, testez votre application via TestFlight. Cela permet d'identifier et corriger les problèmes avant la publication.",
+        "commentFaire": {
+          "item1": "Créez une archive dans Xcode",
+          "item2": "Uploadez vers App Store Connect",
+          "item3": "Configurez TestFlight",
+          "item4": "Invitez des testeurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests internes complets",
+          "item2": "Tests externes avec feedback",
+          "item3": "Correction des bugs critiques",
+          "item4": "Validation des fonctionnalités",
+          "item5": "Préparation App Store"
+        }
+      }
+    },
+    "conformite": {
+      "confidentialite": {
+        "label": "Politique de confidentialité",
+        "description": "Respect des règles de confidentialité iOS",
+        "explication": "Apple exige une politique de confidentialité claire et complète pour toutes les applications iOS. Elle doit expliquer comment vous collectez, utilisez et protégez les données utilisateur.",
+        "commentFaire": {
+          "item1": "Rédigez une politique de confidentialité",
+          "item2": "Ajoutez-la dans App Store Connect",
+          "item3": "Vérifiez la conformité",
+          "item4": "Mettez à jour régulièrement"
+        },
+        "bonnesPratiques": {
+          "item1": "Politique claire et accessible",
+          "item2": "Conformité RGPD et CCPA",
+          "item3": "Mise à jour régulière",
+          "item4": "Traduction en plusieurs langues",
+          "item5": "Contact pour questions"
+        }
+      },
+      "permissions": {
+        "label": "Permissions d'application",
+        "description": "Gestion des autorisations requises",
+        "explication": "iOS demande explicitement l'autorisation pour accéder aux fonctionnalités sensibles (caméra, localisation, contacts, etc.). Expliquez clairement pourquoi vous avez besoin de ces permissions.",
+        "commentFaire": {
+          "item1": "Identifiez les permissions nécessaires",
+          "item2": "Ajoutez les descriptions d'usage",
+          "item3": "Testez le flux d'autorisation",
+          "item4": "Gérez le refus d'autorisation"
+        },
+        "bonnesPratiques": {
+          "item1": "Permissions minimales nécessaires",
+          "item2": "Descriptions claires d'usage",
+          "item3": "Gestion gracieuse du refus",
+          "item4": "Test sur appareils réels",
+          "item5": "Documentation des permissions"
+        }
+      }
+    }
+  },
+  "wp": {
+    "installation": {
+      "latestVersion": {
+        "label": "Version WordPress à jour",
+        "description": "Utiliser la dernière version stable de WordPress",
+        "explication": "WordPress publie régulièrement des mises à jour de sécurité et de fonctionnalités. Utiliser la dernière version stable est essentiel pour la sécurité et les performances.",
+        "commentFaire": {
+          "item1": "Vérifiez la version actuelle dans l'admin",
+          "item2": "Sauvegardez votre site avant mise à jour",
+          "item3": "Mettez à jour WordPress",
+          "item4": "Testez le site après mise à jour"
+        },
+        "bonnesPratiques": {
+          "item1": "Mises à jour automatiques activées",
+          "item2": "Tests sur environnement de staging",
+          "item3": "Sauvegardes régulières",
+          "item4": "Monitoring post-mise à jour",
+          "item5": "Plan de rollback en cas de problème"
+        }
+      },
+      "themeChild": {
+        "label": "Thème enfant configuré",
+        "description": "Utiliser un thème enfant pour les personnalisations",
+        "explication": "Un thème enfant hérite du thème parent et permet de personnaliser le design sans perdre les mises à jour. C'est une pratique recommandée pour la maintenance.",
+        "commentFaire": {
+          "item1": "Créez un thème enfant",
+          "item2": "Activez le thème enfant",
+          "item3": "Personnalisez via le thème enfant",
+          "item4": "Testez les personnalisations"
+        },
+        "bonnesPratiques": {
+          "item1": "Structure de thème enfant standard",
+          "item2": "Personnalisations dans functions.php",
+          "item3": "CSS personnalisé dans style.css",
+          "item4": "Documentation des modifications",
+          "item5": "Tests de compatibilité"
+        }
+      }
+    },
+    "securite": {
+      "updates": {
+        "label": "Mises à jour de sécurité",
+        "description": "Maintenir les plugins et thèmes à jour",
+        "explication": "Les plugins et thèmes obsolètes peuvent contenir des vulnérabilités de sécurité. Les maintenir à jour est crucial pour la protection de votre site.",
+        "commentFaire": {
+          "item1": "Vérifiez les mises à jour disponibles",
+          "item2": "Sauvegardez avant mise à jour",
+          "item3": "Mettez à jour un par un",
+          "item4": "Testez après chaque mise à jour"
+        },
+        "bonnesPratiques": {
+          "item1": "Mises à jour automatiques activées",
+          "item2": "Tests sur environnement de staging",
+          "item3": "Sauvegardes avant mise à jour",
+          "item4": "Monitoring post-mise à jour",
+          "item5": "Plan de rollback en cas de problème"
+        }
+      },
+      "backups": {
+        "label": "Système de sauvegarde",
+        "description": "Sauvegardes automatiques et sécurisées",
+        "explication": "Un système de sauvegarde robuste est essentiel pour récupérer votre site en cas de problème. Les sauvegardes doivent être automatisées et stockées hors du serveur.",
+        "commentFaire": {
+          "item1": "Configurez les sauvegardes automatiques",
+          "item2": "Testez la restauration",
+          "item3": "Stockez hors du serveur",
+          "item4": "Vérifiez l'intégrité des sauvegardes"
+        },
+        "bonnesPratiques": {
+          "item1": "Sauvegardes quotidiennes automatiques",
+          "item2": "Stockage sur plusieurs supports",
+          "item3": "Tests de restauration réguliers",
+          "item4": "Chiffrement des sauvegardes",
+          "item5": "Documentation des procédures"
         }
       }
     }

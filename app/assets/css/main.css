@@ -18,6 +18,15 @@
   --accent-hover: #059669;
   --bg-code: #1e1e1e;
   --text-code: #e5e7eb;
+  
+  /* Dashboard specific variables */
+  --header-bg: #1a1a1a;
+  --header-border: #2d2d2d;
+  --card-bg: #1a1a1a;
+  --card-border: #2d2d2d;
+  --button-bg: #2d2d2d;
+  --button-border: #404040;
+  --button-hover: #404040;
 }
 
 /* Light theme - Plus neutre et professionnel */
@@ -33,6 +42,15 @@
   --accent-hover: #059669;
   --bg-code: #f1f5f9;
   --text-code: #475569;
+  
+  /* Dashboard specific variables */
+  --header-bg: #ffffff;
+  --header-border: #e5e7eb;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --button-bg: #ffffff;
+  --button-border: #d1d5db;
+  --button-hover: #f9fafb;
 }
 
 /* Base styles */
@@ -41,6 +59,11 @@
     @apply transition-colors duration-300;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     height: 100%;
+  }
+  
+  /* Effets de hover pour les boutons du header */
+  .header-button:hover {
+    background-color: var(--button-hover) !important;
   }
   
   body {

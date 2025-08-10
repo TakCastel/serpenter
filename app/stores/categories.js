@@ -26,13 +26,36 @@ export const useCategoriesStore = defineStore('categories', () => {
   const categories = ref([])
   const activeCategory = ref(null)
 
-  const loadCategoriesForProject = (checklistType) => {
-    const projectCategories = categoriesByType[checklistType] || []
-    categories.value = projectCategories
-    
-    // Définir la première catégorie comme active par défaut
-    if (categories.value.length > 0) {
-      activeCategory.value = categories.value[0].id
+  const loadCategoriesForProject = async (checklistType) => {
+    try {
+      const projectCategories = categoriesByType[checklistType] || []
+      
+      // Mettre à jour les catégories immédiatement
+      categories.value = projectCategories
+      
+      // Définir la première catégorie comme active par défaut
+      if (categories.value.length > 0) {
+        activeCategory.value = categories.value[0].id
+      } else {
+        activeCategory.value = null
+      }
+      
+      // Émettre un événement pour notifier les composants
+      if (process.client) {
+        window.dispatchEvent(new CustomEvent('categories-updated', { 
+          detail: { 
+            categories: categories.value,
+            checklistType 
+          } 
+        }))
+      }
+      
+      return categories.value
+    } catch (error) {
+      console.error('Erreur lors du chargement des catégories:', error)
+      categories.value = []
+      activeCategory.value = null
+      return []
     }
   }
 
@@ -44,13 +67,19 @@ export const useCategoriesStore = defineStore('categories', () => {
     return categories.value.find(cat => cat.id === categoryId)
   }
 
+  const resetCategories = () => {
+    categories.value = []
+    activeCategory.value = null
+  }
+
   return {
     categories: computed(() => categories.value),
     activeCategory: computed(() => activeCategory.value),
     loadCategoriesForProject,
     setActiveCategory,
     getCategoryById,
-    categoriesByType
+    categoriesByType,
+    resetCategories
   }
 })
 

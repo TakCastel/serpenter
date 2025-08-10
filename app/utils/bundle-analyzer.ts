@@ -1,8 +1,6 @@
 // Utilitaire pour analyser la taille du bundle
 export const analyzeBundle = () => {
   if (process.env.ANALYZE === 'true') {
-    console.log('🔍 Analyse du bundle activée')
-    
     // Analyse des modules les plus volumineux
     const modules = [
       { name: 'Vue', size: '~40KB' },

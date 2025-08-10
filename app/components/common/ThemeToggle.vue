@@ -18,28 +18,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
-const isDark = ref(true)
-
-const toggleTheme = () => {
-  isDark.value = !isDark.value
-  if (process.client) {
-    document.documentElement.classList.toggle('light-theme')
-    localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
-  }
-}
+const { isDark, toggleTheme, onMounted: themeOnMounted, onUnmounted: themeOnUnmounted } = useTheme()
 
 onMounted(() => {
-  if (process.client) {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'light') {
-      isDark.value = false
-      document.documentElement.classList.add('light-theme')
-    } else {
-      isDark.value = true
-      document.documentElement.classList.remove('light-theme')
-    }
-  }
+  themeOnMounted()
+})
+
+onUnmounted(() => {
+  themeOnUnmounted()
 })
 </script>

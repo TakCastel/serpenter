@@ -12,11 +12,12 @@ export const useProjectsStore = defineStore('projects', {
 
   getters: {
     currentProject: (state) => {
+      if (!state.projects || !Array.isArray(state.projects)) return null
       return state.projects.find(p => p.id === state.currentProjectId)
     },
     
     hasProjects: (state) => {
-      return state.projects.length > 0
+      return state.projects && Array.isArray(state.projects) && state.projects.length > 0
     },
     
     getProjectScores: (state) => (projectId) => {
@@ -102,7 +103,7 @@ export const useProjectsStore = defineStore('projects', {
       const payload = {
         name: project.name,
         description: project.description || '',
-        checklistType: project.checklistType || null,
+        checklistType: project.checklistType || null, // Pas de type par défaut
         createdAt: now,
         lastModified: now
       }
@@ -125,13 +126,13 @@ export const useProjectsStore = defineStore('projects', {
       delete this.projectScores[projectId]
       delete this.checkedByProject[projectId]
       if (this.currentProjectId === projectId) {
-        this.currentProjectId = this.projects.length > 0 ? this.projects[0].id : null
+        this.currentProjectId = (this.projects && this.projects.length > 0) ? this.projects[0].id : null
       }
     },
 
     // Actions locales (optionnelles)
     setCurrentProject(projectId) {
-      if (this.projects.find(p => p.id === projectId)) {
+      if (this.projects && Array.isArray(this.projects) && this.projects.find(p => p.id === projectId)) {
         this.currentProjectId = projectId
       }
     },

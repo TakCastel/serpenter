@@ -52,8 +52,8 @@
                 @click="$emit('close')"
                 class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
                 style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);"
-                :title="$t('modal.close')"
-                :aria-label="$t('modal.close')"
+                :title="t('modal.close')"
+                :aria-label="t('modal.close')"
               >
                 <Icon name="heroicons:x-mark" class="w-4 h-4" />
               </button>
@@ -77,6 +77,9 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps({
   isOpen: {

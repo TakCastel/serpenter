@@ -203,7 +203,7 @@ const loadCategories = async () => {
   try {
     isLoading.value = true
     
-    // Utiliser le nouveau système de données
+    // Utiliser directement le checklistType pour déterminer les catégories
     const categoryIds = getAllCategories()
     
     categories.value = categoryIds.map(categoryId => {
@@ -233,7 +233,6 @@ const loadCategories = async () => {
 
 // Fonction pour gérer le clic sur le bouton de déploiement
 const handleDeployClick = () => {
-  console.log('🚀 Déploiement en cours...')
   if (process.client && window.dataLayer) {
     window.dataLayer.push({
       event: 'deployment_ready',
@@ -408,17 +407,9 @@ watch(progressPercentage, (newPercentage) => {
 watch(locale, async () => { await loadCategories() }, { immediate: false })
 watch(() => props.checklistType, async (newType) => { setChecklistType(newType); await loadCategories() }, { immediate: false })
 
-// Changement de projet → charger les checked depuis la BDD et recalculer les scores
-watch(() => props.currentProjectId, async () => {
-  await loadCheckedItems()
-  nextTick(() => {
-    const allItems = []
-    categories.value.forEach(category => { if (category.items) allItems.push(...category.items) })
-    projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
-  })
-}, { immediate: false })
 
-// Lifecycle
+
+// Écouter les changements de projet via les événements globaux
 onMounted(async () => {
   await loadCheckedItems()
   await loadCategories()
@@ -426,9 +417,11 @@ onMounted(async () => {
     expandedCategories.value.add(categories.value[0].id)
   }
   if (process.client) {
+    // Écouter l'ouverture des catégories
     window.addEventListener('open-category', (event) => {
       if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
     })
+    
     // Réception des mises à jour auto-check depuis l'audit Lighthouse
     window.addEventListener('checked-items-updated', async (event) => {
       try {
@@ -437,11 +430,9 @@ onMounted(async () => {
         await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
         checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
         // Recalcule des scores
-        const allItems = []
-        categories.value.forEach(category => { if (category.items) allItems.push(...category.items) })
-        projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
-      } catch (e) {
-        // noop
+        await calculateScores()
+      } catch (error) {
+        console.error('Erreur lors de la mise à jour des éléments cochés:', error)
       }
     })
   }
@@ -452,6 +443,8 @@ onUnmounted(() => {
     window.removeEventListener('open-category', (event) => {
       if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
     })
+    window.removeEventListener('project-checklist-changed', () => {})
+    window.removeEventListener('categories-updated', () => {})
     window.removeEventListener('checked-items-updated', () => {})
   }
 })

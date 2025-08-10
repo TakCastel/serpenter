@@ -1100,5 +1100,101 @@
         }
       }
     }
+  },
+  "ios": {
+    "preparation": {
+      "bundleId": {
+        "label": "Bundle ID configured",
+        "description": "Unique application identifier",
+        "explication": "The Bundle ID is the unique identifier of your iOS application. It must be consistent between Xcode, App Store Connect and your provisioning profile.",
+        "commentFaire": {
+          "item1": "Check Bundle ID in Xcode",
+          "item2": "Ensure it matches App Store Connect",
+          "item3": "Verify provisioning profile",
+          "item4": "Test compilation"
+        },
+        "bonnesPratiques": {
+          "item1": "Unique and descriptive Bundle ID",
+          "item2": "Format com.company.app",
+          "item3": "Consistency between environments",
+          "item4": "Bundle ID documentation",
+          "item5": "Version management"
+        }
+      },
+      "appIcons": {
+        "label": "App icons configured",
+        "description": "All required icon sizes",
+        "explication": "iOS requires several icon sizes for different contexts (App Store, Spotlight, Settings, etc.). Make sure all required sizes are present.",
+        "commentFaire": {
+          "item1": "Generate all icon sizes",
+          "item2": "Add them to Assets.xcassets",
+          "item3": "Check icon quality",
+          "item4": "Test on different devices"
+        },
+        "bonnesPratiques": {
+          "item1": "High quality vector icons",
+          "item2": "All required sizes",
+          "item3": "Visual consistency",
+          "item4": "Test on real devices",
+          "item5": "App Store validation"
+        }
+      },
+      "testflightBuild": {
+        "label": "TestFlight build ready",
+        "description": "Validated test version",
+        "explication": "Before submitting to the App Store, test your app via TestFlight. This allows you to identify and fix issues before publication.",
+        "commentFaire": {
+          "item1": "Create archive in Xcode",
+          "item2": "Upload to App Store Connect",
+          "item3": "Configure TestFlight",
+          "item4": "Invite testers"
+        },
+        "bonnesPratiques": {
+          "item1": "Complete internal testing",
+          "item2": "External testing with feedback",
+          "item3": "Fix critical bugs",
+          "item4": "Feature validation",
+          "item5": "App Store preparation"
+        }
+      }
+    },
+    "conformite": {
+      "confidentialite": {
+        "label": "Privacy policy",
+        "description": "iOS privacy rules compliance",
+        "explication": "Apple requires a clear and comprehensive privacy policy for all iOS applications. It must explain how you collect, use and protect user data.",
+        "commentFaire": {
+          "item1": "Write privacy policy",
+          "item2": "Add it to App Store Connect",
+          "item3": "Check compliance",
+          "item4": "Update regularly"
+        },
+        "bonnesPratiques": {
+          "item1": "Clear and accessible policy",
+          "item2": "GDPR and CCPA compliance",
+          "item3": "Regular updates",
+          "item4": "Translation in multiple languages",
+          "item5": "Contact for questions"
+        }
+      },
+      "permissions": {
+        "label": "App permissions",
+        "description": "Required permissions management",
+        "explication": "iOS explicitly asks for permission to access sensitive features (camera, location, contacts, etc.). Clearly explain why you need these permissions.",
+        "commentFaire": {
+          "item1": "Identify necessary permissions",
+          "item2": "Add usage descriptions",
+          "item3": "Test authorization flow",
+          "item4": "Handle permission denial"
+        },
+        "bonnesPratiques": {
+          "item1": "Minimal necessary permissions",
+          "item2": "Clear usage descriptions",
+          "item3": "Graceful denial handling",
+          "item4": "Test on real devices",
+          "item5": "Permissions documentation"
+        }
+      }
+    }
   }
 }

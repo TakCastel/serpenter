@@ -16,12 +16,17 @@
       :aria-haspopup="true"
       role="combobox"
       tabindex="0"
+      :disabled="isLoading"
     >
       <div class="flex items-center space-x-3 min-w-0 flex-1">
         <Icon name="heroicons:folder" class="w-4 h-4 flex-shrink-0" style="color: var(--accent-primary);" aria-hidden="true" />
         <span class="text-sm font-medium truncate">
           {{ displayText }}
         </span>
+        <!-- Indicateur de chargement -->
+        <div v-if="isLoading" class="ml-2">
+          <div class="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+        </div>
       </div>
       <Icon 
         name="heroicons:chevron-down" 
@@ -148,17 +153,6 @@
             :placeholder="$t('projects.descriptionPlaceholder')"
           ></textarea>
         </div>
-        <div>
-          <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">
-            {{ $t('projects.checklistType') }}
-          </label>
-          <select v-model="newProject.checklistType" class="input w-full">
-            <option :value="null">{{ $t('projects.checklistTypePlaceholder') }}</option>
-            <option value="web-prelaunch">{{ $t('projects.checklistTypes.webPrelaunch') }}</option>
-            <option value="appstore-preflight">{{ $t('projects.checklistTypes.appStore') }}</option>
-            <option value="wordpress-audit">{{ $t('projects.checklistTypes.wordpress') }}</option>
-          </select>
-        </div>
       </div>
 
       <template #footer>
@@ -211,7 +205,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import SkeletonProjectSelector from '../common/SkeletonProjectSelector.vue'
 import Modal from '../common/Modal.vue'
 import { useProjectsStore } from '~/stores/projects'
@@ -225,7 +219,7 @@ const showCreateModal = ref(false)
 const showDeleteModal = ref(false)
 const isLoading = ref(false)
 const isClient = ref(false)
-const newProject = ref({ name: '', description: '', checklistType: null })
+const newProject = ref({ name: '', description: '' })
 
 const currentProject = computed(() => projectsStore.currentProject)
 const projects = computed(() => projectsStore.projects)
@@ -238,26 +232,43 @@ const displayText = computed(() => {
 
 const toggleDropdown = () => { isDropdownOpen.value = !isDropdownOpen.value }
 
-const selectProject = (projectId) => {
-  console.log('🔍 selectProject appelé avec:', projectId)
-  console.log('🔍 Projets disponibles:', projects.value.map(p => ({ id: p.id, name: p.name })))
-  console.log('🔍 Projet actuel avant:', currentProjectId.value)
-  
+const selectProject = async (projectId) => {
   try {
-    projectsStore.setCurrentProject(projectId)
-    console.log('🔍 Projet actuel après setCurrentProject:', projectsStore.currentProjectId)
+    // Afficher l'état de chargement immédiatement
+    isLoading.value = true
     isDropdownOpen.value = false
+    
+    // Émettre l'événement de changement de projet immédiatement
     emit('project-changed', projectId)
-    console.log('🔍 Événement project-changed émis')
+    
+    // Émettre un événement global pour notifier tous les composants
+    if (process.client) {
+      window.dispatchEvent(new CustomEvent('project-checklist-changed', { 
+        detail: { 
+          projectId,
+          checklistType: projectsStore.currentProject?.checklistType 
+        } 
+      }))
+    }
+    
+    // Mettre à jour le projet dans le store de manière asynchrone
+    await nextTick()
+    projectsStore.setCurrentProject(projectId)
+    
   } catch (error) {
     console.error('❌ Erreur lors de la sélection du projet:', error)
+  } finally {
+    // Masquer l'état de chargement après un court délai pour éviter le clignotement
+    setTimeout(() => {
+      isLoading.value = false
+    }, 100)
   }
 }
 
 const openCreateProjectModal = () => {
   showCreateModal.value = true
   isDropdownOpen.value = false
-  newProject.value = { name: '', description: '', checklistType: null }
+  newProject.value = { name: '', description: '' }
 }
 
 const closeCreateProjectModal = () => { showCreateModal.value = false }
@@ -266,14 +277,10 @@ const createProject = async () => {
   if (!newProject.value.name.trim() || !currentUser.value) return
   const p = await projectsStore.addProjectRemote(currentUser.value.uid, {
     name: newProject.value.name.trim(),
-    description: newProject.value.description.trim(),
-    checklistType: newProject.value.checklistType
+    description: newProject.value.description.trim()
   })
   emit('project-changed', p.id)
   closeCreateProjectModal()
-  if (!p.checklistType) {
-    navigateTo('/select-checklist')
-  }
 }
 
 const openDeleteProjectModal = () => { showDeleteModal.value = true; isDropdownOpen.value = false }
@@ -297,15 +304,9 @@ watch(projects, (newProjects) => {
 
 onMounted(async () => {
   if (process.client) {
-    console.log('🚀 ProjectSelector monté')
-    console.log('🚀 Projets disponibles:', projects.value)
-    console.log('🚀 Projet actuel:', currentProjectId.value)
-    console.log('🚀 Store synced:', projectsStore.isSynced)
-    
     isClient.value = true
     document.addEventListener('click', handleOutsideClick)
     if (currentUser.value && !projectsStore.isSynced) {
-      console.log('🚀 Synchronisation des projets...')
       await projectsStore.subscribeUserProjects(currentUser.value.uid)
     }
   }

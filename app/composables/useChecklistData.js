@@ -35,11 +35,13 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
       // Récupérer commentFaire
       try {
         const commentFaireKey = item.details.commentFaireKey
-        for (let i = 1; i <= 4; i++) {
-          const key = `${commentFaireKey}.item${i}`
-          const value = t(key, [], { fallback: null })
-          if (value && value !== key && !value.startsWith('__MISSING_')) {
-            commentFaire.push(value)
+        if (commentFaireKey) {
+          for (let i = 1; i <= 4; i++) {
+            const key = `${commentFaireKey}.item${i}`
+            const value = t(key, [], { fallback: null })
+            if (value && value !== key && !value.startsWith('__MISSING_')) {
+              commentFaire.push(value)
+            }
           }
         }
       } catch (error) {
@@ -49,11 +51,13 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
       // Récupérer bonnesPratiques
       try {
         const bonnesPratiquesKey = item.details.bonnesPratiquesKey
-        for (let i = 1; i <= 5; i++) {
-          const key = `${bonnesPratiquesKey}.item${i}`
-          const value = t(key, [], { fallback: null })
-          if (value && value !== key && !value.startsWith('__MISSING_')) {
-            bonnesPratiques.push(value)
+        if (bonnesPratiquesKey) {
+          for (let i = 1; i <= 5; i++) {
+            const key = `${bonnesPratiquesKey}.item${i}`
+            const value = t(key, [], { fallback: null })
+            if (value && value !== key && !value.startsWith('__MISSING_')) {
+              bonnesPratiques.push(value)
+            }
           }
         }
       } catch (error) {

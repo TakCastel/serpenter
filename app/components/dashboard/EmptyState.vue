@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center w-full px-4 py-12"">
+  <div class="flex flex-col items-center justify-center w-full px-4 py-12">
     <div class="text-center w-full max-w-md">
       <!-- Icône -->
       <div class="w-16 h-16 mx-auto mb-6 rounded-xl flex items-center justify-center" style="background-color: var(--bg-border);">
