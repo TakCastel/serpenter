@@ -154,7 +154,12 @@
     "openCategory": "Open category {name}",
     "closeCategory": "Close category {name}",
     "item": "Item {label}",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "resetConfirm": "Are you sure you want to reset all progress? This action cannot be undone.",
+    "resetTitle": "Reset all progress",
+    "resetDescription": "Reset all checklist progress",
+    "completed": "completed"
   },
   "modal": {
     "close": "Close"
@@ -187,6 +192,42 @@
     "analytics": {
       "name": "Analytics",
       "description": "Performance tracking and analysis"
+    },
+    "reseau-chiffrement": {
+      "name": "Network Security & Encryption",
+      "description": "Communication protection and data encryption"
+    },
+    "authentification-acces": {
+      "name": "Authentication & Access Control",
+      "description": "Secure credential management and permissions"
+    },
+    "protection-attaques": {
+      "name": "Attack Protection",
+      "description": "Defense against common threats and vulnerabilities"
+    },
+    "fichiers-donnees": {
+      "name": "File & Data Security",
+      "description": "Sensitive data protection and upload validation"
+    },
+    "maintenance-surveillance": {
+      "name": "Maintenance & Monitoring",
+      "description": "Continuous monitoring and preventive maintenance"
+    },
+    "app-store": {
+      "name": "App Store",
+      "description": "Checklist for App Store submission"
+    },
+    "play-store": {
+      "name": "Play Store",
+      "description": "Checklist for Play Store submission"
+    },
+    "technical": {
+      "name": "Technical Aspects",
+      "description": "Technical checklist for mobile applications"
+    },
+    "legal": {
+      "name": "Legal Aspects",
+      "description": "Legal and regulatory checklist"
     }
   },
   "items": {
@@ -1193,6 +1234,1396 @@
           "item3": "Graceful denial handling",
           "item4": "Test on real devices",
           "item5": "Permissions documentation"
+        }
+      }
+    }
+  },
+  "app": {
+    "store": {
+      "metadata": {
+        "title": "App Store Metadata",
+        "description": "Title, description and keywords optimized for the App Store",
+        "explication": "Your app's metadata in the App Store is crucial for discovery and downloads. It must be optimized with relevant keywords and an attractive description.",
+        "commentFaire": {
+          "item1": "Create a catchy title with keywords",
+          "item2": "Write a detailed and attractive description",
+          "item3": "Add relevant keywords",
+          "item4": "Test visibility with search tools"
+        },
+        "bonnesPratiques": {
+          "item1": "Title maximum 30 characters",
+          "item2": "Description maximum 4000 characters",
+          "item3": "Relevant and specific keywords",
+          "item4": "Clear call to action",
+          "item5": "Regular metadata updates"
+        }
+      },
+      "screenshots": {
+        "title": "Optimized Screenshots",
+        "description": "Attractive screenshots for the App Store",
+        "explication": "Screenshots are often the first element users see. They must present your app's key features clearly and attractively.",
+        "commentFaire": {
+          "item1": "Select main features",
+          "item2": "Create high-quality screenshots",
+          "item3": "Add explanatory annotations",
+          "item4": "Test on different devices"
+        },
+        "bonnesPratiques": {
+          "item1": "1242x2688 pixel resolution (iPhone)",
+          "item2": "Maximum 10 screenshots",
+          "item3": "Clear and readable annotations",
+          "item4": "Logical feature order",
+          "item5": "Visual consistency between screenshots"
+        }
+      },
+      "appIcon": {
+        "title": "App Icon",
+        "description": "Distinctive and high-quality icon for the App Store",
+        "explication": "Your app's icon is its main visual identity. It must be distinctive, memorable and reflect your app's essence.",
+        "commentFaire": {
+          "item1": "Design a distinctive icon",
+          "item2": "Create multiple icon sizes",
+          "item3": "Test readability on light and dark backgrounds",
+          "item4": "Check quality on different devices"
+        },
+        "bonnesPratiques": {
+          "item1": "PNG format with transparency",
+          "item2": "Multiple sizes (20x20 to 1024x1024)",
+          "item3": "Simple and recognizable design",
+          "item4": "No text in icon",
+          "item5": "Consistency with brand identity"
+        }
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "Compliant and accessible privacy policy",
+        "explication": "Apple requires a clear and accessible privacy policy for all apps. It must explain how you collect, use and protect user data.",
+        "commentFaire": {
+          "item1": "Write a clear and complete policy",
+          "item2": "Include all types of collected data",
+          "item3": "Explain data usage",
+          "item4": "Add contact information"
+        },
+        "bonnesPratiques": {
+          "item1": "Simple and understandable language",
+          "item2": "Regular updates",
+          "item3": "GDPR/CCPA compliance",
+          "item4": "Accessible from the app",
+          "item5": "Translation in target languages"
+        }
+      },
+      "contentRating": {
+        "title": "Content Rating",
+        "description": "Appropriate content classification for your app",
+        "explication": "Content rating helps parents and users understand your app's content type. It must be accurate and comply with Apple's guidelines.",
+        "commentFaire": {
+          "item1": "Evaluate your app's content",
+          "item2": "Answer the classification questionnaire",
+          "item3": "Check the proposed rating",
+          "item4": "Make corrections if necessary"
+        },
+        "bonnesPratiques": {
+          "item1": "Honest content evaluation",
+          "item2": "Update when changes occur",
+          "item3": "Comply with Apple's guidelines",
+          "item4": "Document rating choices",
+          "item5": "Regular relevance verification"
+        }
+      },
+      "testflight": {
+        "title": "TestFlight Configured",
+        "description": "TestFlight configuration for beta testing",
+        "explication": "TestFlight allows you to test your app with beta users before publication. It's an excellent way to detect and fix issues before launch.",
+        "commentFaire": {
+          "item1": "Configure TestFlight in App Store Connect",
+          "item2": "Add internal and external testers",
+          "item3": "Upload a test build",
+          "item4": "Monitor tester feedback"
+        },
+        "bonnesPratiques": {
+          "item1": "Test on different devices",
+          "item2": "Structured tester feedback",
+          "item3": "Quick bug fixes",
+          "item4": "Change documentation",
+          "item5": "Clear communication with testers"
+        }
+      }
+    },
+    "play": {
+      "store": {
+        "listing": {
+          "title": "Play Store Listing",
+          "description": "Complete and optimized listing for the Play Store",
+          "explication": "Your app's listing in the Play Store must be complete and optimized for discovery. It includes title, short and long descriptions, and keywords.",
+          "commentFaire": {
+            "item1": "Create a catchy title (80 characters max)",
+            "item2": "Write a short description (80 characters max)",
+            "item3": "Write a detailed long description",
+            "item4": "Add relevant keywords"
+          },
+          "bonnesPratiques": {
+            "item1": "Title with main keywords",
+            "item2": "Catchy short description",
+            "item3": "Informative long description",
+            "item4": "Specific and relevant keywords",
+            "item5": "Regular content updates"
+          }
+        },
+        "graphics": {
+          "title": "Play Store Graphics",
+          "description": "Images and graphics optimized for the Play Store",
+          "explication": "Your app's graphics in the Play Store contribute to its attractiveness and conversion. They must be high quality and clearly present features.",
+          "commentFaire": {
+            "item1": "Create a high-resolution icon (512x512)",
+            "item2": "Design attractive screenshots",
+            "item3": "Add a feature banner",
+            "item4": "Test on different devices"
+          },
+          "bonnesPratiques": {
+            "item1": "512x512 pixel icon minimum",
+            "item2": "16:9 or 9:16 screenshots",
+            "item3": "1024x500 feature banner",
+            "item4": "Optimal image quality",
+            "item5": "Overall visual consistency"
+          }
+        },
+        "contentRating": {
+          "title": "Content Rating",
+          "description": "Appropriate content classification for the Play Store",
+          "explication": "Google Play uses a content rating system to help users choose appropriate apps. Your app must be properly classified.",
+          "commentFaire": {
+            "item1": "Answer the classification questionnaire",
+            "item2": "Check the proposed rating",
+            "item3": "Make corrections if necessary",
+            "item4": "Update when changes occur"
+          },
+          "bonnesPratiques": {
+            "item1": "Honest content evaluation",
+            "item2": "Update when changes occur",
+            "item3": "Comply with Google's guidelines",
+            "item4": "Document choices",
+            "item5": "Regular verification"
+          }
+        },
+        "privacyPolicy": {
+          "title": "Privacy Policy",
+          "description": "Privacy policy compliant with Google's requirements",
+          "explication": "Google Play requires a clear and accessible privacy policy for all apps. It must explain data collection and usage.",
+          "commentFaire": {
+            "item1": "Write a complete policy",
+            "item2": "Include all data types",
+            "item3": "Explain data usage",
+            "item4": "Add contact information"
+          },
+          "bonnesPratiques": {
+            "item1": "Clear and accessible language",
+            "item2": "GDPR/CCPA compliance",
+            "item3": "Regular updates",
+            "item4": "Accessible from the app",
+            "item5": "Translation in target languages"
+          }
+        },
+        "testing": {
+          "title": "Testing and Validation",
+          "description": "Complete testing before Play Store publication",
+          "explication": "Before publishing your app on the Play Store, you must perform complete testing to ensure quality and compliance.",
+          "commentFaire": {
+            "item1": "Test on different Android devices",
+            "item2": "Test API compatibility",
+            "item3": "Test performance and stability",
+            "item4": "Test security and permissions"
+          },
+          "bonnesPratiques": {
+            "item1": "Test on popular devices",
+            "item2": "Regression testing",
+            "item3": "Automated testing",
+            "item4": "Beta user testing",
+            "item5": "Test documentation"
+          }
+        }
+      }
+    },
+    "technical": {
+      "performance": {
+        "title": "App Performance",
+        "description": "Performance and responsiveness optimization",
+        "explication": "Your mobile app's performance is crucial for user experience. A slow or frequently crashing app will be quickly uninstalled.",
+        "commentFaire": {
+          "item1": "Measure loading times",
+          "item2": "Optimize network requests",
+          "item3": "Implement caching",
+          "item4": "Test on different devices"
+        },
+        "bonnesPratiques": {
+          "item1": "Launch time < 3 seconds",
+          "item2": "Smart caching",
+          "item3": "Image optimization",
+          "item4": "Memory management",
+          "item5": "Performance monitoring"
+        }
+      },
+      "security": {
+        "title": "App Security",
+        "description": "Data protection and code security",
+        "explication": "Your mobile app's security is essential to protect user data and maintain trust. Vulnerabilities can have serious consequences.",
+        "commentFaire": {
+          "item1": "Implement data encryption",
+          "item2": "Secure network communications",
+          "item3": "Validate all user inputs",
+          "item4": "Perform security testing"
+        },
+        "bonnesPratiques": {
+          "item1": "AES encryption for sensitive data",
+          "item2": "HTTPS mandatory for APIs",
+          "item3": "Client and server validation",
+          "item4": "Regular penetration testing",
+          "item5": "Security updates"
+        }
+      },
+      "accessibility": {
+        "title": "App Accessibility",
+        "description": "Compliance with accessibility standards",
+        "explication": "Your mobile app's accessibility allows all users, including those with disabilities, to use your app effectively.",
+        "commentFaire": {
+          "item1": "Implement VoiceOver/TalkBack support",
+          "item2": "Ensure sufficient contrast",
+          "item3": "Use appropriate font sizes",
+          "item4": "Test with accessibility tools"
+        },
+        "bonnesPratiques": {
+          "item1": "Screen reader support",
+          "item2": "Minimum 4.5:1 contrast",
+          "item3": "Configurable font sizes",
+          "item4": "Keyboard navigation possible",
+          "item5": "Accessibility user testing"
+        }
+      },
+      "localization": {
+        "title": "App Localization",
+        "description": "Multi-language support and cultural adaptation",
+        "explication": "Your mobile app's localization allows you to reach an international audience and improve user experience in different regions.",
+        "commentFaire": {
+          "item1": "Identify target languages",
+          "item2": "Translate all texts",
+          "item3": "Adapt date/number formats",
+          "item4": "Test in each language"
+        },
+        "bonnesPratiques": {
+          "item1": "Support for main languages",
+          "item2": "Professional translations",
+          "item3": "Cultural adaptation",
+          "item4": "Linguistic testing",
+          "item5": "Translation updates"
+        }
+      },
+      "offline": {
+        "title": "Offline Functionality",
+        "description": "Offline mode support and synchronization",
+        "explication": "Offline functionality improves user experience by allowing app use even without internet connection. This is particularly important for retention.",
+        "commentFaire": {
+          "item1": "Implement local caching",
+          "item2": "Manage data synchronization",
+          "item3": "Indicate connection status",
+          "item4": "Test in airplane mode"
+        },
+        "bonnesPratiques": {
+          "item1": "Smart data caching",
+          "item2": "Automatic synchronization",
+          "item3": "Network status indicator",
+          "item4": "Conflict management",
+          "item5": "Complete offline testing"
+        }
+      }
+    },
+    "legal": {
+      "gdpr": {
+        "title": "GDPR Compliance",
+        "description": "General Data Protection Regulation compliance",
+        "explication": "GDPR applies to all apps that collect data from European users. Compliance is mandatory and can have important legal consequences.",
+        "commentFaire": {
+          "item1": "Audit data collection",
+          "item2": "Implement explicit consent",
+          "item3": "Create deletion process",
+          "item4": "Document processing"
+        },
+        "bonnesPratiques": {
+          "item1": "Explicit and revocable consent",
+          "item2": "Minimize collected data",
+          "item3": "Right to be forgotten implemented",
+          "item4": "Breach notification",
+          "item5": "DPO designated if necessary"
+        }
+      },
+      "cookies": {
+        "title": "Cookie Management",
+        "description": "Transparent cookie and tracker management",
+        "explication": "Cookies and trackers in mobile apps must be managed transparently with user consent. This is a legal requirement in many countries.",
+        "commentFaire": {
+          "item1": "Identify all used cookies",
+          "item2": "Implement consent",
+          "item3": "Allow deactivation",
+          "item4": "Inform about usage"
+        },
+        "bonnesPratiques": {
+          "item1": "Complete cookie inventory",
+          "item2": "Consent before activation",
+          "item3": "Easy deactivation",
+          "item4": "Clear usage information",
+          "item5": "Policy updates"
+        }
+      },
+      "terms": {
+        "title": "Terms of Use",
+        "description": "Clear and accessible terms of use",
+        "explication": "Terms of use define the rules for using your app. They must be clear, accessible and comply with applicable legislation.",
+        "commentFaire": {
+          "item1": "Write clear terms",
+          "item2": "Include essential clauses",
+          "item3": "Make them accessible",
+          "item4": "Have them legally validated"
+        },
+        "bonnesPratiques": {
+          "item1": "Simple and understandable language",
+          "item2": "Essential clauses included",
+          "item3": "Accessible from the app",
+          "item4": "Update when changes occur",
+          "item5": "Legal validation"
+        }
+      }
+    }
+  },
+  "security": {
+    "ssl": {
+      "label": "Valid SSL Certificate",
+      "description": "Valid SSL certificate and forced HTTPS redirect",
+      "explication": "A valid SSL certificate ensures data encryption between browser and server, protecting the confidentiality of exchanged information.",
+      "commentFaire": {
+        "item1": "Check SSL certificate validity",
+        "item2": "Configure HTTP to HTTPS redirect",
+        "item3": "Test secure connection",
+        "item4": "Monitor certificate expiration"
+      },
+      "bonnesPratiques": {
+        "item1": "Use certificates from reliable sources",
+        "item2": "Configure automatic renewal",
+        "item3": "Test configuration regularly",
+        "item4": "Monitor security indicators",
+        "item5": "Document SSL configuration"
+      }
+    },
+    "https": {
+      "label": "Forced HTTPS Redirect",
+      "description": "Force redirect from HTTP to HTTPS",
+      "explication": "Forced HTTPS redirect ensures all users access the site via a secure connection, even if they type HTTP in the URL.",
+      "commentFaire": {
+        "item1": "Configure redirect at server level",
+        "item2": "Test HTTP to HTTPS redirect",
+        "item3": "Verify all links are HTTPS",
+        "item4": "Monitor redirect errors"
+      },
+      "bonnesPratiques": {
+        "item1": "301 redirect for SEO",
+        "item2": "Test on different browsers",
+        "item3": "Monitor error logs",
+        "item4": "Configure security headers",
+        "item5": "Document configuration"
+      }
+    },
+    "hsts": {
+      "label": "HSTS Enabled",
+      "description": "HSTS enabled to prevent HTTP downgrade",
+      "explication": "The HSTS (HTTP Strict Transport Security) header forces browsers to use HTTPS, preventing downgrade attacks and man-in-the-middle attacks.",
+      "commentFaire": {
+        "item1": "Configure HSTS header on server",
+        "item2": "Set appropriate validity duration",
+        "item3": "Test HSTS header",
+        "item4": "Monitor compliance"
+      },
+      "bonnesPratiques": {
+        "item1": "Start with short duration",
+        "item2": "Gradually increase duration",
+        "item3": "Include subdomains if necessary",
+        "item4": "Test on different browsers",
+        "item5": "Document HSTS configuration"
+      }
+    },
+    "tls": {
+      "label": "Updated TLS Version",
+      "description": "Encryption of sensitive data in transit (TLS 1.2/1.3)",
+      "explication": "Recent TLS versions (1.2 and 1.3) offer enhanced security and better performance compared to older SSL/TLS versions.",
+      "commentFaire": {
+        "item1": "Check supported TLS version",
+        "item2": "Disable older versions (TLS 1.0/1.1)",
+        "item3": "Test client compatibility",
+        "item4": "Monitor TLS configuration"
+      },
+      "bonnesPratiques": {
+        "item1": "Prioritize TLS 1.3",
+        "item2": "Maintain TLS 1.2 for compatibility",
+        "item3": "Use strong cipher suites",
+        "item4": "Test configuration regularly",
+        "item5": "Document TLS configuration"
+      }
+    },
+    "auth": {
+      "password": {
+        "label": "Hashed Passwords",
+        "description": "Passwords stored hashed (bcrypt, argon2)",
+        "explication": "Password hashing is essential to protect user credentials in case of database compromise.",
+        "commentFaire": {
+          "item1": "Use secure hashing algorithms",
+          "item2": "Add salt to passwords",
+          "item3": "Configure appropriate cost factor",
+          "item4": "Test hashing security"
+        },
+        "bonnesPratiques": {
+          "item1": "Prioritize bcrypt or argon2",
+          "item2": "Use unique salt per user",
+          "item3": "Configure high cost factor",
+          "item4": "Monitor performance",
+          "item5": "Plan migration of old hashes"
+        }
+      },
+      "2fa": {
+        "label": "2FA Enabled",
+        "description": "2FA enabled on sensitive accounts",
+        "explication": "Two-factor authentication adds an extra security layer by requiring a second authentication factor in addition to the password.",
+        "commentFaire": {
+          "item1": "Implement 2FA for admin accounts",
+          "item2": "Offer multiple methods (SMS, app, email)",
+          "item3": "Configure recovery codes",
+          "item4": "Test 2FA process"
+        },
+        "bonnesPratiques": {
+          "item1": "Mandatory for sensitive accounts",
+          "item2": "Secure recovery methods",
+          "item3": "Clear user interface",
+          "item4": "Monitor access attempts",
+          "item5": "User training"
+        }
+      },
+      "policy": {
+        "label": "Password Policy",
+        "description": "Password complexity and rotation policies",
+        "explication": "A strong password policy requires complex passwords and their regular rotation to reduce compromise risks.",
+        "commentFaire": {
+          "item1": "Define complexity rules",
+          "item2": "Configure automatic rotation",
+          "item3": "Implement server-side validation",
+          "item4": "Test password policy"
+        },
+        "bonnesPratiques": {
+          "item1": "Minimum 12 characters",
+          "item2": "Mix of character types",
+          "item3": "Rotation every 90 days",
+          "item4": "Password history",
+          "item5": "User training"
+        }
+      },
+      "roles": {
+        "label": "Roles and Permissions",
+        "description": "Roles and permissions correctly applied",
+        "explication": "A well-designed role and permission system limits access to features and data according to each user's responsibilities.",
+        "commentFaire": {
+          "item1": "Define clear roles",
+          "item2": "Assign minimal necessary permissions",
+          "item3": "Test permission application",
+          "item4": "Monitor privileged access"
+        },
+        "bonnesPratiques": {
+          "item1": "Principle of least privilege",
+          "item2": "Regular permission review",
+          "item3": "Audit privileged access",
+          "item4": "Role documentation",
+          "item5": "Security training"
+        }
+      }
+    },
+    "protection": {
+      "rate": {
+        "label": "Rate Limiting",
+        "description": "Rate limiting for APIs and login forms",
+        "explication": "Rate limiting limits the number of requests a user can make in a given time, protecting against brute force attacks and spam.",
+        "commentFaire": {
+          "item1": "Configure rate limiting on APIs",
+          "item2": "Apply limits on connections",
+          "item3": "Configure appropriate delays",
+          "item4": "Test rate limiting protection"
+        },
+        "bonnesPratiques": {
+          "item1": "Context-appropriate limits",
+          "item2": "Informative error messages",
+          "item3": "Monitor blocked attempts",
+          "item4": "Differentiated configuration per endpoint",
+          "item5": "Document limits"
+        }
+      },
+      "sql": {
+        "label": "SQL Injection Protection",
+        "description": "Protection against SQL injections (validation + escaping)",
+        "explication": "Protection against SQL injections prevents attackers from executing malicious SQL code by manipulating user input.",
+        "commentFaire": {
+          "item1": "Use prepared statements",
+          "item2": "Validate and escape all inputs",
+          "item3": "Test injection protection",
+          "item4": "Monitor injection attempts"
+        },
+        "bonnesPratiques": {
+          "item1": "ORM with built-in protection",
+          "item2": "Strict input validation",
+          "item3": "Automated security testing",
+          "item4": "Monitor error logs",
+          "item5": "Developer training"
+        }
+      },
+      "xss": {
+        "label": "XSS Protection",
+        "description": "Protection against XSS injections (validation + escaping)",
+        "explication": "XSS protection prevents execution of malicious scripts injected into web pages, protecting users against session theft and other attacks.",
+        "commentFaire": {
+          "item1": "Escape all user outputs",
+          "item2": "Use security headers",
+          "item3": "Validate server-side inputs",
+          "item4": "Test XSS protection"
+        },
+        "bonnesPratiques": {
+          "item1": "Content Security Policy (CSP)",
+          "item2": "Automatic output escaping",
+          "item3": "Strict input validation",
+          "item4": "Automated security testing",
+          "item5": "Monitor XSS attempts"
+        }
+      },
+      "directory": {
+        "label": "Directory Indexing",
+        "description": "Disable directory indexing",
+        "explication": "Disabling directory indexing prevents accidental exposure of sensitive files and server structure.",
+        "commentFaire": {
+          "item1": "Configure .htaccess for Apache",
+          "item2": "Configure nginx to disable indexing",
+          "item3": "Test directory access",
+          "item4": "Monitor access attempts"
+        },
+        "bonnesPratiques": {
+          "item1": "Global indexing disable",
+          "item2": ".htaccess files in each directory",
+          "item3": "Monitor access attempts",
+          "item4": "Regular security testing",
+          "item5": "Configuration documentation"
+        }
+      },
+      "waf": {
+        "label": "Application Firewall",
+        "description": "IP filtering or application firewall (WAF)",
+        "explication": "A WAF (Web Application Firewall) protects against common attacks by analyzing and filtering HTTP traffic before it reaches the application.",
+        "commentFaire": {
+          "item1": "Configure a WAF (Cloudflare, AWS WAF)",
+          "item2": "Define filtering rules",
+          "item3": "Test WAF protection",
+          "item4": "Monitor security alerts"
+        },
+        "bonnesPratiques": {
+          "item1": "Rules adapted to your application",
+          "item2": "Monitor false positives",
+          "item3": "Regular rule updates",
+          "item4": "Regular penetration testing",
+          "item5": "WAF rules documentation"
+        }
+      }
+    },
+    "files": {
+      "upload": {
+        "label": "Upload Validation",
+        "description": "Strict upload validation (extension, MIME type)",
+        "explication": "Strict validation of uploaded files prevents upload of malicious files and protects against file upload attacks.",
+        "commentFaire": {
+          "item1": "Validate file extensions",
+          "item2": "Check MIME types",
+          "item3": "Limit file sizes",
+          "item4": "Test upload validation"
+        },
+        "bonnesPratiques": {
+          "item1": "Whitelist of authorized types",
+          "item2": "Mandatory server-side validation",
+          "item3": "Appropriate size limits",
+          "item4": "Antivirus scan of files",
+          "item5": "Monitor suspicious uploads"
+        }
+      },
+      "antivirus": {
+        "label": "Antivirus Scan",
+        "description": "Antivirus scan on uploaded files",
+        "explication": "Antivirus scanning of uploaded files detects and blocks malicious files before they are processed by the application.",
+        "commentFaire": {
+          "item1": "Integrate antivirus engine",
+          "item2": "Scan all uploaded files",
+          "item3": "Block suspicious files",
+          "item4": "Monitor scan results"
+        },
+        "bonnesPratiques": {
+          "item1": "Updated antivirus engine",
+          "item2": "Real-time scanning",
+          "item3": "Quarantine suspicious files",
+          "item4": "Detailed scan reports",
+          "item5": "Performance monitoring"
+        }
+      },
+      "backup": {
+        "label": "Automatic Backups",
+        "description": "Regular automatic backups (off main server)",
+        "explication": "Regular automatic backups ensure data recovery in case of loss, corruption or attack on the main server.",
+        "commentFaire": {
+          "item1": "Configure automatic backups",
+          "item2": "Store backups off-site",
+          "item3": "Test backup restoration",
+          "item4": "Monitor backup success"
+        },
+        "bonnesPratiques": {
+          "item1": "Daily backups",
+          "item2": "Storage in multiple locations",
+          "item3": "Backup encryption",
+          "item4": "Regular restoration tests",
+          "item5": "Procedure documentation"
+        }
+      },
+      "restore": {
+        "label": "Restoration Test",
+        "description": "Backup restoration test",
+        "explication": "Regularly testing backup restoration ensures that recovery procedures work correctly when needed.",
+        "commentFaire": {
+          "item1": "Plan restoration tests",
+          "item2": "Test in isolated environment",
+          "item3": "Verify data integrity",
+          "item4": "Document test procedures"
+        },
+        "bonnesPratiques": {
+          "item1": "Monthly tests minimum",
+          "item2": "Isolated test environment",
+          "item3": "Data integrity validation",
+          "item4": "Procedure documentation",
+          "item5": "Team training"
+        }
+      }
+    },
+    "maintenance": {
+      "dependencies": {
+        "label": "Dependency Updates",
+        "description": "Regular updates of dependencies and CMS",
+        "explication": "Regular updates of dependencies and CMS fix security vulnerabilities and improve application stability.",
+        "commentFaire": {
+          "item1": "Monitor security updates",
+          "item2": "Test updates in dev environment",
+          "item3": "Plan production updates",
+          "item4": "Monitor stability after update"
+        },
+        "bonnesPratiques": {
+          "item1": "Automatic updates if possible",
+          "item2": "Testing in development environment",
+          "item3": "Update planning",
+          "item4": "Rollback in case of problem",
+          "item5": "Change documentation"
+        }
+      },
+      "accounts": {
+        "label": "Unused Accounts",
+        "description": "Remove unused accounts",
+        "explication": "Removing unused accounts reduces attack surface and improves overall application security by limiting potential entry points.",
+        "commentFaire": {
+          "item1": "Identify inactive accounts",
+          "item2": "Notify users before deletion",
+          "item3": "Delete unused accounts",
+          "item4": "Monitor access attempts"
+        },
+        "bonnesPratiques": {
+          "item1": "Clear inactivity definition",
+          "item2": "Automated notification process",
+          "item3": "Archive before deletion",
+          "item4": "Monitor access attempts",
+          "item5": "Procedure documentation"
+        }
+      },
+      "logs": {
+        "label": "Log Monitoring",
+        "description": "Monitor access and error logs",
+        "explication": "Monitoring access and error logs allows detection of suspicious activities and rapid response to security incidents.",
+        "commentFaire": {
+          "item1": "Configure centralized log collection",
+          "item2": "Implement automated alerts",
+          "item3": "Regularly analyze logs",
+          "item4": "Archive logs according to policy"
+        },
+        "bonnesPratiques": {
+          "item1": "Centralized log collection",
+          "item2": "Real-time alerts",
+          "item3": "Automated pattern analysis",
+          "item4": "Appropriate log retention",
+          "item5": "Log analysis training"
+        }
+      },
+      "alerts": {
+        "label": "Suspicious Activity Alerts",
+        "description": "Alerts in case of suspicious activity",
+        "explication": "Suspicious activity alerts allow detection and rapid response to intrusion attempts and abnormal behaviors.",
+        "commentFaire": {
+          "item1": "Configure alert rules",
+          "item2": "Implement real-time notifications",
+          "item3": "Define alert thresholds",
+          "item4": "Test alert system"
+        },
+        "bonnesPratiques": {
+          "item1": "Real-time alerts",
+          "item2": "Context-appropriate thresholds",
+          "item3": "Multi-channel notifications",
+          "item4": "Reduce false positives",
+          "item5": "Defined response procedures"
+        }
+      }
+    }
+  },
+  "app": {
+    "store": {
+      "metadata": {
+        "title": "App Store Metadata",
+        "description": "Complete and optimized metadata",
+        "explication": "Your app's metadata in the App Store is crucial for visibility and downloads. It must be complete and optimized.",
+        "commentFaire": {
+          "item1": "Fill in all required fields",
+          "item2": "Add relevant keywords",
+          "item3": "Write engaging description",
+          "item4": "Optimize app title"
+        },
+        "bonnesPratiques": {
+          "item1": "Short and memorable title",
+          "item2": "Keywords in title",
+          "item3": "Clear and concise description",
+          "item4": "Regular updates",
+          "item5": "A/B testing of elements"
+        }
+      },
+      "screenshots": {
+        "title": "Optimized Screenshots",
+        "description": "Quality screenshots for App Store",
+        "explication": "Screenshots are often the first element users see. They must present your app in an attractive and professional manner.",
+        "commentFaire": {
+          "item1": "Create quality screenshots",
+          "item2": "Add explanatory text",
+          "item3": "Optimize for different sizes",
+          "item4": "Test on different devices"
+        },
+        "bonnesPratiques": {
+          "item1": "Sharp and colorful screenshots",
+          "item2": "Short and readable text",
+          "item3": "Visual consistency",
+          "item4": "Respect Apple guidelines",
+          "item5": "Update with new features"
+        }
+      },
+      "appIcon": {
+        "title": "App Icon",
+        "description": "Distinctive and memorable icon",
+        "explication": "Your app's icon is the main visual element that represents your brand in the App Store and on users' home screens.",
+        "commentFaire": {
+          "item1": "Create distinctive icon",
+          "item2": "Respect Apple guidelines",
+          "item3": "Test on different backgrounds",
+          "item4": "Optimize for readability"
+        },
+        "bonnesPratiques": {
+          "item1": "Simple and memorable design",
+          "item2": "Contrasting colors",
+          "item3": "No text in icon",
+          "item4": "Consistency with identity",
+          "item5": "Test on different devices"
+        }
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "Compliant privacy policy",
+        "explication": "Apple requires a clear privacy policy for all App Store apps. It must explain data collection and usage.",
+        "commentFaire": {
+          "item1": "Write clear policy",
+          "item2": "Include all data types",
+          "item3": "Explain usage",
+          "item4": "Make it accessible"
+        },
+        "bonnesPratiques": {
+          "item1": "Simple and understandable language",
+          "item2": "Regular updates",
+          "item3": "Accessible from app",
+          "item4": "Compliance with local laws",
+          "item5": "Contact for questions"
+        }
+      },
+      "contentRating": {
+        "title": "Content Rating",
+        "description": "Appropriate content classification",
+        "explication": "Content classification in the App Store determines appropriate age and helps parents make informed choices.",
+        "commentFaire": {
+          "item1": "Answer questions honestly",
+          "item2": "Test with different ages",
+          "item3": "Update if necessary",
+          "item4": "Respect Apple guidelines"
+        },
+        "bonnesPratiques": {
+          "item1": "Honest content evaluation",
+          "item2": "Update with changes",
+          "item3": "Respect Apple guidelines",
+          "item4": "Test with target audience",
+          "item5": "Document choices"
+        }
+      },
+      "testflight": {
+        "title": "TestFlight Configured",
+        "description": "TestFlight configuration for testing",
+        "explication": "TestFlight allows you to test your app with real users before publication. Proper configuration is essential for effective testing.",
+        "commentFaire": {
+          "item1": "Configure TestFlight",
+          "item2": "Invite testers",
+          "item3": "Manage test builds",
+          "item4": "Collect feedback"
+        },
+        "bonnesPratiques": {
+          "item1": "Test on different devices",
+          "item2": "Structured tester feedback",
+          "item3": "Quick bug fixes",
+          "item4": "Regression testing",
+          "item5": "Document changes"
+        }
+      }
+    },
+    "technical": {
+      "performance": {
+        "title": "App Performance",
+        "description": "Performance optimization",
+        "explication": "Your mobile app's performance is crucial for user experience and retention. A slow app can discourage users.",
+        "commentFaire": {
+          "item1": "Optimize launch time",
+          "item2": "Implement caching",
+          "item3": "Optimize images",
+          "item4": "Manage memory efficiently"
+        },
+        "bonnesPratiques": {
+          "item1": "Launch time < 3 seconds",
+          "item2": "Smart caching",
+          "item3": "Image optimization",
+          "item4": "Memory management",
+          "item5": "Performance monitoring"
+        }
+      },
+      "security": {
+        "title": "App Security",
+        "description": "Data protection and code security",
+        "explication": "Your mobile app's security is essential to protect user data and maintain trust. Vulnerabilities can have serious consequences.",
+        "commentFaire": {
+          "item1": "Implement data encryption",
+          "item2": "Secure network communications",
+          "item3": "Validate all user inputs",
+          "item4": "Perform security testing"
+        },
+        "bonnesPratiques": {
+          "item1": "AES encryption for sensitive data",
+          "item2": "HTTPS mandatory for APIs",
+          "item3": "Client and server validation",
+          "item4": "Regular penetration testing",
+          "item5": "Security updates"
+        }
+      },
+      "accessibility": {
+        "title": "App Accessibility",
+        "description": "Compliance with accessibility standards",
+        "explication": "Your mobile app's accessibility allows all users, including those with disabilities, to use your app effectively.",
+        "commentFaire": {
+          "item1": "Implement VoiceOver/TalkBack support",
+          "item2": "Ensure sufficient contrast",
+          "item3": "Use appropriate font sizes",
+          "item4": "Test with accessibility tools"
+        },
+        "bonnesPratiques": {
+          "item1": "Screen reader support",
+          "item2": "Minimum 4.5:1 contrast",
+          "item3": "Configurable font sizes",
+          "item4": "Keyboard navigation possible",
+          "item5": "Accessibility user testing"
+        }
+      },
+      "localization": {
+        "title": "App Localization",
+        "description": "Multi-language support and cultural adaptation",
+        "explication": "Your mobile app's localization allows you to reach an international audience and improve user experience in different regions.",
+        "commentFaire": {
+          "item1": "Identify target languages",
+          "item2": "Translate all texts",
+          "item3": "Adapt date/number formats",
+          "item4": "Test in each language"
+        },
+        "bonnesPratiques": {
+          "item1": "Support for main languages",
+          "item2": "Professional translations",
+          "item3": "Cultural adaptation",
+          "item4": "Linguistic testing",
+          "item5": "Translation updates"
+        }
+      },
+      "offline": {
+        "title": "Offline Functionality",
+        "description": "Offline mode support and synchronization",
+        "explication": "Offline functionality improves user experience by allowing app use even without internet connection. This is particularly important for retention.",
+        "commentFaire": {
+          "item1": "Implement local caching",
+          "item2": "Manage data synchronization",
+          "item3": "Indicate connection status",
+          "item4": "Test in airplane mode"
+        },
+        "bonnesPratiques": {
+          "item1": "Smart data caching",
+          "item2": "Automatic synchronization",
+          "item3": "Network status indicator",
+          "item4": "Conflict management",
+          "item5": "Complete offline testing"
+        }
+      }
+    },
+    "legal": {
+      "gdpr": {
+        "title": "GDPR Compliance",
+        "description": "General Data Protection Regulation compliance",
+        "explication": "GDPR applies to all apps that collect data from European users. Compliance is mandatory and can have important legal consequences.",
+        "commentFaire": {
+          "item1": "Audit data collection",
+          "item2": "Implement explicit consent",
+          "item3": "Create deletion process",
+          "item4": "Document processing"
+        },
+        "bonnesPratiques": {
+          "item1": "Explicit and revocable consent",
+          "item2": "Minimize collected data",
+          "item3": "Right to be forgotten implemented",
+          "item4": "Breach notification",
+          "item5": "DPO designated if necessary"
+        }
+      },
+      "cookies": {
+        "title": "Cookie Management",
+        "description": "Compliant cookie and tracker management",
+        "explication": "Cookie management in your mobile app must comply with current regulations and clearly inform users of their use.",
+        "commentFaire": {
+          "item1": "Implement cookie consent",
+          "item2": "Inform about usage",
+          "item3": "Allow deactivation",
+          "item4": "Document policy"
+        },
+        "bonnesPratiques": {
+          "item1": "Clear consent banner",
+          "item2": "Deactivation options",
+          "item3": "Transparent information",
+          "item4": "Regular updates",
+          "item5": "Compliance with local laws"
+        }
+      },
+      "terms": {
+        "title": "Terms of Use",
+        "description": "Clear and compliant terms of use",
+        "explication": "Your mobile app's terms of use must be clear, accessible and compliant with current regulations.",
+        "commentFaire": {
+          "item1": "Write clear terms",
+          "item2": "Include essential clauses",
+          "item3": "Make them accessible",
+          "item4": "Update if necessary"
+        },
+        "bonnesPratiques": {
+          "item1": "Simple and understandable language",
+          "item2": "Essential clauses included",
+          "item3": "Accessible from app",
+          "item4": "Update when changes occur",
+          "item5": "Legal validation"
+        }
+      }
+    }
+  },
+  "security": {
+    "ssl": {
+      "label": "Valid SSL Certificate",
+      "description": "Valid SSL certificate and forced HTTPS redirect",
+      "explication": "A valid SSL certificate ensures data encryption between browser and server, protecting the confidentiality of exchanged information.",
+      "commentFaire": {
+        "item1": "Verify SSL certificate validity",
+        "item2": "Configure HTTP to HTTPS redirect",
+        "item3": "Test secure connection",
+        "item4": "Monitor certificate expiration"
+      },
+      "bonnesPratiques": {
+        "item1": "Use certificates from trusted sources",
+        "item2": "Configure automatic renewal",
+        "item3": "Test configuration regularly",
+        "item4": "Monitor security indicators",
+        "item5": "Document SSL configuration"
+      }
+    },
+    "https": {
+      "label": "Forced HTTPS Redirect",
+      "description": "Force redirect from HTTP to HTTPS",
+      "explication": "Forced HTTPS redirect ensures all users access the site via a secure connection, even if they type HTTP in the URL.",
+      "commentFaire": {
+        "item1": "Configure redirect at server level",
+        "item2": "Test HTTP to HTTPS redirect",
+        "item3": "Verify all links are HTTPS",
+        "item4": "Monitor redirect errors"
+      },
+      "bonnesPratiques": {
+        "item1": "301 redirect for SEO",
+        "item2": "Test on different browsers",
+        "item3": "Monitor error logs",
+        "item4": "Configure security headers",
+        "item5": "Document configuration"
+      }
+    },
+    "hsts": {
+      "label": "HSTS Enabled",
+      "description": "HSTS enabled to prevent HTTP downgrade",
+      "explication": "The HSTS (HTTP Strict Transport Security) header forces browsers to use HTTPS, preventing downgrade attacks and man-in-the-middle attacks.",
+      "commentFaire": {
+        "item1": "Configure HSTS header on server",
+        "item2": "Set appropriate validity duration",
+        "item3": "Test HSTS header",
+        "item4": "Monitor compliance"
+      },
+      "bonnesPratiques": {
+        "item1": "Start with short duration",
+        "item2": "Gradually increase duration",
+        "item3": "Include subdomains if needed",
+        "item4": "Test on different browsers",
+        "item5": "Document HSTS configuration"
+      }
+    },
+    "tls": {
+      "label": "Up-to-date TLS Version",
+      "description": "Encryption of sensitive data in transit (TLS 1.2/1.3)",
+      "explication": "Recent TLS versions (1.2 and 1.3) offer enhanced security and better performance compared to older SSL/TLS versions.",
+      "commentFaire": {
+        "item1": "Check supported TLS version",
+        "item2": "Disable older versions (TLS 1.0/1.1)",
+        "item3": "Test client compatibility",
+        "item4": "Monitor TLS configuration"
+      },
+      "bonnesPratiques": {
+        "item1": "Prioritize TLS 1.3",
+        "item2": "Maintain TLS 1.2 for compatibility",
+        "item3": "Use strong cipher suites",
+        "item4": "Test configuration regularly",
+        "item5": "Document TLS configuration"
+      }
+    },
+    "auth": {
+      "password": {
+        "label": "Hashed Passwords",
+        "description": "Passwords stored hashed (bcrypt, argon2)",
+        "explication": "Password hashing is essential to protect user credentials in case of database compromise.",
+        "commentFaire": {
+          "item1": "Use secure hashing algorithms",
+          "item2": "Add salt to passwords",
+          "item3": "Configure appropriate cost factor",
+          "item4": "Test hashing security"
+        },
+        "bonnesPratiques": {
+          "item1": "Prefer bcrypt or argon2",
+          "item2": "Use unique salt per user",
+          "item3": "Configure high cost factor",
+          "item4": "Monitor performance",
+          "item5": "Plan migration of old hashes"
+        }
+      },
+      "2fa": {
+        "label": "2FA Enabled",
+        "description": "2FA enabled on sensitive accounts",
+        "explication": "Two-factor authentication adds an extra security layer by requiring a second authentication factor in addition to the password.",
+        "commentFaire": {
+          "item1": "Implement 2FA for admin accounts",
+          "item2": "Offer multiple methods (SMS, app, email)",
+          "item3": "Configure recovery codes",
+          "item4": "Test 2FA process"
+        },
+        "bonnesPratiques": {
+          "item1": "Mandatory for sensitive accounts",
+          "item2": "Secure recovery methods",
+          "item3": "Clear user interface",
+          "item4": "Monitor access attempts",
+          "item5": "User training"
+        }
+      },
+      "policy": {
+        "label": "Password Policy",
+        "description": "Password complexity and rotation policies",
+        "explication": "A strong password policy requires complex passwords and regular rotation to reduce compromise risks.",
+        "commentFaire": {
+          "item1": "Define complexity rules",
+          "item2": "Configure automatic rotation",
+          "item3": "Implement server-side validation",
+          "item4": "Test password policy"
+        },
+        "bonnesPratiques": {
+          "item1": "Minimum 12 characters",
+          "item2": "Mix of character types",
+          "item3": "Rotation every 90 days",
+          "item4": "Password history",
+          "item5": "User training"
+        }
+      },
+      "roles": {
+        "label": "Roles and Permissions",
+        "description": "Roles and permissions correctly applied",
+        "explication": "A well-designed role and permission system limits access to features and data according to each user's responsibilities.",
+        "commentFaire": {
+          "item1": "Define clear roles",
+          "item2": "Assign minimal necessary permissions",
+          "item3": "Test permission application",
+          "item4": "Monitor privileged access"
+        },
+        "bonnesPratiques": {
+          "item1": "Principle of least privilege",
+          "item2": "Regular permission review",
+          "item3": "Audit privileged access",
+          "item4": "Role documentation",
+          "item5": "Security training"
+        }
+      }
+    },
+    "protection": {
+      "rate": {
+        "label": "Rate Limiting",
+        "description": "Rate limiting for APIs and login forms",
+        "explication": "Rate limiting restricts the number of requests a user can make in a given time, protecting against brute force attacks and spam.",
+        "commentFaire": {
+          "item1": "Configure rate limiting on APIs",
+          "item2": "Apply limits on connections",
+          "item3": "Configure appropriate delays",
+          "item4": "Test rate limiting protection"
+        },
+        "bonnesPratiques": {
+          "item1": "Context-appropriate limits",
+          "item2": "Informative error messages",
+          "item3": "Monitor blocked attempts",
+          "item4": "Differentiated configuration per endpoint",
+          "item5": "Limit documentation"
+        }
+      },
+      "sql": {
+        "label": "SQL Injection Protection",
+        "description": "Protection against SQL injections (validation + escaping)",
+        "explication": "SQL injection protection prevents attackers from executing malicious SQL code by manipulating user inputs.",
+        "commentFaire": {
+          "item1": "Use prepared statements",
+          "item2": "Validate and escape all inputs",
+          "item3": "Test injection protection",
+          "item4": "Monitor injection attempts"
+        },
+        "bonnesPratiques": {
+          "item1": "ORM with built-in protection",
+          "item2": "Strict input validation",
+          "item3": "Automated security testing",
+          "item4": "Monitor error logs",
+          "item5": "Developer training"
+        }
+      },
+      "xss": {
+        "label": "XSS Protection",
+        "description": "Protection against XSS injections (validation + escaping)",
+        "explication": "XSS protection prevents execution of malicious scripts injected into web pages, protecting users against session theft and other attacks.",
+        "commentFaire": {
+          "item1": "Escape all user outputs",
+          "item2": "Use security headers",
+          "item3": "Validate server-side inputs",
+          "item4": "Test XSS protection"
+        },
+        "bonnesPratiques": {
+          "item1": "Content Security Policy (CSP)",
+          "item2": "Automatic output escaping",
+          "item3": "Strict input validation",
+          "item4": "Automated security testing",
+          "item5": "Monitor XSS attempts"
+        }
+      },
+      "directory": {
+        "label": "Directory Indexing",
+        "description": "Disable directory indexing",
+        "explication": "Disabling directory indexing prevents accidental exposure of sensitive files and server structure.",
+        "commentFaire": {
+          "item1": "Configure .htaccess for Apache",
+          "item2": "Configure nginx to disable indexing",
+          "item3": "Test directory access",
+          "item4": "Monitor access attempts"
+        },
+        "bonnesPratiques": {
+          "item1": "Global indexing disable",
+          "item2": ".htaccess files in each directory",
+          "item3": "Monitor access attempts",
+          "item4": "Regular security testing",
+          "item5": "Configuration documentation"
+        }
+      },
+      "waf": {
+        "label": "Application Firewall",
+        "description": "IP filtering or application firewall (WAF)",
+        "explication": "A WAF (Web Application Firewall) protects against common attacks by analyzing and filtering HTTP traffic before it reaches the application.",
+        "commentFaire": {
+          "item1": "Configure WAF (Cloudflare, AWS WAF)",
+          "item2": "Define filtering rules",
+          "item3": "Test WAF protection",
+          "item4": "Monitor security alerts"
+        },
+        "bonnesPratiques": {
+          "item1": "Rules adapted to your application",
+          "item2": "Monitor false positives",
+          "item3": "Regular rule updates",
+          "item4": "Regular penetration testing",
+          "item5": "WAF rule documentation"
+        }
+      }
+    },
+    "files": {
+      "upload": {
+        "label": "Upload Validation",
+        "description": "Strict upload validation (extension, MIME type)",
+        "explication": "Strict file upload validation prevents uploading malicious files and protects against file upload attacks.",
+        "commentFaire": {
+          "item1": "Validate file extensions",
+          "item2": "Check MIME types",
+          "item3": "Limit file sizes",
+          "item4": "Test upload validation"
+        },
+        "bonnesPratiques": {
+          "item1": "Whitelist of allowed types",
+          "item2": "Mandatory server-side validation",
+          "item3": "Appropriate size limits",
+          "item4": "Antivirus file scanning",
+          "item5": "Monitor suspicious uploads"
+        }
+      },
+      "antivirus": {
+        "label": "Antivirus Scan",
+        "description": "Antivirus scan on uploaded files",
+        "explication": "Antivirus scanning of uploaded files detects and blocks malicious files before they are processed by the application.",
+        "commentFaire": {
+          "item1": "Integrate antivirus engine",
+          "item2": "Scan all uploaded files",
+          "item3": "Block suspicious files",
+          "item4": "Monitor scan results"
+        },
+        "bonnesPratiques": {
+          "item1": "Up-to-date antivirus engine",
+          "item2": "Real-time scanning",
+          "item3": "Quarantine suspicious files",
+          "item4": "Detailed scan reports",
+          "item5": "Performance monitoring"
+        }
+      },
+      "backup": {
+        "label": "Automatic Backups",
+        "description": "Regular automatic backups (off main server)",
+        "explication": "Regular automatic backups ensure data recovery in case of loss, corruption or attack on the main server.",
+        "commentFaire": {
+          "item1": "Configure automatic backups",
+          "item2": "Store backups off-site",
+          "item3": "Test backup restoration",
+          "item4": "Monitor backup success"
+        },
+        "bonnesPratiques": {
+          "item1": "Daily backups",
+          "item2": "Storage in multiple locations",
+          "item3": "Backup encryption",
+          "item4": "Regular restoration tests",
+          "item5": "Procedure documentation"
+        }
+      },
+      "restore": {
+        "label": "Restore Test",
+        "description": "Backup restoration test",
+        "explication": "Regular testing of backup restoration ensures that recovery procedures work correctly when needed.",
+        "commentFaire": {
+          "item1": "Plan restoration tests",
+          "item2": "Test in isolated environment",
+          "item3": "Verify data integrity",
+          "item4": "Document test procedures"
+        },
+        "bonnesPratiques": {
+          "item1": "Monthly tests minimum",
+          "item2": "Isolated test environment",
+          "item3": "Data integrity validation",
+          "item4": "Procedure documentation",
+          "item5": "Team training"
+        }
+      }
+    },
+    "maintenance": {
+      "dependencies": {
+        "label": "Dependency Updates",
+        "description": "Regular updates of dependencies and CMS",
+        "explication": "Regular updates of dependencies and CMS fix security vulnerabilities and improve application stability.",
+        "commentFaire": {
+          "item1": "Monitor security updates",
+          "item2": "Test updates in dev environment",
+          "item3": "Plan production updates",
+          "item4": "Monitor stability after update"
+        },
+        "bonnesPratiques": {
+          "item1": "Automatic updates if possible",
+          "item2": "Testing in development environment",
+          "item3": "Update planning",
+          "item4": "Rollback in case of problems",
+          "item5": "Change documentation"
+        }
+      },
+      "accounts": {
+        "label": "Unused Accounts",
+        "description": "Remove unused accounts",
+        "explication": "Removing unused accounts reduces attack surface and improves overall application security by limiting potential entry points.",
+        "commentFaire": {
+          "item1": "Identify inactive accounts",
+          "item2": "Notify users before deletion",
+          "item3": "Remove unused accounts",
+          "item4": "Monitor access attempts"
+        },
+        "bonnesPratiques": {
+          "item1": "Clear inactivity definition",
+          "item2": "Automated notification process",
+          "item3": "Archive before deletion",
+          "item4": "Monitor access attempts",
+          "item5": "Procedure documentation"
+        }
+      },
+      "logs": {
+        "label": "Log Monitoring",
+        "description": "Monitor access and error logs",
+        "explication": "Monitoring access and error logs allows detection of suspicious activities and rapid response to security incidents.",
+        "commentFaire": {
+          "item1": "Configure centralized log collection",
+          "item2": "Implement automated alerts",
+          "item3": "Regularly analyze logs",
+          "item4": "Archive logs according to policy"
+        },
+        "bonnesPratiques": {
+          "item1": "Centralized log collection",
+          "item2": "Real-time alerts",
+          "item3": "Automated pattern analysis",
+          "item4": "Appropriate log retention",
+          "item5": "Log analysis training"
+        }
+      },
+      "alerts": {
+        "label": "Suspicious Activity Alerts",
+        "description": "Alerts for suspicious activity",
+        "explication": "Suspicious activity alerts allow rapid detection and response to intrusion attempts and abnormal behaviors.",
+        "commentFaire": {
+          "item1": "Configure alert rules",
+          "item2": "Implement real-time notifications",
+          "item3": "Define alert thresholds",
+          "item4": "Test alert system"
+        },
+        "bonnesPratiques": {
+          "item1": "Real-time alerts",
+          "item2": "Context-appropriate thresholds",
+          "item3": "Multi-channel notifications",
+          "item4": "Reduce false positives",
+          "item5": "Defined response procedures"
         }
       }
     }

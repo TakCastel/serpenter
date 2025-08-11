@@ -21,7 +21,7 @@
         <div class="text-left">
           <div class="text-base font-semibold" style="color: var(--text-primary);">Audit Lighthouse</div>
           <div class="text-xs" style="color: var(--text-secondary);">
-            {{ projectType === 'appstore-preflight' ? 'Non disponible pour les projets iOS' : 'Analyse rapide d\'une URL (mobile/desktop)' }}
+            {{ projectType === 'appstore-preflight' ? 'Non disponible pour les projets mobiles' : 'Analyse rapide d\'une URL (mobile/desktop)' }}
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ const lighthousePanel = ref()
 // Écouter les changements de type de projet
 watch(() => props.projectType, (newType) => {
   if (newType === 'appstore-preflight') {
-    // Fermer le Lighthouse pour iOS
+    // Fermer le Lighthouse pour les projets mobiles
     expanded.value = false
   } else if (props.defaultExpanded) {
     // Rouvrir pour les autres types
@@ -81,7 +81,7 @@ const reset = async () => {
 
 const toggleExpanded = () => {
   if (props.projectType === 'appstore-preflight') {
-    return // Ne rien faire pour iOS
+    return // Ne rien faire pour les projets mobiles
   }
   expanded.value = !expanded.value
 }

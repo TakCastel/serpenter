@@ -240,6 +240,7 @@ const projectCategories = computed(() => {
 // Fonction pour obtenir l'icône de la catégorie
 const getSommaireIcon = (categoryId) => {
   const icons = {
+    // Catégories principales
     'seo': 'heroicons:magnifying-glass',
     'accessibilite': 'heroicons:heart',
     'performance': 'heroicons:bolt',
@@ -247,13 +248,19 @@ const getSommaireIcon = (categoryId) => {
     'responsive-ux': 'heroicons:device-phone-mobile',
     'securite': 'heroicons:shield-check',
     'analytics': 'heroicons:chart-bar',
-    'preparation': 'heroicons:clipboard-document-list',
-    'conformite': 'heroicons:check-circle',
-    'installation': 'heroicons:cog',
-    'updates': 'heroicons:arrow-path',
-    'backups': 'heroicons:cloud-arrow-up',
-    'latestVersion': 'heroicons:star',
-    'themeChild': 'heroicons:paint-brush'
+    
+    // Catégories de sécurité
+    'reseau-chiffrement': 'heroicons:lock-closed',
+    'authentification-acces': 'heroicons:key',
+    'protection-attaques': 'heroicons:shield-exclamation',
+    'fichiers-donnees': 'heroicons:document-check',
+    'maintenance-surveillance': 'heroicons:eye',
+    
+    // Catégories d'apps
+    'app-store': 'heroicons:device-phone-mobile',
+    'play-store': 'heroicons:device-phone-mobile',
+    'technical': 'heroicons:cog',
+    'legal': 'heroicons:scale'
   }
   return icons[categoryId] || 'heroicons:document-text'
 }

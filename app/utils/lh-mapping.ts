@@ -1,6 +1,6 @@
 /* Map Lighthouse audit IDs to checklist item IDs */
 const lighthouseAuditIdToChecklistItemId: Record<string, string | string[]> = {
-  // Titres & meta (IDs alignés avec app/data/checklist-items.json)
+  // Titres & meta (IDs alignés avec app/data/checklist-items-web.json)
   'document-title': 'title-tag',
   'meta-description': 'meta-description',
   'canonical': 'canonical',

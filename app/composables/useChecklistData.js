@@ -1,6 +1,6 @@
-import defaultChecklistData from '~/data/checklist-items.json'
-import iosChecklist from '~/data/checklist-items-ios.json'
-import wordpressChecklist from '~/data/checklist-items-wordpress.json'
+import defaultChecklistData from '~/data/checklist-items-web.json'
+import appChecklist from '~/data/checklist-items-app.json'
+import securityChecklist from '~/data/checklist-items-security.json'
 
 export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
   const { t } = useI18n()
@@ -9,8 +9,8 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
   // Plus tard, on pourra importer des datasets spécifiques ici.
   const datasetMap = {
     'web-prelaunch': defaultChecklistData,
-    'appstore-preflight': iosChecklist,
-    'wordpress-audit': wordpressChecklist
+    'appstore-preflight': appChecklist,
+    'security-checker': securityChecklist
   }
 
   const selectedType = ref(initialChecklistType)

@@ -20,7 +20,7 @@ server/data/
 ### Après (nouveau système)
 ```
 app/data/
-└── checklist-items.json
+└── checklist-items-web.json
 
 i18n/locales/
 ├── fr.json (avec traductions intégrées)
@@ -29,7 +29,7 @@ i18n/locales/
 
 ## 📁 Structure du nouveau système
 
-### 1. Fichier de données global (`app/data/checklist-items.json`)
+### 1. Fichier de données global (`app/data/checklist-items-web.json`)
 ```json
 {
   "seo": {
@@ -112,7 +112,7 @@ const categories = getAllCategories()
 ```
 
 ### Ajouter un nouvel item
-1. Ajouter l'item dans `app/data/checklist-items.json`
+1. Ajouter l'item dans `app/data/checklist-items-web.json`
 2. Ajouter les traductions dans `i18n/locales/fr.json` et `i18n/locales/en.json`
 
 ## 🔧 Scripts de migration

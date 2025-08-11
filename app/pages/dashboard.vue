@@ -19,11 +19,11 @@
             borderColor: 'var(--button-border)',
             color: 'var(--text-primary)'
           }"
-          :title="$t('app.progress.resetTitle')"
-          :aria-label="$t('app.progress.resetDescription')"
+          :title="$t('common.resetTitle')"
+          :aria-label="$t('common.resetDescription')"
         >
           <Icon name="heroicons:arrow-path" class="w-5 h-5" :style="{ color: 'var(--text-secondary)' }" aria-hidden="true" />
-          <span class="text-sm font-semibold">{{ $t('app.progress.reset') }}</span>
+          <span class="text-sm font-semibold">{{ $t('common.reset') }}</span>
         </button>
       </div>
       
@@ -76,11 +76,11 @@
   <!-- Modal de confirmation de réinitialisation -->
   <Modal
     v-model:is-open="showResetModal"
-    :title="$t('app.progress.resetTitle')"
+    :title="$t('common.resetTitle')"
     @close="cancelReset"
   >
     <p class="text-base text-gray-600 dark:text-gray-300">
-      {{ $t('app.progress.resetConfirm') }}
+      {{ $t('common.resetConfirm') }}
     </p>
 
     <template #footer>
@@ -94,7 +94,7 @@
         @click="confirmReset"
         class="px-4 py-2 rounded-lg font-medium transition-colors duration-200 bg-emerald-500 text-white hover:bg-emerald-600"
       >
-        {{ $t('app.progress.reset') }}
+        {{ $t('common.reset') }}
       </button>
     </template>
   </Modal>

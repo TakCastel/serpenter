@@ -149,7 +149,7 @@
     "checklistTypes": {
       "webPrelaunch": "Web — Pré‑déploiement (actuelle)",
       "appStore": "iOS — Pré‑soumission App Store",
-      "wordpress": "WordPress — Audit de configuration"
+      "security": "Sécurité & Données — Audit de protection"
     }
   },
   "ios": {
@@ -325,13 +325,15 @@
     "openCategory": "Ouvrir la catégorie {name}",
     "closeCategory": "Fermer la catégorie {name}",
     "item": "Élément {label}",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "reset": "Réinitialiser",
+    "resetConfirm": "Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cette action ne peut pas être annulée.",
+    "resetTitle": "Réinitialiser tout le progrès",
+    "resetDescription": "Réinitialiser tout le progrès de la checklist",
+    "completed": "complétés"
   },
   "modal": {
     "close": "Fermer"
-  },
-  "common": {
-    "goToCategory": "Aller à la catégorie {name}"
   },
   "categories": {
     "seo": {
@@ -373,6 +375,42 @@
     "installation": {
       "name": "Installation",
       "description": "Configuration de base de WordPress"
+    },
+    "reseau-chiffrement": {
+      "name": "Sécurité réseau & chiffrement",
+      "description": "Protection des communications et chiffrement des données"
+    },
+    "authentification-acces": {
+      "name": "Authentification & contrôle d'accès",
+      "description": "Gestion sécurisée des identifiants et des permissions"
+    },
+    "protection-attaques": {
+      "name": "Protection contre les attaques",
+      "description": "Défense contre les menaces courantes et vulnérabilités"
+    },
+    "fichiers-donnees": {
+      "name": "Sécurité des fichiers & données",
+      "description": "Protection des données sensibles et validation des uploads"
+    },
+    "maintenance-surveillance": {
+      "name": "Maintenance & surveillance",
+      "description": "Surveillance continue et maintenance préventive"
+    },
+    "app-store": {
+      "name": "App Store",
+      "description": "Checklist pour la soumission sur l'App Store"
+    },
+    "play-store": {
+      "name": "Play Store",
+      "description": "Checklist pour la soumission sur le Play Store"
+    },
+    "technical": {
+      "name": "Aspects Techniques",
+      "description": "Checklist technique pour les applications mobiles"
+    },
+    "legal": {
+      "name": "Aspects Légaux",
+      "description": "Checklist légale et réglementaire"
     }
   },
   "items": {
@@ -1342,6 +1380,78 @@
           "item4": "Validation des fonctionnalités",
           "item5": "Préparation App Store"
         }
+      },
+      "launchScreen": {
+        "label": "Écran de lancement",
+        "description": "Créer un écran de lancement attrayant",
+        "explication": "L'écran de lancement est la première chose que voient les utilisateurs. Il doit être visuellement attrayant et représenter votre marque.",
+        "commentFaire": {
+          "item1": "Utilisez Xcode pour créer un écran de lancement",
+          "item2": "Ajoutez votre logo et vos couleurs de marque",
+          "item3": "Testez sur différents appareils",
+          "item4": "Vérifiez la cohérence visuelle"
+        },
+        "bonnesPratiques": {
+          "item1": "Gardez-le simple et épuré",
+          "item2": "Évitez le texte et les détails",
+          "item3": "Utilisez des couleurs cohérentes avec votre app",
+          "item4": "Testez sur fond clair et sombre",
+          "item5": "Optimisez pour toutes les tailles d'écran"
+        }
+      },
+      "appStoreConnect": {
+        "label": "Configuration App Store Connect",
+        "description": "Configurer App Store Connect pour la publication",
+        "explication": "App Store Connect est la plateforme de gestion de vos applications iOS. Vous devez y créer votre app et configurer les métadonnées.",
+        "commentFaire": {
+          "item1": "Connectez-vous à App Store Connect",
+          "item2": "Créez une nouvelle app",
+          "item3": "Remplissez les informations de base",
+          "item4": "Configurez les métadonnées"
+        },
+        "bonnesPratiques": {
+          "item1": "Utilisez un nom d'app unique et mémorable",
+          "item2": "Préparez une description claire et concise",
+          "item3": "Organisez vos captures d'écran par taille d'appareil",
+          "item4": "Utilisez des mots-clés pertinents",
+          "item5": "Préparez les notes de version"
+        }
+      },
+      "provisioningProfiles": {
+        "label": "Profils de provisionnement",
+        "description": "Configurer les profils de provisionnement",
+        "explication": "Les profils de provisionnement permettent à votre app de fonctionner sur des appareils spécifiques et de se connecter à l'App Store.",
+        "commentFaire": {
+          "item1": "Dans le Developer Portal, créez un profil de provisionnement",
+          "item2": "Associez-le à votre certificat de distribution",
+          "item3": "Téléchargez et installez le profil",
+          "item4": "Vérifiez la configuration dans Xcode"
+        },
+        "bonnesPratiques": {
+          "item1": "Utilisez des profils de distribution pour la production",
+          "item2": "Gardez vos certificats à jour",
+          "item3": "Gérez bien vos identifiants",
+          "item4": "Documentez vos configurations",
+          "item5": "Testez avant la production"
+        }
+      },
+      "certificates": {
+        "label": "Certificats de développement",
+        "description": "Configurer les certificats de développement et de distribution",
+        "explication": "Les certificats sont nécessaires pour signer votre application et la rendre installable sur les appareils iOS.",
+        "commentFaire": {
+          "item1": "Dans le Developer Portal, créez un certificat de développement",
+          "item2": "Créez un certificat de distribution pour votre app",
+          "item3": "Téléchargez et installez les certificats",
+          "item4": "Configurez Xcode pour les utiliser"
+        },
+        "bonnesPratiques": {
+          "item1": "Sauvegardez vos certificats en sécurité",
+          "item2": "Utilisez des certificats de distribution pour la production",
+          "item3": "Renouvelez-les avant expiration",
+          "item4": "Gérez bien vos identifiants",
+          "item5": "Testez la signature de votre app"
+        }
       }
     },
     "conformite": {
@@ -1379,6 +1489,282 @@
           "item3": "Gestion gracieuse du refus",
           "item4": "Test sur appareils réels",
           "item5": "Documentation des permissions"
+        }
+      },
+      "appTrackingTransparency": {
+        "label": "App Tracking Transparency",
+        "description": "Respecter les règles de transparence du suivi",
+        "explication": "iOS 14.5+ exige que vous demandiez explicitement l'autorisation de suivre l'activité utilisateur à travers les apps et sites web d'autres entreprises.",
+        "commentFaire": {
+          "item1": "Implémentez le framework ATT",
+          "item2": "Demandez l'autorisation au bon moment",
+          "item3": "Gérez tous les cas de réponse",
+          "item4": "Testez sur iOS 14.5+"
+        },
+        "bonnesPratiques": {
+          "item1": "Demande d'autorisation contextuelle",
+          "item2": "Explication claire de l'usage",
+          "item3": "Gestion gracieuse du refus",
+          "item4": "Respect de la vie privée",
+          "item5": "Tests sur différents appareils"
+        }
+      },
+      "storeGuidelines": {
+        "label": "Respect des règles App Store",
+        "description": "Conformité aux guidelines Apple",
+        "explication": "Apple a des règles strictes pour l'App Store. Votre app doit respecter ces guidelines pour être acceptée et publiée.",
+        "commentFaire": {
+          "item1": "Lisez attentivement les guidelines",
+          "item2": "Vérifiez votre app contre chaque règle",
+          "item3": "Testez sur différents appareils",
+          "item4": "Préparez des justifications si nécessaire"
+        },
+        "bonnesPratiques": {
+          "item1": "Respect des règles de contenu",
+          "item2": "Interface utilisateur intuitive",
+          "item3": "Performance et stabilité",
+          "item4": "Métadonnées appropriées",
+          "item5": "Tests complets avant soumission"
+        }
+      },
+      "ageRating": {
+        "label": "Classification d'âge",
+        "description": "Définir la classification d'âge appropriée",
+        "explication": "Chaque app doit avoir une classification d'âge appropriée basée sur son contenu. Cela aide les parents à faire des choix éclairés.",
+        "commentFaire": {
+          "item1": "Évaluez le contenu de votre app",
+          "item2": "Répondez au questionnaire de classification",
+          "item3": "Vérifiez la classification proposée",
+          "item4": "Ajustez si nécessaire"
+        },
+        "bonnesPratiques": {
+          "item1": "Classification précise et honnête",
+          "item2": "Contenu approprié pour l'âge",
+          "item3": "Pas de contenu choquant",
+          "item4": "Respect des standards internationaux",
+          "item5": "Mise à jour si le contenu change"
+        }
+      }
+    },
+    "testing": {
+      "testflightBuild": {
+        "label": "Build TestFlight prête",
+        "description": "Version de test validée",
+        "explication": "Avant de soumettre à l'App Store, testez votre application via TestFlight. Cela permet d'identifier et corriger les problèmes avant la publication.",
+        "commentFaire": {
+          "item1": "Créez une archive dans Xcode",
+          "item2": "Uploadez vers App Store Connect",
+          "item3": "Configurez TestFlight",
+          "item4": "Invitez des testeurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests internes complets",
+          "item2": "Tests externes avec feedback",
+          "item3": "Correction des bugs critiques",
+          "item4": "Validation des fonctionnalités",
+          "item5": "Préparation App Store"
+        }
+      },
+      "deviceTesting": {
+        "label": "Tests sur appareils réels",
+        "description": "Tester sur différents appareils iOS",
+        "explication": "Les simulateurs ne reproduisent pas toujours fidèlement le comportement sur appareils réels. Testez sur plusieurs appareils pour identifier les problèmes.",
+        "commentFaire": {
+          "item1": "Testez sur iPhone et iPad",
+          "item2": "Vérifiez différentes tailles d'écran",
+          "item3": "Testez les orientations portrait et paysage",
+          "item4": "Vérifiez la compatibilité iOS"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests sur appareils réels",
+          "item2": "Couverture des tailles d'écran",
+          "item3": "Tests d'orientation",
+          "item4": "Validation des performances",
+          "item5": "Tests d'accessibilité"
+        }
+      },
+      "accessibilityTesting": {
+        "label": "Tests d'accessibilité",
+        "description": "Vérifier l'accessibilité de l'application",
+        "explication": "L'accessibilité permet aux utilisateurs avec des handicaps d'utiliser votre app. C'est aussi une exigence de l'App Store.",
+        "commentFaire": {
+          "item1": "Activez VoiceOver dans les tests",
+          "item2": "Vérifiez la navigation au clavier",
+          "item3": "Testez les contrastes de couleurs",
+          "item4": "Validez les labels d'accessibilité"
+        },
+        "bonnesPratiques": {
+          "item1": "Support complet de VoiceOver",
+          "item2": "Navigation au clavier intuitive",
+          "item3": "Contrastes WCAG AA minimum",
+          "item4": "Labels descriptifs",
+          "item5": "Tests avec utilisateurs réels"
+        }
+      },
+      "performanceTesting": {
+        "label": "Tests de performance",
+        "description": "Vérifier les performances de l'application",
+        "explication": "Les performances impactent directement l'expérience utilisateur et les chances d'acceptation par Apple. Testez la vitesse, la mémoire et la batterie.",
+        "commentFaire": {
+          "item1": "Utilisez Instruments pour analyser",
+          "item2": "Vérifiez l'utilisation mémoire",
+          "item3": "Testez les temps de démarrage",
+          "item4": "Analysez la consommation batterie"
+        },
+        "bonnesPratiques": {
+          "item1": "Démarrage en moins de 3 secondes",
+          "item2": "Utilisation mémoire optimisée",
+          "item3": "Consommation batterie minimale",
+          "item4": "Animations fluides 60fps",
+          "item5": "Tests sur appareils anciens"
+        }
+      }
+    },
+    "deploiement": {
+      "buildProduction": {
+        "label": "Build de production",
+        "description": "Créer une build optimisée pour la production",
+        "explication": "La build de production doit être optimisée, signée et prête pour la soumission à l'App Store. Elle doit être stable et performante.",
+        "commentFaire": {
+          "item1": "Activez l'optimisation dans Xcode",
+          "item2": "Désactivez le mode debug",
+          "item3": "Vérifiez la signature",
+          "item4": "Testez la build finale"
+        },
+        "bonnesPratiques": {
+          "item1": "Build Release optimisée",
+          "item2": "Signature correcte",
+          "item3": "Tests complets sur la build finale",
+          "item4": "Vérification des métadonnées",
+          "item5": "Préparation des assets"
+        }
+      },
+      "metadataStore": {
+        "label": "Métadonnées App Store",
+        "description": "Configurer les métadonnées de l'App Store",
+        "explication": "Les métadonnées (nom, description, mots-clés) sont cruciales pour la découverte de votre app dans l'App Store et l'ASO.",
+        "commentFaire": {
+          "item1": "Rédigez un nom d'app accrocheur",
+          "item2": "Créez une description persuasive",
+          "item3": "Optimisez les mots-clés",
+          "item4": "Préparez les notes de version"
+        },
+        "bonnesPratiques": {
+          "item1": "Nom unique et mémorable",
+          "item2": "Description claire et concise",
+          "item3": "Mots-clés pertinents et populaires",
+          "item4": "Notes de version informatives",
+          "item5": "Localisation en plusieurs langues"
+        }
+      },
+      "screenshots": {
+        "label": "Captures d'écran optimisées",
+        "description": "Créer des captures d'écran attrayantes",
+        "explication": "Les captures d'écran sont la première impression de votre app. Elles doivent être de haute qualité et montrer les meilleures fonctionnalités.",
+        "commentFaire": {
+          "item1": "Prenez des captures sur appareils réels",
+          "item2": "Montrez les fonctionnalités clés",
+          "item3": "Utilisez des appareils récents",
+          "item4": "Optimisez pour chaque taille d'écran"
+        },
+        "bonnesPratiques": {
+          "item1": "Qualité HD sur appareils récents",
+          "item2": "Fonctionnalités principales visibles",
+          "item3": "Interface épurée et claire",
+          "item4": "Cohérence visuelle",
+          "item5": "Tests sur différents appareils"
+        }
+      },
+      "keywordsOptimisation": {
+        "label": "Optimisation des mots-clés",
+        "description": "Optimiser les mots-clés pour l'ASO",
+        "explication": "L'App Store Optimization (ASO) améliore la visibilité de votre app. Les mots-clés bien choisis augmentent les chances de découverte.",
+        "commentFaire": {
+          "item1": "Recherchez les mots-clés populaires",
+          "item2": "Analysez la concurrence",
+          "item3": "Intégrez les mots-clés naturellement",
+          "item4": "Testez différentes combinaisons"
+        },
+        "bonnesPratiques": {
+          "item1": "Mots-clés pertinents et populaires",
+          "item2": "Intégration naturelle dans le nom",
+          "item3": "Évitez le keyword stuffing",
+          "item4": "Suivi des performances",
+          "item5": "Ajustements basés sur les données"
+        }
+      },
+      "reviewSubmission": {
+        "label": "Soumission pour review",
+        "description": "Soumettre l'app pour review Apple",
+        "explication": "La review Apple peut prendre 24h à plusieurs jours. Préparez bien votre soumission pour éviter les rejets et accélérer le processus.",
+        "commentFaire": {
+          "item1": "Vérifiez tous les éléments requis",
+          "item2": "Testez la build soumise",
+          "item3": "Préparez les justifications",
+          "item4": "Soumettez et suivez le statut"
+        },
+        "bonnesPratiques": {
+          "item1": "Vérification complète avant soumission",
+          "item2": "Build stable et testée",
+          "item3": "Métadonnées complètes et précises",
+          "item4": "Préparation des réponses aux questions",
+          "item5": "Suivi du processus de review"
+        }
+      }
+    },
+    "postDeploiement": {
+      "monitoring": {
+        "label": "Monitoring post-publication",
+        "description": "Surveiller les performances de l'app",
+        "explication": "Après la publication, surveillez les performances, les crashs et les retours utilisateurs pour maintenir la qualité de votre app.",
+        "commentFaire": {
+          "item1": "Configurez Crashlytics ou équivalent",
+          "item2": "Surveillez les métriques App Store",
+          "item3": "Analysez les retours utilisateurs",
+          "item4": "Suivez les performances"
+        },
+        "bonnesPratiques": {
+          "item1": "Monitoring des crashs en temps réel",
+          "item2": "Analyse des métriques de performance",
+          "item3": "Suivi des retours utilisateurs",
+          "item4": "Alertes automatiques",
+          "item5": "Rapports réguliers"
+        }
+      },
+      "userFeedback": {
+        "label": "Gestion des retours utilisateurs",
+        "description": "Répondre aux retours et avis",
+        "explication": "Les retours utilisateurs sont précieux pour améliorer votre app. Répondez rapidement et constructivement aux avis et commentaires.",
+        "commentFaire": {
+          "item1": "Surveillez les avis App Store",
+          "item2": "Répondez aux commentaires",
+          "item3": "Analysez les retours",
+          "item4": "Planifiez les améliorations"
+        },
+        "bonnesPratiques": {
+          "item1": "Réponses rapides et constructives",
+          "item2": "Analyse des retours négatifs",
+          "item3": "Priorisation des améliorations",
+          "item4": "Communication transparente",
+          "item5": "Mise à jour régulière"
+        }
+      },
+      "updatesPlanning": {
+        "label": "Planification des mises à jour",
+        "description": "Planifier les futures mises à jour",
+        "explication": "Une app mobile nécessite des mises à jour régulières pour maintenir l'engagement, corriger les bugs et ajouter des fonctionnalités.",
+        "commentFaire": {
+          "item1": "Analysez les retours utilisateurs",
+          "item2": "Planifiez les nouvelles fonctionnalités",
+          "item3": "Priorisez les corrections de bugs",
+          "item4": "Préparez le calendrier de releases"
+        },
+        "bonnesPratiques": {
+          "item1": "Roadmap de développement claire",
+          "item2": "Mises à jour régulières",
+          "item3": "Communication sur les nouveautés",
+          "item4": "Tests complets avant release",
+          "item5": "Feedback utilisateur intégré"
         }
       }
     }
@@ -1457,6 +1843,1750 @@
           "item3": "Tests de restauration réguliers",
           "item4": "Chiffrement des sauvegardes",
           "item5": "Documentation des procédures"
+        }
+      }
+    }
+  },
+  "app": {
+    "store": {
+      "metadata": {
+        "title": "Métadonnées de l'App Store",
+        "description": "Titre, description et mots-clés optimisés pour l'App Store",
+        "explication": "Les métadonnées de votre application dans l'App Store sont cruciales pour sa découverte et son téléchargement. Elles doivent être optimisées avec des mots-clés pertinents et une description attractive.",
+        "commentFaire": {
+          "item1": "Créez un titre accrocheur avec des mots-clés",
+          "item2": "Rédigez une description détaillée et attractive",
+          "item3": "Ajoutez des mots-clés pertinents",
+          "item4": "Testez la visibilité avec des outils de recherche"
+        },
+        "bonnesPratiques": {
+          "item1": "Titre de 30 caractères maximum",
+          "item2": "Description de 4000 caractères maximum",
+          "item3": "Mots-clés pertinents et spécifiques",
+          "item4": "Appel à l'action clair",
+          "item5": "Mise à jour régulière des métadonnées"
+        }
+      },
+      "screenshots": {
+        "title": "Captures d'écran optimisées",
+        "description": "Captures d'écran attractives pour l'App Store",
+        "explication": "Les captures d'écran sont souvent le premier élément que voient les utilisateurs. Elles doivent présenter les fonctionnalités clés de votre application de manière claire et attractive.",
+        "commentFaire": {
+          "item1": "Sélectionnez les fonctionnalités principales",
+          "item2": "Créez des captures d'écran de qualité",
+          "item3": "Ajoutez des annotations explicatives",
+          "item4": "Testez sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Résolution 1242x2688 pixels (iPhone)",
+          "item2": "Maximum 10 captures d'écran",
+          "item3": "Annotations claires et lisibles",
+          "item4": "Ordre logique des fonctionnalités",
+          "item5": "Cohérence visuelle entre captures"
+        }
+      },
+      "appIcon": {
+        "title": "Icône de l'application",
+        "description": "Icône distinctive et de qualité pour l'App Store",
+        "explication": "L'icône de votre application est son identité visuelle principale. Elle doit être distinctive, mémorable et refléter l'essence de votre application.",
+        "commentFaire": {
+          "item1": "Concevez une icône distinctive",
+          "item2": "Créez plusieurs tailles d'icônes",
+          "item3": "Testez la lisibilité sur fond clair et sombre",
+          "item4": "Vérifiez la qualité sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Format PNG avec transparence",
+          "item2": "Tailles multiples (20x20 à 1024x1024)",
+          "item3": "Design simple et reconnaissable",
+          "item4": "Pas de texte dans l'icône",
+          "item5": "Cohérence avec l'identité de marque"
+        }
+      },
+      "privacy": {
+        "title": "Politique de confidentialité",
+        "description": "Politique de confidentialité conforme et accessible",
+        "explication": "Apple exige une politique de confidentialité claire et accessible pour toutes les applications. Elle doit expliquer comment vous collectez, utilisez et protégez les données utilisateur.",
+        "commentFaire": {
+          "item1": "Rédigez une politique claire et complète",
+          "item2": "Incluez tous les types de données collectées",
+          "item3": "Expliquez l'utilisation des données",
+          "item4": "Ajoutez les coordonnées de contact"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage simple et compréhensible",
+          "item2": "Mise à jour régulière",
+          "item3": "Conformité RGPD/CCPA",
+          "item4": "Accessible depuis l'application",
+          "item5": "Traduction dans les langues cibles"
+        }
+      },
+      "contentRating": {
+        "title": "Classification du contenu",
+        "description": "Classification appropriée du contenu de l'application",
+        "explication": "La classification du contenu aide les parents et les utilisateurs à comprendre le type de contenu de votre application. Elle doit être précise et conforme aux directives d'Apple.",
+        "commentFaire": {
+          "item1": "Évaluez le contenu de votre application",
+          "item2": "Répondez au questionnaire de classification",
+          "item3": "Vérifiez la classification proposée",
+          "item4": "Apportez des corrections si nécessaire"
+        },
+        "bonnesPratiques": {
+          "item1": "Évaluation honnête du contenu",
+          "item2": "Mise à jour lors des changements",
+          "item3": "Respect des directives d'Apple",
+          "item4": "Documentation des choix de classification",
+          "item5": "Vérification régulière de la pertinence"
+        }
+      },
+      "testflight": {
+        "title": "TestFlight configuré",
+        "description": "Configuration de TestFlight pour les tests bêta",
+        "explication": "TestFlight permet de tester votre application avec des utilisateurs bêta avant sa publication. C'est un excellent moyen de détecter et corriger les problèmes avant le lancement.",
+        "commentFaire": {
+          "item1": "Configurez TestFlight dans App Store Connect",
+          "item2": "Ajoutez des testeurs internes et externes",
+          "item3": "Uploadez une build de test",
+          "item4": "Surveillez les retours des testeurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests sur différents appareils",
+          "item2": "Feedback structuré des testeurs",
+          "item3": "Correction rapide des problèmes",
+          "item4": "Documentation des changements",
+          "item5": "Communication claire avec les testeurs"
+        }
+      }
+    },
+    "play": {
+      "store": {
+        "listing": {
+          "title": "Fiche Play Store",
+          "description": "Fiche complète et optimisée pour le Play Store",
+          "explication": "La fiche de votre application dans le Play Store doit être complète et optimisée pour la découverte. Elle comprend le titre, la description courte et longue, et les mots-clés.",
+          "commentFaire": {
+          "item1": "Créez un titre accrocheur (80 caractères max)",
+          "item2": "Rédigez une description courte (80 caractères max)",
+          "item3": "Écrivez une description longue détaillée",
+          "item4": "Ajoutez des mots-clés pertinents"
+        },
+        "bonnesPratiques": {
+          "item1": "Titre avec mots-clés principaux",
+          "item2": "Description courte accrocheuse",
+          "item3": "Description longue informative",
+          "item4": "Mots-clés spécifiques et pertinents",
+          "item5": "Mise à jour régulière du contenu"
+        }
+      },
+      "graphics": {
+        "title": "Graphismes Play Store",
+        "description": "Images et graphismes optimisés pour le Play Store",
+        "explication": "Les graphismes de votre application dans le Play Store contribuent à son attractivité et à sa conversion. Ils doivent être de haute qualité et présenter clairement les fonctionnalités.",
+        "commentFaire": {
+          "item1": "Créez une icône haute résolution (512x512)",
+          "item2": "Concevez des captures d'écran attractives",
+          "item3": "Ajoutez une bannière de fonctionnalité",
+          "item4": "Testez sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Icône 512x512 pixels minimum",
+          "item2": "Captures d'écran 16:9 ou 9:16",
+          "item3": "Bannière de fonctionnalité 1024x500",
+          "item4": "Qualité d'image optimale",
+          "item5": "Cohérence visuelle globale"
+        }
+      },
+      "contentRating": {
+        "title": "Classification du contenu",
+        "description": "Classification appropriée du contenu pour le Play Store",
+        "explication": "Google Play utilise un système de classification du contenu pour aider les utilisateurs à choisir des applications appropriées. Votre application doit être correctement classifiée.",
+        "commentFaire": {
+          "item1": "Répondez au questionnaire de classification",
+          "item2": "Vérifiez la classification proposée",
+          "item3": "Apportez des corrections si nécessaire",
+          "item4": "Mettez à jour lors des changements"
+        },
+        "bonnesPratiques": {
+          "item1": "Évaluation honnête du contenu",
+          "item2": "Mise à jour lors des changements",
+          "item3": "Respect des directives Google",
+          "item4": "Documentation des choix",
+          "item5": "Vérification régulière"
+        }
+      },
+      "privacyPolicy": {
+        "title": "Politique de confidentialité",
+        "description": "Politique de confidentialité conforme aux exigences Google",
+        "explication": "Google Play exige une politique de confidentialité claire et accessible pour toutes les applications. Elle doit expliquer la collecte et l'utilisation des données.",
+        "commentFaire": {
+          "item1": "Rédigez une politique complète",
+          "item2": "Incluez tous les types de données",
+          "item3": "Expliquez l'utilisation des données",
+          "item4": "Ajoutez les coordonnées de contact"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage clair et accessible",
+          "item2": "Conformité RGPD/CCPA",
+          "item3": "Mise à jour régulière",
+          "item4": "Accessible depuis l'app",
+          "item5": "Traduction dans les langues cibles"
+        }
+      },
+      "testing": {
+        "title": "Tests et validation",
+        "description": "Tests complets avant publication sur le Play Store",
+        "explication": "Avant de publier votre application sur le Play Store, vous devez effectuer des tests complets pour vous assurer de sa qualité et de sa conformité.",
+        "commentFaire": {
+          "item1": "Tests sur différents appareils Android",
+          "item2": "Tests de compatibilité API",
+          "item3": "Tests de performance et stabilité",
+          "item4": "Tests de sécurité et permissions"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests sur appareils populaires",
+          "item2": "Tests de régression",
+          "item3": "Tests automatisés",
+          "item4": "Tests utilisateur bêta",
+          "item5": "Documentation des tests"
+        }
+      }
+    },
+    "technical": {
+      "performance": {
+        "title": "Performance de l'application",
+        "description": "Optimisation des performances et de la réactivité",
+        "explication": "Les performances de votre application mobile sont cruciales pour l'expérience utilisateur. Une application lente ou qui plante fréquemment sera rapidement désinstallée.",
+        "commentFaire": {
+          "item1": "Mesurez les temps de chargement",
+          "item2": "Optimisez les requêtes réseau",
+          "item3": "Implémentez la mise en cache",
+          "item4": "Testez sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Temps de lancement < 3 secondes",
+          "item2": "Mise en cache intelligente",
+          "item3": "Optimisation des images",
+          "item4": "Gestion de la mémoire",
+          "item5": "Monitoring des performances"
+        }
+      },
+      "security": {
+        "title": "Sécurité de l'application",
+        "description": "Protection des données et sécurité du code",
+        "explication": "La sécurité de votre application mobile est essentielle pour protéger les données utilisateur et maintenir la confiance. Les vulnérabilités peuvent avoir des conséquences graves.",
+        "commentFaire": {
+          "item1": "Implémentez le chiffrement des données",
+          "item2": "Sécurisez les communications réseau",
+          "item3": "Validez toutes les entrées utilisateur",
+          "item4": "Effectuez des tests de sécurité"
+        },
+        "bonnesPratiques": {
+          "item1": "Chiffrement AES pour les données sensibles",
+          "item2": "HTTPS obligatoire pour les API",
+          "item3": "Validation côté client et serveur",
+          "item4": "Tests de pénétration réguliers",
+          "item5": "Mises à jour de sécurité"
+        }
+      },
+      "accessibility": {
+        "title": "Accessibilité de l'application",
+        "description": "Conformité aux standards d'accessibilité",
+        "explication": "L'accessibilité de votre application mobile permet à tous les utilisateurs, y compris ceux avec des handicaps, d'utiliser votre application efficacement.",
+        "commentFaire": {
+          "item1": "Implémentez le support VoiceOver/TalkBack",
+          "item2": "Assurez un contraste suffisant",
+          "item3": "Utilisez des tailles de police appropriées",
+          "item4": "Testez avec des outils d'accessibilité"
+        },
+        "bonnesPratiques": {
+          "item1": "Support des lecteurs d'écran",
+          "item2": "Contraste minimum 4.5:1",
+          "item3": "Tailles de police configurables",
+          "item4": "Navigation au clavier possible",
+          "item5": "Tests utilisateur accessibilité"
+        }
+      },
+      "localization": {
+        "title": "Localisation de l'application",
+        "description": "Support multi-langues et adaptation culturelle",
+        "explication": "La localisation de votre application mobile permet d'atteindre un public international et d'améliorer l'expérience utilisateur dans différentes régions.",
+        "commentFaire": {
+          "item1": "Identifiez les langues cibles",
+          "item2": "Traduisez tous les textes",
+          "item3": "Adaptez les formats de date/numéros",
+          "item4": "Testez dans chaque langue"
+        },
+        "bonnesPratiques": {
+          "item1": "Support des langues principales",
+          "item2": "Traductions professionnelles",
+          "item3": "Adaptation culturelle",
+          "item4": "Tests linguistiques",
+          "item5": "Mise à jour des traductions"
+        }
+      },
+      "offline": {
+        "title": "Fonctionnement hors ligne",
+        "description": "Support du mode hors ligne et synchronisation",
+        "explication": "Le fonctionnement hors ligne améliore l'expérience utilisateur en permettant d'utiliser l'application même sans connexion internet. C'est particulièrement important pour la rétention.",
+        "commentFaire": {
+          "item1": "Implémentez la mise en cache locale",
+          "item2": "Gérez la synchronisation des données",
+          "item3": "Indiquez le statut de connexion",
+          "item4": "Testez en mode avion"
+        },
+        "bonnesPratiques": {
+          "item1": "Cache intelligent des données",
+          "item2": "Synchronisation automatique",
+          "item3": "Indicateur de statut réseau",
+          "item4": "Gestion des conflits",
+          "item5": "Tests hors ligne complets"
+        }
+      }
+    },
+    "legal": {
+      "gdpr": {
+        "title": "Conformité RGPD",
+        "description": "Respect du règlement général sur la protection des données",
+        "explication": "Le RGPD s'applique à toutes les applications qui collectent des données d'utilisateurs européens. La conformité est obligatoire et peut avoir des conséquences légales importantes.",
+        "commentFaire": {
+          "item1": "Auditez la collecte de données",
+          "item2": "Implémentez le consentement explicite",
+          "item3": "Créez un processus de suppression",
+          "item4": "Documentez les traitements"
+        },
+        "bonnesPratiques": {
+          "item1": "Consentement explicite et révocable",
+          "item2": "Minimisation des données collectées",
+          "item3": "Droit à l'oubli implémenté",
+          "item4": "Notification des violations",
+          "item5": "DPO désigné si nécessaire"
+        }
+      },
+      "cookies": {
+        "title": "Gestion des cookies",
+        "description": "Gestion transparente des cookies et traceurs",
+        "explication": "Les cookies et traceurs dans les applications mobiles doivent être gérés de manière transparente avec le consentement de l'utilisateur. C'est une exigence légale dans de nombreux pays.",
+        "commentFaire": {
+          "item1": "Identifiez tous les cookies utilisés",
+          "item2": "Implémentez le consentement",
+          "item3": "Permettez la désactivation",
+          "item4": "Informez sur l'utilisation"
+        },
+        "bonnesPratiques": {
+          "item1": "Inventaire complet des cookies",
+          "item2": "Consentement avant activation",
+          "item3": "Désactivation facile",
+          "item4": "Information claire sur l'usage",
+          "item5": "Mise à jour de la politique"
+        }
+      },
+      "terms": {
+        "title": "Conditions d'utilisation",
+        "description": "Conditions d'utilisation claires et accessibles",
+        "explication": "Les conditions d'utilisation définissent les règles d'utilisation de votre application. Elles doivent être claires, accessibles et conformes à la législation applicable.",
+        "commentFaire": {
+          "item1": "Rédigez des conditions claires",
+          "item2": "Incluez les clauses essentielles",
+          "item3": "Rendez-les accessibles",
+          "item4": "Faites-les valider juridiquement"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage simple et compréhensible",
+          "item2": "Clauses essentielles incluses",
+          "item3": "Accessible depuis l'application",
+          "item4": "Mise à jour lors des changements",
+          "item5": "Validation juridique"
+        }
+      }
+    }
+  },
+  "app": {
+    "store": {
+      "metadata": {
+        "title": "Métadonnées optimisées",
+        "description": "Titre, description et mots-clés optimisés pour l'App Store",
+        "explication": "Les métadonnées de votre application dans l'App Store sont cruciales pour la découverte et le référencement. Elles doivent être optimisées pour les algorithmes de recherche d'Apple.",
+        "commentFaire": {
+          "item1": "Créez un titre accrocheur (30 caractères max)",
+          "item2": "Rédigez une description persuasive",
+          "item3": "Ajoutez des mots-clés pertinents",
+          "item4": "Testez la visibilité dans l'App Store"
+        },
+        "bonnesPratiques": {
+          "item1": "Titre court et mémorable",
+          "item2": "Description avec call-to-action",
+          "item3": "Mots-clés dans le titre et description",
+          "item4": "Mise à jour régulière des métadonnées",
+          "item5": "A/B testing des descriptions"
+        }
+      },
+      "screenshots": {
+        "title": "Captures d'écran attractives",
+        "description": "Captures d'écran optimisées pour l'App Store",
+        "explication": "Les captures d'écran sont souvent le premier élément que voient les utilisateurs. Elles doivent présenter votre application de manière attractive et professionnelle.",
+        "commentFaire": {
+          "item1": "Sélectionnez les écrans les plus importants",
+          "item2": "Ajoutez des annotations explicatives",
+          "item3": "Utilisez des appareils récents",
+          "item4": "Testez sur différents écrans"
+        },
+        "bonnesPratiques": {
+          "item1": "Écrans de démonstration clés",
+          "item2": "Annotations courtes et claires",
+          "item3": "Qualité d'image optimale",
+          "item4": "Cohérence visuelle",
+          "item5": "Mise à jour avec les nouvelles fonctionnalités"
+        }
+      },
+      "appIcon": {
+        "title": "Icône de l'application",
+        "description": "Icône distinctive et professionnelle",
+        "explication": "L'icône de votre application est votre identité visuelle principale. Elle doit être distinctive, mémorable et refléter l'essence de votre application.",
+        "commentFaire": {
+          "item1": "Créez une icône simple et reconnaissable",
+          "item2": "Testez sur fond clair et sombre",
+          "item3": "Vérifiez la lisibilité en petit format",
+          "item4": "Respectez les guidelines Apple"
+        },
+        "bonnesPratiques": {
+          "item1": "Design simple et mémorable",
+          "item2": "Couleurs contrastées",
+          "item3": "Pas de texte dans l'icône",
+          "item4": "Cohérence avec l'identité de marque",
+          "item5": "Test sur différents appareils"
+        }
+      },
+      "privacy": {
+        "title": "Politique de confidentialité",
+        "description": "Politique de confidentialité conforme et accessible",
+        "explication": "Apple exige une politique de confidentialité claire et accessible pour toutes les applications. Elle doit expliquer comment vous collectez et utilisez les données des utilisateurs.",
+        "commentFaire": {
+          "item1": "Rédigez une politique claire",
+          "item2": "Incluez tous les types de données collectées",
+          "item3": "Expliquez l'utilisation des données",
+          "item4": "Rendez-la accessible depuis l'app"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage simple et compréhensible",
+          "item2": "Mise à jour régulière",
+          "item3": "Accessible depuis l'application",
+          "item4": "Conformité aux lois locales",
+          "item5": "Contact pour questions"
+        }
+      },
+      "contentRating": {
+        "title": "Classification du contenu",
+        "description": "Classification appropriée du contenu",
+        "explication": "La classification du contenu détermine l'âge approprié pour votre application. Elle doit être précise pour éviter les rejets et respecter les guidelines d'Apple.",
+        "commentFaire": {
+          "item1": "Évaluez le contenu de votre application",
+          "item2": "Répondez honnêtement aux questions",
+          "item3": "Testez avec différents âges",
+          "item4": "Mettez à jour si le contenu change"
+        },
+        "bonnesPratiques": {
+          "item1": "Évaluation honnête du contenu",
+          "item2": "Mise à jour lors des changements",
+          "item3": "Respect des guidelines Apple",
+          "item4": "Test avec public cible",
+          "item5": "Documentation des choix"
+        }
+      },
+      "testflight": {
+        "title": "Configuration TestFlight",
+        "description": "Configuration et tests via TestFlight",
+        "explication": "TestFlight permet de tester votre application avec des utilisateurs réels avant la publication. C'est un outil essentiel pour valider votre application.",
+        "commentFaire": {
+          "item1": "Configurez TestFlight dans App Store Connect",
+          "item2": "Invitez des testeurs internes et externes",
+          "item3": "Collectez les retours et feedback",
+          "item4": "Corrigez les problèmes identifiés"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests avec différents appareils",
+          "item2": "Feedback structuré des testeurs",
+          "item3": "Correction rapide des bugs",
+          "item4": "Tests de régression",
+          "item5": "Documentation des changements"
+        }
+      }
+    }
+  },
+  "security": {
+    "ssl": {
+      "label": "Certificat SSL valide",
+      "description": "Certificat SSL valide et redirection HTTPS forcée",
+      "explication": "Un certificat SSL valide assure le chiffrement des données entre le navigateur et le serveur, protégeant la confidentialité des informations échangées.",
+      "commentFaire": {
+        "item1": "Vérifiez la validité du certificat SSL",
+        "item2": "Configurez la redirection HTTP vers HTTPS",
+        "item3": "Testez la connexion sécurisée",
+        "item4": "Surveillez l'expiration du certificat"
+      },
+      "bonnesPratiques": {
+        "item1": "Utilisez des certificats de sources fiables",
+        "item2": "Configurez le renouvellement automatique",
+        "item3": "Testez régulièrement la configuration",
+        "item4": "Surveillez les indicateurs de sécurité",
+        "item5": "Documentez la configuration SSL"
+      }
+    },
+    "https": {
+      "label": "Redirection HTTPS forcée",
+      "description": "Forcer la redirection de HTTP vers HTTPS",
+      "explication": "La redirection HTTPS forcée garantit que tous les utilisateurs accèdent au site via une connexion sécurisée, même s'ils tapent HTTP dans l'URL.",
+      "commentFaire": {
+        "item1": "Configurez la redirection au niveau serveur",
+        "item2": "Testez la redirection HTTP vers HTTPS",
+        "item3": "Vérifiez que tous les liens sont en HTTPS",
+        "item4": "Surveillez les erreurs de redirection"
+      },
+      "bonnesPratiques": {
+        "item1": "Redirection 301 pour le SEO",
+        "item2": "Testez sur différents navigateurs",
+        "item3": "Surveillez les logs d'erreur",
+        "item4": "Configurez les en-têtes de sécurité",
+        "item5": "Documentez la configuration"
+      }
+    },
+    "hsts": {
+      "label": "HSTS activé",
+      "description": "HSTS activé pour éviter le downgrade en HTTP",
+      "explication": "L'en-tête HSTS (HTTP Strict Transport Security) force les navigateurs à utiliser HTTPS, empêchant les attaques de downgrade et les attaques de l'homme du milieu.",
+      "commentFaire": {
+        "item1": "Configurez l'en-tête HSTS sur le serveur",
+        "item2": "Définissez une durée de validité appropriée",
+        "item3": "Testez l'en-tête HSTS",
+        "item4": "Surveillez la conformité"
+      },
+      "bonnesPratiques": {
+        "item1": "Commencez avec une durée courte",
+        "item2": "Augmentez progressivement la durée",
+        "item3": "Incluez les sous-domaines si nécessaire",
+        "item4": "Testez sur différents navigateurs",
+        "item5": "Documentez la configuration HSTS"
+      }
+    },
+    "tls": {
+      "label": "Version TLS à jour",
+      "description": "Chiffrement des données sensibles en transit (TLS 1.2/1.3)",
+      "explication": "Les versions TLS récentes (1.2 et 1.3) offrent une sécurité renforcée et de meilleures performances par rapport aux anciennes versions SSL/TLS.",
+      "commentFaire": {
+        "item1": "Vérifiez la version TLS supportée",
+        "item2": "Désactivez les anciennes versions (TLS 1.0/1.1)",
+        "item3": "Testez la compatibilité des clients",
+        "item4": "Surveillez la configuration TLS"
+      },
+      "bonnesPratiques": {
+        "item1": "Privilégiez TLS 1.3",
+        "item2": "Maintenez TLS 1.2 pour la compatibilité",
+        "item3": "Utilisez des suites de chiffrement fortes",
+        "item4": "Testez régulièrement la configuration",
+        "item5": "Documentez la configuration TLS"
+      }
+    },
+    "auth": {
+      "password": {
+        "label": "Mots de passe hashés",
+        "description": "Mots de passe stockés hashés (bcrypt, argon2)",
+        "explication": "Le hachage des mots de passe est essentiel pour protéger les informations d'identification des utilisateurs en cas de compromission de la base de données.",
+        "commentFaire": {
+          "item1": "Utilisez des algorithmes de hachage sécurisés",
+          "item2": "Ajoutez du sel (salt) aux mots de passe",
+          "item3": "Configurez un facteur de coût approprié",
+          "item4": "Testez la sécurité du hachage"
+        },
+        "bonnesPratiques": {
+          "item1": "Privilégiez bcrypt ou argon2",
+          "item2": "Utilisez un sel unique par utilisateur",
+          "item3": "Configurez un facteur de coût élevé",
+          "item4": "Surveillez les performances",
+          "item5": "Planifiez la migration des anciens hachages"
+        }
+      },
+      "2fa": {
+        "label": "2FA activé",
+        "description": "2FA activé sur les comptes sensibles",
+        "explication": "L'authentification à deux facteurs ajoute une couche de sécurité supplémentaire en exigeant un second facteur d'authentification en plus du mot de passe.",
+        "commentFaire": {
+          "item1": "Implémentez la 2FA pour les comptes admin",
+          "item2": "Offrez plusieurs méthodes (SMS, app, email)",
+          "item3": "Configurez les codes de récupération",
+          "item4": "Testez le processus 2FA"
+        },
+        "bonnesPratiques": {
+          "item1": "Obligatoire pour les comptes sensibles",
+          "item2": "Méthodes de récupération sécurisées",
+          "item3": "Interface utilisateur claire",
+          "item4": "Surveillance des tentatives d'accès",
+          "item5": "Formation des utilisateurs"
+        }
+      },
+      "policy": {
+        "label": "Politique de mots de passe",
+        "description": "Politiques de complexité et rotation des mots de passe",
+        "explication": "Une politique de mots de passe forte exige des mots de passe complexes et leur rotation régulière pour réduire les risques de compromission.",
+        "commentFaire": {
+          "item1": "Définissez des règles de complexité",
+          "item2": "Configurez la rotation automatique",
+          "item3": "Implémentez la validation côté serveur",
+          "item4": "Testez la politique de mots de passe"
+        },
+        "bonnesPratiques": {
+          "item1": "Minimum 12 caractères",
+          "item2": "Mélange de types de caractères",
+          "item3": "Rotation tous les 90 jours",
+          "item4": "Historique des mots de passe",
+          "item5": "Formation des utilisateurs"
+        }
+      },
+      "roles": {
+        "label": "Rôles et permissions",
+        "description": "Rôles et permissions correctement appliqués",
+        "explication": "Un système de rôles et permissions bien conçu limite l'accès aux fonctionnalités et données selon les responsabilités de chaque utilisateur.",
+        "commentFaire": {
+          "item1": "Définissez des rôles clairs",
+          "item2": "Attribuez les permissions minimales nécessaires",
+          "item3": "Testez l'application des permissions",
+          "item4": "Surveillez les accès privilégiés"
+        },
+        "bonnesPratiques": {
+          "item1": "Principe du moindre privilège",
+          "item2": "Révision régulière des permissions",
+          "item3": "Audit des accès privilégiés",
+          "item4": "Documentation des rôles",
+          "item5": "Formation sur la sécurité"
+        }
+      }
+    },
+    "protection": {
+      "rate": {
+        "label": "Limitation de débit",
+        "description": "Limitation de débit pour les API et formulaires de connexion",
+        "explication": "Le rate limiting limite le nombre de requêtes qu'un utilisateur peut effectuer dans un délai donné, protégeant contre les attaques par force brute et le spam.",
+        "commentFaire": {
+          "item1": "Configurez le rate limiting sur les APIs",
+          "item2": "Appliquez des limites sur les connexions",
+          "item3": "Configurez des délais appropriés",
+          "item4": "Testez la protection rate limiting"
+        },
+        "bonnesPratiques": {
+          "item1": "Limites adaptées au contexte",
+          "item2": "Messages d'erreur informatifs",
+          "item3": "Surveillance des tentatives bloquées",
+          "item4": "Configuration différenciée par endpoint",
+          "item5": "Documentation des limites"
+        }
+      },
+      "sql": {
+        "label": "Protection contre les injections SQL",
+        "description": "Protection contre injections SQL (validation + échappement)",
+        "explication": "La protection contre les injections SQL empêche les attaquants d'exécuter du code SQL malveillant en manipulant les entrées utilisateur.",
+        "commentFaire": {
+          "item1": "Utilisez des requêtes préparées",
+          "item2": "Validez et échappez toutes les entrées",
+          "item3": "Testez la protection contre les injections",
+          "item4": "Surveillez les tentatives d'injection"
+        },
+        "bonnesPratiques": {
+          "item1": "ORM avec protection intégrée",
+          "item2": "Validation stricte des entrées",
+          "item3": "Tests de sécurité automatisés",
+          "item4": "Surveillance des logs d'erreur",
+          "item5": "Formation des développeurs"
+        }
+      },
+      "xss": {
+        "label": "Protection contre les attaques XSS",
+        "description": "Protection contre injections XSS (validation + échappement)",
+        "explication": "La protection XSS empêche l'exécution de scripts malveillants injectés dans les pages web, protégeant les utilisateurs contre le vol de session et autres attaques.",
+        "commentFaire": {
+          "item1": "Échappez toutes les sorties utilisateur",
+          "item2": "Utilisez des en-têtes de sécurité",
+          "item3": "Validez les entrées côté serveur",
+          "item4": "Testez la protection XSS"
+        },
+        "bonnesPratiques": {
+          "item1": "Content Security Policy (CSP)",
+          "item2": "Échappement automatique des sorties",
+          "item3": "Validation stricte des entrées",
+          "item4": "Tests de sécurité automatisés",
+          "item5": "Surveillance des tentatives XSS"
+        }
+      },
+      "directory": {
+        "label": "Désactivation de l'indexation des répertoires",
+        "description": "Désactivation de l'indexation des répertoires",
+        "explication": "La désactivation de l'indexation des répertoires empêche l'exposition accidentelle de fichiers sensibles et de la structure du serveur.",
+        "commentFaire": {
+          "item1": "Configurez .htaccess pour Apache",
+          "item2": "Configurez nginx pour désactiver l'indexation",
+          "item3": "Testez l'accès aux répertoires",
+          "item4": "Surveillez les tentatives d'accès"
+        },
+        "bonnesPratiques": {
+          "item1": "Désactivation globale de l'indexation",
+          "item2": "Fichiers .htaccess dans chaque répertoire",
+          "item3": "Surveillance des tentatives d'accès",
+          "item4": "Tests de sécurité réguliers",
+          "item5": "Documentation de la configuration"
+        }
+      },
+      "waf": {
+        "label": "Firewall applicatif (WAF)",
+        "description": "Filtrage IP ou firewall applicatif (WAF)",
+        "explication": "Un WAF (Web Application Firewall) protège contre les attaques courantes en analysant et filtrant le trafic HTTP avant qu'il n'atteigne l'application.",
+        "commentFaire": {
+          "item1": "Configurez un WAF (Cloudflare, AWS WAF)",
+          "item2": "Définissez des règles de filtrage",
+          "item3": "Testez la protection du WAF",
+          "item4": "Surveillez les alertes de sécurité"
+        },
+        "bonnesPratiques": {
+          "item1": "Règles adaptées à votre application",
+          "item2": "Surveillance des faux positifs",
+          "item3": "Mise à jour régulière des règles",
+          "item4": "Tests de pénétration réguliers",
+          "item5": "Documentation des règles WAF"
+        }
+      }
+    },
+    "files": {
+      "upload": {
+        "label": "Validation des uploads",
+        "description": "Validation stricte des uploads (extension, MIME type)",
+        "explication": "La validation stricte des fichiers uploadés empêche l'upload de fichiers malveillants et protège contre les attaques par upload de fichiers.",
+        "commentFaire": {
+          "item1": "Validez les extensions de fichiers",
+          "item2": "Vérifiez les types MIME",
+          "item3": "Limitez la taille des fichiers",
+          "item4": "Testez la validation des uploads"
+        },
+        "bonnesPratiques": {
+          "item1": "Liste blanche des types autorisés",
+          "item2": "Validation côté serveur obligatoire",
+          "item3": "Limites de taille appropriées",
+          "item4": "Scan antivirus des fichiers",
+          "item5": "Surveillance des uploads suspects"
+        }
+      },
+      "antivirus": {
+        "label": "Scan antivirus",
+        "description": "Scan antivirus sur les fichiers uploadés",
+        "explication": "Le scan antivirus des fichiers uploadés détecte et bloque les fichiers malveillants avant qu'ils ne soient traités par l'application.",
+        "commentFaire": {
+          "item1": "Intégrez un moteur antivirus",
+          "item2": "Scannez tous les fichiers uploadés",
+          "item3": "Bloquez les fichiers suspects",
+          "item4": "Surveillez les résultats des scans"
+        },
+        "bonnesPratiques": {
+          "item1": "Moteur antivirus à jour",
+          "item2": "Scan en temps réel",
+          "item3": "Quarantaine des fichiers suspects",
+          "item4": "Rapports de scan détaillés",
+          "item5": "Surveillance des performances"
+        }
+      },
+      "backup": {
+        "label": "Sauvegardes automatiques",
+        "description": "Sauvegardes automatiques régulières (hors serveur principal)",
+        "explication": "Les sauvegardes automatiques régulières garantissent la récupération des données en cas de perte, corruption ou attaque sur le serveur principal.",
+        "commentFaire": {
+          "item1": "Configurez des sauvegardes automatiques",
+          "item2": "Stockez les sauvegardes hors site",
+          "item3": "Testez la restauration des sauvegardes",
+          "item4": "Surveillez le succès des sauvegardes"
+        },
+        "bonnesPratiques": {
+          "item1": "Sauvegardes quotidiennes",
+          "item2": "Stockage dans plusieurs emplacements",
+          "item3": "Chiffrement des sauvegardes",
+          "item4": "Tests de restauration réguliers",
+          "item5": "Documentation des procédures"
+        }
+      },
+      "restore": {
+        "label": "Test de restauration",
+        "description": "Test de restauration des backups",
+        "explication": "Tester régulièrement la restauration des sauvegardes garantit que les procédures de récupération fonctionnent correctement en cas de besoin.",
+        "commentFaire": {
+          "item1": "Planifiez des tests de restauration",
+          "item2": "Testez sur un environnement isolé",
+          "item3": "Vérifiez l'intégrité des données",
+          "item4": "Documentez les procédures de test"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests mensuels minimum",
+          "item2": "Environnement de test isolé",
+          "item3": "Validation de l'intégrité des données",
+          "item4": "Documentation des procédures",
+          "item5": "Formation de l'équipe"
+        }
+      }
+    },
+    "maintenance": {
+      "dependencies": {
+        "label": "Mises à jour des dépendances",
+        "description": "Mises à jour régulières des dépendances et CMS",
+        "explication": "Les mises à jour régulières des dépendances et du CMS corrigent les vulnérabilités de sécurité et améliorent la stabilité de l'application.",
+        "commentFaire": {
+          "item1": "Surveillez les mises à jour de sécurité",
+          "item2": "Testez les mises à jour en environnement de dev",
+          "item3": "Planifiez les mises à jour en production",
+          "item4": "Surveillez la stabilité après mise à jour"
+        },
+        "bonnesPratiques": {
+          "item1": "Mises à jour automatiques si possible",
+          "item2": "Tests en environnement de développement",
+          "item3": "Planification des mises à jour",
+          "item4": "Rollback en cas de problème",
+          "item5": "Documentation des changements"
+        }
+      },
+      "accounts": {
+        "label": "Comptes inutilisés",
+        "description": "Suppression des comptes inutilisés",
+        "explication": "La suppression des comptes inutilisés réduit la surface d'attaque et améliore la sécurité globale de l'application en limitant les points d'entrée potentiels.",
+        "commentFaire": {
+          "item1": "Identifiez les comptes inactifs",
+          "item2": "Notifiez les utilisateurs avant suppression",
+          "item3": "Supprimez les comptes inutilisés",
+          "item4": "Surveillez les tentatives d'accès"
+        },
+        "bonnesPratiques": {
+          "item1": "Définition claire de l'inactivité",
+          "item2": "Processus de notification automatisé",
+          "item3": "Archivage avant suppression",
+          "item4": "Surveillance des tentatives d'accès",
+          "item5": "Documentation des procédures"
+        }
+      },
+      "logs": {
+        "label": "Surveillance des logs",
+        "description": "Surveillance des logs d'accès et d'erreurs",
+        "explication": "La surveillance des logs d'accès et d'erreurs permet de détecter les activités suspectes et de réagir rapidement aux incidents de sécurité.",
+        "commentFaire": {
+          "item1": "Configurez la collecte centralisée des logs",
+          "item2": "Implémentez des alertes automatisées",
+          "item3": "Analysez régulièrement les logs",
+          "item4": "Archivez les logs selon la politique"
+        },
+        "bonnesPratiques": {
+          "item1": "Collecte centralisée des logs",
+          "item2": "Alertes en temps réel",
+          "item3": "Analyse automatisée des patterns",
+          "item4": "Rétention appropriée des logs",
+          "item5": "Formation sur l'analyse des logs"
+        }
+      },
+      "alerts": {
+        "label": "Alertes d'activité suspecte",
+        "description": "Alertes en cas d'activité suspecte",
+        "explication": "Les alertes d'activité suspecte permettent de détecter et de réagir rapidement aux tentatives d'intrusion et aux comportements anormaux.",
+        "commentFaire": {
+          "item1": "Configurez des règles d'alerte",
+          "item2": "Implémentez des notifications en temps réel",
+          "item3": "Définissez des seuils d'alerte",
+          "item4": "Testez le système d'alertes"
+        },
+        "bonnesPratiques": {
+          "item1": "Alertes en temps réel",
+          "item2": "Seuils adaptés au contexte",
+          "item3": "Notifications multi-canaux",
+          "item4": "Réduction des faux positifs",
+          "item5": "Procédures de réponse définies"
+        }
+      }
+    }
+  },
+    "technical": {
+      "performance": {
+        "title": "Performance de l'application",
+        "description": "Optimisation des performances et de la réactivité",
+        "explication": "Les performances de votre application mobile sont cruciales pour l'expérience utilisateur. Une application lente ou qui plante fréquemment sera rapidement désinstallée.",
+        "commentFaire": {
+          "item1": "Mesurez les temps de chargement",
+          "item2": "Optimisez les requêtes réseau",
+          "item3": "Implémentez la mise en cache",
+          "item4": "Testez sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Temps de lancement < 3 secondes",
+          "item2": "Mise en cache intelligente",
+          "item3": "Optimisation des images",
+          "item4": "Gestion de la mémoire",
+          "item5": "Tests de performance réguliers"
+        }
+      },
+      "security": {
+        "title": "Sécurité de l'application",
+        "description": "Protection contre les vulnérabilités courantes",
+        "explication": "La sécurité de votre application mobile est essentielle pour protéger les données utilisateur et maintenir la confiance des utilisateurs.",
+        "commentFaire": {
+          "item1": "Audit de sécurité complet",
+          "item2": "Implémentez le chiffrement des données",
+          "item3": "Testez les vulnérabilités",
+          "item4": "Surveillez les menaces"
+        },
+        "bonnesPratiques": {
+          "item1": "Chiffrement des données sensibles",
+          "item2": "Validation des entrées utilisateur",
+          "item3": "Mises à jour de sécurité",
+          "item4": "Tests de pénétration",
+          "item5": "Formation de l'équipe"
+        }
+      },
+      "accessibility": {
+        "title": "Accessibilité de l'application",
+        "description": "Conformité aux standards d'accessibilité",
+        "explication": "L'accessibilité garantit que votre application peut être utilisée par tous, y compris les personnes en situation de handicap.",
+        "commentFaire": {
+          "item1": "Implémentez la navigation au clavier",
+          "item2": "Ajoutez des alternatives textuelles",
+          "item3": "Testez avec des lecteurs d'écran",
+          "item4": "Vérifiez les contrastes de couleurs"
+        },
+        "bonnesPratiques": {
+          "item1": "Navigation au clavier complète",
+          "item2": "Contraste de couleurs suffisant",
+          "item3": "Alternatives textuelles pour les images",
+          "item4": "Tests avec des utilisateurs",
+          "item5": "Conformité WCAG 2.1"
+        }
+      },
+      "localization": {
+        "title": "Localisation de l'application",
+        "description": "Support multilingue et adaptation culturelle",
+        "explication": "La localisation adapte votre application aux marchés internationaux, améliorant l'expérience utilisateur et l'adoption.",
+        "commentFaire": {
+          "item1": "Identifiez les marchés cibles",
+          "item2": "Traduisez tous les textes",
+          "item3": "Adaptez les formats (dates, devises)",
+          "item4": "Testez avec des utilisateurs locaux"
+        },
+        "bonnesPratiques": {
+          "item1": "Support de plusieurs langues",
+          "item2": "Adaptation culturelle",
+          "item3": "Formats locaux appropriés",
+          "item4": "Tests de localisation",
+          "item5": "Mise à jour continue"
+        }
+      },
+      "offline": {
+        "title": "Fonctionnement hors ligne",
+        "description": "Fonctionnalités disponibles sans connexion",
+        "explication": "Le fonctionnement hors ligne améliore l'expérience utilisateur en permettant l'utilisation même sans connexion internet.",
+        "commentFaire": {
+          "item1": "Identifiez les fonctionnalités essentielles",
+          "item2": "Implémentez la synchronisation",
+          "item3": "Gérez les conflits de données",
+          "item4": "Testez en mode hors ligne"
+        },
+        "bonnesPratiques": {
+          "item1": "Fonctionnalités essentielles hors ligne",
+          "item2": "Synchronisation intelligente",
+          "item3": "Gestion des conflits",
+          "item4": "Indicateurs de statut",
+          "item5": "Tests hors ligne complets"
+        }
+      }
+    },
+    "legal": {
+      "gdpr": {
+        "title": "Conformité RGPD",
+        "description": "Respect du règlement général sur la protection des données",
+        "explication": "Le RGPD s'applique aux applications qui collectent des données d'utilisateurs européens. La conformité est obligatoire.",
+        "commentFaire": {
+          "item1": "Auditez la collecte de données",
+          "item2": "Implémentez le consentement explicite",
+          "item3": "Créez un processus de suppression",
+          "item4": "Documentez les traitements"
+        },
+        "bonnesPratiques": {
+          "item1": "Consentement explicite et révocable",
+          "item2": "Minimisation des données collectées",
+          "item3": "Droit à l'oubli implémenté",
+          "item4": "Notification des violations",
+          "item5": "DPO désigné si nécessaire"
+        }
+      },
+      "cookies": {
+        "title": "Gestion des cookies",
+        "description": "Gestion transparente des cookies et traceurs",
+        "explication": "Les cookies dans les applications mobiles doivent être gérés de manière transparente avec le consentement de l'utilisateur.",
+        "commentFaire": {
+          "item1": "Identifiez tous les cookies utilisés",
+          "item2": "Implémentez le consentement",
+          "item3": "Permettez la désactivation",
+          "item4": "Informez sur l'utilisation"
+        },
+        "bonnesPratiques": {
+          "item1": "Inventaire complet des cookies",
+          "item2": "Consentement avant activation",
+          "item3": "Désactivation facile",
+          "item4": "Information claire sur l'usage",
+          "item5": "Mise à jour de la politique"
+        }
+      },
+      "terms": {
+        "title": "Conditions d'utilisation",
+        "description": "Conditions d'utilisation claires et accessibles",
+        "explication": "Les conditions d'utilisation définissent les règles d'utilisation de votre application. Elles doivent être claires et conformes à la législation.",
+        "commentFaire": {
+          "item1": "Rédigez des conditions claires",
+          "item2": "Incluez les clauses essentielles",
+          "item3": "Rendez-les accessibles",
+          "item4": "Faites-les valider juridiquement"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage simple et compréhensible",
+          "item2": "Clauses essentielles incluses",
+          "item3": "Accessible depuis l'application",
+          "item4": "Mise à jour lors des changements",
+          "item5": "Validation juridique"
+        }
+      }
+    }
+  },
+  "app": {
+    "store": {
+      "metadata": {
+        "title": "Métadonnées App Store",
+        "description": "Métadonnées complètes et optimisées",
+        "explication": "Les métadonnées de votre application dans l'App Store sont cruciales pour la visibilité et les téléchargements. Elles doivent être complètes et optimisées.",
+        "commentFaire": {
+          "item1": "Remplissez tous les champs obligatoires",
+          "item2": "Ajoutez des mots-clés pertinents",
+          "item3": "Rédigez une description engageante",
+          "item4": "Optimisez le titre de l'app"
+        },
+        "bonnesPratiques": {
+          "item1": "Titre court et mémorable",
+          "item2": "Mots-clés dans le titre",
+          "item3": "Description claire et concise",
+          "item4": "Mise à jour régulière",
+          "item5": "A/B testing des éléments"
+        }
+      },
+      "screenshots": {
+        "title": "Captures d'écran optimisées",
+        "description": "Captures d'écran de qualité pour l'App Store",
+        "explication": "Les captures d'écran sont souvent le premier élément que voient les utilisateurs. Elles doivent présenter votre application de manière attractive et professionnelle.",
+        "commentFaire": {
+          "item1": "Créez des captures de qualité",
+          "item2": "Ajoutez des textes explicatifs",
+          "item3": "Optimisez pour différentes tailles",
+          "item4": "Testez sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Captures nettes et colorées",
+          "item2": "Textes courts et lisibles",
+          "item3": "Cohérence visuelle",
+          "item4": "Respect des guidelines Apple",
+          "item5": "Mise à jour avec les nouvelles fonctionnalités"
+        }
+      },
+      "appIcon": {
+        "title": "Icône de l'application",
+        "description": "Icône distinctive et mémorable",
+        "explication": "L'icône de votre application est l'élément visuel principal qui représente votre marque dans l'App Store et sur l'écran d'accueil des utilisateurs.",
+        "commentFaire": {
+          "item1": "Créez une icône distinctive",
+          "item2": "Respectez les guidelines Apple",
+          "item3": "Testez sur différents fonds",
+          "item4": "Optimisez pour la lisibilité"
+        },
+        "bonnesPratiques": {
+          "item1": "Design simple et mémorable",
+          "item2": "Couleurs contrastées",
+          "item3": "Pas de texte dans l'icône",
+          "item4": "Cohérence avec l'identité",
+          "item5": "Test sur différents appareils"
+        }
+      },
+      "privacy": {
+        "title": "Politique de confidentialité",
+        "description": "Politique de confidentialité conforme",
+        "explication": "Apple exige une politique de confidentialité claire pour toutes les applications de l'App Store. Elle doit expliquer la collecte et l'utilisation des données.",
+        "commentFaire": {
+          "item1": "Rédigez une politique claire",
+          "item2": "Incluez tous les types de données",
+          "item3": "Expliquez l'utilisation",
+          "item4": "Rendez-la accessible"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage simple et compréhensible",
+          "item2": "Mise à jour régulière",
+          "item3": "Accessible depuis l'application",
+          "item4": "Conformité aux lois locales",
+          "item5": "Contact pour questions"
+        }
+      },
+      "contentRating": {
+        "title": "Classification du contenu",
+        "description": "Classification appropriée du contenu",
+        "explication": "La classification du contenu dans l'App Store détermine l'âge approprié et aide les parents à faire des choix éclairés.",
+        "commentFaire": {
+          "item1": "Répondez honnêtement aux questions",
+          "item2": "Testez avec différents âges",
+          "item3": "Mettez à jour si nécessaire",
+          "item4": "Respectez les guidelines Apple"
+        },
+        "bonnesPratiques": {
+          "item1": "Évaluation honnête du contenu",
+          "item2": "Mise à jour lors des changements",
+          "item3": "Respect des guidelines Apple",
+          "item4": "Test avec public cible",
+          "item5": "Documentation des choix"
+        }
+      },
+      "testflight": {
+        "title": "TestFlight configuré",
+        "description": "Configuration TestFlight pour les tests",
+        "explication": "TestFlight permet de tester votre application avec des utilisateurs réels avant la publication. Une configuration correcte est essentielle pour un processus de test efficace.",
+        "commentFaire": {
+          "item1": "Configurez TestFlight",
+          "item2": "Invitez des testeurs",
+          "item3": "Gérez les builds de test",
+          "item4": "Collectez les retours"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests sur différents appareils",
+          "item2": "Feedback structuré des testeurs",
+          "item3": "Correction rapide des bugs",
+          "item4": "Tests de régression",
+          "item5": "Documentation des changements"
+        }
+      }
+    },
+    "technical": {
+      "performance": {
+        "title": "Performance de l'application",
+        "description": "Optimisation des performances",
+        "explication": "La performance de votre application mobile est cruciale pour l'expérience utilisateur et la rétention. Une app lente peut décourager les utilisateurs.",
+        "commentFaire": {
+          "item1": "Optimisez le temps de lancement",
+          "item2": "Implémentez la mise en cache",
+          "item3": "Optimisez les images",
+          "item4": "Gérez la mémoire efficacement"
+        },
+        "bonnesPratiques": {
+          "item1": "Temps de lancement < 3 secondes",
+          "item2": "Mise en cache intelligente",
+          "item3": "Optimisation des images",
+          "item4": "Gestion de la mémoire",
+          "item5": "Monitoring des performances"
+        }
+      },
+      "security": {
+        "title": "Sécurité de l'application",
+        "description": "Protection des données et sécurité du code",
+        "explication": "La sécurité de votre application mobile est essentielle pour protéger les données utilisateur et maintenir la confiance. Les vulnérabilités peuvent avoir des conséquences graves.",
+        "commentFaire": {
+          "item1": "Implémentez le chiffrement des données",
+          "item2": "Sécurisez les communications réseau",
+          "item3": "Validez toutes les entrées utilisateur",
+          "item4": "Effectuez des tests de sécurité"
+        },
+        "bonnesPratiques": {
+          "item1": "Chiffrement AES pour les données sensibles",
+          "item2": "HTTPS obligatoire pour les API",
+          "item3": "Validation côté client et serveur",
+          "item4": "Tests de pénétration réguliers",
+          "item5": "Mises à jour de sécurité"
+        }
+      },
+      "accessibility": {
+        "title": "Accessibilité de l'application",
+        "description": "Conformité aux standards d'accessibilité",
+        "explication": "L'accessibilité de votre application mobile permet à tous les utilisateurs, y compris ceux avec des handicaps, d'utiliser votre application efficacement.",
+        "commentFaire": {
+          "item1": "Implémentez le support VoiceOver/TalkBack",
+          "item2": "Assurez un contraste suffisant",
+          "item3": "Utilisez des tailles de police appropriées",
+          "item4": "Testez avec des outils d'accessibilité"
+        },
+        "bonnesPratiques": {
+          "item1": "Support des lecteurs d'écran",
+          "item2": "Contraste minimum 4.5:1",
+          "item3": "Tailles de police configurables",
+          "item4": "Navigation au clavier possible",
+          "item5": "Tests utilisateur accessibilité"
+        }
+      },
+      "localization": {
+        "title": "Localisation de l'application",
+        "description": "Support multi-langues et adaptation culturelle",
+        "explication": "La localisation de votre application mobile permet d'atteindre un public international et d'améliorer l'expérience utilisateur dans différentes régions.",
+        "commentFaire": {
+          "item1": "Identifiez les langues cibles",
+          "item2": "Traduisez tous les textes",
+          "item3": "Adaptez les formats de date/numéros",
+          "item4": "Testez dans chaque langue"
+        },
+        "bonnesPratiques": {
+          "item1": "Support des langues principales",
+          "item2": "Traductions professionnelles",
+          "item3": "Adaptation culturelle",
+          "item4": "Tests linguistiques",
+          "item5": "Mise à jour des traductions"
+        }
+      },
+      "offline": {
+        "title": "Fonctionnement hors ligne",
+        "description": "Support du mode hors ligne et synchronisation",
+        "explication": "Le fonctionnement hors ligne améliore l'expérience utilisateur en permettant d'utiliser l'application même sans connexion internet. C'est particulièrement important pour la rétention.",
+        "commentFaire": {
+          "item1": "Implémentez la mise en cache locale",
+          "item2": "Gérez la synchronisation des données",
+          "item3": "Indiquez le statut de connexion",
+          "item4": "Testez en mode avion"
+        },
+        "bonnesPratiques": {
+          "item1": "Cache intelligent des données",
+          "item2": "Synchronisation automatique",
+          "item3": "Indicateur de statut réseau",
+          "item4": "Gestion des conflits",
+          "item5": "Tests hors ligne complets"
+        }
+      }
+    },
+    "legal": {
+      "gdpr": {
+        "title": "Conformité RGPD",
+        "description": "Respect du règlement général sur la protection des données",
+        "explication": "Le RGPD s'applique à toutes les applications qui collectent des données d'utilisateurs européens. La conformité est obligatoire et peut avoir des conséquences légales importantes.",
+        "commentFaire": {
+          "item1": "Auditez la collecte de données",
+          "item2": "Implémentez le consentement explicite",
+          "item3": "Créez un processus de suppression",
+          "item4": "Documentez les traitements"
+        },
+        "bonnesPratiques": {
+          "item1": "Consentement explicite et révocable",
+          "item2": "Minimisation des données collectées",
+          "item3": "Droit à l'oubli implémenté",
+          "item4": "Notification des violations",
+          "item5": "DPO désigné si nécessaire"
+        }
+      },
+      "cookies": {
+        "title": "Gestion des cookies",
+        "description": "Gestion conforme des cookies et traceurs",
+        "explication": "La gestion des cookies dans votre application mobile doit respecter les réglementations en vigueur et informer clairement les utilisateurs de leur utilisation.",
+        "commentFaire": {
+          "item1": "Implémentez le consentement cookies",
+          "item2": "Informez sur l'utilisation",
+          "item3": "Permettez la désactivation",
+          "item4": "Documentez la politique"
+        },
+        "bonnesPratiques": {
+          "item1": "Bannière de consentement claire",
+          "item2": "Options de désactivation",
+          "item3": "Information transparente",
+          "item4": "Mise à jour régulière",
+          "item5": "Conformité aux lois locales"
+        }
+      },
+      "terms": {
+        "title": "Conditions d'utilisation",
+        "description": "Conditions d'utilisation claires et conformes",
+        "explication": "Les conditions d'utilisation de votre application mobile doivent être claires, accessibles et conformes aux réglementations en vigueur.",
+        "commentFaire": {
+          "item1": "Rédigez des conditions claires",
+          "item2": "Incluez les clauses essentielles",
+          "item3": "Rendez-les accessibles",
+          "item4": "Mettez à jour si nécessaire"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage simple et compréhensible",
+          "item2": "Clauses essentielles incluses",
+          "item3": "Accessible depuis l'application",
+          "item4": "Mise à jour lors des changements",
+          "item5": "Validation juridique"
+        }
+      }
+    }
+  },
+  "play": {
+    "store": {
+      "listing": {
+        "title": "Fiche Play Store complète",
+        "description": "Fiche d'application optimisée pour le Play Store",
+        "explication": "La fiche de votre application dans le Play Store doit être complète et optimisée pour améliorer la visibilité et les téléchargements.",
+        "commentFaire": {
+          "item1": "Remplissez tous les champs obligatoires",
+          "item2": "Ajoutez des captures d'écran",
+          "item3": "Rédigez une description détaillée",
+          "item4": "Ajoutez des vidéos de démonstration"
+        },
+        "bonnesPratiques": {
+          "item1": "Description complète et engageante",
+          "item2": "Captures d'écran de qualité",
+          "item3": "Mots-clés pertinents",
+          "item4": "Mise à jour régulière",
+          "item5": "A/B testing des éléments"
+        }
+      },
+      "graphics": {
+        "title": "Graphismes optimisés",
+        "description": "Icônes et bannières optimisées pour le Play Store",
+        "explication": "Les graphismes de votre application dans le Play Store contribuent à l'attractivité et à la professionnalité de votre présentation.",
+        "commentFaire": {
+          "item1": "Créez une icône distinctive",
+          "item2": "Ajoutez des bannières promotionnelles",
+          "item3": "Optimisez pour différentes tailles",
+          "item4": "Testez sur différents appareils"
+        },
+        "bonnesPratiques": {
+          "item1": "Icône simple et mémorable",
+          "item2": "Bannières de qualité professionnelle",
+          "item3": "Cohérence visuelle",
+          "item4": "Respect des guidelines Google",
+          "item5": "Mise à jour avec l'identité"
+        }
+      },
+      "contentRating": {
+        "title": "Classification du contenu",
+        "description": "Classification appropriée du contenu",
+        "explication": "La classification du contenu dans le Play Store détermine l'âge approprié et aide les parents à faire des choix éclairés.",
+        "commentFaire": {
+          "item1": "Répondez honnêtement aux questions",
+          "item2": "Testez avec différents âges",
+          "item3": "Mettez à jour si nécessaire",
+          "item4": "Respectez les guidelines Google"
+        },
+        "bonnesPratiques": {
+          "item1": "Évaluation honnête du contenu",
+          "item2": "Mise à jour lors des changements",
+          "item3": "Respect des guidelines Google",
+          "item4": "Test avec public cible",
+          "item5": "Documentation des choix"
+        }
+      },
+      "privacyPolicy": {
+        "title": "Politique de confidentialité",
+        "description": "Politique de confidentialité conforme",
+        "explication": "Google exige une politique de confidentialité claire pour toutes les applications du Play Store. Elle doit expliquer la collecte et l'utilisation des données.",
+        "commentFaire": {
+          "item1": "Rédigez une politique claire",
+          "item2": "Incluez tous les types de données",
+          "item3": "Expliquez l'utilisation",
+          "item4": "Rendez-la accessible"
+        },
+        "bonnesPratiques": {
+          "item1": "Langage simple et compréhensible",
+          "item2": "Mise à jour régulière",
+          "item3": "Accessible depuis l'application",
+          "item4": "Conformité aux lois locales",
+          "item5": "Contact pour questions"
+        }
+      },
+      "testing": {
+        "title": "Tests et validation",
+        "description": "Tests complets avant publication",
+        "explication": "Les tests complets avant la publication sur le Play Store sont essentiels pour éviter les rejets et assurer une expérience utilisateur de qualité.",
+        "commentFaire": {
+          "item1": "Testez sur différents appareils",
+          "item2": "Vérifiez toutes les fonctionnalités",
+          "item3": "Testez les cas d'erreur",
+          "item4": "Validez la conformité"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests sur appareils populaires",
+          "item2": "Tests de régression",
+          "item3": "Validation de la conformité",
+          "item4": "Tests de performance",
+          "item5": "Documentation des tests"
+        }
+      }
+    }
+  },
+  "security": {
+    "ssl": {
+      "label": "Certificat SSL valide",
+      "description": "Certificat SSL valide et redirection HTTPS forcée",
+      "explication": "Un certificat SSL valide assure le chiffrement des données entre le navigateur et le serveur, protégeant la confidentialité des informations échangées.",
+      "commentFaire": {
+        "item1": "Vérifiez la validité du certificat SSL",
+        "item2": "Configurez la redirection HTTP vers HTTPS",
+        "item3": "Testez la connexion sécurisée",
+        "item4": "Surveillez l'expiration du certificat"
+      },
+      "bonnesPratiques": {
+        "item1": "Utilisez des certificats de sources fiables",
+        "item2": "Configurez le renouvellement automatique",
+        "item3": "Testez régulièrement la configuration",
+        "item4": "Surveillez les indicateurs de sécurité",
+        "item5": "Documentez la configuration SSL"
+      }
+    },
+    "https": {
+      "label": "Redirection HTTPS forcée",
+      "description": "Forcer la redirection de HTTP vers HTTPS",
+      "explication": "La redirection HTTPS forcée garantit que tous les utilisateurs accèdent au site via une connexion sécurisée, même s'ils tapent HTTP dans l'URL.",
+      "commentFaire": {
+        "item1": "Configurez la redirection au niveau serveur",
+        "item2": "Testez la redirection HTTP vers HTTPS",
+        "item3": "Vérifiez que tous les liens sont en HTTPS",
+        "item4": "Surveillez les erreurs de redirection"
+      },
+      "bonnesPratiques": {
+        "item1": "Redirection 301 pour le SEO",
+        "item2": "Testez sur différents navigateurs",
+        "item3": "Surveillez les logs d'erreur",
+        "item4": "Configurez les en-têtes de sécurité",
+        "item5": "Documentez la configuration"
+      }
+    },
+    "hsts": {
+      "label": "HSTS activé",
+      "description": "HSTS activé pour éviter le downgrade en HTTP",
+      "explication": "L'en-tête HSTS (HTTP Strict Transport Security) force les navigateurs à utiliser HTTPS, empêchant les attaques de downgrade et les attaques de l'homme du milieu.",
+      "commentFaire": {
+        "item1": "Configurez l'en-tête HSTS sur le serveur",
+        "item2": "Définissez une durée de validité appropriée",
+        "item3": "Testez l'en-tête HSTS",
+        "item4": "Surveillez la conformité"
+      },
+      "bonnesPratiques": {
+        "item1": "Commencez avec une durée courte",
+        "item2": "Augmentez progressivement la durée",
+        "item3": "Incluez les sous-domaines si nécessaire",
+        "item4": "Testez sur différents navigateurs",
+        "item5": "Documentez la configuration HSTS"
+      }
+    },
+    "tls": {
+      "label": "Version TLS à jour",
+      "description": "Chiffrement des données sensibles en transit (TLS 1.2/1.3)",
+      "explication": "Les versions TLS récentes (1.2 et 1.3) offrent une sécurité renforcée et de meilleures performances par rapport aux anciennes versions SSL/TLS.",
+      "commentFaire": {
+        "item1": "Vérifiez la version TLS supportée",
+        "item2": "Désactivez les anciennes versions (TLS 1.0/1.1)",
+        "item3": "Testez la compatibilité des clients",
+        "item4": "Surveillez la configuration TLS"
+      },
+      "bonnesPratiques": {
+        "item1": "Privilégiez TLS 1.3",
+        "item2": "Maintenez TLS 1.2 pour la compatibilité",
+        "item3": "Utilisez des suites de chiffrement fortes",
+        "item4": "Testez régulièrement la configuration",
+        "item5": "Documentez la configuration TLS"
+      }
+    },
+    "auth": {
+      "password": {
+        "label": "Mots de passe hashés",
+        "description": "Mots de passe stockés hashés (bcrypt, argon2)",
+        "explication": "Le hachage des mots de passe est essentiel pour protéger les informations d'identification des utilisateurs en cas de compromission de la base de données.",
+        "commentFaire": {
+          "item1": "Utilisez des algorithmes de hachage sécurisés",
+          "item2": "Ajoutez du sel (salt) aux mots de passe",
+          "item3": "Configurez un facteur de coût approprié",
+          "item4": "Testez la sécurité du hachage"
+        },
+        "bonnesPratiques": {
+          "item1": "Privilégiez bcrypt ou argon2",
+          "item2": "Utilisez un sel unique par utilisateur",
+          "item3": "Configurez un facteur de coût élevé",
+          "item4": "Surveillez les performances",
+          "item5": "Planifiez la migration des anciens hachages"
+        }
+      },
+      "2fa": {
+        "label": "2FA activé",
+        "description": "2FA activé sur les comptes sensibles",
+        "explication": "L'authentification à deux facteurs ajoute une couche de sécurité supplémentaire en exigeant un second facteur d'authentification en plus du mot de passe.",
+        "commentFaire": {
+          "item1": "Implémentez la 2FA pour les comptes admin",
+          "item2": "Proposez plusieurs méthodes (SMS, app, email)",
+          "item3": "Configurez des codes de récupération",
+          "item4": "Testez le processus 2FA"
+        },
+        "bonnesPratiques": {
+          "item1": "Obligatoire pour les comptes sensibles",
+          "item2": "Méthodes de récupération sécurisées",
+          "item3": "Interface utilisateur claire",
+          "item4": "Surveillance des tentatives d'accès",
+          "item5": "Formation des utilisateurs"
+        }
+      },
+      "policy": {
+        "label": "Politique de mots de passe",
+        "description": "Politique de complexité et rotation des mots de passe",
+        "explication": "Une politique de mots de passe forte exige des mots de passe complexes et une rotation régulière pour réduire les risques de compromission.",
+        "commentFaire": {
+          "item1": "Définissez des règles de complexité",
+          "item2": "Configurez la rotation automatique",
+          "item3": "Implémentez la validation côté serveur",
+          "item4": "Testez la politique de mots de passe"
+        },
+        "bonnesPratiques": {
+          "item1": "Minimum 12 caractères",
+          "item2": "Mélange de types de caractères",
+          "item3": "Rotation tous les 90 jours",
+          "item4": "Historique des mots de passe",
+          "item5": "Formation des utilisateurs"
+        }
+      },
+      "roles": {
+        "label": "Rôles et permissions",
+        "description": "Rôles et permissions correctement appliqués",
+        "explication": "Un système de rôles et permissions bien conçu limite l'accès aux fonctionnalités et données selon les responsabilités de chaque utilisateur.",
+        "commentFaire": {
+          "item1": "Définissez des rôles clairs",
+          "item2": "Assignez les permissions minimales nécessaires",
+          "item3": "Testez l'application des permissions",
+          "item4": "Surveillez l'accès privilégié"
+        },
+        "bonnesPratiques": {
+          "item1": "Principe du moindre privilège",
+          "item2": "Révision régulière des permissions",
+          "item3": "Audit de l'accès privilégié",
+          "item4": "Documentation des rôles",
+          "item5": "Formation à la sécurité"
+        }
+      }
+    },
+    "protection": {
+      "rate": {
+        "label": "Limitation de débit",
+        "description": "Limitation de débit pour les API et formulaires de connexion",
+        "explication": "La limitation de débit limite le nombre de requêtes qu'un utilisateur peut effectuer dans un délai donné, protégeant contre les attaques par force brute et le spam.",
+        "commentFaire": {
+          "item1": "Configurez la limitation de débit sur les API",
+          "item2": "Appliquez des limites sur les connexions",
+          "item3": "Configurez des délais appropriés",
+          "item4": "Testez la protection par limitation de débit"
+        },
+        "bonnesPratiques": {
+          "item1": "Limites adaptées au contexte",
+          "item2": "Messages d'erreur informatifs",
+          "item3": "Surveillance des tentatives bloquées",
+          "item4": "Configuration différenciée par endpoint",
+          "item5": "Documentation des limites"
+        }
+      },
+      "sql": {
+        "label": "Protection contre les injections SQL",
+        "description": "Protection contre injections SQL (validation + échappement)",
+        "explication": "La protection contre les injections SQL empêche les attaquants d'exécuter du code SQL malveillant en manipulant les entrées utilisateur.",
+        "commentFaire": {
+          "item1": "Utilisez des requêtes préparées",
+          "item2": "Validez et échappez toutes les entrées",
+          "item3": "Testez la protection contre les injections",
+          "item4": "Surveillez les tentatives d'injection"
+        },
+        "bonnesPratiques": {
+          "item1": "ORM avec protection intégrée",
+          "item2": "Validation stricte des entrées",
+          "item3": "Tests de sécurité automatisés",
+          "item4": "Surveillance des logs d'erreur",
+          "item5": "Formation des développeurs"
+        }
+      },
+      "xss": {
+        "label": "Protection contre les attaques XSS",
+        "description": "Protection contre injections XSS (validation + échappement)",
+        "explication": "La protection XSS empêche l'exécution de scripts malveillants injectés dans les pages web, protégeant les utilisateurs contre le vol de session et autres attaques.",
+        "commentFaire": {
+          "item1": "Échappez toutes les sorties utilisateur",
+          "item2": "Utilisez des en-têtes de sécurité",
+          "item3": "Validez les entrées côté serveur",
+          "item4": "Testez la protection XSS"
+        },
+        "bonnesPratiques": {
+          "item1": "Content Security Policy (CSP)",
+          "item2": "Échappement automatique des sorties",
+          "item3": "Validation stricte des entrées",
+          "item4": "Tests de sécurité automatisés",
+          "item5": "Surveillance des tentatives XSS"
+        }
+      },
+      "directory": {
+        "label": "Désactivation de l'indexation des répertoires",
+        "description": "Désactivation de l'indexation des répertoires",
+        "explication": "La désactivation de l'indexation des répertoires empêche l'exposition accidentelle de fichiers sensibles et de la structure du serveur.",
+        "commentFaire": {
+          "item1": "Configurez .htaccess pour Apache",
+          "item2": "Configurez nginx pour désactiver l'indexation",
+          "item3": "Testez l'accès aux répertoires",
+          "item4": "Surveillez les tentatives d'accès"
+        },
+        "bonnesPratiques": {
+          "item1": "Désactivation globale de l'indexation",
+          "item2": "Fichiers .htaccess dans chaque répertoire",
+          "item3": "Surveillance des tentatives d'accès",
+          "item4": "Tests de sécurité réguliers",
+          "item5": "Documentation de la configuration"
+        }
+      },
+      "waf": {
+        "label": "Firewall applicatif (WAF)",
+        "description": "Filtrage IP ou firewall applicatif (WAF)",
+        "explication": "Un WAF (Web Application Firewall) protège contre les attaques courantes en analysant et filtrant le trafic HTTP avant qu'il n'atteigne l'application.",
+        "commentFaire": {
+          "item1": "Configurez un WAF (Cloudflare, AWS WAF)",
+          "item2": "Définissez des règles de filtrage",
+          "item3": "Testez la protection du WAF",
+          "item4": "Surveillez les alertes de sécurité"
+        },
+        "bonnesPratiques": {
+          "item1": "Règles adaptées à votre application",
+          "item2": "Surveillance des faux positifs",
+          "item3": "Mise à jour régulière des règles",
+          "item4": "Tests de pénétration réguliers",
+          "item5": "Documentation des règles WAF"
+        }
+      }
+    },
+    "files": {
+      "upload": {
+        "label": "Validation des uploads",
+        "description": "Validation stricte des uploads (extension, MIME type)",
+        "explication": "La validation stricte des fichiers uploadés empêche l'upload de fichiers malveillants et protège contre les attaques par upload de fichiers.",
+        "commentFaire": {
+          "item1": "Validez les extensions de fichiers",
+          "item2": "Vérifiez les types MIME",
+          "item3": "Limitez la taille des fichiers",
+          "item4": "Testez la validation des uploads"
+        },
+        "bonnesPratiques": {
+          "item1": "Liste blanche des types autorisés",
+          "item2": "Validation côté serveur obligatoire",
+          "item3": "Limites de taille appropriées",
+          "item4": "Scan antivirus des fichiers",
+          "item5": "Surveillance des uploads suspects"
+        }
+      },
+      "antivirus": {
+        "label": "Scan antivirus",
+        "description": "Scan antivirus sur les fichiers uploadés",
+        "explication": "Le scan antivirus des fichiers uploadés détecte et bloque les fichiers malveillants avant qu'ils ne soient traités par l'application.",
+        "commentFaire": {
+          "item1": "Intégrez un moteur antivirus",
+          "item2": "Scannez tous les fichiers uploadés",
+          "item3": "Bloquez les fichiers suspects",
+          "item4": "Surveillez les résultats des scans"
+        },
+        "bonnesPratiques": {
+          "item1": "Moteur antivirus à jour",
+          "item2": "Scan en temps réel",
+          "item3": "Quarantaine des fichiers suspects",
+          "item4": "Rapports de scan détaillés",
+          "item5": "Surveillance des performances"
+        }
+      },
+      "backup": {
+        "label": "Sauvegardes automatiques",
+        "description": "Sauvegardes automatiques régulières (hors serveur principal)",
+        "explication": "Les sauvegardes automatiques régulières garantissent la récupération des données en cas de perte, corruption ou attaque sur le serveur principal.",
+        "commentFaire": {
+          "item1": "Configurez des sauvegardes automatiques",
+          "item2": "Stockez les sauvegardes hors site",
+          "item3": "Testez la restauration des sauvegardes",
+          "item4": "Surveillez le succès des sauvegardes"
+        },
+        "bonnesPratiques": {
+          "item1": "Sauvegardes quotidiennes",
+          "item2": "Stockage dans plusieurs emplacements",
+          "item3": "Chiffrement des sauvegardes",
+          "item4": "Tests de restauration réguliers",
+          "item5": "Documentation des procédures"
+        }
+      },
+      "restore": {
+        "label": "Test de restauration",
+        "description": "Test de restauration des backups",
+        "explication": "Tester régulièrement la restauration des sauvegardes garantit que les procédures de récupération fonctionnent correctement en cas de besoin.",
+        "commentFaire": {
+          "item1": "Planifiez des tests de restauration",
+          "item2": "Testez sur un environnement isolé",
+          "item3": "Vérifiez l'intégrité des données",
+          "item4": "Documentez les procédures de test"
+        },
+        "bonnesPratiques": {
+          "item1": "Tests mensuels minimum",
+          "item2": "Environnement de test isolé",
+          "item3": "Validation de l'intégrité des données",
+          "item4": "Documentation des procédures",
+          "item5": "Formation de l'équipe"
+        }
+      }
+    },
+    "maintenance": {
+      "dependencies": {
+        "label": "Mises à jour des dépendances",
+        "description": "Mises à jour régulières des dépendances et CMS",
+        "explication": "Les mises à jour régulières des dépendances et du CMS corrigent les vulnérabilités de sécurité et améliorent la stabilité de l'application.",
+        "commentFaire": {
+          "item1": "Surveillez les mises à jour de sécurité",
+          "item2": "Testez les mises à jour en environnement de dev",
+          "item3": "Planifiez les mises à jour en production",
+          "item4": "Surveillez la stabilité après mise à jour"
+        },
+        "bonnesPratiques": {
+          "item1": "Mises à jour automatiques si possible",
+          "item2": "Tests en environnement de développement",
+          "item3": "Planification des mises à jour",
+          "item4": "Rollback en cas de problème",
+          "item5": "Documentation des changements"
+        }
+      },
+      "accounts": {
+        "label": "Comptes inutilisés",
+        "description": "Suppression des comptes inutilisés",
+        "explication": "La suppression des comptes inutilisés réduit la surface d'attaque et améliore la sécurité globale de l'application en limitant les points d'entrée potentiels.",
+        "commentFaire": {
+          "item1": "Identifiez les comptes inactifs",
+          "item2": "Notifiez les utilisateurs avant suppression",
+          "item3": "Supprimez les comptes inutilisés",
+          "item4": "Surveillez les tentatives d'accès"
+        },
+        "bonnesPratiques": {
+          "item1": "Définition claire de l'inactivité",
+          "item2": "Processus de notification automatisé",
+          "item3": "Archivage avant suppression",
+          "item4": "Surveillance des tentatives d'accès",
+          "item5": "Documentation des procédures"
+        }
+      },
+      "logs": {
+        "label": "Surveillance des logs",
+        "description": "Surveillance des logs d'accès et d'erreurs",
+        "explication": "La surveillance des logs d'accès et d'erreurs permet de détecter les activités suspectes et de réagir rapidement aux incidents de sécurité.",
+        "commentFaire": {
+          "item1": "Configurez la collecte centralisée des logs",
+          "item2": "Implémentez des alertes automatisées",
+          "item3": "Analysez régulièrement les logs",
+          "item4": "Archivez les logs selon la politique"
+        },
+        "bonnesPratiques": {
+          "item1": "Collecte centralisée des logs",
+          "item2": "Alertes en temps réel",
+          "item3": "Analyse automatisée des patterns",
+          "item4": "Rétention appropriée des logs",
+          "item5": "Formation sur l'analyse des logs"
+        }
+      },
+      "alerts": {
+        "label": "Alertes d'activité suspecte",
+        "description": "Alertes en cas d'activité suspecte",
+        "explication": "Les alertes d'activité suspecte permettent de détecter et de réagir rapidement aux tentatives d'intrusion et aux comportements anormaux.",
+        "commentFaire": {
+          "item1": "Configurez des règles d'alerte",
+          "item2": "Implémentez des notifications en temps réel",
+          "item3": "Définissez des seuils d'alerte",
+          "item4": "Testez le système d'alertes"
+        },
+        "bonnesPratiques": {
+          "item1": "Alertes en temps réel",
+          "item2": "Seuils adaptés au contexte",
+          "item3": "Notifications multi-canaux",
+          "item4": "Réduction des faux positifs",
+          "item5": "Procédures de réponse définies"
         }
       }
     }

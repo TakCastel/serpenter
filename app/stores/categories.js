@@ -12,14 +12,15 @@ export const useCategoriesStore = defineStore('categories', () => {
       { id: 'conformite', name: 'Conformité', icon: 'heroicons:check-circle' }
     ],
     'appstore-preflight': [
-      { id: 'preparation', name: 'Préparation', icon: 'heroicons:clipboard-document-list' },
-      { id: 'conformite', name: 'Conformité', icon: 'heroicons:check-circle' }
+      { id: 'app-store', name: 'App Store', icon: 'fluent-emoji:apple-logo' },
+      { id: 'play-store', name: 'Play Store', icon: 'fluent-emoji:android-logo' }
     ],
-    'wordpress-audit': [
-      { id: 'configuration', name: 'Configuration', icon: 'heroicons:cog' },
-      { id: 'securite', name: 'Sécurité', icon: 'heroicons:shield-check' },
-      { id: 'performance', name: 'Performance', icon: 'heroicons:bolt' },
-      { id: 'maintenance', name: 'Maintenance', icon: 'heroicons:wrench-screwdriver' }
+    'security-checker': [
+      { id: 'reseau-chiffrement', name: 'Sécurité réseau & chiffrement', icon: 'fluent-emoji:shield' },
+      { id: 'authentification-acces', name: 'Authentification & contrôle d\'accès', icon: 'fluent-emoji:key' },
+      { id: 'protection-attaques', name: 'Protection contre les attaques', icon: 'fluent-emoji:crossed-swords' },
+      { id: 'fichiers-donnees', name: 'Sécurité des fichiers & données', icon: 'fluent-emoji:file-folder' },
+      { id: 'maintenance-surveillance', name: 'Maintenance & surveillance', icon: 'fluent-emoji:eye' }
     ]
   }
 

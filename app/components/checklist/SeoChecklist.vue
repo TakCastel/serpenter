@@ -68,7 +68,7 @@
                   <div class="text-sm font-medium transition-colors duration-200" :class="{ 'text-white': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? 'white' : 'var(--text-primary)' }">
                     {{ getCategoryCompletedCount(category) }} / {{ category.items?.length || 0 }}
                   </div>
-                  <div class="text-xs transition-colors duration-200" :class="{ 'text-green-100': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? '#dcfce7' : 'var(--text-muted)' }">{{ $t('app.progress.completed') }}</div>
+                  <div class="text-xs transition-colors duration-200" :class="{ 'text-green-100': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? '#dcfce7' : 'var(--text-muted)' }">{{ $t('common.completed') }}</div>
                 </div>
                 <button 
                   class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
@@ -245,13 +245,27 @@ const handleDeployClick = () => {
 
 const getCategoryIcon = (categoryId) => {
   const icons = {
+    // Catégories principales
     'seo': 'fluent-emoji:magnifying-glass-tilted-left',
     'accessibilite': 'fluent-emoji:wheelchair-symbol',
     'performance': 'fluent-emoji:high-voltage',
     'eco-conception': 'fluent-emoji:seedling',
     'responsive-ux': 'fluent-emoji:mobile-phone',
     'securite': 'fluent-emoji:locked',
-    'analytics': 'fluent-emoji:bar-chart'
+    'analytics': 'fluent-emoji:bar-chart',
+    
+    // Catégories de sécurité
+    'reseau-chiffrement': 'fluent-emoji:shield',
+    'authentification-acces': 'fluent-emoji:key',
+    'protection-attaques': 'fluent-emoji:crossed-swords',
+    'fichiers-donnees': 'fluent-emoji:file-folder',
+    'maintenance-surveillance': 'fluent-emoji:eye',
+    
+    // Catégories d'apps - Utilisation d'emojis plus fiables
+    'app-store': 'fluent-emoji:red-apple',
+    'play-store': 'fluent-emoji:robot',
+    'technical': 'fluent-emoji:gear',
+    'legal': 'fluent-emoji:balance-scale'
   }
   return icons[categoryId] || 'fluent-emoji:clipboard'
 }
@@ -453,15 +467,17 @@ onUnmounted(() => {
 const resetProgress = async () => {
   // Clear local set
   checkedItems.value = new Set()
-  // Sauvegarder en BDD si possible
+  
+  // Réinitialiser complètement dans le store principal
   if (currentUser.value && props.currentProjectId) {
-    projectsStore.setCheckedForProject(props.currentProjectId, checkedItems.value)
+    // Réinitialiser les items cochés
+    projectsStore.setCheckedForProject(props.currentProjectId, new Set())
+    // Réinitialiser les scores
+    projectsStore.resetProjectScores(props.currentProjectId)
+    // Sauvegarder en BDD
     await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
   }
-  // Mettre à jour scores
-  const allItems = []
-  categories.value.forEach(category => { if (category.items) allItems.push(...category.items) })
-  projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
+  
   // Événement progression
   if (process.client) {
     window.dispatchEvent(new CustomEvent('progress-updated', { detail: { percentage: 0 } }))

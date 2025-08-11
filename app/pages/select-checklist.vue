@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <!-- iOS App Store -->
+      <!-- Applications Mobiles -->
       <div 
         class="border border-gray-200 rounded-lg p-6 cursor-pointer bg-white hover:bg-gray-50"
         :class="submitting ? 'opacity-50 cursor-not-allowed' : ''"
@@ -64,56 +64,56 @@
             </div>
             <div class="text-right">
               <div class="text-xs font-medium px-2 py-1 rounded-full bg-gray-200 text-gray-700">
-                iOS
+                Mobile
               </div>
             </div>
           </div>
           
-          <h3 class="text-xl font-bold mb-2 text-gray-900">iOS — Pré‑soumission App Store</h3>
+          <h3 class="text-xl font-bold mb-2 text-gray-900">Applications Mobiles — App Store & Play Store</h3>
           <p class="text-sm leading-relaxed text-gray-600">
-            Contrôles spécifiques pour préparer votre application iOS à la soumission sur l'App Store.
+            Contrôles complets pour préparer vos applications iOS et Android à la soumission sur les stores.
           </p>
         </div>
         
         <!-- Footer avec statistiques -->
         <div class="pt-4 border-t border-gray-100">
           <div class="flex items-center justify-between text-sm text-gray-500">
-            <span>38 vérifications</span>
-            <span>App Store • iOS • UX</span>
+            <span>23 vérifications</span>
+            <span>App Store • Play Store • Mobile</span>
           </div>
         </div>
       </div>
 
-      <!-- WordPress Audit -->
+      <!-- Security Checker -->
       <div 
         class="border border-gray-200 rounded-lg p-6 cursor-pointer bg-white hover:bg-gray-50"
         :class="submitting ? 'opacity-50 cursor-not-allowed' : ''"
-        @click="!submitting && setType('wordpress-audit')"
+        @click="!submitting && setType('security-checker')"
       >
         <!-- Header de la carte -->
         <div class="mb-4">
           <div class="flex items-center justify-between mb-4">
-            <div class="w-16 h-16 rounded-lg bg-blue-600 flex items-center justify-center">
-              <Icon name="heroicons:document-text" class="w-8 h-8 text-white" />
+            <div class="w-16 h-16 rounded-lg bg-red-600 flex items-center justify-center">
+              <Icon name="heroicons:shield-check" class="w-8 h-8 text-white" />
             </div>
             <div class="text-right">
-              <div class="text-xs font-medium px-2 py-1 rounded-full bg-gray-200 text-gray-700">
-                WordPress
+              <div class="text-xs font-medium px-2 py-1 rounded-full bg-red-100 text-red-700">
+                Sécurité
               </div>
             </div>
           </div>
           
-          <h3 class="text-xl font-bold mb-2 text-gray-900">WordPress — Audit de configuration</h3>
+          <h3 class="text-xl font-bold mb-2 text-gray-900">Sécurité & Données — Audit de protection</h3>
           <p class="text-sm leading-relaxed text-gray-600">
-            Vérifications essentielles pour une instance WordPress optimisée, sécurisée et performante.
+            Vérifications essentielles pour sécuriser votre infrastructure, protéger vos données et assurer la conformité.
           </p>
         </div>
         
         <!-- Footer avec statistiques -->
         <div class="pt-4 border-t border-gray-100">
           <div class="flex items-center justify-between text-sm text-gray-500">
-            <span>42 vérifications</span>
-            <span>WordPress • CMS • Sécurité</span>
+            <span>25 vérifications</span>
+            <span>Sécurité • RGPD • Sauvegardes</span>
           </div>
         </div>
       </div>
