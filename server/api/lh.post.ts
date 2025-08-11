@@ -1,10 +1,25 @@
-import lighthouse from 'lighthouse'
-import { launch, LaunchedChrome } from 'chrome-launcher'
-import puppeteer from 'puppeteer'
+// Charger dynamiquement les dépendances lourdes pour réduire l'empreinte mémoire au build
+let lighthouse: any
+let launch: any
+type LaunchedChrome = any
+let puppeteer: any
 
 interface Body { url: string; basicUser?: string; basicPass?: string; formFactor?: 'mobile' | 'desktop' }
 
 export default defineEventHandler(async (event) => {
+  // Importer au runtime pour éviter d'alourdir le bundle serveur
+  if (!lighthouse) {
+    const lh = await import('lighthouse')
+    lighthouse = lh.default || lh
+  }
+  if (!launch) {
+    const chromeLauncher = await import('chrome-launcher')
+    launch = chromeLauncher.launch
+  }
+  if (!puppeteer) {
+    const p = await import('puppeteer')
+    puppeteer = p.default || p
+  }
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 1000 * 60 * 3) // 3 min
 
