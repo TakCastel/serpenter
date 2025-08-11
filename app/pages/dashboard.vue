@@ -50,20 +50,25 @@
       </div>
       <div class="lg:col-span-1">
         <!-- Desktop: accordéon visible par défaut -->
-        <div v-if="currentProject?.checklistType !== 'security-checker'" class="hidden lg:block">
+        <div v-if="currentProject?.checklistType !== 'security-checker' && currentProject?.checklistType !== 'appstore-preflight'" class="hidden lg:block">
           <LighthouseAccordion 
             ref="lighthouseAccordion"
-            :default-expanded="currentProject?.checklistType !== 'appstore-preflight'"
+            :default-expanded="true"
             :project-type="currentProject?.checklistType"
           />
         </div>
         <!-- Mobile: accordéon replié, placé en dessous -->
-        <div v-if="currentProject?.checklistType !== 'security-checker'" class="block lg:hidden">
+        <div v-if="currentProject?.checklistType !== 'security-checker' && currentProject?.checklistType !== 'appstore-preflight'" class="block lg:hidden">
           <LighthouseAccordion 
             ref="lighthouseAccordionMobile"
             :default-expanded="false"
             :project-type="currentProject?.checklistType"
           />
+        </div>
+
+        <!-- Pour les projets mobiles, afficher l'accordéon de pré‑soumission -->
+        <div v-if="currentProject?.checklistType === 'appstore-preflight'">
+          <AppPreflightAccordion />
         </div>
 
         <!-- Pour les projets de sécurité, afficher le scanner de sécurité -->
@@ -112,6 +117,7 @@ import EmptyState from '~/components/dashboard/EmptyState.vue'
 import SeoChecklist from '~/components/checklist/SeoChecklist.vue'
 import LighthouseAccordion from '~/components/dashboard/LighthouseAccordion.vue'
 import SecurityScannerAccordion from '~/components/dashboard/SecurityScannerAccordion.vue'
+import AppPreflightAccordion from '~/components/dashboard/AppPreflightAccordion.vue'
 import Modal from '~/components/common/Modal.vue'
 
 definePageMeta({
