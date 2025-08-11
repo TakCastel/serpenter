@@ -52,7 +52,7 @@
         <!-- Résultats -->
         <div v-if="results" class="space-y-4">
           <!-- Score global -->
-          <div class="p-3 rounded-lg" style="background-color: var(--bg-surface);">
+          <div class="p-3 rounded-lg border" style="background-color: var(--bg-surface); border-color: var(--bg-border);">
             <div class="flex items-center justify-between mb-2">
               <span class="text-sm font-semibold" style="color: var(--text-primary);">Score global</span>
               <div class="w-12 h-12 rounded-full grid place-items-center" :style="ringStyle(score)">

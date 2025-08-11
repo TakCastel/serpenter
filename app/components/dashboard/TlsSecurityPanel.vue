@@ -21,7 +21,7 @@
     </summary>
     <div class="px-4 pb-4">
       <div class="space-y-4">
-        <p class="text-sm" style="color: var(--text-secondary);">Analyse SSL Labs (résumé) du domaine pour évaluer la configuration TLS.</p>
+        <p class="text-sm" style="color: var(--text-secondary);">Analyse Observatory de Mozilla (score global) et Security Headers (présence des en-têtes).</p>
         <div class="flex items-center gap-3">
           <button 
             @click="runScan" 
@@ -29,7 +29,7 @@
             class="btn btn-primary btn-sm"
             :class="{ 'opacity-50 cursor-not-allowed': !isValidUrl || !url }"
           >
-            <span v-if="!loading">Scanner SSL/TLS</span>
+            <span v-if="!loading">Lancer les 2 scans</span>
             <span v-else class="inline-flex items-center gap-2">
               <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
@@ -50,22 +50,23 @@
               </div>
             </div>
             <div class="text-xs" style="color: var(--text-secondary);">
-              Note SSL Labs: <strong>{{ results.grade || '—' }}</strong>
+              Mozilla Observatory: <strong>{{ results.observatory?.grade || '—' }}</strong>
             </div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div class="p-3 rounded-lg border" style="border-color: var(--bg-border);">
-              <div class="text-xs" style="color: var(--text-secondary);">Support TLS</div>
+              <div class="text-xs" style="color: var(--text-secondary);">En-têtes de sécurité</div>
               <ul class="text-xs mt-1" style="color: var(--text-primary);">
-                <li>TLS 1.3: <strong>{{ results.supportsTls13 ? 'Oui' : 'Non' }}</strong></li>
-                <li>TLS 1.2: <strong>{{ results.supportsTls12 ? 'Oui' : 'Non' }}</strong></li>
+                <li v-for="(val, key) in results.headers?.headers" :key="key">
+                  {{ key }}: <strong>{{ val ? 'présent' : 'manquant' }}</strong>
+                </li>
               </ul>
             </div>
             <div class="p-3 rounded-lg border" style="border-color: var(--bg-border);">
               <div class="text-xs" style="color: var(--text-secondary);">Recommandations</div>
               <ul class="text-xs mt-1" style="color: var(--text-primary);">
-                <li v-for="rec in results.recommendations" :key="rec">{{ rec }}</li>
+                <li v-for="rec in results.headers?.recommendations || []" :key="rec">{{ rec }}</li>
               </ul>
             </div>
           </div>
@@ -102,15 +103,35 @@ const runScan = async () => {
   loading.value = true
   error.value = ''
   try {
-    const response = await $fetch('/api/security-ssl', { method: 'POST', body: { url: url.value } }) as any
-    if (response?.success) {
-      results.value = response.data
-      // Auto-check minimal basé sur TLS
-      const ids: string[] = []
-      if (results.value.supportsTls12) ids.push('tls-version')
-      if (ids.length) emit('items-autochecked', ids)
+    // Lancer Observatory et Security Headers en parallèle
+    const [obs, headers] = await Promise.all([
+      $fetch('/api/security-observatory', { method: 'POST', body: { url: url.value } }) as any,
+      $fetch('/api/security-headers', { method: 'POST', body: { url: url.value } }) as any
+    ])
+
+    if ((obs?.success || headers?.success)) {
+      const observatoryData = obs?.success ? obs.data : null
+      const headersData = headers?.success ? headers.data : null
+      const computedScore = Math.round((
+        (observatoryData?.score ?? 0) + (headersData?.score ?? 0)
+      ) / 2)
+
+      results.value = {
+        score: computedScore,
+        observatory: observatoryData,
+        headers: headersData
+      }
+
+      // Auto-check depuis les headers
+      if (headersData?.headers) {
+        try {
+          const { collectChecklistItemIdsFromHeaders } = await import('~/utils/security-mapping')
+          const ids = collectChecklistItemIdsFromHeaders(headersData.headers)
+          if (ids.length) emit('items-autochecked', ids)
+        } catch {}
+      }
     } else {
-      throw new Error('Échec du scan SSL')
+      throw new Error('Échec des scans')
     }
   } catch (e:any) {
     error.value = e?.data?.statusMessage || e?.message || 'Erreur SSL'

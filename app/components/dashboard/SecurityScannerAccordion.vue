@@ -23,7 +23,7 @@
     </div>
 
     <!-- URL Input -->
-    <div class="p-4 rounded-xl border" style="border-color: var(--bg-border);">
+    <div class="p-4 rounded-xl border" style="border-color: var(--bg-border); background-color: var(--bg-surface);">
       <label class="block text-sm mb-2" style="color: var(--text-secondary);">URL à scanner</label>
       <div class="flex gap-2">
         <input 
@@ -31,8 +31,9 @@
           type="url" 
           required 
           placeholder="https://example.com" 
-          class="input flex-1" 
+          class="flex-1 px-3 py-2 rounded-lg border text-sm"
           :class="{ 'border-red-500': url && !isValidUrl }"
+          style="background-color: var(--bg-primary); border-color: var(--bg-border); color: var(--text-primary);"
           @input="validateUrl"
         />
         <button 
@@ -41,10 +42,16 @@
           class="btn btn-primary"
           :class="{ 'opacity-50 cursor-not-allowed': !url || !isValidUrl }"
         >
-          <Icon name="heroicons:shield-check" class="w-4 h-4" />
+          <div class="flex items-center gap-2">
+            <Icon name="heroicons:shield-check" class="w-4 h-4" />
+            <span class="hidden sm:inline">Scanner tout</span>
+          </div>
         </button>
       </div>
-      <div v-if="url && !isValidUrl" class="text-sm text-red-500 mt-1">
+      <div class="text-xs mt-2" style="color: var(--text-secondary);">
+        Cette URL sera utilisée pour tous les scans. Vous pouvez lancer l’ensemble ou chaque section séparément.
+      </div>
+      <div v-if="url && !isValidUrl" class="text-sm mt-1" style="color: #fca5a5;">
         Veuillez entrer une URL valide (ex: https://example.com)
       </div>
     </div>
