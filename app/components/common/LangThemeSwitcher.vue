@@ -16,7 +16,7 @@
           color: 'var(--text-primary)'
         } : {}"
         :aria-expanded="showMenu"
-        :aria-label="t('app.language.select')"
+        :aria-label="t('common.language.select')"
       >
         <Icon :name="currentFlagIcon" :class="size === 'sm' ? 'w-4 h-4' : 'w-5 h-5'" aria-hidden="true" />
         <span class="text-xs font-medium" :class="context === 'dropdown' ? '' : 'text-gray-700'">{{ currentLangLabel }}</span>
@@ -36,7 +36,7 @@
           { zIndex: context === 'dropdown' ? 99999 : 50 }
         ]"
         role="menu"
-        :aria-label="t('app.language.select')"
+        :aria-label="t('common.language.select')"
       >
         <button
           @click="chooseLanguage('fr')"
@@ -53,7 +53,7 @@
         >
           <span class="flex items-center gap-2">
             <Icon name="circle-flags:fr" class="w-5 h-5" aria-hidden="true" />
-            <span>{{ t('app.language.french') }}</span>
+            <span>{{ t('common.language.french') }}</span>
           </span>
           <Icon v-if="locale?.value === 'fr'" name="heroicons:check" :style="context === 'dropdown' ? { color: 'var(--accent-primary)' } : { color: '#059669' }" class="w-4 h-4" aria-hidden="true" />
         </button>
@@ -72,7 +72,7 @@
         >
           <span class="flex items-center gap-2">
             <Icon name="circle-flags:gb" class="w-5 h-5" aria-hidden="true" />
-            <span>{{ t('app.language.english') }}</span>
+            <span>{{ t('common.language.english') }}</span>
           </span>
           <Icon v-if="locale?.value === 'en'" name="heroicons:check" :style="context === 'dropdown' ? { color: 'var(--accent-primary)' } : { color: '#059669' }" class="w-4 h-4" aria-hidden="true" />
         </button>

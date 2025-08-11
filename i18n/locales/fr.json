@@ -330,7 +330,12 @@
     "resetConfirm": "Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cette action ne peut pas être annulée.",
     "resetTitle": "Réinitialiser tout le progrès",
     "resetDescription": "Réinitialiser tout le progrès de la checklist",
-    "completed": "complétés"
+    "completed": "complétés",
+    "language": {
+      "select": "Sélectionner la langue",
+      "french": "Français",
+      "english": "Anglais"
+    }
   },
   "modal": {
     "close": "Fermer"
@@ -418,7 +423,9 @@
       "noDetails": "Aucun détail disponible pour cet élément",
       "explication": "Explication",
       "exemple": "Exemple",
-      "bonnesPratiques": "Bonnes pratiques"
+      "bonnesPratiques": "Bonnes pratiques",
+      "ressources": "Ressources",
+      "conseils": "Conseils"
     },
     "accordion": {
       "open": "Ouvrir",

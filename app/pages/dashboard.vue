@@ -50,7 +50,7 @@
       </div>
       <div class="lg:col-span-1">
         <!-- Desktop: accordéon visible par défaut -->
-        <div class="hidden lg:block">
+        <div v-if="currentProject?.checklistType !== 'security-checker'" class="hidden lg:block">
           <LighthouseAccordion 
             ref="lighthouseAccordion"
             :default-expanded="currentProject?.checklistType !== 'appstore-preflight'"
@@ -58,7 +58,7 @@
           />
         </div>
         <!-- Mobile: accordéon replié, placé en dessous -->
-        <div class="block lg:hidden">
+        <div v-if="currentProject?.checklistType !== 'security-checker'" class="block lg:hidden">
           <LighthouseAccordion 
             ref="lighthouseAccordionMobile"
             :default-expanded="false"
@@ -133,6 +133,11 @@ watch([currentProject, hasProjects], ([p, has]) => {
 watch(currentProjectId, async (newProjectId, oldProjectId) => {
   if (process.client && newProjectId && newProjectId !== oldProjectId) {
     try {
+      // Ne pas réinitialiser le Lighthouse pour les projets de sécurité
+      if (currentProject.value?.checklistType === 'security-checker') {
+        return
+      }
+      
       // Réinitialiser le Lighthouse desktop
       if (lighthouseAccordion.value) {
         await lighthouseAccordion.value.reset()

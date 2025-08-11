@@ -9,7 +9,8 @@
     },
     "navigation": {
       "verifications": "Verifications",
-      "verificationsDescription": "Pre-deployment verifications"
+      "verificationsDescription": "Pre-deployment verifications",
+      "noCategories": "No categories available"
     },
     "progress": {
       "completed": "completed",
@@ -19,6 +20,10 @@
       "resetConfirm": "Are you sure you want to reset all progress? This action cannot be undone.",
       "resetTitle": "Reset all progress",
       "resetDescription": "Reset all checklist progress"
+    },
+    "sidebar": {
+      "welcome": "Welcome!",
+      "createProjectMessage": "Create your first project to get started"
     },
     "theme": {
       "light": "Switch to light theme",
@@ -159,7 +164,12 @@
     "resetConfirm": "Are you sure you want to reset all progress? This action cannot be undone.",
     "resetTitle": "Reset all progress",
     "resetDescription": "Reset all checklist progress",
-    "completed": "completed"
+    "completed": "completed",
+    "language": {
+      "select": "Select language",
+      "french": "French",
+      "english": "English"
+    }
   },
   "modal": {
     "close": "Close"
@@ -235,7 +245,9 @@
       "noDetails": "No details available for this item",
       "explication": "Explanation",
       "exemple": "Example",
-      "bonnesPratiques": "Best practices"
+      "bonnesPratiques": "Best practices",
+      "ressources": "Resources",
+      "conseils": "Tips"
     },
     "accordion": {
       "open": "Open",

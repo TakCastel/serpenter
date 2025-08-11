@@ -125,16 +125,10 @@ const toggleUserMenu = () => {
 const handleClickOutside = (event) => {
   // Vérifier que le menu est ouvert et que la référence existe
   if (showUserMenu.value && userMenuRef.value) {
-    console.log('Menu ouvert, vérification du clic extérieur')
-    console.log('userMenuRef.value:', userMenuRef.value)
-    console.log('event.target:', event.target)
-    
     // Vérifier si le clic est en dehors du menu
     if (!userMenuRef.value.$el && !userMenuRef.value.contains(event.target)) {
-      console.log('Fermeture du menu (méthode 1)')
       showUserMenu.value = false
     } else if (userMenuRef.value.$el && !userMenuRef.value.$el.contains(event.target)) {
-      console.log('Fermeture du menu (méthode 2)')
       showUserMenu.value = false
     }
   }
