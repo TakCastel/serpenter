@@ -78,6 +78,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { collectChecklistItemIdsFromHeaders } from '~/utils/security-mapping'
 
 interface Props {
   url: string
@@ -125,7 +126,6 @@ const runScan = async () => {
       // Auto-check depuis les headers
       if (headersData?.headers) {
         try {
-          const { collectChecklistItemIdsFromHeaders } = await import('~/utils/security-mapping')
           const ids = collectChecklistItemIdsFromHeaders(headersData.headers)
           if (ids.length) emit('items-autochecked', ids)
         } catch {}

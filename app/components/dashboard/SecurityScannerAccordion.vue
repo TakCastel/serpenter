@@ -100,7 +100,6 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { collectAllSecurityChecklistItemIds } from '~/utils/security-mapping'
 import HeadersSecurityPanel from './HeadersSecurityPanel.vue'
 import VulnerabilityPanel from './VulnerabilityPanel.vue'
 import TlsSecurityPanel from './TlsSecurityPanel.vue'

@@ -78,7 +78,22 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify'
+    preset: 'netlify',
+    // Réduction du travail de prerender pour limiter l'utilisation mémoire
+    prerender: {
+      crawlLinks: false,
+      routes: []
+    },
+    // Allègement du bundle Nitro
+    inlineDynamicImports: false,
+    minify: true,
+    externals: { inline: [] },
+    sourceMap: false
+  },
+
+  // Désactiver les sourcemaps côté build Vite (client) pour économiser la RAM
+  vite: {
+    build: { sourcemap: false }
   },
 
   app: {
