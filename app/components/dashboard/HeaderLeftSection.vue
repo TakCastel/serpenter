@@ -25,10 +25,10 @@
       <Icon name="fluent-emoji:snake" class="w-8 h-8 sm:w-10 sm:h-10" aria-hidden="true" />
       <div class="flex flex-col">
         <h1 class="font-bold tracking-tight text-xl text-emerald-500">
-          {{ $t('app.title') }}
+          {{ appTitle }}
         </h1>
         <span class="text-xs text-gray-600">
-          {{ $t('app.subtitle') }}
+          {{ appSubtitle }}
         </span>
       </div>
     </div>
@@ -36,6 +36,8 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
 defineProps({
   isSidebarCollapsed: {
     type: Boolean,
@@ -44,4 +46,8 @@ defineProps({
 })
 
 defineEmits(['toggle-sidebar'])
+
+const { t, te, locale } = useI18n({ useScope: 'global' })
+const appTitle = computed(() => (te && te('app.title') ? t('app.title') : 'Serpenter'))
+const appSubtitle = computed(() => (te && te('app.subtitle') ? t('app.subtitle') : (locale?.value === 'fr' ? 'Check, Check. Go.' : 'Check, Check. Go.')))
 </script>

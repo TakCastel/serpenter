@@ -64,10 +64,28 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
         console.warn(`Erreur lors de la récupération de bonnesPratiques pour ${item.id}:`, error)
       }
       
-      // Gérer l'exemple HTML
-      const exemple = item.details.html ? {
-        html: item.details.html
-      } : {}
+      // Gérer les exemples (ordre de priorité: exempleKey -> exemple -> html)
+      let exemple = null
+      try {
+        // 1) Clé de traduction directe si fournie
+        const exempleKey = item.details.exempleKey
+        if (exempleKey) {
+          const val = t(exempleKey, [], { fallback: null })
+          if (val && val !== exempleKey && !String(val).startsWith('__MISSING_')) {
+            exemple = val
+          }
+        }
+      } catch (e) {}
+
+      // 2) Valeur directe dans le dataset
+      if (!exemple && item.details.exemple) {
+        exemple = item.details.exemple
+      }
+
+      // 3) Ancien champ HTML dédié
+      if (!exemple && item.details.html) {
+        exemple = { html: item.details.html }
+      }
 
       return {
         id: item.id,
@@ -77,7 +95,7 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
           explication,
           commentFaire,
           bonnesPratiques,
-          exemple
+          ...(exemple ? { exemple } : {})
         }
       }
     })

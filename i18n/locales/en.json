@@ -3,6 +3,11 @@
   "app": {
     "title": "Serpenter",
     "subtitle": "Check, Check. Go.",
+    "theme": {
+      "light": "Switch to light theme",
+      "dark": "Switch to dark theme"
+    },
+    "backToTop": "Back to top",
     "hero": {
       "title": "Pre-Deployment Checklist",
       "description": "Check all essential aspects before putting your site online"

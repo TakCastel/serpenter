@@ -110,6 +110,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { collectChecklistItemIdsFromHeaders } from '~/utils/security-mapping'
 
 // Props
 interface Props {
@@ -244,23 +245,7 @@ const runScan = async () => {
 
 const getAutoCheckedItems = (): string[] => {
   if (!results.value) return []
-  
-  const checkedItems = []
-  
-  // Mapping des headers vers les éléments de checklist
-  if (results.value.headers['content-security-policy']) {
-    checkedItems.push('content-security-policy')
-  }
-  
-  if (results.value.headers['x-frame-options']) {
-    checkedItems.push('security-headers')
-  }
-  
-  if (results.value.headers['strict-transport-security']) {
-    checkedItems.push('hsts-enabled')
-  }
-  
-  return checkedItems
+  return collectChecklistItemIdsFromHeaders(results.value.headers || {})
 }
 
 const getScoreDescription = (score: number): string => {

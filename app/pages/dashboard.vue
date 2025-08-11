@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 lg:px-6 py-6 w-full bg-[var(--bg-primary)]" :style="{ height: 'calc(100vh - 77px)' }">
+  <div class="px-4 lg:px-6 py-6 pb-24 w-full bg-[var(--bg-primary)]" :style="{ height: 'calc(100vh - 77px)' }">
     <!-- Header global avec titre, description et statistiques (visible seulement si projet sélectionné) -->
     <div v-if="isClient && currentProjectId && currentProject?.checklistType" class="card p-6 mb-6" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
       <div class="flex items-start justify-between mb-4">
@@ -65,6 +65,11 @@
             :project-type="currentProject?.checklistType"
           />
         </div>
+
+        <!-- Pour les projets de sécurité, afficher le scanner de sécurité -->
+        <div v-if="currentProject?.checklistType === 'security-checker'">
+          <SecurityScannerAccordion @items-autochecked="onSecurityItemsAutoChecked" />
+        </div>
       </div>
     </div>
 
@@ -106,6 +111,7 @@ import { useProjectsStore } from '~/stores/projects'
 import EmptyState from '~/components/dashboard/EmptyState.vue'
 import SeoChecklist from '~/components/checklist/SeoChecklist.vue'
 import LighthouseAccordion from '~/components/dashboard/LighthouseAccordion.vue'
+import SecurityScannerAccordion from '~/components/dashboard/SecurityScannerAccordion.vue'
 import Modal from '~/components/common/Modal.vue'
 
 definePageMeta({
@@ -118,6 +124,7 @@ const lighthouseAccordionMobile = ref(null)
 const isClient = ref(false)
 const showResetModal = ref(false)
 const projectsStore = useProjectsStore()
+const { currentUser } = useAuth()
 const hasProjects = computed(() => projectsStore.hasProjects)
 const currentProjectId = computed(() => projectsStore.currentProjectId)
 const currentProject = computed(() => projectsStore.currentProject)
@@ -173,6 +180,22 @@ const handleCreateFirstProject = (project) => {
 const handleResetProgress = () => {
   if (seoChecklist.value && seoChecklist.value.resetProgress) {
     seoChecklist.value.resetProgress()
+  }
+}
+
+const onSecurityItemsAutoChecked = async (itemIds) => {
+  try {
+    const projectId = projectsStore.currentProjectId
+    if (!projectId || !currentUser?.value) return
+    const set = projectsStore.getCheckedSet(projectId)
+    itemIds.forEach(id => set.add(id))
+    projectsStore.setCheckedForProject(projectId, set)
+    await projectsStore.saveProjectChecked(currentUser.value.uid, projectId)
+    if (process.client) {
+      window.dispatchEvent(new CustomEvent('checked-items-updated', { detail: { projectId, itemIds } }))
+    }
+  } catch (e) {
+    // noop
   }
 }
 

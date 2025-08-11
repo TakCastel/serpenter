@@ -1855,6 +1855,13 @@
     }
   },
   "app": {
+    "title": "Serpenter",
+    "subtitle": "Check, Check. Go.",
+    "theme": {
+      "light": "Passer au thème clair",
+      "dark": "Passer au thème sombre"
+    },
+    "backToTop": "Retour en haut",
     "store": {
       "metadata": {
         "title": "Métadonnées de l'App Store",

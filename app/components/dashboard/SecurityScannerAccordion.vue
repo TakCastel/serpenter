@@ -95,8 +95,8 @@
 import { ref, computed, watch } from 'vue'
 import { collectAllSecurityChecklistItemIds } from '~/utils/security-mapping'
 import HeadersSecurityPanel from './HeadersSecurityPanel.vue'
-
 import VulnerabilityPanel from './VulnerabilityPanel.vue'
+import TlsSecurityPanel from './TlsSecurityPanel.vue'
 
 // Props et emits
 const emit = defineEmits(['items-autochecked'])
@@ -105,23 +105,25 @@ const emit = defineEmits(['items-autochecked'])
 const headersPanel = ref()
 
 const vulnerabilityPanel = ref()
+const sslPanel = ref()
 
 // État local
 const url = ref('')
 const isValidUrl = ref(false)
 const headersPanelOpen = ref(false)
+const sslPanelOpen = ref(false)
 const vulnerabilityPanelOpen = ref(false)
 
 // Computed
 const isAnyLoading = computed(() => {
   return headersPanel.value?.loading || 
- 
+         sslPanel.value?.loading ||
          vulnerabilityPanel.value?.loading
 })
 
 const hasAnyResults = computed(() => {
   return headersPanel.value?.hasResults || 
- 
+         sslPanel.value?.hasResults ||
          vulnerabilityPanel.value?.hasResults
 })
 
@@ -173,11 +175,9 @@ const runAllScans = async () => {
   if (headersPanel.value?.runScan) {
     scans.push(headersPanel.value.runScan())
   }
-  
   if (sslPanel.value?.runScan) {
     scans.push(sslPanel.value.runScan())
   }
-  
   if (vulnerabilityPanel.value?.runScan) {
     scans.push(vulnerabilityPanel.value.runScan())
   }

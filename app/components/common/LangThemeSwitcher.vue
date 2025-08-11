@@ -93,8 +93,8 @@
         backgroundColor: 'var(--button-bg)',
         color: 'var(--text-primary)'
       } : {}"
-      :title="isDark ? t('app.theme.light') : t('app.theme.dark')"
-      :aria-label="isDark ? t('app.theme.light') : t('app.theme.dark')"
+      :title="isDark ? lightLabel : darkLabel"
+      :aria-label="isDark ? lightLabel : darkLabel"
       role="button"
       tabindex="0"
     >
@@ -118,7 +118,7 @@ const props = defineProps({
   context: { type: String, default: 'header' } // 'header' | 'dropdown'
 })
 
-const { locale, setLocale, t } = useI18n({ useScope: 'global' })
+const { locale, setLocale, t, te } = useI18n({ useScope: 'global' })
 
 const { isDark, toggleTheme, onMounted: themeOnMounted, onUnmounted: themeOnUnmounted } = useTheme()
 
@@ -127,6 +127,17 @@ const rootEl = ref(null)
 
 const currentFlagIcon = computed(() => (locale?.value === 'fr' ? 'circle-flags:fr' : 'circle-flags:gb'))
 const currentLangLabel = computed(() => (locale?.value === 'fr' ? 'FR' : 'EN'))
+
+// Libellés thème avec fallback si la clé i18n est absente
+const lightLabel = computed(() => {
+  if (te && te('app.theme.light')) return t('app.theme.light')
+  return locale?.value === 'fr' ? 'Passer au thème clair' : 'Switch to light theme'
+})
+
+const darkLabel = computed(() => {
+  if (te && te('app.theme.dark')) return t('app.theme.dark')
+  return locale?.value === 'fr' ? 'Passer au thème sombre' : 'Switch to dark theme'
+})
 
 const setLanguage = async (lang) => {
   try {
