@@ -36,9 +36,15 @@ try {
   // Nettoyer les builds précédents
   console.log('🧹 Nettoyage des builds précédents...');
   if (process.platform === 'win32') {
-    execSync('if exist .nuxt rmdir /s /q .nuxt', { stdio: 'inherit' });
-    execSync('if exist dist rmdir /s /q dist', { stdio: 'inherit' });
-    execSync('if exist .output rmdir /s /q .output', { stdio: 'inherit' });
+    try {
+      execSync('rmdir /s /q .nuxt 2>nul', { stdio: 'inherit' });
+    } catch (e) {}
+    try {
+      execSync('rmdir /s /q dist 2>nul', { stdio: 'inherit' });
+    } catch (e) {}
+    try {
+      execSync('rmdir /s /q .output 2>nul', { stdio: 'inherit' });
+    } catch (e) {}
   } else {
     execSync('rm -rf .nuxt dist .output', { stdio: 'inherit' });
   }
@@ -57,7 +63,8 @@ try {
   // Copier les fichiers de build
   console.log('📁 Copie des fichiers de build...');
   if (process.platform === 'win32') {
-    execSync(`xcopy dist\\* ${publishDir}\\ /E /I /Y`, { stdio: 'inherit' });
+    // Utiliser une approche simple avec PowerShell pour Windows
+    execSync(`powershell -Command "Copy-Item -Path 'dist\\*' -Destination '${publishDir}' -Recurse -Force"`, { stdio: 'inherit' });
   } else {
     execSync(`cp -r dist/* ${publishDir}/`, { stdio: 'inherit' });
   }

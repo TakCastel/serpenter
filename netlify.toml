@@ -1,9 +1,11 @@
 [build]
   command = "npm run build:netlify:spa"
   publish = ".netlify/publish"
+  functions = "netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "18.17.0"
+  NPM_VERSION = "9.6.7"
 
 # Configuration pour le mode SPA (SSR désactivé)
 [[redirects]]
@@ -40,4 +42,4 @@
 
 # Configuration des fonctions (si nécessaire)
 [functions]
-  directory = "netlify/functions"
+  node_bundler = "esbuild"

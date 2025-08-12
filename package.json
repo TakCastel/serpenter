@@ -45,7 +45,7 @@
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.15.0",
     "@nuxt/image": "^1.11.0",
-    "@nuxtjs/i18n": "latest",
+    "@nuxtjs/i18n": "^10.0.3",
     "@pinia/nuxt": "^0.11.2",
     "chrome-launcher": "^1.2.0",
     "eslint": "^9.32.0",
