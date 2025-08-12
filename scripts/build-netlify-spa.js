@@ -11,15 +11,18 @@ import { join } from 'path';
 
 console.log('🚀 Démarrage du build Netlify en mode SPA...');
 
-// Variables d'environnement pour le build
-const buildEnv = {
-  NODE_ENV: 'production',
-  NUXT_APP_ENV: 'production',
-  BUILD_DATE: new Date().toISOString(),
-  BUILD_HASH: process.env.COMMIT_REF || 'dev',
-  // Désactiver explicitement le SSR
-  NUXT_SSR: 'false'
-};
+  // Variables d'environnement pour le build
+  const buildEnv = {
+    NODE_ENV: 'production',
+    NUXT_APP_ENV: 'production',
+    BUILD_DATE: new Date().toISOString(),
+    BUILD_HASH: process.env.COMMIT_REF || 'dev',
+    // Désactiver explicitement le SSR
+    NUXT_SSR: 'false',
+    // Forcer le mode SPA
+    NITRO_PRESET: 'netlify-static',
+    NITRO_PRERENDER: 'false'
+  };
 
 // Appliquer les variables d'environnement
 Object.entries(buildEnv).forEach(([key, value]) => {
@@ -30,7 +33,13 @@ Object.entries(buildEnv).forEach(([key, value]) => {
 try {
   // Nettoyer les builds précédents
   console.log('🧹 Nettoyage des builds précédents...');
-  execSync('rm -rf .nuxt dist .output', { stdio: 'inherit' });
+  if (process.platform === 'win32') {
+    execSync('if exist .nuxt rmdir /s /q .nuxt', { stdio: 'inherit' });
+    execSync('if exist dist rmdir /s /q dist', { stdio: 'inherit' });
+    execSync('if exist .output rmdir /s /q .output', { stdio: 'inherit' });
+  } else {
+    execSync('rm -rf .nuxt dist .output', { stdio: 'inherit' });
+  }
   
   // Build avec Nuxt
   console.log('🔨 Build Nuxt en cours...');
@@ -45,7 +54,11 @@ try {
   
   // Copier les fichiers de build
   console.log('📁 Copie des fichiers de build...');
-  execSync(`cp -r dist/* ${publishDir}/`, { stdio: 'inherit' });
+  if (process.platform === 'win32') {
+    execSync(`xcopy dist\\* ${publishDir}\\ /E /I /Y`, { stdio: 'inherit' });
+  } else {
+    execSync(`cp -r dist/* ${publishDir}/`, { stdio: 'inherit' });
+  }
   
   // Créer un fichier _redirects pour le mode SPA
   const redirectsContent = `# Configuration SPA pour Netlify

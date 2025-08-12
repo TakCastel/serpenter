@@ -6,7 +6,14 @@ NUXT_PUBLIC_*
 .netlify/
 dist/
 .output/
+.nuxt/
 
 # Logs et fichiers temporaires
 *.log
 .env*
+
+# Fichiers de développement
+*.md
+.github/
+cypress/
+scripts/

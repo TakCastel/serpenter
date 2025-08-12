@@ -85,14 +85,11 @@ export default defineNuxtConfig({
     }
   },
 
-  // Configuration de sécurité
+  // Configuration pour le mode SPA (pas de prerendering)
   nitro: {
     preset: 'netlify-static',
-    // Configuration du prerendering pour le déploiement statique
-    prerender: {
-      crawlLinks: true,
-      routes: ['/']
-    },
+    // Désactiver le prerendering en mode SPA
+    prerender: false,
     // Allègement du bundle Nitro
     inlineDynamicImports: false,
     minify: true,
