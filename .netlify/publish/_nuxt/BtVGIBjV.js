@@ -1,1 +1,0 @@
-import{c as n,_,a}from"./CDJxWnmB.js";import{_ as s}from"./C-5UWYdn.js";import{c,o as r,a as i,b as e,j as l}from"./-Ay7-MNe.js";import"./CCn08sVd.js";const m=n(a),p={class:"fixed top-6 right-6 z-50"},N={__name:"default",setup(u){return(t,d)=>{const o=m;return r(),c("div",null,[i("div",p,[e(s)]),e(o),l(t.$slots,"default"),e(_)])}}};export{N as default};

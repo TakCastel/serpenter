@@ -87,9 +87,12 @@ export default defineNuxtConfig({
 
   // Configuration de sécurité
   nitro: {
-    preset: 'netlify',
-    // Désactiver complètement le prerendering pour éviter les problèmes de mémoire
-    prerender: false,
+    preset: 'netlify-static',
+    // Configuration du prerendering pour le déploiement statique
+    prerender: {
+      crawlLinks: true,
+      routes: ['/']
+    },
     // Allègement du bundle Nitro
     inlineDynamicImports: false,
     minify: true,
