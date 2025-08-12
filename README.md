@@ -1,6 +1,11 @@
-# Nuxt Minimal Starter
+# 🐍 Serpenter - Application de Sécurité Web
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Application Nuxt.js pour l'analyse de sécurité et l'audit de sites web.
+
+## 📚 Documentation
+
+- **[Guide du Workflow](WORKFLOW_GUIDE.md)** - GitFlow et déploiement Netlify
+- **[Documentation Nuxt](https://nuxt.com/docs/getting-started/introduction)** - Guide officiel Nuxt.js
 
 ## Setup
 
@@ -72,4 +77,25 @@ yarn preview
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## 🚀 Déploiement
+
+Le projet utilise **Netlify** avec un build local et prerendering :
+
+```bash
+# Générer la version statique
+npm run generate
+
+# Le déploiement se fait automatiquement via Git
+# Voir WORKFLOW_GUIDE.md pour les détails
+```
+
+## 📖 Pour commencer
+
+1. **Lire le [Guide du Workflow](WORKFLOW_GUIDE.md)** - Essentiel pour comprendre le processus de développement
+2. **Suivre les conventions GitFlow** pour chaque feature
+3. **Tester localement** avant de merger
+4. **Utiliser `npm run generate`** pour le build de production
+
+---
+
+**💡 Important** : Consultez toujours le [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) avant de commencer une nouvelle feature !
