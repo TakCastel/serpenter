@@ -1,0 +1,12 @@
+# Ignorer les variables publiques dans le scanning des secrets
+NUXT_PUBLIC_FIREBASE_*
+NUXT_PUBLIC_*
+
+# Dossiers de build
+.netlify/
+dist/
+.output/
+
+# Logs et fichiers temporaires
+*.log
+.env*

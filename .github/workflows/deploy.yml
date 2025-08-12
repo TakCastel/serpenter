@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+echo "[+] Déploiement de Serpenter..."
+
+cd /var/www/serpenter
+
+# Arrête proprement le container actuel (mais que celui-là)
+docker compose down
+
+# Met à jour les images (si jamais tu pushes vers un registre plus tard)
+docker compose pull || true
+
+# Relance le container en arrière-plan
+docker compose up -d --remove-orphans
+
+echo "[✓] Serpenter redémarré avec succès"
