@@ -21,7 +21,8 @@ jobs:
 
       - name: 🚀 Deploy on VPS via SSH
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          echo "Connexion SSH vers ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}"
+          ssh -o StrictHostKeyChecking=no "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" 'bash /var/www/serpenter/deploy.sh'
             echo "Connexion réussie ✅"
             cd /var/www/serpenter
             bash ./deploy.sh
