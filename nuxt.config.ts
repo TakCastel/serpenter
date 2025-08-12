@@ -97,10 +97,8 @@ export default defineNuxtConfig({
     sourceMap: false
   },
 
-  // Configuration Vite simplifiée
-  vite: {
-    build: { sourcemap: false }
-  },
+  // DÉSACTIVER COMPLÈTEMENT VITE
+  vite: false,
 
   app: {
     head: {
