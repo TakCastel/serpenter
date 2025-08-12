@@ -20,6 +20,14 @@ export default defineNuxtConfig({
         messagingSenderId: process.env.NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
         appId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID,
         measurementId: process.env.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+      },
+      // Informations de version
+      app: {
+        name: 'serpenter',
+        version: '1.0.0',
+        buildDate: process.env.BUILD_DATE || new Date().toISOString(),
+        buildHash: process.env.BUILD_HASH || 'dev',
+        buildEnv: process.env.NODE_ENV || 'development'
       }
     }
   },

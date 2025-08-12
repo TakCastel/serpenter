@@ -1,16 +1,18 @@
-import packageJson from '~/package.json'
-
 export const useVersion = () => {
-  const version = packageJson.version
-  const name = packageJson.name
+  // Utiliser la runtime config de Nuxt
+  const config = useRuntimeConfig()
+  const appInfo = config.public.app
+
+  const version = appInfo.version
+  const name = appInfo.name
   
   // Parse semantic version
   const [major, minor, patch] = version.split('.').map(Number)
   
-  // Build info (sera injecté au build time)
-  const buildDate = process.env.BUILD_DATE || new Date().toISOString()
-  const buildHash = process.env.BUILD_HASH || 'dev'
-  const buildEnv = process.env.NODE_ENV || 'development'
+  // Build info depuis la runtime config
+  const buildDate = appInfo.buildDate
+  const buildHash = appInfo.buildHash
+  const buildEnv = appInfo.buildEnv
   
   // Version complète avec build info
   const fullVersion = `${version}+${buildHash.slice(0, 7)}`
