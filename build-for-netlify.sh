@@ -7,9 +7,9 @@ echo "🚀 Building for Netlify deployment..."
 echo "🧹 Cleaning previous builds..."
 rm -rf .output .netlify
 
-# Builder l'application
-echo "🔨 Building application..."
-npm run build
+# Builder l'application avec informations de version
+echo "🔨 Building application with version info..."
+npm run build:versioned
 
 if [ $? -ne 0 ]; then
     echo "❌ Build failed!"

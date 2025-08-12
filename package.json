@@ -1,9 +1,11 @@
 {
-  "name": "nuxt-app",
+  "name": "serpenter",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
+    "build:versioned": "node scripts/build-with-version.js",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -26,7 +28,11 @@
     "cypress:install": "cypress install",
     "cypress:verify": "cypress verify",
     "test:progression": "cypress run --spec 'cypress/e2e/project-progression-sync.cy.js'",
-    "test:debug-scores": "cypress run --spec 'cypress/e2e/debug-calculatescores.cy.js'"
+    "test:debug-scores": "cypress run --spec 'cypress/e2e/debug-calculatescores.cy.js'",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "version:show": "node -p \"require('./package.json').version\""
   },
   "dependencies": {
     "@nuxt/eslint": "^1.8.0",

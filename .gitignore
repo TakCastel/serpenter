@@ -96,6 +96,9 @@ public
 !.netlify/
 !.netlify/publish/
 
+# Build info (generated at build time)
+build-info.json
+
 # Storybook build outputs
 .out
 .storybook-out

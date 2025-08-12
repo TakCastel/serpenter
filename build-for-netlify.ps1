@@ -8,9 +8,9 @@ Write-Host "🧹 Cleaning previous builds..." -ForegroundColor Yellow
 if (Test-Path ".output") { Remove-Item -Recurse -Force ".output" }
 if (Test-Path ".netlify") { Remove-Item -Recurse -Force ".netlify" }
 
-# Builder l'application
-Write-Host "🔨 Building application..." -ForegroundColor Yellow
-npm run build
+# Builder l'application avec informations de version
+Write-Host "🔨 Building application with version info..." -ForegroundColor Yellow
+npm run build:versioned
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Build failed!" -ForegroundColor Red

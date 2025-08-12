@@ -6,10 +6,16 @@
     <NuxtRouteAnnouncer />
     <slot />
     <BackToTop />
+
+    <!-- Version info en bas à gauche -->
+    <div class="fixed bottom-4 left-4 z-40">
+      <VersionInfo simple />
+    </div>
   </div>
 </template>
 
 <script setup>
 import BackToTop from '~/components/common/BackToTop.vue'
 import LangThemeSwitcher from '~/components/common/LangThemeSwitcher.vue'
+import VersionInfo from '~/components/common/VersionInfo.vue'
 </script>
