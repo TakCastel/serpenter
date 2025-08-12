@@ -35,10 +35,7 @@ export default defineNuxtConfig({
 
   icon: {
     size: '24px',
-    class: 'icon',
-    aliases: {
-      nuxt: 'logos:nuxt-icon'
-    }
+    class: 'icon'
   },
 
   i18n: {
