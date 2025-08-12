@@ -77,54 +77,21 @@ export default defineNuxtConfig({
     }
   },
 
-  // Configuration optimisée pour réduire l'utilisation mémoire
+  // Configuration de sécurité
   nitro: {
     preset: 'netlify',
-    // Désactiver complètement le prerendering
-    prerender: {
-      crawlLinks: false,
-      routes: []
-    },
-    // Optimisations mémoire maximales
+    // Désactiver complètement le prerendering pour éviter les problèmes de mémoire
+    prerender: false,
+    // Allègement du bundle Nitro
     inlineDynamicImports: false,
     minify: true,
-    sourceMap: false,
-    // Externaliser Firebase pour réduire la taille du bundle
-    externals: {
-      inline: [],
-      external: ['firebase']
-    },
-    // Réduire la parallélisation
-    rollupConfig: {
-      output: {
-        maxParallelFileOps: 1
-      }
-    }
+    externals: { inline: [] },
+    sourceMap: false
   },
 
-  // Optimisations drastiques pour réduire l'utilisation mémoire
+  // Désactiver les sourcemaps côté build Vite (client) pour économiser la RAM
   vite: {
-    build: {
-      sourcemap: false,
-      // Réduire la taille des chunks pour éviter les gros bundles
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
-            'vue': ['vue', '@vue/runtime-core'],
-            'vendor': ['@nuxt/icon', '@nuxtjs/i18n']
-          }
-        }
-      },
-      // Limiter la parallélisation pour économiser la RAM
-      terserOptions: {
-        parallel: 1
-      }
-    },
-    // Optimisations supplémentaires
-    optimizeDeps: {
-      include: ['firebase/app', 'firebase/auth', 'firebase/firestore']
-    }
+    build: { sourcemap: false }
   },
 
   app: {

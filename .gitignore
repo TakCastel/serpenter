@@ -92,6 +92,10 @@ dist
 .cache/
 public
 
+# Netlify build artifacts (keep for deployment)
+!.netlify/
+!.netlify/publish/
+
 # Storybook build outputs
 .out
 .storybook-out
