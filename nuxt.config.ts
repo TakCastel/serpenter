@@ -97,7 +97,7 @@ export default defineNuxtConfig({
     sourceMap: false
   },
 
-  // Configuration Vite simplifiée pour éviter les conflits crypto
+  // Configuration Vite simplifiée
   vite: {
     build: { sourcemap: false }
   },
