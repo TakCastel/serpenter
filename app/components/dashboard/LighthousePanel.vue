@@ -170,7 +170,7 @@ const runAudit = async () => {
   try {
     const body:any = { url: url.value, formFactor: formFactor.value }
     if (basicUser.value && basicPass.value) { body.basicUser = basicUser.value; body.basicPass = basicPass.value }
-    const res = await $fetch('/api/lh', { method: 'POST', body })
+    const res = await $fetch('/.netlify/functions/lh', { method: 'POST', body })
     report.value = res
     try {
       const { collectChecklistItemIdsFromLhr } = await import('~/utils/lh-mapping')
