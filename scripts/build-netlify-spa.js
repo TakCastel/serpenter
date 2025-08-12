@@ -22,10 +22,8 @@ console.log('🚀 Démarrage du build Netlify en mode SPA...');
     // Forcer le mode SPA
     NITRO_PRESET: 'netlify-static',
     NITRO_PRERENDER: 'false',
-    // Résoudre les problèmes de compatibilité Node.js 18
-    NODE_OPTIONS: '--max-old-space-size=4096 --openssl-legacy-provider',
-    // Forcer l'utilisation de l'ancien système de hash
-    VITE_LEGACY_HASH: 'true'
+    // Configuration pour Node.js 16
+    NODE_OPTIONS: '--max-old-space-size=4096'
   };
 
 // Appliquer les variables d'environnement
@@ -45,35 +43,12 @@ try {
     execSync('rm -rf .nuxt dist .output', { stdio: 'inherit' });
   }
   
-  // Build avec Nuxt - Utiliser une approche alternative pour éviter crypto.hash
+  // Build avec Nuxt
   console.log('🔨 Build Nuxt en cours...');
-  
-  // Essayer d'abord avec des options spécifiques
-  try {
-    execSync('npx nuxi build --preset=netlify-static', { 
-      stdio: 'inherit',
-      env: { 
-        ...process.env, 
-        ...buildEnv,
-        // Forcer l'utilisation de l'ancien système de hash
-        VITE_LEGACY_HASH: 'true',
-        // Désactiver les fonctionnalités problématiques
-        NUXT_APP_CDN_URL: '',
-        NUXT_APP_BASE_URL: ''
-      }
-    });
-  } catch (buildError) {
-    console.log('⚠️ Build standard échoué, tentative avec generate...');
-    // Fallback vers generate si build échoue
-    execSync('npx nuxi generate', { 
-      stdio: 'inherit',
-      env: { 
-        ...process.env, 
-        ...buildEnv,
-        NITRO_PRESET: 'netlify-static'
-      }
-    });
-  }
+  execSync('npx nuxi build', { 
+    stdio: 'inherit',
+    env: { ...process.env, ...buildEnv }
+  });
   
   // Créer le dossier de publication Netlify
   const publishDir = '.netlify/publish';

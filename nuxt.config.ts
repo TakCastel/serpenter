@@ -97,25 +97,9 @@ export default defineNuxtConfig({
     sourceMap: false
   },
 
-  // Désactiver les sourcemaps côté build Vite (client) pour économiser la RAM
+  // Configuration Vite simplifiée pour éviter les conflits crypto
   vite: {
-    build: { sourcemap: false },
-    // Résoudre le problème crypto.hash avec Node.js 18
-    define: {
-      global: 'globalThis'
-    },
-    // Configuration pour résoudre les problèmes de polyfills
-    resolve: {
-      alias: {
-        crypto: 'crypto-browserify',
-        stream: 'stream-browserify',
-        buffer: 'buffer'
-      }
-    },
-    // Optimisations pour le mode SPA
-    optimizeDeps: {
-      include: ['vue', 'vue-router', 'pinia']
-    }
+    build: { sourcemap: false }
   },
 
   app: {
