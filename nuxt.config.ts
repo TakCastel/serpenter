@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
 
+
   modules: [
     '@nuxt/icon',
     '@nuxtjs/tailwindcss',
@@ -97,8 +98,21 @@ export default defineNuxtConfig({
     sourceMap: false
   },
 
-  // DÉSACTIVER COMPLÈTEMENT VITE
-  vite: false,
+  // Configuration Vite optimisée pour Node 20
+  vite: {
+    plugins: [{
+      name: 'force-node-crypto',
+      enforce: 'pre',
+      configResolved() {
+        // Plugin noop pour s'assurer qu'aucun alias crypto ne s'applique
+      }
+    }],
+    resolve: {
+      alias: {
+        // Surtout ne pas rediriger 'node:crypto' vers un polyfill
+      }
+    }
+  },
 
   app: {
     head: {
