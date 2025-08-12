@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="inline-flex items-center gap-2" ref="rootEl">
     <!-- Language dropdown -->
     <div class="relative">
@@ -120,7 +120,7 @@ const props = defineProps({
 
 const { locale, setLocale, t, te } = useI18n({ useScope: 'global' })
 
-const { isDark, toggleTheme, onMounted: themeOnMounted, onUnmounted: themeOnUnmounted } = useTheme()
+const { isDark, toggleTheme } = useTheme()
 
 const showMenu = ref(false)
 const rootEl = ref(null)
@@ -161,27 +161,11 @@ const chooseLanguage = async (lang) => {
 }
 
 onMounted(() => {
-  themeOnMounted()
-  
-  if (process.client) {
-    const handleClick = (e) => {
-      if (!rootEl.value) return
-      if (showMenu.value && !rootEl.value.contains(e.target)) {
-        showMenu.value = false
-      }
-    }
-    document.addEventListener('click', handleClick)
-    ;(rootEl).value && ((rootEl).value._off = handleClick)
-  }
+  // Plus besoin d'appeler themeOnMounted() car useTheme gère déjà onMounted
 })
 
 onUnmounted(() => {
-  themeOnUnmounted()
-  
-  if (process.client && rootEl.value && rootEl.value._off) {
-    document.removeEventListener('click', rootEl.value._off)
-  }
+  // Plus besoin d'appeler themeOnUnmounted() car useTheme gère déjà onUnmounted
 })
 </script>
-
 

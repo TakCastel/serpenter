@@ -80,14 +80,26 @@ const checklistType = ref(null)
 
 const createProject = async () => {
   if (!projectName.value.trim() || !currentUser.value) return
-  const project = await projectsStore.addProjectRemote(currentUser.value.uid, {
-    name: projectName.value.trim(),
-    description: projectDescription.value.trim(),
-    checklistType: checklistType.value
-  })
-  emit('create-project', project)
-  if (!project.checklistType) {
-    navigateTo('/select-checklist')
+
+  try {
+    const project = await projectsStore.addProjectRemote(currentUser.value.uid, {
+      name: projectName.value.trim(),
+      description: projectDescription.value.trim(),
+      checklistType: checklistType.value
+    })
+
+    // Forcer la mise à jour du projet courant dans le store
+    projectsStore.setCurrentProject(project.id)
+
+    // Émettre l'événement vers le parent
+    emit('create-project', project)
+
+    // Naviguer vers la sélection de checklist si nécessaire
+    if (!project.checklistType) {
+      await navigateTo('/select-checklist')
+    }
+  } catch (error) {
+    console.error('Erreur lors de la création du projet:', error)
   }
 }
 </script>

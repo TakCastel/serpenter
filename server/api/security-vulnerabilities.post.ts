@@ -33,7 +33,6 @@ export default defineEventHandler(async (event) => {
       data: vulnerabilityResults
     }
   } catch (error: any) {
-    console.error('Erreur lors du scan des vulnérabilités:', error)
     throw createError({
       statusCode: error.statusCode || 500,
       statusMessage: error.statusMessage || 'Erreur interne du serveur'
@@ -66,7 +65,6 @@ async function scanVulnerabilities(url: string) {
       timestamp: new Date().toISOString()
     }
   } catch (error) {
-    console.error('Erreur lors du scan des vulnérabilités:', error)
     return {
       score: 0,
       vulnerabilities: [],
@@ -111,7 +109,6 @@ async function scanWithOWASPZAP(url: string) {
     
     throw new Error('Impossible de lancer le scan OWASP ZAP')
   } catch (error) {
-    console.error('Erreur OWASP ZAP:', error)
     throw error
   }
 }
@@ -157,7 +154,7 @@ async function detectBasicVulnerabilities(url: string) {
      }
     
   } catch (error) {
-    console.error('Erreur lors des tests de vulnérabilités:', error)
+    // Erreur lors des tests de vulnérabilités
   }
   
   return vulnerabilities
@@ -233,7 +230,7 @@ async function testInputValidation(url: string) {
       }
     }
   } catch (error) {
-    console.error('Erreur lors du test de validation des entrées:', error)
+    // Erreur lors du test de validation des entrées
   }
   
   return { hasVulnerabilities: vulnerabilities.length > 0, vulnerabilities }
@@ -306,7 +303,7 @@ async function testInputValidation(url: string) {
      }
      
    } catch (error) {
-     console.error('Erreur lors du test des headers de sécurité:', error)
+     // Erreur lors du test des headers de sécurité
    }
    
    return { hasVulnerabilities: vulnerabilities.length > 0, vulnerabilities }
@@ -380,7 +377,7 @@ async function testServerConfiguration(url: string) {
      }
     
   } catch (error) {
-    console.error('Erreur lors du test de configuration serveur:', error)
+    // Erreur lors du test de configuration serveur
   }
   
      return { hasVulnerabilities: vulnerabilities.length > 0, vulnerabilities }
@@ -429,7 +426,7 @@ async function testServerConfiguration(url: string) {
      }
      
    } catch (error) {
-     console.error('Erreur lors du test des fichiers publics:', error)
+     // Erreur lors du test des fichiers publics
    }
    
    return { hasVulnerabilities: vulnerabilities.length > 0, vulnerabilities }
@@ -471,7 +468,7 @@ async function testServerConfiguration(url: string) {
     }
     
   } catch (error) {
-    console.error('Erreur lors du test de divulgation d\'informations:', error)
+    // Erreur lors du test de divulgation d'informations
   }
   
      return { hasVulnerabilities: vulnerabilities.length > 0, vulnerabilities }
@@ -532,7 +529,6 @@ async function testServerConfiguration(url: string) {
      return false
      
    } catch (error) {
-     console.error('Erreur lors de l\'analyse du contenu du fichier:', error)
      return false
    }
  }
@@ -577,7 +573,6 @@ async function testServerConfiguration(url: string) {
      return sensitivePatterns.some(pattern => pattern.test(contentStr))
      
    } catch (error) {
-     console.error('Erreur lors de l\'analyse du contenu du fichier public:', error)
      return false
    }
  }

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="w-full" style="min-height: calc(100vh + 200px);">
     <!-- Carte de félicitations quand toutes les catégories sont complétées -->
     <DeploymentReadyCard 
@@ -161,7 +161,7 @@ const props = defineProps({
     default: 'web-prelaunch'
   }
 })
-const { getCategoryItems, getAllCategories, getCategoryData, setChecklistType } = useChecklistData(props.checklistType)
+const { getCategoryItems, getAllCategories, getCategoryData, setChecklistType, isLoading: isDataLoading, waitForData } = useChecklistData(props.checklistType)
 const { currentUser } = useAuth()
 
 // Props moved above
@@ -202,7 +202,10 @@ const totalCategoriesCount = computed(() => {
 const loadCategories = async () => {
   try {
     isLoading.value = true
-    
+
+    // Attendre que les données soient chargées
+    await waitForData()
+
     // Utiliser directement le checklistType pour déterminer les catégories
     const categoryIds = getAllCategories()
     
@@ -210,7 +213,9 @@ const loadCategories = async () => {
       const categoryData = getCategoryData(categoryId)
       const categoryName = $t(`categories.${categoryId}.name`)
       const categoryDescription = $t(`categories.${categoryId}.description`)
-      
+
+
+
       return {
         id: categoryId,
         name: categoryName,
@@ -220,11 +225,14 @@ const loadCategories = async () => {
         isLoading: false
       }
     })
-    
+
+    // Calculer les scores après le chargement des catégories
+    await calculateScores()
+
     // Émettre l'événement avec les catégories chargées
     emit('categories-loaded', categories.value)
   } catch (error) {
-    console.error('Erreur lors du chargement de la checklist:', error)
+    // Erreur lors du chargement de la checklist
     categories.value = []
   } finally {
     isLoading.value = false
@@ -280,7 +288,7 @@ const loadCheckedItems = async () => {
     await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
     checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
   } catch (error) {
-    console.error('Erreur lors du chargement du progrès:', error)
+    // Erreur lors du chargement du progrès
     checkedItems.value = new Set()
   }
 }
@@ -298,15 +306,57 @@ const saveCheckedItems = async () => {
     if (!currentUser.value || !props.currentProjectId) return
     projectsStore.setCheckedForProject(props.currentProjectId, checkedItems.value)
     await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
-    
+
     // Mettre à jour les scores dans le store
+    await calculateScores()
+  } catch (error) {
+    // Erreur lors de la sauvegarde du progrès
+  }
+}
+
+// Fonction pour calculer et mettre à jour les scores
+const calculateScores = async () => {
+  try {
+    if (!props.currentProjectId) return
+
     const allItems = []
     categories.value.forEach(category => {
       if (category.items) allItems.push(...category.items)
     })
+
     projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
   } catch (error) {
-    console.error('Erreur lors de la sauvegarde du progrès:', error)
+    console.error('Erreur lors du calcul des scores:', error)
+  }
+}
+
+// Gestionnaire pour le changement de projet
+const handleProjectChange = async (event) => {
+  try {
+    if (!currentUser.value || !event.detail?.projectId) return
+
+    // Recharger complètement les données pour le nouveau projet
+    await loadCheckedItems()
+    await loadCategories()
+
+    // Recalculer les scores
+    await calculateScores()
+  } catch (error) {
+    console.error('Erreur lors du changement de projet:', error)
+  }
+}
+
+// Gestionnaire pour les mises à jour d'éléments cochés
+const handleCheckedItemsUpdate = async (event) => {
+  try {
+    if (!currentUser.value || !props.currentProjectId) return
+    // Recharger l'état depuis Firestore via le store
+    await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
+    checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
+    // Recalcule des scores
+    await calculateScores()
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour des éléments cochés:', error)
   }
 }
 
@@ -421,35 +471,40 @@ watch(progressPercentage, (newPercentage) => {
 watch(locale, async () => { await loadCategories() }, { immediate: false })
 watch(() => props.checklistType, async (newType) => { setChecklistType(newType); await loadCategories() }, { immediate: false })
 
-
+// NOUVEAU: Watcher sur le changement de projet
+watch(() => props.currentProjectId, async (newProjectId, oldProjectId) => {
+  if (newProjectId && newProjectId !== oldProjectId) {
+    try {
+      // Recharger les données pour le nouveau projet
+      await loadCheckedItems()
+      await calculateScores()
+    } catch (error) {
+      console.error('Erreur lors du changement de projet (watcher):', error)
+    }
+  }
+}, { immediate: false })
 
 // Écouter les changements de projet via les événements globaux
-onMounted(async () => {
-  await loadCheckedItems()
-  await loadCategories()
-  if (categories.value.length > 0) {
-    expandedCategories.value.add(categories.value[0].id)
-  }
-  if (process.client) {
-    // Écouter l'ouverture des catégories
-    window.addEventListener('open-category', (event) => {
-      if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
-    })
-    
-    // Réception des mises à jour auto-check depuis l'audit Lighthouse
-    window.addEventListener('checked-items-updated', async (event) => {
-      try {
-        if (!currentUser.value || !props.currentProjectId) return
-        // Recharger l'état depuis Firestore via le store
-        await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
-        checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
-        // Recalcule des scores
-        await calculateScores()
-      } catch (error) {
-        console.error('Erreur lors de la mise à jour des éléments cochés:', error)
-      }
-    })
-  }
+onMounted(() => {
+  nextTick().then(async () => {
+    await loadCheckedItems()
+    await loadCategories()
+    if (categories.value.length > 0) {
+      expandedCategories.value.add(categories.value[0].id)
+    }
+    if (process.client) {
+      // Écouter l'ouverture des catégories
+      window.addEventListener('open-category', (event) => {
+        if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
+      })
+
+      // NOUVEAU: Écouter les changements de projet
+      window.addEventListener('project-checklist-changed', handleProjectChange)
+
+      // Réception des mises à jour auto-check depuis l'audit Lighthouse
+      window.addEventListener('checked-items-updated', handleCheckedItemsUpdate)
+    }
+  })
 })
 
 onUnmounted(() => {
@@ -457,9 +512,8 @@ onUnmounted(() => {
     window.removeEventListener('open-category', (event) => {
       if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
     })
-    window.removeEventListener('project-checklist-changed', () => {})
-    window.removeEventListener('categories-updated', () => {})
-    window.removeEventListener('checked-items-updated', () => {})
+    window.removeEventListener('project-checklist-changed', handleProjectChange)
+    window.removeEventListener('checked-items-updated', handleCheckedItemsUpdate)
   }
 })
 

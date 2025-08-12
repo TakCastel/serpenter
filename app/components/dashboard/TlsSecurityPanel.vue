@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <details class="rounded-xl border" style="border-color: var(--bg-border);" :open="isOpen">
     <summary 
       class="cursor-pointer px-4 py-3 text-sm flex items-center justify-between hover:bg-opacity-50" 
@@ -154,5 +154,4 @@ const reset = () => {
 
 defineExpose({ runScan, reset, loading, score, hasResults })
 </script>
-
 

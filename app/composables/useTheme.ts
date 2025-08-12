@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 export const useTheme = () => {
   const isDark = ref(true)
@@ -51,23 +51,21 @@ export const useTheme = () => {
   }
 
   // Initialiser le thème quand le composant est monté
-  const onMounted = () => {
+  onMounted(() => {
     isClient.value = true
     initTheme()
-  }
+  })
 
   // Nettoyer quand le composant est démonté
-  const onUnmounted = () => {
+  onUnmounted(() => {
     isClient.value = false
-  }
+  })
 
   return {
     isDark,
     themeClass,
     toggleTheme,
     setTheme,
-    initTheme,
-    onMounted,
-    onUnmounted
+    initTheme
   }
 }

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <aside 
     :class="[
       'fixed left-0 top-[77px] border-r transition-all duration-500 ease-in-out h-[calc(100vh-77px)] flex flex-col z-10 shadow-lg',
@@ -62,7 +62,7 @@
               </div>
               
               <!-- Navigation des catégories -->
-              <nav v-else class="space-y-1" role="navigation" :aria-label="$t('app.navigation.verificationsDescription')">
+              <nav v-else class="space-y-1" role="navigation" aria-label="Navigation des catégories">
                 <button
                   v-for="category in projectCategories"
                   :key="category.id"
@@ -190,7 +190,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useProjectsStore } from '~/stores/projects'
 import { useChecklistData } from '~/composables/useChecklistData'
 import ProjectSelector from '~/components/dashboard/ProjectSelector.vue'
@@ -215,26 +215,48 @@ const hasProjects = computed(() => projectsStore.hasProjects)
 const currentProjectId = computed(() => projectsStore.currentProjectId)
 const currentProject = computed(() => projectsStore.currentProject)
 
-// Utiliser useChecklistData pour avoir la même source de vérité
+// Initialiser les données de checklist une seule fois
+const checklistData = useChecklistData('web-prelaunch')
+
+// Watcher pour mettre à jour le type de checklist quand le projet change
+watch(() => currentProject.value?.checklistType, (newType) => {
+  if (newType && checklistData.setChecklistType) {
+    checklistData.setChecklistType(newType)
+  }
+}, { immediate: true })
+
+// Computed pour les catégories du projet
 const projectCategories = computed(() => {
-  if (!currentProject.value?.checklistType) return []
-  
-  const { getAllCategories, getCategoryData } = useChecklistData(currentProject.value.checklistType)
-  const categoryIds = getAllCategories()
-  
-  return categoryIds.map(categoryId => {
-    const categoryData = getCategoryData(categoryId)
-    const categoryName = t(`categories.${categoryId}.name`)
-    
-    // Déterminer l'icône selon le type de catégorie
-    const icon = getSommaireIcon(categoryId)
-    
-    return {
-      id: categoryId,
-      name: categoryName,
-      icon: icon
-    }
-  })
+  try {
+    if (!checklistData || !currentProject.value?.checklistType) return []
+
+    const { getAllCategories, getCategoryData } = checklistData
+    const categoryIds = getAllCategories()
+
+    return categoryIds.map(categoryId => {
+      try {
+        const categoryData = getCategoryData(categoryId)
+        const categoryName = t(`categories.${categoryId}.name`)
+
+        // Déterminer l'icône selon le type de catégorie
+        const icon = getSommaireIcon(categoryId)
+
+        return {
+          id: categoryId,
+          name: categoryName,
+          icon: icon
+        }
+      } catch (error) {
+        return {
+          id: categoryId,
+          name: `Catégorie ${categoryId}`,
+          icon: 'heroicons:document-text'
+        }
+      }
+    })
+  } catch (error) {
+    return []
+  }
 })
 
 // Fonction pour obtenir l'icône de la catégorie
@@ -279,8 +301,7 @@ const handleProjectChanged = async (projectId) => {
     // Émettre l'événement vers le parent
     emit('project-changed', projectId)
   } catch (error) {
-    console.error('Erreur lors du changement de projet:', error)
-  } finally {
+    } finally {
     // Petit délai pour l'effet visuel
     setTimeout(() => {
       isProjectLoading.value = false
@@ -290,58 +311,70 @@ const handleProjectChanged = async (projectId) => {
 
 // Scroll simple vers la catégorie
 const scrollToCategory = (categoryId) => {
-  if (process.client) {
-    const element = document.getElementById(`category-${categoryId}`)
-    if (element) {
-      // Mettre à jour la catégorie active
-      activeCategory.value = categoryId
-      
-      // Ouvrir l'accordéon de la catégorie
-      window.dispatchEvent(new CustomEvent('open-category', { 
-        detail: { categoryId } 
-      }))
-      
-      // Scroll vers l'élément
-      setTimeout(() => {
-        const headerHeight = 80
-        const elementTop = element.offsetTop
-        const scrollPosition = elementTop - headerHeight - 20
-        window.scrollTo({
-          top: Math.max(0, scrollPosition),
-          behavior: 'smooth'
-        })
-      }, 300)
+  try {
+    if (process.client) {
+      const element = document.getElementById(`category-${categoryId}`)
+      if (element) {
+        // Mettre à jour la catégorie active
+        activeCategory.value = categoryId
+        
+        // Ouvrir l'accordéon de la catégorie
+        window.dispatchEvent(new CustomEvent('open-category', { 
+          detail: { categoryId } 
+        }))
+        
+        // Scroll vers l'élément
+        setTimeout(() => {
+          try {
+            const headerHeight = 80
+            const elementTop = element.offsetTop
+            const scrollPosition = elementTop - headerHeight - 20
+            window.scrollTo({
+              top: Math.max(0, scrollPosition),
+              behavior: 'smooth'
+            })
+          } catch (error) {
+            }
+        }, 300)
+      }
     }
-  }
+  } catch (error) {
+    }
 }
 
 // Gestion du scroll pour mettre à jour la catégorie active
 const checkScroll = () => {
-  if (process.client && projectCategories.value && Array.isArray(projectCategories.value)) {
-    const scrollY = window.scrollY
-    const windowHeight = window.innerHeight
-    const headerHeight = 80
-    
-    let closestCategory = null
-    let closestDistance = Infinity
-    
-    projectCategories.value.forEach(category => {
-      const element = document.getElementById(`category-${category.id}`)
-      if (element) {
-        const rect = element.getBoundingClientRect()
-        const distance = Math.abs(rect.top - headerHeight)
-        
-        if (distance < closestDistance) {
-          closestDistance = distance
-          closestCategory = category.id
-        }
+  try {
+    if (process.client && projectCategories.value && Array.isArray(projectCategories.value)) {
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+      const headerHeight = 80
+      
+      let closestCategory = null
+      let closestDistance = Infinity
+      
+      projectCategories.value.forEach(category => {
+        try {
+          const element = document.getElementById(`category-${category.id}`)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            const distance = Math.abs(rect.top - headerHeight)
+            
+            if (distance < closestDistance) {
+              closestDistance = distance
+              closestCategory = category.id
+            }
+          }
+        } catch (error) {
+          }
+      })
+      
+      if (closestCategory && closestCategory !== activeCategory.value) {
+        activeCategory.value = closestCategory
       }
-    })
-    
-    if (closestCategory && closestCategory !== activeCategory.value) {
-      activeCategory.value = closestCategory
     }
-  }
+  } catch (error) {
+    }
 }
 
 onMounted(() => {
@@ -357,7 +390,4 @@ onUnmounted(() => {
   }
 })
 </script>
-
-
-
 

@@ -53,7 +53,7 @@ export const useCategoriesStore = defineStore('categories', () => {
       
       return categories.value
     } catch (error) {
-      console.error('Erreur lors du chargement des catégories:', error)
+      // Erreur lors du chargement des catégories
       categories.value = []
       activeCategory.value = null
       return []

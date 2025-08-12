@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Background avec motif serpent -->
     <div class="absolute inset-0 transition-all duration-300" style="background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-primary) 100%);"></div>
@@ -113,7 +113,6 @@ const toggleTheme = () => {
     localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
   }
 }
-
 
 onMounted(() => {
   if (process.client) {

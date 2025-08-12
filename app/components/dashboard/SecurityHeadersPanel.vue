@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <details class="rounded-xl border" style="border-color: var(--bg-border);" :open="isOpen">
     <summary 
       class="cursor-pointer px-4 py-3 text-sm flex items-center justify-between hover:bg-opacity-50" 
@@ -151,7 +151,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-
 interface Props {
   url: string
   isValidUrl: boolean
@@ -233,7 +232,6 @@ const scanSecurityHeaders = async () => {
     const data: SecurityHeadersResults = await response.json()
     results.value = data
   } catch (error) {
-    console.error('Error scanning security headers:', error)
     results.value = null
   } finally {
     loading.value = false

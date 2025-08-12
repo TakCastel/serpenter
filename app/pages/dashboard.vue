@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="px-4 lg:px-6 py-6 pb-24 w-full bg-[var(--bg-primary)]" :style="{ height: 'calc(100vh - 77px)' }">
     <!-- Header global avec titre, description et statistiques (visible seulement si projet sélectionné) -->
     <div v-if="isClient && currentProjectId && currentProject?.checklistType" class="card p-6 mb-6" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
@@ -68,12 +68,12 @@
 
         <!-- Pour les projets mobiles, afficher l'accordéon de pré‑soumission -->
         <div v-if="currentProject?.checklistType === 'appstore-preflight'">
-          <AppPreflightAccordion />
+          <AppPreflightAccordion ref="appPreflightAccordion" />
         </div>
 
         <!-- Pour les projets de sécurité, afficher le scanner de sécurité -->
         <div v-if="currentProject?.checklistType === 'security-checker'">
-          <SecurityScannerAccordion @items-autochecked="onSecurityItemsAutoChecked" />
+          <SecurityScannerAccordion ref="securityScannerAccordion" @items-autochecked="onSecurityItemsAutoChecked" />
         </div>
       </div>
     </div>
@@ -127,6 +127,8 @@ definePageMeta({
 const seoChecklist = ref(null)
 const lighthouseAccordion = ref(null)
 const lighthouseAccordionMobile = ref(null)
+const appPreflightAccordion = ref(null)
+const securityScannerAccordion = ref(null)
 const isClient = ref(false)
 const showResetModal = ref(false)
 const projectsStore = useProjectsStore()
@@ -142,27 +144,38 @@ watch([currentProject, hasProjects], ([p, has]) => {
   }
 }, { immediate: true })
 
-// Réinitialiser le Lighthouse quand le projet change
+// Réinitialiser les accordéons quand le projet change
 watch(currentProjectId, async (newProjectId, oldProjectId) => {
   if (process.client && newProjectId && newProjectId !== oldProjectId) {
     try {
-      // Ne pas réinitialiser le Lighthouse pour les projets de sécurité
-      if (currentProject.value?.checklistType === 'security-checker') {
-        return
-      }
-      
-      // Réinitialiser le Lighthouse desktop
-      if (lighthouseAccordion.value) {
-        await lighthouseAccordion.value.reset()
-      }
-      
-      // Réinitialiser le Lighthouse mobile
-      if (lighthouseAccordionMobile.value) {
-        await lighthouseAccordionMobile.value.reset()
+      // Attendre que le DOM soit mis à jour
+      await nextTick()
+
+      // Réinitialiser selon le type de projet
+      const projectType = currentProject.value?.checklistType
+
+      if (projectType === 'security-checker') {
+        // Réinitialiser le scanner de sécurité
+        if (securityScannerAccordion.value) {
+          await securityScannerAccordion.value.reset()
+        }
+      } else if (projectType === 'appstore-preflight') {
+        // Réinitialiser l'accordéon de pré-soumission
+        if (appPreflightAccordion.value) {
+          await appPreflightAccordion.value.reset()
+        }
+      } else {
+        // Réinitialiser le Lighthouse pour les autres types
+        if (lighthouseAccordion.value) {
+          await lighthouseAccordion.value.reset()
+        }
+
+        if (lighthouseAccordionMobile.value) {
+          await lighthouseAccordionMobile.value.reset()
+        }
       }
     } catch (error) {
-      console.error('Erreur lors de la réinitialisation du Lighthouse:', error)
-    }
+      }
   }
 })
 
@@ -174,7 +187,6 @@ onMounted(() => {
     window.addEventListener('reset-checklist-progress', handleResetProgress)
   }
 })
-
 
 const handleCreateFirstProject = (project) => {
   // Projet créé avec succès

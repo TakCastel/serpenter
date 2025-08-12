@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="px-4 lg:px-6 py-10 max-w-6xl mx-auto">
     
 
@@ -137,5 +137,4 @@ const setType = async (type) => {
   }
 }
 </script>
-
 

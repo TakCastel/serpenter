@@ -1,0 +1,27 @@
+{
+  "webProject": {
+    "name": "Site Web E-commerce",
+    "description": "Site de vente en ligne avec paiement sécurisé",
+    "checklistType": "web-prelaunch"
+  },
+  "appProject": {
+    "name": "Application Mobile",
+    "description": "App iOS/Android pour la gestion de tâches",
+    "checklistType": "appstore-preflight"
+  },
+  "securityProject": {
+    "name": "Audit Sécurité",
+    "description": "Vérification de sécurité pour API REST",
+    "checklistType": "security-checker"
+  },
+  "emptyProject": {
+    "name": "Projet Test",
+    "description": "",
+    "checklistType": "web-prelaunch"
+  },
+  "longNameProject": {
+    "name": "Projet avec un nom très long qui pourrait poser des problèmes d'affichage dans l'interface utilisateur",
+    "description": "Description également très longue qui devrait être tronquée ou gérée correctement par l'interface utilisateur pour éviter les problèmes d'affichage",
+    "checklistType": "web-prelaunch"
+  }
+}

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="space-y-4">
     <!-- En-tête -->
     <div class="flex items-center justify-between">
@@ -68,8 +68,6 @@
         @items-autochecked="onItemsAutoChecked"
       />
 
-
-
       <!-- Vulnerability Panel -->
       <VulnerabilityPanel 
         ref="vulnerabilityPanel"
@@ -99,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import HeadersSecurityPanel from './HeadersSecurityPanel.vue'
 import VulnerabilityPanel from './VulnerabilityPanel.vue'
 import TlsSecurityPanel from './TlsSecurityPanel.vue'
@@ -191,8 +189,7 @@ const runAllScans = async () => {
   try {
     await Promise.all(scans)
   } catch (error) {
-    console.error('Erreur lors des scans de sécurité:', error)
-  }
+    }
 }
 
 const onItemsAutoChecked = (itemIds: string[]) => {
@@ -203,11 +200,35 @@ const onItemsAutoChecked = (itemIds: string[]) => {
 const reset = () => {
   url.value = ''
   isValidUrl.value = false
-  
+
+  // Fermer tous les panels
+  headersPanelOpen.value = false
+  sslPanelOpen.value = false
+  vulnerabilityPanelOpen.value = false
+
+  // Réinitialiser les panels enfants
   if (headersPanel.value?.reset) headersPanel.value.reset()
   if (sslPanel.value?.reset) sslPanel.value.reset()
   if (vulnerabilityPanel.value?.reset) vulnerabilityPanel.value.reset()
 }
+
+// Gestionnaire de changement de projet
+const handleProjectChanged = () => {
+  reset()
+}
+
+// Écouter les changements de projet
+onMounted(() => {
+  if (process.client) {
+    window.addEventListener('project-checklist-changed', handleProjectChanged)
+  }
+})
+
+onUnmounted(() => {
+  if (process.client) {
+    window.removeEventListener('project-checklist-changed', handleProjectChanged)
+  }
+})
 
 // Utilitaires
 const ringStyle = (val: number) => ({

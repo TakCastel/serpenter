@@ -1,0 +1,92 @@
+{
+  "seo": {
+    "name": "SEO & Référencement",
+    "description": "Optimisation pour les moteurs de recherche",
+    "items": [
+      {
+        "id": "meta-title",
+        "labelKey": "seo.metaTitle.title",
+        "descriptionKey": "seo.metaTitle.description",
+        "details": {
+          "explicationKey": "seo.metaTitle.explication",
+          "commentFaireKey": "seo.metaTitle.commentFaire",
+          "bonnesPratiquesKey": "seo.metaTitle.bonnesPratiques"
+        }
+      },
+      {
+        "id": "meta-description",
+        "labelKey": "seo.metaDescription.title",
+        "descriptionKey": "seo.metaDescription.description",
+        "details": {
+          "explicationKey": "seo.metaDescription.explication",
+          "commentFaireKey": "seo.metaDescription.commentFaire",
+          "bonnesPratiquesKey": "seo.metaDescription.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "accessibilite": {
+    "name": "Accessibilité",
+    "description": "Conformité aux standards d'accessibilité",
+    "items": [
+      {
+        "id": "alt-images",
+        "labelKey": "accessibility.altImages.title",
+        "descriptionKey": "accessibility.altImages.description",
+        "details": {
+          "explicationKey": "accessibility.altImages.explication",
+          "commentFaireKey": "accessibility.altImages.commentFaire",
+          "bonnesPratiquesKey": "accessibility.altImages.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "performance": {
+    "name": "Performance",
+    "description": "Optimisation des performances",
+    "items": [
+      {
+        "id": "page-speed",
+        "labelKey": "performance.pageSpeed.title",
+        "descriptionKey": "performance.pageSpeed.description",
+        "details": {
+          "explicationKey": "performance.pageSpeed.explication",
+          "commentFaireKey": "performance.pageSpeed.commentFaire",
+          "bonnesPratiquesKey": "performance.pageSpeed.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "securite": {
+    "name": "Sécurité",
+    "description": "Vérifications de sécurité",
+    "items": [
+      {
+        "id": "https-ssl",
+        "labelKey": "security.httpsSSL.title",
+        "descriptionKey": "security.httpsSSL.description",
+        "details": {
+          "explicationKey": "security.httpsSSL.explication",
+          "commentFaireKey": "security.httpsSSL.commentFaire",
+          "bonnesPratiquesKey": "security.httpsSSL.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "conformite": {
+    "name": "Conformité",
+    "description": "Conformité légale et réglementaire",
+    "items": [
+      {
+        "id": "rgpd-compliance",
+        "labelKey": "compliance.rgpd.title",
+        "descriptionKey": "compliance.rgpd.description",
+        "details": {
+          "explicationKey": "compliance.rgpd.explication",
+          "commentFaireKey": "compliance.rgpd.commentFaire",
+          "bonnesPratiquesKey": "compliance.rgpd.bonnesPratiques"
+        }
+      }
+    ]
+  }
+}

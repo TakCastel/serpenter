@@ -10,7 +10,7 @@ export const analyzeBundle = () => {
       { name: 'i18n', size: '~25KB' }
     ]
     
-    console.table(modules)
+    // Affichage des modules analysés
   }
 }
 

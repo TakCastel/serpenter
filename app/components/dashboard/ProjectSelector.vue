@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="relative">
     <!-- Skeleton pendant le chargement -->
     <SkeletonProjectSelector v-if="isLoading" />
@@ -237,26 +237,28 @@ const selectProject = async (projectId) => {
     // Afficher l'état de chargement immédiatement
     isLoading.value = true
     isDropdownOpen.value = false
-    
-    // Émettre l'événement de changement de projet immédiatement
+
+    // Mettre à jour le projet dans le store immédiatement
+    projectsStore.setCurrentProject(projectId)
+
+    // Émettre l'événement de changement de projet
     emit('project-changed', projectId)
-    
+
+    // Attendre que le DOM soit mis à jour
+    await nextTick()
+
     // Émettre un événement global pour notifier tous les composants
     if (process.client) {
-      window.dispatchEvent(new CustomEvent('project-checklist-changed', { 
-        detail: { 
+      window.dispatchEvent(new CustomEvent('project-checklist-changed', {
+        detail: {
           projectId,
-          checklistType: projectsStore.currentProject?.checklistType 
-        } 
+          checklistType: projectsStore.currentProject?.checklistType
+        }
       }))
     }
-    
-    // Mettre à jour le projet dans le store de manière asynchrone
-    await nextTick()
-    projectsStore.setCurrentProject(projectId)
-    
+
   } catch (error) {
-    console.error('❌ Erreur lors de la sélection du projet:', error)
+    console.error('Erreur lors de la sélection du projet:', error)
   } finally {
     // Masquer l'état de chargement après un court délai pour éviter le clignotement
     setTimeout(() => {
@@ -275,12 +277,29 @@ const closeCreateProjectModal = () => { showCreateModal.value = false }
 
 const createProject = async () => {
   if (!newProject.value.name.trim() || !currentUser.value) return
-  const p = await projectsStore.addProjectRemote(currentUser.value.uid, {
-    name: newProject.value.name.trim(),
-    description: newProject.value.description.trim()
-  })
-  emit('project-changed', p.id)
-  closeCreateProjectModal()
+
+  try {
+    const p = await projectsStore.addProjectRemote(currentUser.value.uid, {
+      name: newProject.value.name.trim(),
+      description: newProject.value.description.trim()
+    })
+
+    // Forcer la mise à jour du projet courant dans le store
+    projectsStore.setCurrentProject(p.id)
+
+    // Émettre l'événement de changement de projet
+    emit('project-changed', p.id)
+
+    // Fermer le modal
+    closeCreateProjectModal()
+
+    // Naviguer vers la sélection de checklist si le projet n'a pas de type
+    if (!p.checklistType) {
+      await navigateTo('/select-checklist')
+    }
+  } catch (error) {
+    console.error('Erreur lors de la création du projet:', error)
+  }
 }
 
 const openDeleteProjectModal = () => { showDeleteModal.value = true; isDropdownOpen.value = false }
@@ -302,13 +321,10 @@ watch(projects, (newProjects) => {
   if (newProjects.length > 0 && isLoading.value) isLoading.value = false
 }, { immediate: true })
 
-onMounted(async () => {
+onMounted(() => {
   if (process.client) {
     isClient.value = true
     document.addEventListener('click', handleOutsideClick)
-    if (currentUser.value && !projectsStore.isSynced) {
-      await projectsStore.subscribeUserProjects(currentUser.value.uid)
-    }
   }
 })
 

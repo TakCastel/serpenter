@@ -76,9 +76,9 @@ const currentProjectHasChecklistType = computed(() => {
 const emit = defineEmits(['toggle-sidebar'])
 
 const { setLocale } = useI18n()
-const { currentUser, logout } = useAuth()
+const { currentUser, signOut } = useAuth()
 
-const { isDark, toggleTheme, onMounted: themeOnMounted, onUnmounted: themeOnUnmounted } = useTheme()
+const { isDark, toggleTheme } = useTheme()
 const isScrolled = ref(false)
 const progressPercentage = ref(null)
 const isClient = ref(false)
@@ -136,11 +136,14 @@ const handleClickOutside = (event) => {
 
 const logoutUser = async () => {
   try {
-    await logout()
+    await signOut()
     showUserMenu.value = false
-    navigateTo('/login')
+    await navigateTo('/login')
   } catch (e) {
-    // noop
+    // Erreur lors de la déconnexion
+    // En cas d'erreur, fermer le menu et rediriger quand même
+    showUserMenu.value = false
+    await navigateTo('/login')
   }
 }
 
@@ -165,20 +168,20 @@ const goToHelp = () => {
   router.push('/help')
 }
 
-onMounted(async () => {
+onMounted(() => {
   isClient.value = true
-  themeOnMounted()
+  // Plus besoin d'appeler themeOnMounted() car useTheme gère déjà onMounted
   
   if (process.client) {
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('progress-updated', handleProgressUpdate)
     
     // Attendre que le composant soit complètement monté avant d'ajouter l'event listener
-    await nextTick()
-    document.addEventListener('click', handleClickOutside)
-    
-    handleScroll()
-    resetProgressWhenNoProject()
+    nextTick().then(() => {
+      document.addEventListener('click', handleClickOutside)
+      handleScroll()
+      resetProgressWhenNoProject()
+    })
   }
 })
 
@@ -189,7 +192,7 @@ watch(() => props.currentProjectId, (newValue) => {
 })
 
 onUnmounted(() => {
-  themeOnUnmounted()
+  // Plus besoin d'appeler themeOnUnmounted() car useTheme gère déjà onUnmounted
   
   if (process.client) {
     window.removeEventListener('scroll', handleScroll)

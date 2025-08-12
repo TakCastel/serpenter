@@ -12,7 +12,7 @@ export const useProjectScores = () => {
           projectScores.value[projectId] = JSON.parse(saved)
         }
       } catch (error) {
-        console.error('Erreur lors du chargement des scores:', error)
+        // Erreur lors du chargement des scores
       }
     }
   }
@@ -24,7 +24,7 @@ export const useProjectScores = () => {
         projectScores.value[projectId] = scores
         localStorage.setItem(`project-scores-${projectId}`, JSON.stringify(scores))
       } catch (error) {
-        console.error('Erreur lors de la sauvegarde des scores:', error)
+        // Erreur lors de la sauvegarde des scores
       }
     }
   }

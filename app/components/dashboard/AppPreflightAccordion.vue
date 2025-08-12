@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="card p-4 rounded-xl">
     <div class="flex gap-2 mb-4">
       <button class="btn" :class="{ 'btn-primary': tab==='meta' }" @click="tab='meta'">Métadonnées</button>
@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import CodeEditor from '~/components/common/CodeEditor.vue'
 
 const tab = ref<'meta'|'ios'|'android'>('meta')
@@ -166,6 +166,56 @@ const checkAndroid = async () => {
     androidLoading.value = false
   }
 }
+
+// Méthode pour réinitialiser l'état
+const reset = () => {
+  tab.value = 'meta'
+
+  // Réinitialiser les métadonnées
+  meta.value = {
+    ios: { name: '', subtitle: '', keywords: '', promotionalText: '', description: '', releaseNotes: '' },
+    android: { title: '', shortDescription: '', fullDescription: '', releaseNotes: '' }
+  }
+  metaResult.value = null
+  iosIssues.value = []
+  androidIssues.value = []
+  metaOk.value = false
+
+  // Réinitialiser iOS
+  iosPlist.value = ''
+  iosResult.value = null
+  iosLoading.value = false
+  iosError.value = null
+
+  // Réinitialiser Android
+  androidManifest.value = ''
+  androidResult.value = null
+  androidLoading.value = false
+  androidError.value = null
+}
+
+// Gestionnaire de changement de projet
+const handleProjectChanged = () => {
+  reset()
+}
+
+// Écouter les changements de projet
+onMounted(() => {
+  if (process.client) {
+    window.addEventListener('project-checklist-changed', handleProjectChanged)
+  }
+})
+
+onUnmounted(() => {
+  if (process.client) {
+    window.removeEventListener('project-checklist-changed', handleProjectChanged)
+  }
+})
+
+// Exposer la méthode reset
+defineExpose({
+  reset
+})
 </script>
 
 <style scoped>
@@ -175,5 +225,4 @@ const checkAndroid = async () => {
 .btn-primary { @apply bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700; }
 .card { @apply bg-white border border-gray-200; }
 </style>
-
 

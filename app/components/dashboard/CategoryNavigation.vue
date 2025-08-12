@@ -68,11 +68,22 @@ const { t } = useI18n()
 const hasProjects = computed(() => projectsStore.hasProjects)
 const currentProject = computed(() => projectsStore.currentProject)
 
-// Utiliser useChecklistData pour avoir la même source de vérité
+// Charger les données de checklist au niveau du setup
+const checklistData = computed(() => {
+  if (!currentProject.value?.checklistType) return null
+  try {
+    return useChecklistData(currentProject.value.checklistType)
+  } catch (error) {
+    // Erreur lors du chargement des données de checklist
+    return null
+  }
+})
+
+// Computed pour les catégories du projet
 const projectCategories = computed(() => {
-  if (!currentProject.value?.checklistType) return []
+  if (!checklistData.value) return []
   
-  const { getAllCategories, getCategoryData } = useChecklistData(currentProject.value.checklistType)
+  const { getAllCategories, getCategoryData } = checklistData.value
   const categoryIds = getAllCategories()
   
   return categoryIds.map(categoryId => {

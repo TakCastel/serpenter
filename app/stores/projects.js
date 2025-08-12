@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { collection, doc, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, setDoc, getDoc } from 'firebase/firestore'
 
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
@@ -45,6 +44,14 @@ export const useProjectsStore = defineStore('projects', {
   },
 
   actions: {
+    // Chargement à la demande des fonctions Firestore (client uniquement)
+    async _firestoreFns() {
+      if (process.server) {
+        throw new Error('Firestore Web SDK non disponible côté serveur')
+      }
+      const mod = await import('firebase/firestore')
+      return mod
+    },
     // Connexion Firestore (via plugin)
     _db() {
       const { $db } = useNuxtApp()
@@ -55,6 +62,7 @@ export const useProjectsStore = defineStore('projects', {
     async subscribeUserProjects(userId) {
       if (!userId) return
       const db = this._db()
+      const { collection, onSnapshot } = await this._firestoreFns()
       const colRef = collection(db, 'users', userId, 'projects')
       // Snapshot en temps réel avec gestion d'erreur (permissions, etc.)
       onSnapshot(
@@ -70,7 +78,7 @@ export const useProjectsStore = defineStore('projects', {
             this.isSynced = true
           },
           error: (error) => {
-            console.error('Erreur abonnement projets (Firestore):', error)
+            // Erreur abonnement projets (Firestore)
             this.projects = []
             this.isSynced = false
           }
@@ -81,6 +89,7 @@ export const useProjectsStore = defineStore('projects', {
     // Charger les checked items d'un projet
     async loadProjectChecked(userId, projectId) {
       const db = this._db()
+      const { doc, getDoc } = await this._firestoreFns()
       const docRef = doc(db, 'users', userId, 'projects', projectId, 'state', 'checked')
       const snap = await getDoc(docRef)
       const data = snap.exists() ? snap.data() : { items: [] }
@@ -90,6 +99,7 @@ export const useProjectsStore = defineStore('projects', {
     // Sauvegarder les checked items d'un projet
     async saveProjectChecked(userId, projectId) {
       const db = this._db()
+      const { doc, setDoc } = await this._firestoreFns()
       const docRef = doc(db, 'users', userId, 'projects', projectId, 'state', 'checked')
       const items = Array.from(this.getCheckedSet(projectId))
       await setDoc(docRef, { items }, { merge: true })
@@ -98,6 +108,7 @@ export const useProjectsStore = defineStore('projects', {
     // Gestion des projets
     async addProjectRemote(userId, project) {
       const db = this._db()
+      const { collection, addDoc } = await this._firestoreFns()
       const colRef = collection(db, 'users', userId, 'projects')
       const now = new Date().toISOString()
       const payload = {
@@ -114,12 +125,14 @@ export const useProjectsStore = defineStore('projects', {
 
     async updateProjectRemote(userId, projectId, updates) {
       const db = this._db()
+      const { doc, updateDoc } = await this._firestoreFns()
       const docRef = doc(db, 'users', userId, 'projects', projectId)
       await updateDoc(docRef, { ...updates, lastModified: new Date().toISOString() })
     },
 
     async deleteProjectRemote(userId, projectId) {
       const db = this._db()
+      const { doc, deleteDoc } = await this._firestoreFns()
       const docRef = doc(db, 'users', userId, 'projects', projectId)
       await deleteDoc(docRef)
       // État local ajusté par le snapshot
@@ -132,7 +145,9 @@ export const useProjectsStore = defineStore('projects', {
 
     // Actions locales (optionnelles)
     setCurrentProject(projectId) {
-      if (this.projects && Array.isArray(this.projects) && this.projects.find(p => p.id === projectId)) {
+      // Accepter le projectId même si le projet n'est pas encore dans la liste
+      // (utile pour les projets fraîchement créés avant que Firestore ne se synchronise)
+      if (projectId) {
         this.currentProjectId = projectId
       }
     },

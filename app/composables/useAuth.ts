@@ -1,67 +1,170 @@
-// Option 2
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, setPersistence, browserLocalPersistence, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth'
-import type { User } from 'firebase/auth'
-import { getApps, initializeApp } from 'firebase/app'
 import { ref } from 'vue'
-
-const currentUser = ref<User | null>(null)
-const isReady = ref(false)
-let listenerInitialized = false
+import {
+  onAuthStateChanged,
+  signInWithRedirect,
+  signInWithPopup,
+  getRedirectResult,
+  GoogleAuthProvider,
+  signOut as firebaseSignOut,
+  type User,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  setPersistence,
+  browserLocalPersistence
+} from 'firebase/auth'
 
 export function useAuth() {
-  // Initialiser Firebase app si besoin
-  if (typeof window !== 'undefined' && !getApps().length) {
-    const config = useRuntimeConfig()
-    const firebaseConfig = {
-      apiKey: config.public.firebase.apiKey,
-      authDomain: config.public.firebase.authDomain,
-      projectId: config.public.firebase.projectId,
-      storageBucket: config.public.firebase.storageBucket,
-      messagingSenderId: config.public.firebase.messagingSenderId,
-      appId: config.public.firebase.appId
+  // Garde SSR: renvoie un mock neutre côté serveur avec l'API complète
+  if (import.meta.server) {
+    const user = ref<User | null>(null)
+    const ready = ref(false)
+    return {
+      user,
+      currentUser: user,
+      ready,
+      isReady: ready,
+      signIn: async () => { throw new Error('Auth indisponible côté serveur') },
+      signOut: async () => {},
+      logout: async () => {},
+      login: async () => { throw new Error('Auth indisponible côté serveur') },
+      register: async () => { throw new Error('Auth indisponible côté serveur') },
+      loginWithGoogle: async () => { throw new Error('Auth indisponible côté serveur') },
+      forgotPassword: async () => { throw new Error('Auth indisponible côté serveur') }
     }
-    if (firebaseConfig.apiKey && firebaseConfig.authDomain && firebaseConfig.projectId && firebaseConfig.appId) {
-      initializeApp(firebaseConfig)
+  }
+
+  const { $auth } = useNuxtApp() as any
+
+  // Plugin non chargé → fail-safe sans casser l'app
+  if (!$auth) {
+    const user = ref<User | null>(null)
+    const ready = ref(false)
+    // Plugin Firebase non initialisé
+    return {
+      user,
+      currentUser: user,
+      ready,
+      isReady: ready,
+      signIn: async () => { throw new Error('Auth indisponible (plugin Firebase non initialisé)') },
+      signOut: async () => { /* SignOut appelé sans Firebase */ },
+      logout: async () => { /* Logout appelé sans Firebase */ },
+      login: async () => { throw new Error('Auth indisponible (plugin Firebase non initialisé)') },
+      register: async () => { throw new Error('Auth indisponible (plugin Firebase non initialisé)') },
+      loginWithGoogle: async () => { throw new Error('Auth indisponible (plugin Firebase non initialisé)') },
+      forgotPassword: async () => { throw new Error('Auth indisponible (plugin Firebase non initialisé)') }
     }
   }
 
-  const auth = getAuth()
+  const user = ref<User | null>(null)
+  const ready = ref(false)
 
-  // Hydrater immédiatement l’état courant
-  if (currentUser.value === null) {
-    currentUser.value = auth.currentUser
-    if (auth.currentUser) isReady.value = true
-  }
+  // Initialiser l'état d'authentification immédiatement
+  onAuthStateChanged($auth, (u: User | null) => {
+    user.value = u ?? null
+    ready.value = true
+  })
 
-  // Attacher l’écouteur une seule fois côté client, sans onMounted
-  if (typeof window !== 'undefined' && !listenerInitialized) {
-    onAuthStateChanged(auth, (user) => {
-      currentUser.value = user
-      isReady.value = true
-    })
-    listenerInitialized = true
-  }
-
-  const login = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password)
-  const register = async (email: string, password: string) => {
-    await setPersistence(auth, browserLocalPersistence)
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider()
-    await setPersistence(auth, browserLocalPersistence)
-    try {
-      return await signInWithPopup(auth, provider)
-    } catch (e: any) {
-      // Fallback redirect si popup bloqué ou environnement non supporté
-      if (e?.code === 'auth/popup-blocked' || e?.code === 'auth/operation-not-supported-in-this-environment') {
-        return await signInWithRedirect(auth, provider)
+  // Gérer les résultats de redirection Google
+  if (import.meta.client) {
+    getRedirectResult($auth).then((result) => {
+      if (result) {
+        // Connexion Google réussie via redirect
       }
-      throw e
+    }).catch(() => {
+      // Erreur lors du traitement du redirect Google
+    })
+  }
+
+  const signIn = async () => {
+    // Utiliser redirect pour éviter les problèmes COOP
+    const provider = new GoogleAuthProvider()
+    await signInWithRedirect($auth, provider)
+  }
+
+  const login = async (email: string, password: string) => {
+    try {
+      await setPersistence($auth, browserLocalPersistence)
+      return await signInWithEmailAndPassword($auth, email, password)
+    } catch (error) {
+      // Erreur lors de la connexion
+      throw error
     }
   }
-  const forgotPassword = (email: string) => sendPasswordResetEmail(auth, email)
-  const logout = () => signOut(auth)
 
-  return { currentUser, isReady, login, register, loginWithGoogle, forgotPassword, logout }
+  const register = async (email: string, password: string) => {
+    try {
+      await setPersistence($auth, browserLocalPersistence)
+      return await createUserWithEmailAndPassword($auth, email, password)
+    } catch (error) {
+      // Erreur lors de l'inscription
+      throw error
+    }
+  }
+
+  const loginWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider()
+      await setPersistence($auth, browserLocalPersistence)
+
+      // Essayer popup d'abord, fallback sur redirect si nécessaire
+      try {
+        return await signInWithPopup($auth, provider)
+      } catch (popupError: any) {
+        // Si popup échoue (bloqué par navigateur), utiliser redirect
+        if (popupError.code === 'auth/popup-blocked' || popupError.code === 'auth/popup-closed-by-user') {
+          // Popup bloqué, utilisation de redirect
+          return await signInWithRedirect($auth, provider)
+        }
+        throw popupError
+      }
+    } catch (error) {
+      // Erreur lors de la connexion Google
+      throw error
+    }
+  }
+
+  const forgotPassword = async (email: string) => {
+    try {
+      return await sendPasswordResetEmail($auth, email)
+    } catch (error) {
+      // Erreur lors de l'envoi du mail de réinitialisation
+      throw error
+    }
+  }
+
+  const signOut = async () => {
+    try {
+      await firebaseSignOut($auth)
+      // Nettoyer le localStorage après la déconnexion
+      if (import.meta.client) {
+        // Chercher et supprimer toutes les clés Firebase
+        const keysToRemove = []
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i)
+          if (key && (key.startsWith('firebase:authUser:') || key.startsWith('firebase:'))) {
+            keysToRemove.push(key)
+          }
+        }
+        keysToRemove.forEach(key => localStorage.removeItem(key))
+      }
+    } catch (error) {
+      // Erreur lors de la déconnexion
+      throw error
+    }
+  }
+
+  return {
+    user,
+    currentUser: user,
+    ready,
+    isReady: ready,
+    signIn,
+    signOut,
+    logout: signOut, // Alias pour compatibilité
+    login,
+    register,
+    loginWithGoogle,
+    forgotPassword
+  }
 }

@@ -56,7 +56,7 @@ const onSubmit = async () => {
   error.value = ''
   try {
     await login(email.value, password.value)
-    navigateTo('/dashboard')
+    await navigateTo('/dashboard')
   } catch (e: any) {
     error.value = e?.message || 'Erreur de connexion'
   }
@@ -66,7 +66,7 @@ const onGoogle = async () => {
   error.value = ''
   try {
     await loginWithGoogle()
-    navigateTo('/dashboard')
+    await navigateTo('/dashboard')
   } catch (e: any) {
     error.value = e?.message || 'Erreur de connexion Google'
   }

@@ -1,0 +1,16 @@
+{
+  "documents": [
+    {
+      "name": "projects/test-project-1",
+      "fields": {
+        "name": {"stringValue": "Site Web E-commerce"},
+        "description": {"stringValue": "Site de vente en ligne"},
+        "checklistType": {"stringValue": "web-prelaunch"},
+        "createdAt": {"timestampValue": "2024-01-01T00:00:00Z"},
+        "lastModified": {"timestampValue": "2024-01-01T00:00:00Z"}
+      },
+      "createTime": "2024-01-01T00:00:00Z",
+      "updateTime": "2024-01-01T00:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "app-store": {
+    "name": "App Store",
+    "description": "Checklist pour la soumission sur l'App Store",
+    "items": [
+      {
+        "id": "app-store-listing",
+        "labelKey": "app.store.listing.title",
+        "descriptionKey": "app.store.listing.description",
+        "details": {
+          "explicationKey": "app.store.listing.explication",
+          "commentFaireKey": "app.store.listing.commentFaire",
+          "bonnesPratiquesKey": "app.store.listing.bonnesPratiques"
+        }
+      },
+      {
+        "id": "app-store-screenshots",
+        "labelKey": "app.store.screenshots.title",
+        "descriptionKey": "app.store.screenshots.description",
+        "details": {
+          "explicationKey": "app.store.screenshots.explication",
+          "commentFaireKey": "app.store.screenshots.commentFaire",
+          "bonnesPratiquesKey": "app.store.screenshots.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "play-store": {
+    "name": "Play Store",
+    "description": "Checklist pour la soumission sur le Play Store",
+    "items": [
+      {
+        "id": "play-store-listing",
+        "labelKey": "play.store.listing.title",
+        "descriptionKey": "play.store.listing.description",
+        "details": {
+          "explicationKey": "play.store.listing.explication",
+          "commentFaireKey": "play.store.listing.commentFaire",
+          "bonnesPratiquesKey": "play.store.listing.bonnesPratiques"
+        }
+      },
+      {
+        "id": "play-store-permissions",
+        "labelKey": "play.store.permissions.title",
+        "descriptionKey": "play.store.permissions.description",
+        "details": {
+          "explicationKey": "play.store.permissions.explication",
+          "commentFaireKey": "play.store.permissions.commentFaire",
+          "bonnesPratiquesKey": "play.store.permissions.bonnesPratiques"
+        }
+      }
+    ]
+  }
+}

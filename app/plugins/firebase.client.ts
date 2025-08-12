@@ -3,35 +3,38 @@ import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 export default defineNuxtPlugin(async () => {
-  const config = useRuntimeConfig()
-  const firebaseConfig = {
-    apiKey: config.public.firebase.apiKey,
-    authDomain: config.public.firebase.authDomain,
-    projectId: config.public.firebase.projectId,
-    storageBucket: config.public.firebase.storageBucket,
-    messagingSenderId: config.public.firebase.messagingSenderId,
-    appId: config.public.firebase.appId,
-    measurementId: config.public.firebase.measurementId
-  }
+  const cfg = useRuntimeConfig().public.firebase
 
-  if (!firebaseConfig.apiKey || !firebaseConfig.authDomain || !firebaseConfig.projectId || !firebaseConfig.appId) {
-    if (process.dev) {
-      // eslint-disable-next-line no-console
-      console.error('[Firebase] Config incomplète. Vérifiez vos variables .env (NUXT_PUBLIC_FIREBASE_*)')
-    }
+  // Pas de config → on ne fait rien (évite un 500 sur environnements sans vars)
+  if (!cfg?.apiKey) {
+    // Configuration Firebase manquante
     return
   }
 
-  let app
-  if (!getApps().length) {
-    app = initializeApp(firebaseConfig)
-  }
-  const auth = getAuth()
+  // Configuration Firebase chargée
+
+  const app = getApps().length
+    ? getApps()[0]
+    : initializeApp({
+        apiKey: cfg.apiKey,
+        authDomain: cfg.authDomain,
+        projectId: cfg.projectId,
+        storageBucket: cfg.storageBucket,
+        messagingSenderId: cfg.messagingSenderId,
+        appId: cfg.appId,
+        measurementId: cfg.measurementId
+      })
+
+  const auth = getAuth(app)
   await setPersistence(auth, browserLocalPersistence)
-  const db = getFirestore()
+  const db = getFirestore(app)
+
+  // Firebase initialisé avec succès
 
   return {
     provide: {
+      firebaseApp: app,
+      auth,
       db
     }
   }

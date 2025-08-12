@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="unified-security-scan">
     <!-- En-tête explicatif -->
     <div class="scan-header">
@@ -86,8 +86,6 @@
       </div>
     </div>
 
-
-
     <!-- Résultats rapides -->
     <div v-if="quickResults" class="quick-results">
       <h4 class="results-title">Résultats du scan rapide</h4>
@@ -115,7 +113,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-
 
 interface Props {
   url: string
@@ -200,7 +197,7 @@ const startFullScan = async () => {
       type: 'error'
     }
     
-    console.error('Erreur lors du scan complet:', error)
+    // Erreur lors du scan complet
   } finally {
     loading.value = false
     
@@ -260,7 +257,7 @@ const startQuickScan = async () => {
       type: 'error'
     }
     
-    console.error('Erreur lors du scan rapide:', error)
+    // Erreur lors du scan rapide
   } finally {
     loading.value = false
     

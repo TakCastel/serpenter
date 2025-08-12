@@ -1,0 +1,38 @@
+{
+  "security": {
+    "name": "Sécurité",
+    "description": "Scanner de sécurité complet",
+    "items": [
+      {
+        "id": "security-headers",
+        "labelKey": "security.headers.title",
+        "descriptionKey": "security.headers.description",
+        "details": {
+          "explicationKey": "security.headers.explication",
+          "commentFaireKey": "security.headers.commentFaire",
+          "bonnesPratiquesKey": "security.headers.bonnesPratiques"
+        }
+      },
+      {
+        "id": "security-ssl",
+        "labelKey": "security.ssl.title",
+        "descriptionKey": "security.ssl.description",
+        "details": {
+          "explicationKey": "security.ssl.explication",
+          "commentFaireKey": "security.ssl.commentFaire",
+          "bonnesPratiquesKey": "security.ssl.bonnesPratiques"
+        }
+      },
+      {
+        "id": "security-vulnerabilities",
+        "labelKey": "security.vulnerabilities.title",
+        "descriptionKey": "security.vulnerabilities.description",
+        "details": {
+          "explicationKey": "security.vulnerabilities.explication",
+          "commentFaireKey": "security.vulnerabilities.commentFaire",
+          "bonnesPratiquesKey": "security.vulnerabilities.bonnesPratiques"
+        }
+      }
+    ]
+  }
+}

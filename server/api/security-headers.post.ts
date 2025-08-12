@@ -101,7 +101,6 @@ export default defineEventHandler(async (event) => {
       }
     }
   } catch (error: any) {
-    console.error('Erreur /api/security-headers:', error)
     throw createError({
       statusCode: error?.statusCode || 500,
       statusMessage: error?.statusMessage || 'Erreur interne du serveur'

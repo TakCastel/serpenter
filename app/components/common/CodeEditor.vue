@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="w-full">
     <div v-if="label" class="mb-2 flex items-center justify-between">
       <label class="text-sm font-medium text-gray-700">{{ label }}</label>
@@ -68,5 +68,4 @@ const handleClean = () => {
 .textarea { @apply w-full border rounded-md px-3 py-2; }
 .btn-xs { @apply px-2 py-1 rounded border text-gray-700 bg-white hover:bg-gray-50; }
 </style>
-
 

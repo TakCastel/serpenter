@@ -118,7 +118,7 @@
         <!-- Déconnexion -->
         <div class="p-4">
           <button
-            @click="$emit('logout')"
+            @click="handleLogout"
             class="w-full px-4 py-3 text-left text-sm transition-all duration-200 hover:bg-opacity-90 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 text-red-600 flex items-center justify-center space-x-3 font-medium"
           >
             <Icon name="heroicons:arrow-right-on-rectangle" class="w-5 h-5 text-red-500" />
@@ -132,6 +132,8 @@
 
 <script setup>
 import LangThemeSwitcher from '~/components/common/LangThemeSwitcher.vue'
+
+const { signOut } = useAuth()
 
 defineProps({
   isClient: {
@@ -156,9 +158,23 @@ defineProps({
   }
 })
 
-defineEmits([
+const emit = defineEmits([
   'toggle-mobile-menu',
   'toggle-user-menu',
   'logout'
 ])
+
+const handleLogout = async () => {
+  try {
+    await signOut()
+    // Émettre l'événement pour fermer le menu utilisateur
+    emit('logout')
+    // Rediriger vers la page de connexion
+    await navigateTo('/login')
+  } catch (e) {
+    // Erreur déconnexion
+    // En cas d'erreur, rediriger quand même vers login
+    await navigateTo('/login')
+  }
+}
 </script>

@@ -1,28 +1,66 @@
-import defaultChecklistData from '~/data/checklist-items-web.json'
-import appChecklist from '~/data/checklist-items-app.json'
-import securityChecklist from '~/data/checklist-items-security.json'
+// Chargement paresseux des datasets depuis /public pour éviter de gonfler le bundle serveur
 
 export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
   const { t } = useI18n()
 
-  // Pour l'instant, tous les types pointent vers le dataset par défaut.
-  // Plus tard, on pourra importer des datasets spécifiques ici.
-  const datasetMap = {
-    'web-prelaunch': defaultChecklistData,
-    'appstore-preflight': appChecklist,
-    'security-checker': securityChecklist
+  const datasetCache = reactive({})
+  const resolveUrl = (type) => {
+    switch (type) {
+      case 'appstore-preflight':
+        return '/data/checklist-items-app.json'
+      case 'security-checker':
+        return '/data/checklist-items-security.json'
+      case 'web-prelaunch':
+      default:
+        return '/data/checklist-items-web.json'
+    }
+  }
+  const loadDataset = async (type) => {
+    if (datasetCache[type]) return datasetCache[type]
+    if (process.server) return {}
+    const url = resolveUrl(type)
+    const data = await $fetch(url)
+    datasetCache[type] = data
+    return data
   }
 
   const selectedType = ref(initialChecklistType)
-  const dataRef = computed(() => datasetMap[selectedType.value] || defaultChecklistData)
+  const dataRef = ref({})
+  const isLoading = ref(true)
+  const loadingPromise = ref(null)
+
+  if (process.client) {
+    // charger initialement
+    loadingPromise.value = loadDataset(selectedType.value).then((data) => {
+      dataRef.value = data || {}
+      isLoading.value = false
+    })
+    watch(selectedType, async (type) => {
+      isLoading.value = true
+      const data = await loadDataset(type)
+      dataRef.value = data || {}
+      isLoading.value = false
+    })
+  } else {
+    isLoading.value = false
+  }
+
   const setChecklistType = (type) => { selectedType.value = type }
 
+  // Fonction pour attendre que les données soient chargées
+  const waitForData = async () => {
+    if (process.client && loadingPromise.value) {
+      await loadingPromise.value
+    }
+  }
+
   const getCategoryItems = (category) => {
-    if (!dataRef.value[category] || !dataRef.value[category].items) {
+    const data = dataRef.value || {}
+    if (!data[category] || !data[category].items) {
       return []
     }
 
-    return dataRef.value[category].items.map(item => {
+    return data[category].items.map(item => {
       // Récupérer les traductions
       const label = t(item.labelKey)
       const description = t(item.descriptionKey)
@@ -45,7 +83,7 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
           }
         }
       } catch (error) {
-        console.warn(`Erreur lors de la récupération de commentFaire pour ${item.id}:`, error)
+        // Erreur lors de la récupération de commentFaire
       }
       
       // Récupérer bonnesPratiques
@@ -61,7 +99,7 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
           }
         }
       } catch (error) {
-        console.warn(`Erreur lors de la récupération de bonnesPratiques pour ${item.id}:`, error)
+        // Erreur lors de la récupération de bonnesPratiques
       }
       
       // Gérer les exemples (ordre de priorité: exempleKey -> exemple -> html)
@@ -87,6 +125,8 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
         exemple = { html: item.details.html }
       }
 
+
+
       return {
         id: item.id,
         label,
@@ -101,20 +141,16 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
     })
   }
 
-  const getAllCategories = () => {
-    return Object.keys(dataRef.value)
-  }
+  const getAllCategories = () => Object.keys(dataRef.value || {})
 
-  const getCategoryData = (category) => {
-    return {
-      items: getCategoryItems(category)
-    }
-  }
+  const getCategoryData = (category) => ({ items: getCategoryItems(category) })
 
   return {
     getCategoryItems,
     getAllCategories,
     getCategoryData,
-    setChecklistType
+    setChecklistType,
+    isLoading,
+    waitForData
   }
 }

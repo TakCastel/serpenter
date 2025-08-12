@@ -77,6 +77,7 @@ export default defineNuxtConfig({
     }
   },
 
+  // Configuration de sécurité
   nitro: {
     preset: 'netlify',
     // Réduction du travail de prerender pour limiter l'utilisation mémoire

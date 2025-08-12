@@ -1,0 +1,9 @@
+{
+  "kind": "identitytoolkit#VerifyPasswordResponse",
+  "localId": "test-user-id",
+  "email": "test@serpenter.com",
+  "displayName": "Test User",
+  "idToken": "mock-id-token",
+  "refreshToken": "mock-refresh-token",
+  "expiresIn": "3600"
+}

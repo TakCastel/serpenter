@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 
 const props = defineProps({
   exemple: {
@@ -92,21 +92,25 @@ const props = defineProps({
   }
 })
 
+
+
+
+
 const hasCodeExamples = computed(() => {
   if (!props.exemple) return false
-  
+
   if (typeof props.exemple === 'string') {
     return true
   }
-  
-  return props.exemple.code || 
+
+  return props.exemple.code ||
          props.exemple.exemple ||
-         props.exemple.html || 
-         props.exemple.css || 
-         props.exemple.javascript || 
-         props.exemple.php || 
-         props.exemple.nodejs || 
-         props.exemple.apache || 
+         props.exemple.html ||
+         props.exemple.css ||
+         props.exemple.javascript ||
+         props.exemple.php ||
+         props.exemple.nodejs ||
+         props.exemple.apache ||
          props.exemple.nginx
 })
 </script>

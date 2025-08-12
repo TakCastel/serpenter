@@ -34,7 +34,7 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 
-const { isDark, toggleTheme, onMounted: themeOnMounted, onUnmounted: themeOnUnmounted } = useTheme()
+const { isDark, toggleTheme } = useTheme()
 
 defineProps({
   showMobileMenu: {
@@ -63,10 +63,10 @@ defineEmits([
 ])
 
 onMounted(() => {
-  themeOnMounted()
+  // Plus besoin d'appeler themeOnMounted() car useTheme gère déjà onMounted
 })
 
 onUnmounted(() => {
-  themeOnUnmounted()
+  // Plus besoin d'appeler themeOnUnmounted() car useTheme gère déjà onUnmounted
 })
 </script>

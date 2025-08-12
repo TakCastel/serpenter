@@ -1,0 +1,22 @@
+{
+  "validUser": {
+    "email": "test@serpenter.com",
+    "password": "testpassword123",
+    "uid": "test-user-id",
+    "displayName": "Test User"
+  },
+  "validUser2": {
+    "email": "test2@serpenter.com", 
+    "password": "testpassword456",
+    "uid": "test-user-id-2",
+    "displayName": "Test User 2"
+  },
+  "invalidUser": {
+    "email": "invalid@test.com",
+    "password": "wrongpassword"
+  },
+  "incompleteUser": {
+    "email": "",
+    "password": ""
+  }
+}

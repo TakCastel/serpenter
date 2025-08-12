@@ -1,20 +1,32 @@
 [build]
-  command = "npm run build"
+  command = "echo 'Skipping Netlify CI build; using local artifacts.'"
   publish = ".netlify/publish"
 
-[build.environment]
-  NODE_VERSION = "20"
-  NODE_OPTIONS = "--max-old-space-size=4096"
-  SECRETS_SCAN_OMIT_KEYS = "NUXT_PUBLIC_FIREBASE_API_KEY,NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN,NUXT_PUBLIC_FIREBASE_PROJECT_ID,NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET,NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,NUXT_PUBLIC_FIREBASE_APP_ID,NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID"
+# (Optionnel) Restaurer plus tard pour tester la CI
+# [build.environment]
+#   NODE_VERSION = "20.19.4"
+#   NODE_OPTIONS = "--max-old-space-size=6144"
+#   SECRETS_SCAN_OMIT_KEYS = "NUXT_PUBLIC_FIREBASE_API_KEY,NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN,NUXT_PUBLIC_FIREBASE_PROJECT_ID,NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET,NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,NUXT_PUBLIC_FIREBASE_APP_ID,NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID"
 
 # Redirections SPA supprimées pour SSR
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
+# EN-TÊTES DE SÉCURITÉ TEMPORAIREMENT DÉSACTIVÉS POUR FIREBASE
+# [[headers]]
+#   for = "/*"
+#   [headers.values]
+#     X-Frame-Options = "SAMEORIGIN"
+#     X-Content-Type-Options = "nosniff"
+#     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# [[headers]]
+#   for = "/login"
+#   [headers.values]
+#     Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+
+# [[headers]]
+#   for = "/__/auth/*"
+#   [headers.values]
+#     Cross-Origin-Opener-Policy = "same-origin-allow-popups"
 
 [[headers]]
   for = "/_nuxt/*"

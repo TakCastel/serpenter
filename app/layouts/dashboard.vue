@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useProjectsStore } from '~/stores/projects'
 
 import AppHeader from '~/components/dashboard/AppHeader.vue'
@@ -37,7 +37,15 @@ import Sidebar from '~/components/dashboard/Sidebar.vue'
 import BackToTop from '~/components/common/BackToTop.vue'
 
 const projectsStore = useProjectsStore()
+const { currentUser, ready } = useAuth()
 const currentProjectId = computed(() => projectsStore.currentProjectId)
+
+// S'abonner automatiquement aux projets quand l'utilisateur est authentifié
+watch([currentUser, ready], ([user, isReady]) => {
+  if (process.client && isReady && user && !projectsStore.isSynced) {
+    projectsStore.subscribeUserProjects(user.uid)
+  }
+}, { immediate: true })
 
 const handleResetProgress = () => {
   if (process.client) {
