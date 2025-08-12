@@ -99,7 +99,11 @@ export default defineNuxtConfig({
 
   // Désactiver les sourcemaps côté build Vite (client) pour économiser la RAM
   vite: {
-    build: { sourcemap: false }
+    build: { sourcemap: false },
+    // Résoudre le problème crypto.hash avec Node.js 18
+    define: {
+      global: 'globalThis'
+    }
   },
 
   app: {

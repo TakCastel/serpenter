@@ -21,7 +21,9 @@ console.log('🚀 Démarrage du build Netlify en mode SPA...');
     NUXT_SSR: 'false',
     // Forcer le mode SPA
     NITRO_PRESET: 'netlify-static',
-    NITRO_PRERENDER: 'false'
+    NITRO_PRERENDER: 'false',
+    // Résoudre les problèmes de compatibilité Node.js 18
+    NODE_OPTIONS: '--max-old-space-size=4096 --openssl-legacy-provider'
   };
 
 // Appliquer les variables d'environnement
