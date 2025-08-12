@@ -49,23 +49,35 @@ git commit -m "feat: description de la modification"
 git push origin feature/nom-de-votre-feature
 ```
 
-### 3. Merge vers develop
+### 3. Merge vers develop (avec gestion automatique des versions)
 
 ```bash
+# ⚡ NOUVEAU : Utiliser le script automatisé
+.\scripts\merge-with-version.ps1 -MergeType "feature" -BranchName "feature/nom-de-votre-feature"
+
+# Ou manuellement :
 # Basculer sur develop
 git checkout develop
 git pull origin develop
 
+# Mettre à jour la version (minor: 1.0.0 -> 1.1.0)
+npm run version:auto:feature
+
 # Merger la feature
 git merge feature/nom-de-votre-feature
 
-# Pousser develop
+# Pousser develop et le tag
 git push origin develop
+git push origin v$(npm run version:show)
 ```
 
 ### 4. Merge vers main et déploiement
 
 ```bash
+# ⚡ NOUVEAU : Utiliser le script automatisé
+.\scripts\merge-with-version.ps1 -MergeType "develop" -BranchName "develop" -PushTag
+
+# Ou manuellement :
 # Basculer sur main
 git checkout main
 git pull origin main
@@ -141,10 +153,16 @@ git checkout -b hotfix/nom-du-hotfix
 # Commiter
 git commit -m "fix: description de la correction"
 
-# Merger vers main
+# ⚡ NOUVEAU : Utiliser le script automatisé
+.\scripts\merge-with-version.ps1 -MergeType "hotfix" -BranchName "hotfix/nom-du-hotfix" -PushTag
+
+# Ou manuellement :
+# Merger vers main avec mise à jour de version (patch: 1.0.0 -> 1.0.1)
+npm run version:auto:hotfix
 git checkout main
 git merge hotfix/nom-du-hotfix
 git push origin main
+git push origin v$(npm run version:show)
 
 # Merger vers develop
 git checkout develop
@@ -170,6 +188,42 @@ type: feat, fix, docs, style, refactor, test, chore
 scope: composant ou module concerné (optionnel)
 ```
 
+## 🏷️ Gestion automatique des versions
+
+### Principe de versioning
+
+Le projet utilise le **Semantic Versioning** (SemVer) avec gestion automatique :
+
+- **`MAJOR`** (2.0.0) : Breaking changes, changements incompatibles
+- **`MINOR`** (1.1.0) : Nouvelles fonctionnalités, compatibles
+- **`PATCH`** (1.0.1) : Corrections de bugs, compatibles
+
+### Règles automatiques
+
+- **Feature → develop** : `MINOR` (1.0.0 → 1.1.0)
+- **Hotfix → main** : `PATCH` (1.0.0 → 1.0.1)  
+- **Develop → main** : `MINOR` (1.1.0 → 1.2.0)
+- **Breaking change** : `MAJOR` (1.0.0 → 2.0.0)
+
+### Scripts de version
+
+```bash
+# ⚡ Automatique (recommandé)
+.\scripts\merge-with-version.ps1 -MergeType "feature" -BranchName "feature/nom-feature"
+
+# Manuel
+npm run version:auto:feature    # 1.0.0 -> 1.1.0
+npm run version:auto:hotfix     # 1.0.0 -> 1.0.1
+npm run version:auto:major      # 1.0.0 -> 2.0.0
+```
+
+### Tags Git automatiques
+
+Chaque version est automatiquement taguée :
+- `v1.0.0`, `v1.0.1`, `v1.1.0`, etc.
+- Tags poussés automatiquement avec `-PushTag`
+- Historique complet des releases dans Git
+
 ### Exemples
 
 ```bash
@@ -191,6 +245,21 @@ npm run generate
 npm run build:netlify
 ```
 
+### Gestion automatique des versions
+
+```bash
+# ⚡ NOUVEAU : Script automatisé pour les merges
+.\scripts\merge-with-version.ps1 -MergeType "feature" -BranchName "feature/nom-feature"
+.\scripts\merge-with-version.ps1 -MergeType "hotfix" -BranchName "hotfix/nom-hotfix"
+.\scripts\merge-with-version.ps1 -MergeType "develop" -BranchName "develop" -PushTag
+
+# Scripts de version manuels
+npm run version:auto:feature    # 1.0.0 -> 1.1.0
+npm run version:auto:hotfix     # 1.0.0 -> 1.0.1
+npm run version:auto:major      # 1.0.0 -> 2.0.0
+npm run version:show            # Afficher la version actuelle
+```
+
 ### Vérification de l'état
 
 ```bash
@@ -202,6 +271,9 @@ git status
 
 # Voir l'historique des commits
 git log --oneline --graph
+
+# Voir les tags
+git tag -l
 ```
 
 ## ⚠️ Points d'attention
@@ -232,10 +304,21 @@ git log --oneline --graph
 - [ ] Créer la branche feature depuis `develop`
 - [ ] Développer et tester localement
 - [ ] Commiter régulièrement avec des messages clairs
-- [ ] Merger vers `develop` et pousser
-- [ ] Merger vers `main` et pousser (déclenche le déploiement)
+- [ ] **Merger vers `develop` avec gestion automatique des versions** ⚡
+- [ ] **Merger vers `main` avec gestion automatique des versions** ⚡
 - [ ] Nettoyer les branches
 - [ ] Vérifier le déploiement sur Netlify
+- [ ] **Vérifier que le tag de version a été créé et poussé** 🏷️
+
+## 🎯 Checklist pour chaque hotfix
+
+- [ ] Créer la branche hotfix depuis `main`
+- [ ] Corriger le bug et tester
+- [ ] Commiter avec le préfixe `fix:`
+- [ ] **Merger vers `main` avec gestion automatique des versions** ⚡
+- [ ] **Merger vers `develop`** 
+- [ ] Nettoyer la branche hotfix
+- [ ] **Vérifier que le tag de version a été créé et poussé** 🏷️
 
 ## 🔗 Ressources utiles
 
