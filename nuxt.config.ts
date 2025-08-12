@@ -103,6 +103,18 @@ export default defineNuxtConfig({
     // Résoudre le problème crypto.hash avec Node.js 18
     define: {
       global: 'globalThis'
+    },
+    // Configuration pour résoudre les problèmes de polyfills
+    resolve: {
+      alias: {
+        crypto: 'crypto-browserify',
+        stream: 'stream-browserify',
+        buffer: 'buffer'
+      }
+    },
+    // Optimisations pour le mode SPA
+    optimizeDeps: {
+      include: ['vue', 'vue-router', 'pinia']
     }
   },
 
