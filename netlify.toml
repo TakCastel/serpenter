@@ -6,7 +6,7 @@
   NODE_VERSION = "20.19.0"
   NPM_VERSION  = "10.2.4"
   SECRETS_SCAN_ENABLED = "false"
-  NODE_ENV = "production"
+  NODE_ENV = "development"
   NITRO_PRESET = "static"
   NUXT_PUBLIC_I18N_FALLBACK_LOCALE = "fr"
   NUXT_PUBLIC_I18N_DEFAULT_LOCALE = "fr"
