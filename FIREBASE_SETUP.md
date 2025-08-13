@@ -64,3 +64,4 @@ Après déploiement des règles, redémarrer l'application et vérifier dans la 
 2. Les projets se chargent correctement
 3. La création de projets fonctionne
 
+

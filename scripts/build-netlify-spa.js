@@ -71,21 +71,7 @@ try {
 /*    /index.html   200
 
 # Assets Nuxt
-/_nuxt/*    /_nuxt/:splat    200
-
-# Headers de sécurité
-/*
-  X-Frame-Options: DENY
-  X-XSS-Protection: 1; mode=block
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-
-# Cache pour les assets
-/_nuxt/*
-  Cache-Control: public, max-age=31536000, immutable
-
-*.{jpg,jpeg,png,gif,ico,svg,webp}
-  Cache-Control: public, max-age=31536000, immutable`;
+/_nuxt/*    /_nuxt/:splat    200`;
 
   writeFileSync(join(publishDir, '_redirects'), redirectsContent);
   console.log('📄 Fichier _redirects créé');
