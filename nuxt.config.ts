@@ -50,7 +50,9 @@ export default defineNuxtConfig({
       useCookie: true,
       cookieKey: 'i18n_redirected',
       redirectOn: 'root'
-    }
+    },
+    // Configuration pour la production
+    vueI18n: './i18n.config.ts'
   },
 
   css: ['~/assets/css/main.css'],
@@ -86,8 +88,6 @@ export default defineNuxtConfig({
   // Configuration pour le mode SPA (pas de prerendering)
   nitro: {
     preset: 'netlify-static',
-    // Désactiver le prerendering en mode SPA
-    prerender: false,
     // Allègement du bundle Nitro
     inlineDynamicImports: false,
     minify: true,

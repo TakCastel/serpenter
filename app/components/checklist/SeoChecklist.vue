@@ -211,9 +211,19 @@ const loadCategories = async () => {
     
     categories.value = categoryIds.map(categoryId => {
       const categoryData = getCategoryData(categoryId)
-      const categoryName = $t(`categories.${categoryId}.name`)
-      const categoryDescription = $t(`categories.${categoryId}.description`)
-
+      
+      // Fonction de fallback pour les traductions manquantes
+      const getTranslation = (key, fallback) => {
+        try {
+          const translation = $t(key)
+          return translation !== key ? translation : fallback
+        } catch (error) {
+          return fallback
+        }
+      }
+      
+      const categoryName = getTranslation(`categories.${categoryId}.name`, categoryId)
+      const categoryDescription = getTranslation(`categories.${categoryId}.description`, 'Description non disponible')
 
 
       return {

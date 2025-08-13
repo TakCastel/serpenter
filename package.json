@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "build:netlify": "NITRO_PRESET=static npx nuxi build --fail-on-error --logLevel=verbose",
+    "build:netlify": "NITRO_PRESET=static NODE_ENV=production npx nuxi build --fail-on-error --logLevel=verbose",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
