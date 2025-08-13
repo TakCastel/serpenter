@@ -49,31 +49,9 @@
         />
       </div>
       <div class="lg:col-span-1">
-        <!-- Desktop: accordéon visible par défaut -->
-        <div v-if="currentProject?.checklistType !== 'security-checker' && currentProject?.checklistType !== 'appstore-preflight'" class="hidden lg:block">
-          <LighthouseAccordion 
-            ref="lighthouseAccordion"
-            :default-expanded="true"
-            :project-type="currentProject?.checklistType"
-          />
-        </div>
-        <!-- Mobile: accordéon replié, placé en dessous -->
-        <div v-if="currentProject?.checklistType !== 'security-checker' && currentProject?.checklistType !== 'appstore-preflight'" class="block lg:hidden">
-          <LighthouseAccordion 
-            ref="lighthouseAccordionMobile"
-            :default-expanded="false"
-            :project-type="currentProject?.checklistType"
-          />
-        </div>
-
-        <!-- Pour les projets mobiles, afficher l'accordéon de pré‑soumission -->
-        <div v-if="currentProject?.checklistType === 'appstore-preflight'">
-          <AppPreflightAccordion ref="appPreflightAccordion" />
-        </div>
-
-        <!-- Pour les projets de sécurité, afficher le scanner de sécurité -->
-        <div v-if="currentProject?.checklistType === 'security-checker'">
-          <SecurityScannerAccordion ref="securityScannerAccordion" @items-autochecked="onSecurityItemsAutoChecked" />
+        <!-- TODO: Ajouter les composants d'accordéon selon le type de projet -->
+        <div class="p-4 text-center text-sm text-gray-500">
+          <p>Composants d'accordéon à implémenter</p>
         </div>
       </div>
     </div>
@@ -111,13 +89,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useProjectsStore } from '~/stores/projects'
 import EmptyState from '~/components/dashboard/EmptyState.vue'
 import SeoChecklist from '~/components/checklist/SeoChecklist.vue'
-import LighthouseAccordion from '~/components/dashboard/LighthouseAccordion.vue'
-import SecurityScannerAccordion from '~/components/dashboard/SecurityScannerAccordion.vue'
-import AppPreflightAccordion from '~/components/dashboard/AppPreflightAccordion.vue'
 import Modal from '~/components/common/Modal.vue'
 
 definePageMeta({
@@ -125,10 +100,6 @@ definePageMeta({
 })
 
 const seoChecklist = ref(null)
-const lighthouseAccordion = ref(null)
-const lighthouseAccordionMobile = ref(null)
-const appPreflightAccordion = ref(null)
-const securityScannerAccordion = ref(null)
 const isClient = ref(false)
 const showResetModal = ref(false)
 const projectsStore = useProjectsStore()
@@ -143,41 +114,6 @@ watch([currentProject, hasProjects], ([p, has]) => {
     navigateTo('/select-checklist')
   }
 }, { immediate: true })
-
-// Réinitialiser les accordéons quand le projet change
-watch(currentProjectId, async (newProjectId, oldProjectId) => {
-  if (process.client && newProjectId && newProjectId !== oldProjectId) {
-    try {
-      // Attendre que le DOM soit mis à jour
-      await nextTick()
-
-      // Réinitialiser selon le type de projet
-      const projectType = currentProject.value?.checklistType
-
-      if (projectType === 'security-checker') {
-        // Réinitialiser le scanner de sécurité
-        if (securityScannerAccordion.value) {
-          await securityScannerAccordion.value.reset()
-        }
-      } else if (projectType === 'appstore-preflight') {
-        // Réinitialiser l'accordéon de pré-soumission
-        if (appPreflightAccordion.value) {
-          await appPreflightAccordion.value.reset()
-        }
-      } else {
-        // Réinitialiser le Lighthouse pour les autres types
-        if (lighthouseAccordion.value) {
-          await lighthouseAccordion.value.reset()
-        }
-
-        if (lighthouseAccordionMobile.value) {
-          await lighthouseAccordionMobile.value.reset()
-        }
-      }
-    } catch (error) {
-      }
-  }
-})
 
 // Écouter les changements de projet via les événements globaux
 onMounted(() => {
@@ -198,22 +134,6 @@ const handleCreateFirstProject = (project) => {
 const handleResetProgress = () => {
   if (seoChecklist.value && seoChecklist.value.resetProgress) {
     seoChecklist.value.resetProgress()
-  }
-}
-
-const onSecurityItemsAutoChecked = async (itemIds) => {
-  try {
-    const projectId = projectsStore.currentProjectId
-    if (!projectId || !currentUser?.value) return
-    const set = projectsStore.getCheckedSet(projectId)
-    itemIds.forEach(id => set.add(id))
-    projectsStore.setCheckedForProject(projectId, set)
-    await projectsStore.saveProjectChecked(currentUser.value.uid, projectId)
-    if (process.client) {
-      window.dispatchEvent(new CustomEvent('checked-items-updated', { detail: { projectId, itemIds } }))
-    }
-  } catch (e) {
-    // noop
   }
 }
 

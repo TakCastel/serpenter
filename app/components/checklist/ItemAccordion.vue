@@ -78,6 +78,10 @@ const handleOpenItemAccordion = (event) => {
   }
 }
 
+const handleResetAllItemAccordions = () => {
+  isExpanded.value = false
+}
+
 // Watcher pour gérer les changements d'état de l'item
 watch(() => props.isItemChecked, (newValue, oldValue) => {
   if (newValue && !oldValue) {
@@ -93,6 +97,7 @@ onMounted(() => {
   if (process.client) {
     window.addEventListener('close-item-accordion', handleCloseItemAccordion)
     window.addEventListener('open-item-accordion', handleOpenItemAccordion)
+    window.addEventListener('reset-all-item-accordions', handleResetAllItemAccordions)
   }
 })
 
@@ -100,6 +105,7 @@ onUnmounted(() => {
   if (process.client) {
     window.removeEventListener('close-item-accordion', handleCloseItemAccordion)
     window.removeEventListener('open-item-accordion', handleOpenItemAccordion)
+    window.removeEventListener('reset-all-item-accordions', handleResetAllItemAccordions)
   }
 })
 </script> 

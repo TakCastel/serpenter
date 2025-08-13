@@ -475,9 +475,22 @@ watch(() => props.checklistType, async (newType) => { setChecklistType(newType);
 watch(() => props.currentProjectId, async (newProjectId, oldProjectId) => {
   if (newProjectId && newProjectId !== oldProjectId) {
     try {
+      // Réinitialiser l'état des accordéons
+      expandedCategories.value.clear()
+      
+      // Fermer tous les accordéons d'items
+      if (process.client) {
+        window.dispatchEvent(new CustomEvent('reset-all-item-accordions'))
+      }
+      
       // Recharger les données pour le nouveau projet
       await loadCheckedItems()
       await calculateScores()
+      
+      // Ouvrir la première catégorie par défaut
+      if (categories.value.length > 0) {
+        expandedCategories.value.add(categories.value[0].id)
+      }
     } catch (error) {
       console.error('Erreur lors du changement de projet (watcher):', error)
     }
