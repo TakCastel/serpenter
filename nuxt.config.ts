@@ -85,7 +85,7 @@ export default defineNuxtConfig({
 
   // Configuration pour le mode SPA (pas de prerendering)
   nitro: {
-    preset: 'static',
+    preset: 'netlify-static',
     // Désactiver le prerendering en mode SPA
     prerender: false,
     // Allègement du bundle Nitro

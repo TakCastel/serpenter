@@ -32,12 +32,12 @@
 [[headers]]
   for = "/_nuxt/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    cache-control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "*.{jpg,jpeg,png,gif,ico,svg,webp}"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    cache-control = "public, max-age=31536000, immutable"
 
 # Configuration des fonctions (si nécessaire)
 [functions]
