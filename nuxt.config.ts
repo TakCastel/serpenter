@@ -2,15 +2,19 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
-
-
+  nitro: {
+    preset: 'netlify-static',
+    inlineDynamicImports: false,
+    minify: true,
+    externals: { inline: [] },
+    sourceMap: false
+  },
   modules: [
     '@nuxt/icon',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@pinia/nuxt'
   ],
-
   runtimeConfig: {
     public: {
       firebase: {
@@ -22,7 +26,6 @@ export default defineNuxtConfig({
         appId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID,
         measurementId: process.env.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID
       },
-      // Informations de version
       app: {
         name: 'serpenter',
         version: '1.0.0',
@@ -32,12 +35,10 @@ export default defineNuxtConfig({
       }
     }
   },
-
   icon: {
     size: '24px',
     class: 'icon'
   },
-
   i18n: {
     defaultLocale: 'fr',
     langDir: 'locales/',
@@ -45,18 +46,20 @@ export default defineNuxtConfig({
       { code: 'fr', name: 'Français', file: 'fr.json' },
       { code: 'en', name: 'English', file: 'en.json' }
     ],
-    strategy: 'prefix_except_default',
+    strategy: 'no_prefix',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root'
+      redirectOn: 'no prefix',
+      alwaysRedirect: false,
+      fallbackLocale: 'fr'
     },
-    // Configuration pour la production
+    compilation: {
+      strictMessage: false
+    },
     vueI18n: './i18n.config.ts'
   },
-
   css: ['~/assets/css/main.css'],
-
   tailwindcss: {
     config: {
       darkMode: 'class',
@@ -84,18 +87,6 @@ export default defineNuxtConfig({
       }
     }
   },
-
-  // Configuration pour le mode SPA (pas de prerendering)
-  nitro: {
-    preset: 'netlify-static',
-    // Allègement du bundle Nitro
-    inlineDynamicImports: false,
-    minify: true,
-    externals: { inline: [] },
-    sourceMap: false
-  },
-
-  // Configuration Vite optimisée pour Node 20
   vite: {
     plugins: [{
       name: 'force-node-crypto',
@@ -110,12 +101,18 @@ export default defineNuxtConfig({
       }
     }
   },
-
   app: {
     head: {
       htmlAttrs: {
         lang: 'fr'
       }
     }
+  },
+  experimental: {
+    payloadExtraction: false
+  },
+  
+  render: {
+    fallback: true
   }
 })
