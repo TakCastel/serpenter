@@ -163,7 +163,7 @@ const props = defineProps({
   }
 })
 const { getCategoryItems, getAllCategories, getCategoryData, setChecklistType, isLoading: isDataLoading, waitForData } = useChecklistData(props.checklistType)
-const { translateItems } = useChecklistI18n()
+const { translateItems, safeT, waitForI18n } = useChecklistI18n()
 const { currentUser } = useAuth()
 
 // Props moved above
@@ -205,8 +205,8 @@ const loadCategories = async () => {
   try {
     isLoading.value = true
 
-    // Attendre que les données soient chargées
-    await waitForData()
+    // ✅ Attendre que les données ET l'i18n soient chargés
+    await Promise.all([waitForData(), waitForI18n()])
 
     // Utiliser directement le checklistType pour déterminer les catégories
     const categoryIds = getAllCategories()
@@ -214,18 +214,9 @@ const loadCategories = async () => {
     categories.value = categoryIds.map(categoryId => {
       const categoryData = getCategoryData(categoryId)
       
-      // Fonction de fallback pour les traductions manquantes
-      const getTranslation = (key, fallback) => {
-        try {
-          const translation = $t(key)
-          return translation !== key ? translation : fallback
-        } catch (error) {
-          return fallback
-        }
-      }
-      
-      const categoryName = getTranslation(`categories.${categoryId}.name`, categoryId)
-      const categoryDescription = getTranslation(`categories.${categoryId}.description`, 'Description non disponible')
+      // ✅ Utiliser le composable i18n centralisé pour éviter les problèmes de timing
+      const categoryName = safeT(`categories.${categoryId}.name`, categoryId)
+      const categoryDescription = safeT(`categories.${categoryId}.description`, 'Description non disponible')
 
 
       return {

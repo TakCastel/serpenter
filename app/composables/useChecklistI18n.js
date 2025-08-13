@@ -2,16 +2,27 @@
 // Centralise la logique de traduction pour éviter les appels dynamiques au build time
 
 export const useChecklistI18n = () => {
-  const { t } = useI18n()
+  const { t, te } = useI18n()
 
-  // Fonction sécurisée pour la traduction avec fallback
+  // Fonction sécurisée pour la traduction avec fallback et vérification d'initialisation
   const safeT = (key, fallback = null) => {
     if (!key) return fallback
     
     try {
+      // ✅ Vérifier que l'i18n est initialisé avant de traduire
+      if (!te || typeof te !== 'function') {
+        return fallback
+      }
+      
+      // Vérifier si la clé existe
+      if (!te(key)) {
+        return fallback
+      }
+      
       const value = t(key)
       return value !== key ? value : fallback
     } catch (error) {
+      console.warn(`Erreur de traduction pour la clé "${key}":`, error)
       return fallback
     }
   }
@@ -93,12 +104,45 @@ export const useChecklistI18n = () => {
     return items.map(item => translateItem(item))
   }
 
+  // ✅ Fonction pour attendre que l'i18n soit initialisé
+  const waitForI18n = async (maxWaitTime = 5000) => {
+    return new Promise((resolve, reject) => {
+      const startTime = Date.now()
+      
+      const checkI18n = () => {
+        try {
+          // Vérifier que l'i18n est prêt avec une clé de test
+          if (te && typeof te === 'function' && te('welcome') && t('welcome') !== 'welcome') {
+            resolve()
+            return
+          }
+          
+          // Timeout pour éviter les boucles infinies
+          if (Date.now() - startTime > maxWaitTime) {
+            console.warn('Timeout lors de l\'attente de l\'initialisation i18n')
+            resolve() // Résoudre quand même pour ne pas bloquer
+            return
+          }
+          
+          // Réessayer dans 50ms
+          setTimeout(checkI18n, 50)
+        } catch (error) {
+          console.warn('Erreur lors de la vérification i18n:', error)
+          resolve() // Résoudre en cas d'erreur pour ne pas bloquer
+        }
+      }
+      
+      checkI18n()
+    })
+  }
+
   return {
     safeT,
     translateItem,
     translateItems,
     getCommentFaireList,
     getBonnesPratiquesList,
-    getExemple
+    getExemple,
+    waitForI18n
   }
 }
