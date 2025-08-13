@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "build:netlify": "NITRO_PRESET=static nuxt build",
+    "build:netlify": "NITRO_PRESET=static npx nuxi build --fail-on-error --logLevel=verbose",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -20,7 +20,6 @@
     "deploy:all": "firebase deploy"
   },
   "dependencies": {
-    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@nuxt/icon": "^1.0.0",
     "@nuxt/image": "^1.0.0",
     "@nuxtjs/i18n": "^10.0.3",

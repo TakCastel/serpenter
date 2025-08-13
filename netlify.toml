@@ -1,44 +1,30 @@
 [build]
   command = "npm run build:netlify"
   publish = ".output/public"
-  functions = "netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "20.11.1"
-  NPM_VERSION = "10.2.4"
+  NODE_VERSION = "20.19.0"
+  NPM_VERSION  = "10.2.4"
 
-# Configuration pour le mode SPA (SSR désactivé)
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to   = "/index.html"
   status = 200
 
-# Redirections spécifiques pour les assets
-[[redirects]]
-  from = "/_nuxt/*"
-  to = "/_nuxt/:splat"
-  status = 200
-
-# Headers de sécurité et de performance
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-
-# Headers pour les assets statiques et images
 [[headers]]
   for = "/_nuxt/*"
   [headers.values]
-    cache-control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "*.{jpg,jpeg,png,gif,ico,svg,webp}"
+  for = "/*"
   [headers.values]
-    cache-control = "public, max-age=31536000, immutable"
+    Referrer-Policy     = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options     = "DENY"
+    X-XSS-Protection    = "1; mode=block"
 
-# Configuration des fonctions (si nécessaire)
-[functions]
-  node_bundler = "esbuild"
+[[headers]]
+  for = "/*.{jpg,jpeg,png,gif,ico,svg,webp}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
