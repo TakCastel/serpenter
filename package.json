@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "build:netlify": "node scripts/build-netlify-spa.js",
+    "build:netlify": "NITRO_PRESET=static nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
