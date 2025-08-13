@@ -1,7 +1,8 @@
 // Chargement paresseux des datasets depuis /public pour éviter de gonfler le bundle serveur
 
 export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
-  const { t } = useI18n()
+  // Suppression de l'import useI18n car on n'en a plus besoin ici
+  // const { t } = useI18n()
 
   const datasetCache = reactive({})
   const resolveUrl = (type) => {
@@ -61,81 +62,19 @@ export const useChecklistData = (initialChecklistType = 'web-prelaunch') => {
     }
 
     return data[category].items.map(item => {
-      // Récupérer les traductions
-      const label = t(item.labelKey)
-      const description = t(item.descriptionKey)
-      const explication = t(item.details.explicationKey)
-      
-      // Récupérer les listes commentFaire et bonnesPratiques
-      let commentFaire = []
-      let bonnesPratiques = []
-      
-      // Récupérer commentFaire
-      try {
-        const commentFaireKey = item.details.commentFaireKey
-        if (commentFaireKey) {
-          for (let i = 1; i <= 4; i++) {
-            const key = `${commentFaireKey}.item${i}`
-            const value = t(key, [], { fallback: null })
-            if (value && value !== key && !value.startsWith('__MISSING_')) {
-              commentFaire.push(value)
-            }
-          }
-        }
-      } catch (error) {
-        // Erreur lors de la récupération de commentFaire
-      }
-      
-      // Récupérer bonnesPratiques
-      try {
-        const bonnesPratiquesKey = item.details.bonnesPratiquesKey
-        if (bonnesPratiquesKey) {
-          for (let i = 1; i <= 5; i++) {
-            const key = `${bonnesPratiquesKey}.item${i}`
-            const value = t(key, [], { fallback: null })
-            if (value && value !== key && !value.startsWith('__MISSING_')) {
-              bonnesPratiques.push(value)
-            }
-          }
-        }
-      } catch (error) {
-        // Erreur lors de la récupération de bonnesPratiques
-      }
-      
-      // Gérer les exemples (ordre de priorité: exempleKey -> exemple -> html)
-      let exemple = null
-      try {
-        // 1) Clé de traduction directe si fournie
-        const exempleKey = item.details.exempleKey
-        if (exempleKey) {
-          const val = t(exempleKey, [], { fallback: null })
-          if (val && val !== exempleKey && !String(val).startsWith('__MISSING_')) {
-            exemple = val
-          }
-        }
-      } catch (e) {}
-
-      // 2) Valeur directe dans le dataset
-      if (!exemple && item.details.exemple) {
-        exemple = item.details.exemple
-      }
-
-      // 3) Ancien champ HTML dédié
-      if (!exemple && item.details.html) {
-        exemple = { html: item.details.html }
-      }
-
-
-
+      // ✅ SOLUTION : Retourner les clés de traduction au lieu des traductions
+      // Plus d'appels à t() avec des clés dynamiques = plus de 40k clés au build
       return {
         id: item.id,
-        label,
-        description,
+        labelKey: item.labelKey,
+        descriptionKey: item.descriptionKey,
         details: {
-          explication,
-          commentFaire,
-          bonnesPratiques,
-          ...(exemple ? { exemple } : {})
+          explicationKey: item.details.explicationKey,
+          commentFaireKey: item.details.commentFaireKey,
+          bonnesPratiquesKey: item.details.bonnesPratiquesKey,
+          exempleKey: item.details.exempleKey,
+          exemple: item.details.exemple,
+          html: item.details.html
         }
       }
     })

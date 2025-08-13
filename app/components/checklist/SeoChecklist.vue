@@ -147,6 +147,7 @@ import SkeletonItem from '../common/SkeletonItem.vue'
 import { useI18n } from 'vue-i18n'
 import { useProjectsStore } from '~/stores/projects'
 import { useChecklistData } from '~/composables/useChecklistData'
+import { useChecklistI18n } from '~/composables/useChecklistI18n'
 
 const emit = defineEmits(['categories-loaded'])
 const { locale } = useI18n()
@@ -162,6 +163,7 @@ const props = defineProps({
   }
 })
 const { getCategoryItems, getAllCategories, getCategoryData, setChecklistType, isLoading: isDataLoading, waitForData } = useChecklistData(props.checklistType)
+const { translateItems } = useChecklistI18n()
 const { currentUser } = useAuth()
 
 // Props moved above
@@ -230,7 +232,7 @@ const loadCategories = async () => {
         id: categoryId,
         name: categoryName,
         description: categoryDescription,
-        items: categoryData.items,
+        items: translateItems(categoryData.items), // ✅ Traduire les items ici
         icon: getCategoryIcon(categoryId),
         isLoading: false
       }
