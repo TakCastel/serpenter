@@ -23,7 +23,7 @@
           <div 
             class="card"
             role="region"
-            :aria-label="`Catégorie ${category.name}`"
+                         :aria-label="`Catégorie categories.${category.id}.name`"
           >
           <!-- Category Header -->
           <div 
@@ -40,7 +40,7 @@
             role="button"
             :aria-expanded="isCategoryExpanded(category.id)"
             :aria-controls="`category-${category.id}`"
-            :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
+                               :aria-label="`${isCategoryExpanded(category.id) ? 'Fermer categories.' + category.id + '.name' : 'Ouvrir categories.' + category.id + '.name'}`"
             tabindex="0"
           >
             <div class="flex items-center justify-between relative z-10">
@@ -54,14 +54,14 @@
                     aria-hidden="true" 
                   />
                 </div>
-                <div class="flex-1 min-w-0">
-                  <h2 class="text-xl font-semibold leading-tight transition-colors duration-200 mb-1" :class="{ 'text-white': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? 'white' : 'var(--text-primary)' }">
-                    {{ category.name }}
-                  </h2>
-                  <p class="text-sm transition-colors duration-200" :class="{ 'text-green-100': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? '#dcfce7' : 'var(--text-secondary)' }">
-                    {{ category.description }}
-                  </p>
-                </div>
+                                 <div class="flex-1 min-w-0">
+                   <h2 class="text-xl font-semibold leading-tight transition-colors duration-200 mb-1" :class="{ 'text-white': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? 'white' : 'var(--text-primary)' }">
+                     categories.{{ category.id }}.name
+                   </h2>
+                   <p class="text-sm transition-colors duration-200" :class="{ 'text-green-100': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? '#dcfce7' : 'var(--text-secondary)' }">
+                     categories.{{ category.id }}.description
+                   </p>
+                 </div>
               </div>
               <div class="flex items-center space-x-3">
                 <div class="text-right">
@@ -77,7 +77,7 @@
                     'bg-white/20 hover:bg-white/30': isCategoryCompleted(category)
                   }"
                   :aria-expanded="isCategoryExpanded(category.id)"
-                  :aria-label="`${isCategoryExpanded(category.id) ? $t('common.closeCategory', { name: category.name }) : $t('common.openCategory', { name: category.name })}`"
+                  :aria-label="`${isCategoryExpanded(category.id) ? 'Fermer categories.' + category.id + '.name' : 'Ouvrir categories.' + category.id + '.name'}`"
                   aria-hidden="true"
                 >
                   <Icon 
@@ -108,7 +108,7 @@
               'max-h-[10000px] opacity-100 transform translate-y-0': isCategoryExpanded(category.id) 
             }"
             role="region"
-            :aria-label="`Contenu de la catégorie ${category.name}`"
+                         :aria-label="`Contenu de la catégorie categories.${category.id}.name`"
           >
             <div class="p-4 md:p-5 space-y-4">
               <!-- Skeleton pour les items pendant le chargement -->
@@ -205,8 +205,8 @@ const loadCategories = async () => {
   try {
     isLoading.value = true
 
-    // ✅ Attendre que les données ET l'i18n soient chargés
-    await Promise.all([waitForData(), waitForI18n()])
+    // ✅ Attendre seulement les données
+    await waitForData()
 
     // Utiliser directement le checklistType pour déterminer les catégories
     const categoryIds = getAllCategories()
@@ -214,16 +214,16 @@ const loadCategories = async () => {
     categories.value = categoryIds.map(categoryId => {
       const categoryData = getCategoryData(categoryId)
       
-      // ✅ Utiliser le composable i18n centralisé pour éviter les problèmes de timing
-      const categoryName = safeT(`categories.${categoryId}.name`, categoryId)
-      const categoryDescription = safeT(`categories.${categoryId}.description`, 'Description non disponible')
+             // ✅ Afficher les données brutes sans traduction
+       const categoryName = categoryId
+       const categoryDescription = `categories.${categoryId}.description`
 
 
       return {
         id: categoryId,
         name: categoryName,
         description: categoryDescription,
-        items: translateItems(categoryData.items), // ✅ Traduire les items ici
+        items: categoryData.items, // ✅ Afficher les données brutes sans traduction
         icon: getCategoryIcon(categoryId),
         isLoading: false
       }

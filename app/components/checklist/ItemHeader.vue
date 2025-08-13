@@ -36,10 +36,11 @@
           />
         </button>
         <div class="flex-1 min-w-0">
-          <h3 class="text-lg font-semibold leading-tight transition-colors duration-200 mb-2" style="color: var(--text-primary);" v-html="item.label">
+          <h3 class="text-lg font-semibold leading-tight transition-colors duration-200 mb-2" style="color: var(--text-primary);">
+            {{ item.labelKey || item.label }}
           </h3>
           <p class="text-base transition-colors duration-200" style="color: var(--text-secondary);">
-            {{ item.description }}
+            {{ item.descriptionKey || item.description }}
           </p>
         </div>
       </div>

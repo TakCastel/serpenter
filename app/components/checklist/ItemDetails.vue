@@ -17,14 +17,14 @@
       
       <!-- Explication -->
       <ItemExplication 
-        v-if="item.details && item.details.explication"
-        :explication="item.details.explication"
+        v-if="item.details && item.details.explicationKey"
+        :explication="item.details.explicationKey"
       />
 
       <!-- Comment faire -->
       <ItemCommentFaire 
-        v-if="item.details && item.details.commentFaire"
-        :comment-faire="item.details.commentFaire"
+        v-if="item.details && item.details.commentFaireKey"
+        :comment-faire="item.details.commentFaireKey"
       />
 
       <!-- Exemple -->
@@ -35,8 +35,8 @@
 
       <!-- Bonnes pratiques -->
       <ItemBonnesPratiques 
-        v-if="item.details && item.details.bonnesPratiques"
-        :bonnes-pratiques="item.details.bonnesPratiques"
+        v-if="item.details && item.details.bonnesPratiquesKey"
+        :bonnes-pratiques="item.details.bonnesPratiquesKey"
       />
 
       <!-- Ressources -->

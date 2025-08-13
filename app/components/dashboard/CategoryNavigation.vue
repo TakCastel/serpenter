@@ -88,7 +88,7 @@ const projectCategories = computed(() => {
   
   return categoryIds.map(categoryId => {
     const categoryData = getCategoryData(categoryId)
-    const categoryName = t(`categories.${categoryId}.name`)
+    const categoryName = `categories.${categoryId}.name`
     
     // Déterminer l'icône selon le type de catégorie
     const icon = getSommaireIcon(categoryId)
