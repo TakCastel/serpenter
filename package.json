@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "nuxt build",
+    "build:netlify": "node scripts/build-netlify-spa.js",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

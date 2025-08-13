@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
-  compatibilityDate: '2025-08-12',
 
 
   modules: [
@@ -86,7 +85,7 @@ export default defineNuxtConfig({
 
   // Configuration pour le mode SPA (pas de prerendering)
   nitro: {
-    preset: 'netlify-static',
+    preset: 'static',
     // Désactiver le prerendering en mode SPA
     prerender: false,
     // Allègement du bundle Nitro

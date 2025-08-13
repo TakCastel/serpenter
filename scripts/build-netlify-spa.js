@@ -19,10 +19,7 @@ console.log('🚀 Démarrage du build Netlify en mode SPA...');
     BUILD_HASH: process.env.COMMIT_REF || 'dev',
     // Désactiver explicitement le SSR
     NUXT_SSR: 'false',
-    // Forcer le mode SPA
-    NITRO_PRESET: 'netlify-static',
-    NITRO_PRERENDER: 'false',
-    // Configuration pour Node.js 16
+    // Configuration pour Node.js 20
     NODE_OPTIONS: '--max-old-space-size=4096'
   };
 
@@ -64,9 +61,9 @@ try {
   console.log('📁 Copie des fichiers de build...');
   if (process.platform === 'win32') {
     // Utiliser une approche simple avec PowerShell pour Windows
-    execSync(`powershell -Command "Copy-Item -Path 'dist\\*' -Destination '${publishDir}' -Recurse -Force"`, { stdio: 'inherit' });
+    execSync(`powershell -Command "Copy-Item -Path '.output\\public\\*' -Destination '${publishDir}' -Recurse -Force"`, { stdio: 'inherit' });
   } else {
-    execSync(`cp -r dist/* ${publishDir}/`, { stdio: 'inherit' });
+    execSync(`cp -r .output/public/* ${publishDir}/`, { stdio: 'inherit' });
   }
   
   // Créer un fichier _redirects pour le mode SPA

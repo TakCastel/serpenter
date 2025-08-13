@@ -1,0 +1,237 @@
+{
+  "reseau-chiffrement": {
+    "name": "Sécurité réseau & chiffrement",
+    "items": [
+      {
+        "id": "ssl-certificate",
+        "labelKey": "security.ssl.label",
+        "descriptionKey": "security.ssl.description",
+        "details": {
+          "explicationKey": "security.ssl.explication",
+          "commentFaireKey": "security.ssl.commentFaire",
+          "bonnesPratiquesKey": "security.ssl.bonnesPratiques"
+        }
+      },
+      {
+        "id": "https-redirect",
+        "labelKey": "security.https.label",
+        "descriptionKey": "security.https.description",
+        "details": {
+          "explicationKey": "security.https.explication",
+          "commentFaireKey": "security.https.commentFaire",
+          "bonnesPratiquesKey": "security.https.bonnesPratiques"
+        }
+      },
+      {
+        "id": "hsts-enabled",
+        "labelKey": "security.hsts.label",
+        "descriptionKey": "security.hsts.description",
+        "details": {
+          "explicationKey": "security.hsts.explication",
+          "commentFaireKey": "security.hsts.commentFaire",
+          "bonnesPratiquesKey": "security.hsts.bonnesPratiques"
+        }
+      },
+      {
+        "id": "tls-version",
+        "labelKey": "security.tls.label",
+        "descriptionKey": "security.tls.description",
+        "details": {
+          "explicationKey": "security.tls.explication",
+          "commentFaireKey": "security.tls.commentFaire",
+          "bonnesPratiquesKey": "security.tls.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "authentification-acces": {
+    "name": "Authentification & contrôle d'accès",
+    "items": [
+      {
+        "id": "password-hashing",
+        "labelKey": "security.auth.password.label",
+        "descriptionKey": "security.auth.password.description",
+        "details": {
+          "explicationKey": "security.auth.password.explication",
+          "commentFaireKey": "security.auth.password.commentFaire",
+          "bonnesPratiquesKey": "security.auth.password.bonnesPratiques"
+        }
+      },
+      {
+        "id": "2fa-enabled",
+        "labelKey": "security.auth.2fa.label",
+        "descriptionKey": "security.auth.2fa.description",
+        "details": {
+          "explicationKey": "security.auth.2fa.explication",
+          "commentFaireKey": "security.auth.2fa.commentFaire",
+          "bonnesPratiquesKey": "security.auth.2fa.bonnesPratiques"
+        }
+      },
+      {
+        "id": "password-policy",
+        "labelKey": "security.auth.policy.label",
+        "descriptionKey": "security.auth.policy.description",
+        "details": {
+          "explicationKey": "security.auth.policy.explication",
+          "commentFaireKey": "security.auth.policy.commentFaire",
+          "bonnesPratiquesKey": "security.auth.policy.bonnesPratiques"
+        }
+      },
+      {
+        "id": "roles-permissions",
+        "labelKey": "security.auth.roles.label",
+        "descriptionKey": "security.auth.roles.description",
+        "details": {
+          "explicationKey": "security.auth.roles.explication",
+          "commentFaireKey": "security.auth.roles.commentFaire",
+          "bonnesPratiquesKey": "security.auth.roles.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "protection-attaques": {
+    "name": "Protection contre les attaques",
+    "items": [
+      {
+        "id": "rate-limiting",
+        "labelKey": "security.protection.rate.label",
+        "descriptionKey": "security.protection.rate.description",
+        "details": {
+          "explicationKey": "security.protection.rate.explication",
+          "commentFaireKey": "security.protection.rate.commentFaire",
+          "bonnesPratiquesKey": "security.protection.rate.bonnesPratiques"
+        }
+      },
+      {
+        "id": "sql-injection",
+        "labelKey": "security.protection.sql.label",
+        "descriptionKey": "security.protection.sql.description",
+        "details": {
+          "explicationKey": "security.protection.sql.explication",
+          "commentFaireKey": "security.protection.sql.commentFaire",
+          "bonnesPratiquesKey": "security.protection.sql.bonnesPratiques"
+        }
+      },
+      {
+        "id": "xss-protection",
+        "labelKey": "security.protection.xss.label",
+        "descriptionKey": "security.protection.xss.description",
+        "details": {
+          "explicationKey": "security.protection.xss.explication",
+          "commentFaireKey": "security.protection.xss.commentFaire",
+          "bonnesPratiquesKey": "security.protection.xss.bonnesPratiques"
+        }
+      },
+      {
+        "id": "directory-indexing",
+        "labelKey": "security.protection.directory.label",
+        "descriptionKey": "security.protection.directory.description",
+        "details": {
+          "explicationKey": "security.protection.directory.explication",
+          "commentFaireKey": "security.protection.directory.commentFaire",
+          "bonnesPratiquesKey": "security.protection.directory.bonnesPratiques"
+        }
+      },
+      {
+        "id": "waf-firewall",
+        "labelKey": "security.protection.waf.label",
+        "descriptionKey": "security.protection.waf.description",
+        "details": {
+          "explicationKey": "security.protection.waf.explication",
+          "commentFaireKey": "security.protection.waf.commentFaire",
+          "bonnesPratiquesKey": "security.protection.waf.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "fichiers-donnees": {
+    "name": "Sécurité des fichiers & données",
+    "items": [
+      {
+        "id": "file-upload-validation",
+        "labelKey": "security.files.upload.label",
+        "descriptionKey": "security.files.upload.description",
+        "details": {
+          "explicationKey": "security.files.upload.explication",
+          "commentFaireKey": "security.files.upload.commentFaire",
+          "bonnesPratiquesKey": "security.files.upload.bonnesPratiques"
+        }
+      },
+      {
+        "id": "antivirus-scan",
+        "labelKey": "security.files.antivirus.label",
+        "descriptionKey": "security.files.antivirus.description",
+        "details": {
+          "explicationKey": "security.files.antivirus.explication",
+          "commentFaireKey": "security.files.antivirus.commentFaire",
+          "bonnesPratiquesKey": "security.files.antivirus.bonnesPratiques"
+        }
+      },
+      {
+        "id": "backup-automation",
+        "labelKey": "security.files.backup.label",
+        "descriptionKey": "security.files.backup.description",
+        "details": {
+          "explicationKey": "security.files.backup.explication",
+          "commentFaireKey": "security.files.backup.commentFaire",
+          "bonnesPratiquesKey": "security.files.backup.bonnesPratiques"
+        }
+      },
+      {
+        "id": "backup-restore-test",
+        "labelKey": "security.files.restore.label",
+        "descriptionKey": "security.files.restore.description",
+        "details": {
+          "explicationKey": "security.files.restore.explication",
+          "commentFaireKey": "security.files.restore.commentFaire",
+          "bonnesPratiquesKey": "security.files.restore.bonnesPratiques"
+        }
+      }
+    ]
+  },
+  "maintenance-surveillance": {
+    "name": "Maintenance & surveillance",
+    "items": [
+      {
+        "id": "dependency-updates",
+        "labelKey": "security.maintenance.dependencies.label",
+        "descriptionKey": "security.maintenance.dependencies.description",
+        "details": {
+          "explicationKey": "security.maintenance.dependencies.explication",
+          "commentFaireKey": "security.maintenance.dependencies.commentFaire",
+          "bonnesPratiquesKey": "security.maintenance.dependencies.bonnesPratiques"
+        }
+      },
+      {
+        "id": "unused-accounts",
+        "labelKey": "security.maintenance.accounts.label",
+        "descriptionKey": "security.maintenance.accounts.description",
+        "details": {
+          "explicationKey": "security.maintenance.accounts.explication",
+          "commentFaireKey": "security.maintenance.accounts.commentFaire",
+          "bonnesPratiquesKey": "security.maintenance.accounts.bonnesPratiques"
+        }
+      },
+      {
+        "id": "log-monitoring",
+        "labelKey": "security.maintenance.logs.label",
+        "descriptionKey": "security.maintenance.logs.description",
+        "details": {
+          "explicationKey": "security.maintenance.logs.explication",
+          "commentFaireKey": "security.maintenance.logs.commentFaire",
+          "bonnesPratiquesKey": "security.maintenance.logs.bonnesPratiques"
+        }
+      },
+      {
+        "id": "suspicious-activity",
+        "labelKey": "security.maintenance.alerts.label",
+        "descriptionKey": "security.maintenance.alerts.description",
+        "details": {
+          "explicationKey": "security.maintenance.alerts.explication",
+          "commentFaireKey": "security.maintenance.alerts.commentFaire",
+          "bonnesPratiquesKey": "security.maintenance.alerts.bonnesPratiques"
+        }
+      }
+    ]
+  }
+}
