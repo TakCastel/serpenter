@@ -1,135 +1,209 @@
 ﻿<template>
-  <div class="w-full" style="min-height: calc(100vh + 200px);">
+  <div class="w-full" style="min-height: calc(100vh + 200px)">
     <!-- Carte de félicitations quand toutes les catégories sont complétées -->
-    <DeploymentReadyCard 
+    <DeploymentReadyCard
       v-if="allCategoriesCompleted && !isLoading"
       :total-items="totalCount"
       :total-categories="totalCategoriesCount"
       @deploy-click="handleDeployClick"
     />
-    
+
     <!-- En-tête, stats et barre de progression supprimés pour n'afficher que les accordéons -->
 
     <!-- Categories -->
-    <div class="space-y-6" role="region" aria-label="Catégories de la checklist">
+    <div
+      class="space-y-6"
+      role="region"
+      aria-label="Catégories de la checklist"
+    >
       <!-- Skeleton pour les catégories pendant le chargement -->
       <template v-if="isLoading">
         <SkeletonCategory v-for="i in 3" :key="`skeleton-category-${i}`" />
       </template>
-      
+
       <!-- Catégories réelles -->
       <template v-else>
         <template v-for="(category, index) in categories" :key="category.id">
-          <div 
+          <div
             class="card"
             role="region"
-                         :aria-label="`Catégorie categories.${category.id}.name`"
+            :aria-label="`Catégorie categories.${category.id}.name`"
           >
-          <!-- Category Header -->
-          <div 
-            class="p-4 md:p-5 cursor-pointer transition-all duration-300 hover:bg-opacity-80 relative overflow-hidden"
-            :class="{ 
-              'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-t-xl': isCategoryCompleted(category) && isCategoryExpanded(category.id),
-              'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-xl': isCategoryCompleted(category) && !isCategoryExpanded(category.id),
-              'hover:bg-opacity-80 rounded-t-xl': !isCategoryCompleted(category) && isCategoryExpanded(category.id),
-              'hover:bg-opacity-80 rounded-xl': !isCategoryCompleted(category) && !isCategoryExpanded(category.id)
-            }"
-            @click="toggleCategory(category.id)"
-            @keydown.enter="toggleCategory(category.id)"
-            @keydown.space.prevent="toggleCategory(category.id)"
-            role="button"
-            :aria-expanded="isCategoryExpanded(category.id)"
-            :aria-controls="`category-${category.id}`"
-                               :aria-label="`${isCategoryExpanded(category.id) ? 'Fermer categories.' + category.id + '.name' : 'Ouvrir categories.' + category.id + '.name'}`"
-            tabindex="0"
-          >
-            <div class="flex items-center justify-between relative z-10">
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <Icon 
-                    :name="getCategoryIcon(category.id)" 
-                    class="w-8 h-8 transition-colors duration-200" 
-                    :class="{ 'text-white drop-shadow-sm': isCategoryCompleted(category) }"
-                    :style="{ color: isCategoryCompleted(category) ? 'white' : 'var(--accent-primary)' }" 
-                    aria-hidden="true" 
-                  />
-                </div>
-                                 <div class="flex-1 min-w-0">
-                   <h2 class="text-xl font-semibold leading-tight transition-colors duration-200 mb-1" :class="{ 'text-white': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? 'white' : 'var(--text-primary)' }">
-                     categories.{{ category.id }}.name
-                   </h2>
-                   <p class="text-sm transition-colors duration-200" :class="{ 'text-green-100': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? '#dcfce7' : 'var(--text-secondary)' }">
-                     categories.{{ category.id }}.description
-                   </p>
-                 </div>
-              </div>
-              <div class="flex items-center space-x-3">
-                <div class="text-right">
-                  <div class="text-sm font-medium transition-colors duration-200" :class="{ 'text-white': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? 'white' : 'var(--text-primary)' }">
-                    {{ getCategoryCompletedCount(category) }} / {{ category.items?.length || 0 }}
+            <!-- Category Header -->
+            <div
+              class="p-4 md:p-5 cursor-pointer transition-all duration-300 hover:bg-opacity-80 relative overflow-hidden"
+              :class="{
+                'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-t-xl':
+                  isCategoryCompleted(category) &&
+                  isCategoryExpanded(category.id),
+                'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-xl':
+                  isCategoryCompleted(category) &&
+                  !isCategoryExpanded(category.id),
+                'hover:bg-opacity-80 rounded-t-xl':
+                  !isCategoryCompleted(category) &&
+                  isCategoryExpanded(category.id),
+                'hover:bg-opacity-80 rounded-xl':
+                  !isCategoryCompleted(category) &&
+                  !isCategoryExpanded(category.id),
+              }"
+              @click="toggleCategory(category.id)"
+              @keydown.enter="toggleCategory(category.id)"
+              @keydown.space.prevent="toggleCategory(category.id)"
+              role="button"
+              :aria-expanded="isCategoryExpanded(category.id)"
+              :aria-controls="`category-${category.id}`"
+              :aria-label="`${
+                isCategoryExpanded(category.id)
+                  ? 'Fermer categories.' + category.id + '.name'
+                  : 'Ouvrir categories.' + category.id + '.name'
+              }`"
+              tabindex="0"
+            >
+              <div class="flex items-center justify-between relative z-10">
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <Icon
+                      :name="getCategoryIcon(category.id)"
+                      class="w-8 h-8 transition-colors duration-200"
+                      :class="{
+                        'text-white drop-shadow-sm':
+                          isCategoryCompleted(category),
+                      }"
+                      :style="{
+                        color: isCategoryCompleted(category)
+                          ? 'white'
+                          : 'var(--accent-primary)',
+                      }"
+                      aria-hidden="true"
+                    />
                   </div>
-                  <div class="text-xs transition-colors duration-200" :class="{ 'text-green-100': isCategoryCompleted(category) }" :style="{ color: isCategoryCompleted(category) ? '#dcfce7' : 'var(--text-muted)' }">{{ $t('common.completed') }}</div>
+                  <div class="flex-1 min-w-0">
+                    <h2
+                      class="text-xl font-semibold leading-tight transition-colors duration-200 mb-1"
+                      :class="{ 'text-white': isCategoryCompleted(category) }"
+                      :style="{
+                        color: isCategoryCompleted(category)
+                          ? 'white'
+                          : 'var(--text-primary)',
+                      }"
+                    >
+                      {{ $t("categories." + category.id + ".name") }}
+                    </h2>
+                    <p
+                      class="text-sm transition-colors duration-200"
+                      :class="{
+                        'text-green-100': isCategoryCompleted(category),
+                      }"
+                      :style="{
+                        color: isCategoryCompleted(category)
+                          ? '#dcfce7'
+                          : 'var(--text-secondary)',
+                      }"
+                    >
+                      {{ $t("categories." + category.id + ".description") }}
+                    </p>
+                  </div>
                 </div>
-                <button 
-                  class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
-                  :class="{ 
-                    'rotate-180': isCategoryExpanded(category.id) && !isCategoryCompleted(category),
-                    'bg-white/20 hover:bg-white/30': isCategoryCompleted(category)
-                  }"
-                  :aria-expanded="isCategoryExpanded(category.id)"
-                  :aria-label="`${isCategoryExpanded(category.id) ? 'Fermer categories.' + category.id + '.name' : 'Ouvrir categories.' + category.id + '.name'}`"
-                  aria-hidden="true"
-                >
-                  <Icon 
-                    v-if="isCategoryCompleted(category)"
-                    name="heroicons:check-circle" 
-                    class="w-6 h-6 transition-colors duration-200 text-white"
+                <div class="flex items-center space-x-3">
+                  <div class="text-right">
+                    <div
+                      class="text-sm font-medium transition-colors duration-200"
+                      :class="{ 'text-white': isCategoryCompleted(category) }"
+                      :style="{
+                        color: isCategoryCompleted(category)
+                          ? 'white'
+                          : 'var(--text-primary)',
+                      }"
+                    >
+                      {{ getCategoryCompletedCount(category) }} /
+                      {{ category.items?.length || 0 }}
+                    </div>
+                    <div
+                      class="text-xs transition-colors duration-200"
+                      :class="{
+                        'text-green-100': isCategoryCompleted(category),
+                      }"
+                      :style="{
+                        color: isCategoryCompleted(category)
+                          ? '#dcfce7'
+                          : 'var(--text-muted)',
+                      }"
+                    >
+                      {{ $t("common.completed") }}
+                    </div>
+                  </div>
+                  <button
+                    class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
+                    :class="{
+                      'rotate-180':
+                        isCategoryExpanded(category.id) &&
+                        !isCategoryCompleted(category),
+                      'bg-white/20 hover:bg-white/30':
+                        isCategoryCompleted(category),
+                    }"
+                    :aria-expanded="isCategoryExpanded(category.id)"
+                    :aria-label="`${
+                      isCategoryExpanded(category.id)
+                        ? 'Fermer categories.' + category.id + '.name'
+                        : 'Ouvrir categories.' + category.id + '.name'
+                    }`"
                     aria-hidden="true"
-                  />
-                  <Icon 
-                    v-else
-                    name="heroicons:chevron-down" 
-                    class="w-5 h-5 transition-colors duration-200"
-                    style="color: var(--text-muted);"
-                    aria-hidden="true"
-                  />
-                </button>
+                  >
+                    <Icon
+                      v-if="isCategoryCompleted(category)"
+                      name="heroicons:check-circle"
+                      class="w-6 h-6 transition-colors duration-200 text-white"
+                      aria-hidden="true"
+                    />
+                    <Icon
+                      v-else
+                      name="heroicons:chevron-down"
+                      class="w-5 h-5 transition-colors duration-200"
+                      style="color: var(--text-muted)"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Category Content -->
-          <div 
-            :id="`category-${category.id}`"
-            class="border-t transition-all duration-500 ease-out overflow-hidden"
-            style="border-color: var(--bg-border); background-color: var(--bg-primary);"
-            :class="{ 
-              'max-h-0 opacity-0 transform -translate-y-2': !isCategoryExpanded(category.id), 
-              'max-h-[10000px] opacity-100 transform translate-y-0': isCategoryExpanded(category.id) 
-            }"
-            role="region"
-                         :aria-label="`Contenu de la catégorie categories.${category.id}.name`"
-          >
-            <div class="p-4 md:p-5 space-y-4">
-              <!-- Skeleton pour les items pendant le chargement -->
-              <template v-if="category.isLoading">
-                <SkeletonItem v-for="i in 3" :key="`skeleton-item-${i}`" />
-              </template>
-              
-              <!-- Items réels -->
-              <template v-else>
-                <ItemAccordion 
-                  v-for="item in category.items" 
-                  :key="item.id" 
-                  :item="item"
-                  :is-item-checked="isItemChecked(item.id)"
-                  @toggle-item="toggleItem"
-                  @accordion-opened="handleAccordionOpened"
-                  @accordion-closed="handleAccordionClosed"
-                />
-              </template>
+            <!-- Category Content -->
+            <div
+              :id="`category-${category.id}`"
+              class="border-t transition-all duration-500 ease-out overflow-hidden"
+              style="
+                border-color: var(--bg-border);
+                background-color: var(--bg-primary);
+              "
+              :class="{
+                'max-h-0 opacity-0 transform -translate-y-2':
+                  !isCategoryExpanded(category.id),
+                'max-h-[10000px] opacity-100 transform translate-y-0':
+                  isCategoryExpanded(category.id),
+              }"
+              role="region"
+              :aria-label="`Contenu de la catégorie categories.${category.id}.name`"
+            >
+              <div class="p-4 md:p-5 space-y-4">
+                <!-- Skeleton pour les items pendant le chargement -->
+                <template v-if="category.isLoading">
+                  <SkeletonItem v-for="i in 3" :key="`skeleton-item-${i}`" />
+                </template>
+
+                <!-- Items réels -->
+                <template v-else>
+                  <ItemAccordion
+                    v-for="item in category.items"
+                    :key="item.id"
+                    :item="item"
+                    :is-item-checked="isItemChecked(item.id)"
+                    @toggle-item="toggleItem"
+                    @accordion-opened="handleAccordionOpened"
+                    @accordion-closed="handleAccordionClosed"
+                  />
+                </template>
+              </div>
             </div>
-          </div>
           </div>
         </template>
       </template>
@@ -138,86 +212,96 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch, nextTick } from 'vue'
-import ItemAccordion from './ItemAccordion.vue'
-// Imports supprimés: ChecklistHeader, StatsCards
-import DeploymentReadyCard from './DeploymentReadyCard.vue'
-import SkeletonCategory from '../common/SkeletonCategory.vue'
-import SkeletonItem from '../common/SkeletonItem.vue'
-import { useI18n } from 'vue-i18n'
-import { useProjectsStore } from '~/stores/projects'
-import { useChecklistData } from '~/composables/useChecklistData'
-import { useChecklistI18n } from '~/composables/useChecklistI18n'
+import { ref, computed, onMounted, watch, nextTick } from "vue";
+import ItemAccordion from "./ItemAccordion.vue";
+import DeploymentReadyCard from "./DeploymentReadyCard.vue";
+import SkeletonCategory from "../common/SkeletonCategory.vue";
+import SkeletonItem from "../common/SkeletonItem.vue";
+import { useI18n } from "vue-i18n";
+import { useProjectsStore } from "~/stores/projects";
+import { useChecklistData } from "~/composables/useChecklistData";
+import { useChecklistI18n } from "~/composables/useChecklistI18n";
 
-const emit = defineEmits(['categories-loaded'])
-const { locale } = useI18n()
-const projectsStore = useProjectsStore()
+const emit = defineEmits(["categories-loaded"]);
+const { locale } = useI18n();
+const projectsStore = useProjectsStore();
 const props = defineProps({
   currentProjectId: {
     type: String,
-    default: 'default'
+    default: "default",
   },
   checklistType: {
     type: String,
-    default: 'web-prelaunch'
-  }
-})
-const { getCategoryItems, getAllCategories, getCategoryData, setChecklistType, isLoading: isDataLoading, waitForData } = useChecklistData(props.checklistType)
-const { translateItems, safeT, waitForI18n } = useChecklistI18n()
-const { currentUser } = useAuth()
+    default: "web-prelaunch",
+  },
+});
+const {
+  getCategoryItems,
+  getAllCategories,
+  getCategoryData,
+  setChecklistType,
+  isLoading: isDataLoading,
+  waitForData,
+} = useChecklistData(props.checklistType);
+const { translateItems, safeT, waitForI18n } = useChecklistI18n();
+const { currentUser } = useAuth();
 
 // Props moved above
 
 // État réactif
-const categories = ref([])
-const checkedItems = ref(new Set())
-const expandedCategories = ref(new Set())
-const expandedItems = ref(new Set()) // Nouveau: pour tracker les items ouverts
-const isLoading = ref(true)
+const categories = ref([]);
+const checkedItems = ref(new Set());
+const expandedCategories = ref(new Set());
+const expandedItems = ref(new Set()); // Nouveau: pour tracker les items ouverts
+const isLoading = ref(true);
+
+// (Mode debug retiré)
 
 // Computed properties
 const totalCount = computed(() => {
   return categories.value.reduce((total, category) => {
-    return total + (category.items?.length || 0)
-  }, 0)
-})
+    return total + (category.items?.length || 0);
+  }, 0);
+});
 
 const completedCount = computed(() => {
-  return projectsStore.getProjectScores(props.currentProjectId).completedItems
-})
+  return projectsStore.getProjectScores(props.currentProjectId).completedItems;
+});
 
 const progressPercentage = computed(() => {
-  return projectsStore.getProjectScores(props.currentProjectId).percentage
-})
+  return projectsStore.getProjectScores(props.currentProjectId).percentage;
+});
 
 // Computed pour vérifier si toutes les catégories sont complétées
 const allCategoriesCompleted = computed(() => {
-  return categories.value.length > 0 && categories.value.every(category => isCategoryCompleted(category))
-})
+  return (
+    categories.value.length > 0 &&
+    categories.value.every((category) => isCategoryCompleted(category))
+  );
+});
 
 // Computed pour le nombre total de catégories
 const totalCategoriesCount = computed(() => {
-  return categories.value.length
-})
+  return categories.value.length;
+});
 
 // Méthodes
 const loadCategories = async () => {
   try {
-    isLoading.value = true
+    isLoading.value = true;
 
     // ✅ Attendre seulement les données
-    await waitForData()
+    await waitForData();
 
     // Utiliser directement le checklistType pour déterminer les catégories
-    const categoryIds = getAllCategories()
-    
-    categories.value = categoryIds.map(categoryId => {
-      const categoryData = getCategoryData(categoryId)
-      
-             // ✅ Afficher les données brutes sans traduction
-       const categoryName = categoryId
-       const categoryDescription = `categories.${categoryId}.description`
+    const categoryIds = getAllCategories();
 
+    categories.value = categoryIds.map((categoryId) => {
+      const categoryData = getCategoryData(categoryId);
+
+      // ✅ Afficher les données brutes sans traduction
+      const categoryName = categoryId;
+      const categoryDescription = `categories.${categoryId}.description`;
 
       return {
         id: categoryId,
@@ -225,336 +309,451 @@ const loadCategories = async () => {
         description: categoryDescription,
         items: categoryData.items, // ✅ Afficher les données brutes sans traduction
         icon: getCategoryIcon(categoryId),
-        isLoading: false
-      }
-    })
+        isLoading: false,
+      };
+    });
 
     // Calculer les scores après le chargement des catégories
-    await calculateScores()
+    await calculateScores();
 
     // Émettre l'événement avec les catégories chargées
-    emit('categories-loaded', categories.value)
+    emit("categories-loaded", categories.value);
   } catch (error) {
     // Erreur lors du chargement de la checklist
-    categories.value = []
+    categories.value = [];
   } finally {
-    isLoading.value = false
+    isLoading.value = false;
   }
-}
+};
 
 // Fonction pour gérer le clic sur le bouton de déploiement
 const handleDeployClick = () => {
   if (process.client && window.dataLayer) {
     window.dataLayer.push({
-      event: 'deployment_ready',
-      category: 'checklist',
-      action: 'deploy_click',
-      label: 'all_categories_completed'
-    })
+      event: "deployment_ready",
+      category: "checklist",
+      action: "deploy_click",
+      label: "all_categories_completed",
+    });
   }
-}
+};
 
 const getCategoryIcon = (categoryId) => {
   const icons = {
     // Catégories principales
-    'seo': 'fluent-emoji:magnifying-glass-tilted-left',
-    'accessibilite': 'fluent-emoji:wheelchair-symbol',
-    'performance': 'fluent-emoji:high-voltage',
-    'eco-conception': 'fluent-emoji:seedling',
-    'responsive-ux': 'fluent-emoji:mobile-phone',
-    'securite': 'fluent-emoji:locked',
-    'analytics': 'fluent-emoji:bar-chart',
-    
+    seo: "fluent-emoji:magnifying-glass-tilted-left",
+    accessibilite: "fluent-emoji:wheelchair-symbol",
+    performance: "fluent-emoji:high-voltage",
+    "eco-conception": "fluent-emoji:seedling",
+    "responsive-ux": "fluent-emoji:mobile-phone",
+    securite: "fluent-emoji:locked",
+    analytics: "fluent-emoji:bar-chart",
+
     // Catégories de sécurité
-    'reseau-chiffrement': 'fluent-emoji:shield',
-    'authentification-acces': 'fluent-emoji:key',
-    'protection-attaques': 'fluent-emoji:crossed-swords',
-    'fichiers-donnees': 'fluent-emoji:file-folder',
-    'maintenance-surveillance': 'fluent-emoji:eye',
-    
+    "reseau-chiffrement": "fluent-emoji:shield",
+    "authentification-acces": "fluent-emoji:key",
+    "protection-attaques": "fluent-emoji:crossed-swords",
+    "fichiers-donnees": "fluent-emoji:file-folder",
+    "maintenance-surveillance": "fluent-emoji:eye",
+
     // Catégories d'apps - Utilisation d'emojis plus fiables
-    'app-store': 'fluent-emoji:red-apple',
-    'play-store': 'fluent-emoji:robot',
-    'technical': 'fluent-emoji:gear',
-    'legal': 'fluent-emoji:balance-scale'
-  }
-  return icons[categoryId] || 'fluent-emoji:clipboard'
-}
+    "app-store": "fluent-emoji:red-apple",
+    "play-store": "fluent-emoji:robot",
+    technical: "fluent-emoji:gear",
+    legal: "fluent-emoji:balance-scale",
+  };
+  return icons[categoryId] || "fluent-emoji:clipboard";
+};
 
 // Chargement depuis Firestore via le store
 const loadCheckedItems = async () => {
   try {
     if (!currentUser.value || !props.currentProjectId) {
-      checkedItems.value = new Set()
-      return
+      checkedItems.value = new Set();
+      return;
     }
-    await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
-    checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
+    await projectsStore.loadProjectChecked(
+      currentUser.value.uid,
+      props.currentProjectId
+    );
+    checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId);
   } catch (error) {
     // Erreur lors du chargement du progrès
-    checkedItems.value = new Set()
+    checkedItems.value = new Set();
   }
-}
+};
 
 const resetCheckedItems = async () => {
-  checkedItems.value.clear()
+  checkedItems.value.clear();
   if (currentUser.value && props.currentProjectId) {
-    projectsStore.setCheckedForProject(props.currentProjectId, checkedItems.value)
-    await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
+    projectsStore.setCheckedForProject(
+      props.currentProjectId,
+      checkedItems.value
+    );
+    await projectsStore.saveProjectChecked(
+      currentUser.value.uid,
+      props.currentProjectId
+    );
   }
-}
+};
 
 const saveCheckedItems = async () => {
   try {
-    if (!currentUser.value || !props.currentProjectId) return
-    projectsStore.setCheckedForProject(props.currentProjectId, checkedItems.value)
-    await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
+    if (!currentUser.value || !props.currentProjectId) return;
+    projectsStore.setCheckedForProject(
+      props.currentProjectId,
+      checkedItems.value
+    );
+    await projectsStore.saveProjectChecked(
+      currentUser.value.uid,
+      props.currentProjectId
+    );
 
     // Mettre à jour les scores dans le store
-    await calculateScores()
+    await calculateScores();
   } catch (error) {
     // Erreur lors de la sauvegarde du progrès
   }
-}
+};
 
 // Fonction pour calculer et mettre à jour les scores
 const calculateScores = async () => {
   try {
-    if (!props.currentProjectId) return
+    if (!props.currentProjectId) return;
 
-    const allItems = []
-    categories.value.forEach(category => {
-      if (category.items) allItems.push(...category.items)
-    })
+    const allItems = [];
+    categories.value.forEach((category) => {
+      if (category.items) allItems.push(...category.items);
+    });
 
-    projectsStore.calculateScoresFromItems(props.currentProjectId, allItems, checkedItems.value)
+    projectsStore.calculateScoresFromItems(
+      props.currentProjectId,
+      allItems,
+      checkedItems.value
+    );
   } catch (error) {
-    console.error('Erreur lors du calcul des scores:', error)
+    console.error("Erreur lors du calcul des scores:", error);
   }
-}
+};
 
 // Gestionnaire pour le changement de projet
 const handleProjectChange = async (event) => {
   try {
-    if (!currentUser.value || !event.detail?.projectId) return
+    if (!currentUser.value || !event.detail?.projectId) return;
 
     // Recharger complètement les données pour le nouveau projet
-    await loadCheckedItems()
-    await loadCategories()
+    await loadCheckedItems();
+    await loadCategories();
 
     // Recalculer les scores
-    await calculateScores()
+    await calculateScores();
   } catch (error) {
-    console.error('Erreur lors du changement de projet:', error)
+    console.error("Erreur lors du changement de projet:", error);
   }
-}
+};
 
 // Gestionnaire pour les mises à jour d'éléments cochés
 const handleCheckedItemsUpdate = async (event) => {
   try {
-    if (!currentUser.value || !props.currentProjectId) return
+    if (!currentUser.value || !props.currentProjectId) return;
     // Recharger l'état depuis Firestore via le store
-    await projectsStore.loadProjectChecked(currentUser.value.uid, props.currentProjectId)
-    checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId)
+    await projectsStore.loadProjectChecked(
+      currentUser.value.uid,
+      props.currentProjectId
+    );
+    checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId);
     // Recalcule des scores
-    await calculateScores()
+    await calculateScores();
   } catch (error) {
-    console.error('Erreur lors de la mise à jour des éléments cochés:', error)
+    console.error("Erreur lors de la mise à jour des éléments cochés:", error);
   }
-}
+};
 
 // Nouvelle fonction pour vérifier si un item était ouvert avant d'être coché
-const checkIfItemWasExpanded = (itemId) => expandedItems.value.has(itemId)
-const markItemAsExpanded = (itemId) => { expandedItems.value.add(itemId) }
-const markItemAsCollapsed = (itemId) => { expandedItems.value.delete(itemId) }
+const checkIfItemWasExpanded = (itemId) => expandedItems.value.has(itemId);
+const markItemAsExpanded = (itemId) => {
+  expandedItems.value.add(itemId);
+};
+const markItemAsCollapsed = (itemId) => {
+  expandedItems.value.delete(itemId);
+};
 
 // Gestionnaires d'événements pour les accordéons
-const handleAccordionOpened = (itemId) => { markItemAsExpanded(itemId) }
-const handleAccordionClosed = (itemId) => { markItemAsCollapsed(itemId) }
+const handleAccordionOpened = (itemId) => {
+  markItemAsExpanded(itemId);
+};
+const handleAccordionClosed = (itemId) => {
+  markItemAsCollapsed(itemId);
+};
 
 const toggleItem = async (itemId) => {
-  const wasChecked = checkedItems.value.has(itemId)
-  if (wasChecked) checkedItems.value.delete(itemId)
-  else checkedItems.value.add(itemId)
-  
-  await saveCheckedItems()
-  
-  const category = categories.value.find(cat => cat.items?.some(item => item.id === itemId))
+  const wasChecked = checkedItems.value.has(itemId);
+  if (wasChecked) checkedItems.value.delete(itemId);
+  else checkedItems.value.add(itemId);
+
+  await saveCheckedItems();
+
+  const category = categories.value.find((cat) =>
+    cat.items?.some((item) => item.id === itemId)
+  );
   if (category) {
     if (!wasChecked && isCategoryCompleted(category)) {
-      nextTick(() => { generateCategoryExplosion(category.id) })
-      expandedCategories.value.delete(category.id)
+      nextTick(() => {
+        generateCategoryExplosion(category.id);
+      });
+      expandedCategories.value.delete(category.id);
     } else if (wasChecked && !isCategoryCompleted(category)) {
-      expandedCategories.value.add(category.id)
+      expandedCategories.value.add(category.id);
     } else if (!wasChecked) {
-      const currentItemIndex = category.items.findIndex(item => item.id === itemId)
-      if (currentItemIndex !== -1 && currentItemIndex < category.items.length - 1) {
-        const nextItem = category.items[currentItemIndex + 1]
-        const wasCurrentItemExpanded = checkIfItemWasExpanded(itemId)
+      const currentItemIndex = category.items.findIndex(
+        (item) => item.id === itemId
+      );
+      if (
+        currentItemIndex !== -1 &&
+        currentItemIndex < category.items.length - 1
+      ) {
+        const nextItem = category.items[currentItemIndex + 1];
+        const wasCurrentItemExpanded = checkIfItemWasExpanded(itemId);
         if (wasCurrentItemExpanded && nextItem && !isItemChecked(nextItem.id)) {
           if (!expandedCategories.value.has(category.id)) {
-            expandedCategories.value.add(category.id)
+            expandedCategories.value.add(category.id);
           }
           nextTick(() => {
             if (process.client) {
-              markItemAsExpanded(nextItem.id)
-              window.dispatchEvent(new CustomEvent('open-item-accordion', { detail: { itemId: nextItem.id } }))
+              markItemAsExpanded(nextItem.id);
+              window.dispatchEvent(
+                new CustomEvent("open-item-accordion", {
+                  detail: { itemId: nextItem.id },
+                })
+              );
             }
-          })
+          });
         }
       }
     }
   }
-}
+};
 
-const isItemChecked = (itemId) => checkedItems.value.has(itemId)
+const isItemChecked = (itemId) => checkedItems.value.has(itemId);
 
 const isCategoryCompleted = (category) => {
-  if (!category.items || category.items.length === 0) return false
-  return category.items.every(item => isItemChecked(item.id))
-}
+  if (!category.items || category.items.length === 0) return false;
+  return category.items.every((item) => isItemChecked(item.id));
+};
 
-const showCategoryExplosion = ref(null)
+const showCategoryExplosion = ref(null);
 const categoryParticles = computed(() => {
-  const particles = []
+  const particles = [];
   for (let i = 0; i < 12; i++) {
-    particles.push({ id: i, angle: (i / 12) * 360, delay: i * 40, distance: 80 + Math.random() * 40 })
+    particles.push({
+      id: i,
+      angle: (i / 12) * 360,
+      delay: i * 40,
+      distance: 80 + Math.random() * 40,
+    });
   }
-  return particles
-})
+  return particles;
+});
 
-const generateCategoryExplosion = (categoryId) => { showCategoryExplosion.value = categoryId }
-const isCategoryExpanded = (categoryId) => expandedCategories.value.has(categoryId)
-const getCategoryCompletedCount = (category) => (category.items ? category.items.filter(item => isItemChecked(item.id)).length : 0)
+const generateCategoryExplosion = (categoryId) => {
+  showCategoryExplosion.value = categoryId;
+};
+const isCategoryExpanded = (categoryId) =>
+  expandedCategories.value.has(categoryId);
+const getCategoryCompletedCount = (category) =>
+  category.items
+    ? category.items.filter((item) => isItemChecked(item.id)).length
+    : 0;
 
 const toggleCategory = (categoryId) => {
   if (expandedCategories.value.has(categoryId)) {
-    expandedCategories.value.delete(categoryId)
-    const category = categories.value.find(cat => cat.id === categoryId)
+    expandedCategories.value.delete(categoryId);
+    const category = categories.value.find((cat) => cat.id === categoryId);
     if (category && category.items && process.client) {
-      category.items.forEach(item => { window.dispatchEvent(new CustomEvent('close-item-accordion', { detail: { itemId: item.id } })) })
+      category.items.forEach((item) => {
+        window.dispatchEvent(
+          new CustomEvent("close-item-accordion", {
+            detail: { itemId: item.id },
+          })
+        );
+      });
     }
   } else {
     if (process.client) {
-      categories.value.forEach(category => {
+      categories.value.forEach((category) => {
         if (category.items) {
-          category.items.forEach(item => { window.dispatchEvent(new CustomEvent('close-item-accordion', { detail: { itemId: item.id } })) })
+          category.items.forEach((item) => {
+            window.dispatchEvent(
+              new CustomEvent("close-item-accordion", {
+                detail: { itemId: item.id },
+              })
+            );
+          });
         }
-      })
+      });
     }
-    expandedCategories.value.clear()
-    expandedCategories.value.add(categoryId)
-    if (isCategoryCompleted(categories.value.find(cat => cat.id === categoryId))) {
-      generateCategoryExplosion(categoryId)
+    expandedCategories.value.clear();
+    expandedCategories.value.add(categoryId);
+    if (
+      isCategoryCompleted(categories.value.find((cat) => cat.id === categoryId))
+    ) {
+      generateCategoryExplosion(categoryId);
     }
   }
-}
+};
 
 // Méthodes exposées
 const openCategory = (categoryId) => {
   if (process.client) {
-    categories.value.forEach(category => {
+    categories.value.forEach((category) => {
       if (category.items) {
-        category.items.forEach(item => { window.dispatchEvent(new CustomEvent('close-item-accordion', { detail: { itemId: item.id } })) })
+        category.items.forEach((item) => {
+          window.dispatchEvent(
+            new CustomEvent("close-item-accordion", {
+              detail: { itemId: item.id },
+            })
+          );
+        });
       }
-    })
+    });
   }
-  expandedCategories.value.clear()
-  expandedCategories.value.add(categoryId)
-}
+  expandedCategories.value.clear();
+  expandedCategories.value.add(categoryId);
+};
 
 // Émettre la progression
-watch(progressPercentage, (newPercentage) => {
-  if (process.client) {
-    window.dispatchEvent(new CustomEvent('progress-updated', { detail: { percentage: Math.round(newPercentage) } }))
-  }
-}, { immediate: true })
+watch(
+  progressPercentage,
+  (newPercentage) => {
+    if (process.client) {
+      window.dispatchEvent(
+        new CustomEvent("progress-updated", {
+          detail: { percentage: Math.round(newPercentage) },
+        })
+      );
+    }
+  },
+  { immediate: true }
+);
 
 // Recharger la checklist quand la langue ou le type changent
-watch(locale, async () => { await loadCategories() }, { immediate: false })
-watch(() => props.checklistType, async (newType) => { setChecklistType(newType); await loadCategories() }, { immediate: false })
+watch(
+  locale,
+  async () => {
+    await loadCategories();
+  },
+  { immediate: false }
+);
+watch(
+  () => props.checklistType,
+  async (newType) => {
+    setChecklistType(newType);
+    await loadCategories();
+  },
+  { immediate: false }
+);
 
 // NOUVEAU: Watcher sur le changement de projet
-watch(() => props.currentProjectId, async (newProjectId, oldProjectId) => {
-  if (newProjectId && newProjectId !== oldProjectId) {
-    try {
-      // Réinitialiser l'état des accordéons
-      expandedCategories.value.clear()
-      
-      // Fermer tous les accordéons d'items
-      if (process.client) {
-        window.dispatchEvent(new CustomEvent('reset-all-item-accordions'))
+watch(
+  () => props.currentProjectId,
+  async (newProjectId, oldProjectId) => {
+    if (newProjectId && newProjectId !== oldProjectId) {
+      try {
+        // Réinitialiser l'état des accordéons
+        expandedCategories.value.clear();
+
+        // Fermer tous les accordéons d'items
+        if (process.client) {
+          window.dispatchEvent(new CustomEvent("reset-all-item-accordions"));
+        }
+
+        // Recharger les données pour le nouveau projet
+        await loadCheckedItems();
+        await calculateScores();
+
+        // Ouvrir la première catégorie par défaut
+        if (categories.value.length > 0) {
+          expandedCategories.value.add(categories.value[0].id);
+        }
+      } catch (error) {
+        console.error("Erreur lors du changement de projet (watcher):", error);
       }
-      
-      // Recharger les données pour le nouveau projet
-      await loadCheckedItems()
-      await calculateScores()
-      
-      // Ouvrir la première catégorie par défaut
-      if (categories.value.length > 0) {
-        expandedCategories.value.add(categories.value[0].id)
-      }
-    } catch (error) {
-      console.error('Erreur lors du changement de projet (watcher):', error)
     }
-  }
-}, { immediate: false })
+  },
+  { immediate: false }
+);
 
 // Écouter les changements de projet via les événements globaux
 onMounted(() => {
   nextTick().then(async () => {
-    await loadCheckedItems()
-    await loadCategories()
+    await loadCheckedItems();
+    await loadCategories();
     if (categories.value.length > 0) {
-      expandedCategories.value.add(categories.value[0].id)
+      expandedCategories.value.add(categories.value[0].id);
     }
     if (process.client) {
       // Écouter l'ouverture des catégories
-      window.addEventListener('open-category', (event) => {
-        if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
-      })
+      window.addEventListener("open-category", (event) => {
+        if (event.detail && event.detail.categoryId)
+          openCategory(event.detail.categoryId);
+      });
 
       // NOUVEAU: Écouter les changements de projet
-      window.addEventListener('project-checklist-changed', handleProjectChange)
+      window.addEventListener("project-checklist-changed", handleProjectChange);
 
       // Réception des mises à jour auto-check depuis l'audit Lighthouse
-      window.addEventListener('checked-items-updated', handleCheckedItemsUpdate)
+      window.addEventListener(
+        "checked-items-updated",
+        handleCheckedItemsUpdate
+      );
     }
-  })
-})
+  });
+});
 
 onUnmounted(() => {
   if (process.client) {
-    window.removeEventListener('open-category', (event) => {
-      if (event.detail && event.detail.categoryId) openCategory(event.detail.categoryId)
-    })
-    window.removeEventListener('project-checklist-changed', handleProjectChange)
-    window.removeEventListener('checked-items-updated', handleCheckedItemsUpdate)
+    window.removeEventListener("open-category", (event) => {
+      if (event.detail && event.detail.categoryId)
+        openCategory(event.detail.categoryId);
+    });
+    window.removeEventListener(
+      "project-checklist-changed",
+      handleProjectChange
+    );
+    window.removeEventListener(
+      "checked-items-updated",
+      handleCheckedItemsUpdate
+    );
   }
-})
+});
 
 // Exposer les méthodes
 const resetProgress = async () => {
   // Clear local set
-  checkedItems.value = new Set()
-  
+  checkedItems.value = new Set();
+
   // Réinitialiser complètement dans le store principal
   if (currentUser.value && props.currentProjectId) {
     // Réinitialiser les items cochés
-    projectsStore.setCheckedForProject(props.currentProjectId, new Set())
+    projectsStore.setCheckedForProject(props.currentProjectId, new Set());
     // Réinitialiser les scores
-    projectsStore.resetProjectScores(props.currentProjectId)
+    projectsStore.resetProjectScores(props.currentProjectId);
     // Sauvegarder en BDD
-    await projectsStore.saveProjectChecked(currentUser.value.uid, props.currentProjectId)
+    await projectsStore.saveProjectChecked(
+      currentUser.value.uid,
+      props.currentProjectId
+    );
   }
-  
+
   // Événement progression
   if (process.client) {
-    window.dispatchEvent(new CustomEvent('progress-updated', { detail: { percentage: 0 } }))
+    window.dispatchEvent(
+      new CustomEvent("progress-updated", { detail: { percentage: 0 } })
+    );
   }
-}
+};
 
-defineExpose({ openCategory, resetProgress })
+defineExpose({ openCategory, resetProgress });
 </script>
 
 <style scoped>
@@ -566,9 +765,10 @@ defineExpose({ openCategory, resetProgress })
   100% {
     opacity: 0;
     transform: translate(
-      calc(-50% + cos(var(--explosion-angle)) * var(--explosion-distance)),
-      calc(-50% + sin(var(--explosion-angle)) * var(--explosion-distance))
-    ) scale(0);
+        calc(-50% + cos(var(--explosion-angle)) * var(--explosion-distance)),
+        calc(-50% + sin(var(--explosion-angle)) * var(--explosion-distance))
+      )
+      scale(0);
   }
 }
 
@@ -579,17 +779,41 @@ defineExpose({ openCategory, resetProgress })
 
 /* Support pour les navigateurs qui ne supportent pas les variables CSS dans les animations */
 @supports not (animation-delay: var(--explosion-delay)) {
-  .animate-category-explosion:nth-child(1) { animation-delay: 0ms; }
-  .animate-category-explosion:nth-child(2) { animation-delay: 40ms; }
-  .animate-category-explosion:nth-child(3) { animation-delay: 80ms; }
-  .animate-category-explosion:nth-child(4) { animation-delay: 120ms; }
-  .animate-category-explosion:nth-child(5) { animation-delay: 160ms; }
-  .animate-category-explosion:nth-child(6) { animation-delay: 200ms; }
-  .animate-category-explosion:nth-child(7) { animation-delay: 240ms; }
-  .animate-category-explosion:nth-child(8) { animation-delay: 280ms; }
-  .animate-category-explosion:nth-child(9) { animation-delay: 320ms; }
-  .animate-category-explosion:nth-child(10) { animation-delay: 360ms; }
-  .animate-category-explosion:nth-child(11) { animation-delay: 400ms; }
-  .animate-category-explosion:nth-child(12) { animation-delay: 440ms; }
+  .animate-category-explosion:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .animate-category-explosion:nth-child(2) {
+    animation-delay: 40ms;
+  }
+  .animate-category-explosion:nth-child(3) {
+    animation-delay: 80ms;
+  }
+  .animate-category-explosion:nth-child(4) {
+    animation-delay: 120ms;
+  }
+  .animate-category-explosion:nth-child(5) {
+    animation-delay: 160ms;
+  }
+  .animate-category-explosion:nth-child(6) {
+    animation-delay: 200ms;
+  }
+  .animate-category-explosion:nth-child(7) {
+    animation-delay: 240ms;
+  }
+  .animate-category-explosion:nth-child(8) {
+    animation-delay: 280ms;
+  }
+  .animate-category-explosion:nth-child(9) {
+    animation-delay: 320ms;
+  }
+  .animate-category-explosion:nth-child(10) {
+    animation-delay: 360ms;
+  }
+  .animate-category-explosion:nth-child(11) {
+    animation-delay: 400ms;
+  }
+  .animate-category-explosion:nth-child(12) {
+    animation-delay: 440ms;
+  }
 }
-</style> 
+</style>

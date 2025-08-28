@@ -74,7 +74,7 @@
     <template #footer>
       <button
         @click="cancelReset"
-        class="px-4 py-2 rounded-lg font-medium transition-colors duration-200 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+        class="px-4 py-2 rounded-lg font-medium transition-colors durée-200 bg-white dark:bg-gray-8 00 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
       >
         {{ $t('common.cancel') }}
       </button>
@@ -89,80 +89,84 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-import { useProjectsStore } from '~/stores/projects'
-import EmptyState from '~/components/dashboard/EmptyState.vue'
-import SeoChecklist from '~/components/checklist/SeoChecklist.vue'
-import Modal from '~/components/common/Modal.vue'
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { useProjectsStore } from "~/stores/projects";
+import EmptyState from "~/components/dashboard/EmptyState.vue";
+import SeoChecklist from "~/components/checklist/SeoChecklist.vue";
+import Modal from "~/components/common/Modal.vue";
 
 definePageMeta({
-  layout: 'dashboard'
-})
+  layout: "dashboard",
+});
 
-const seoChecklist = ref(null)
-const isClient = ref(false)
-const showResetModal = ref(false)
-const projectsStore = useProjectsStore()
-const { currentUser } = useAuth()
-const hasProjects = computed(() => projectsStore.hasProjects)
-const currentProjectId = computed(() => projectsStore.currentProjectId)
-const currentProject = computed(() => projectsStore.currentProject)
+const seoChecklist = ref(null);
+const isClient = ref(false);
+const showResetModal = ref(false);
+const projectsStore = useProjectsStore();
+const { currentUser } = useAuth();
+const hasProjects = computed(() => projectsStore.hasProjects);
+const currentProjectId = computed(() => projectsStore.currentProjectId);
+const currentProject = computed(() => projectsStore.currentProject);
 
 // Redirection si le type de checklist n'est pas défini, uniquement s'il existe au moins un projet
-watch([currentProject, hasProjects], ([p, has]) => {
-  if (process.client && has && p && !p.checklistType) {
-    navigateTo('/select-checklist')
-  }
-}, { immediate: true })
+watch(
+  [currentProject, hasProjects],
+  ([p, has]) => {
+    if (process.client && has && p && !p.checklistType) {
+      navigateTo("/select-checklist");
+    }
+  },
+  { immediate: true }
+);
 
 // Écouter les changements de projet via les événements globaux
 onMounted(() => {
   if (process.client) {
-    isClient.value = true
+    isClient.value = true;
     // Écouter l'événement de réinitialisation
-    window.addEventListener('reset-checklist-progress', handleResetProgress)
+    window.addEventListener("reset-checklist-progress", handleResetProgress);
   }
-})
+});
 
 const handleCreateFirstProject = (project) => {
   // Projet créé avec succès
   if (project && !project.checklistType) {
-    navigateTo('/select-checklist')
+    navigateTo("/select-checklist");
   }
-}
+};
 
 const handleResetProgress = () => {
   if (seoChecklist.value && seoChecklist.value.resetProgress) {
-    seoChecklist.value.resetProgress()
+    seoChecklist.value.resetProgress();
   }
-}
+};
 
 const resetChecklistProgress = () => {
-  showResetModal.value = true
-}
+  showResetModal.value = true;
+};
 
 const confirmReset = () => {
   if (seoChecklist.value && seoChecklist.value.resetProgress) {
-    seoChecklist.value.resetProgress()
+    seoChecklist.value.resetProgress();
     // Émettre l'événement pour informer le layout de la réinitialisation
-    window.dispatchEvent(new CustomEvent('reset-checklist-progress'))
+    window.dispatchEvent(new CustomEvent("reset-checklist-progress"));
   }
-  showResetModal.value = false
-}
+  showResetModal.value = false;
+};
 
 const cancelReset = () => {
-  showResetModal.value = false
-}
+  showResetModal.value = false;
+};
 
 onUnmounted(() => {
   if (process.client) {
     // Nettoyer l'écouteur d'événement
-    window.removeEventListener('reset-checklist-progress', handleResetProgress)
+    window.removeEventListener("reset-checklist-progress", handleResetProgress);
   }
-})
+});
 
 // Exposer la méthode pour le layout
 defineExpose({
-  handleResetProgress
-})
+  handleResetProgress,
+});
 </script>
