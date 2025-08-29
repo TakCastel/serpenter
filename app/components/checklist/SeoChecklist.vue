@@ -1,212 +1,228 @@
 ﻿<template>
   <div class="w-full" style="min-height: calc(100vh + 200px)">
-    <!-- Carte de félicitations quand toutes les catégories sont complétées -->
-    <DeploymentReadyCard
-      v-if="allCategoriesCompleted && !isLoading"
-      :total-items="totalCount"
-      :total-categories="totalCategoriesCount"
-      @deploy-click="handleDeployClick"
-    />
+    <!-- Skeleton pendant le chargement du changement de projet -->
+    <SkeletonChecklist v-if="projectsStore.isLoading" />
 
-    <!-- En-tête, stats et barre de progression supprimés pour n'afficher que les accordéons -->
+    <!-- Contenu de la checklist -->
+    <div v-else>
+      <!-- Carte de félicitations quand toutes les catégories sont complétées -->
+      <DeploymentReadyCard
+        v-if="allCategoriesCompleted && !isLoading"
+        :total-items="totalCount"
+        :total-categories="totalCategoriesCount"
+        @deploy-click="handleDeployClick"
+      />
 
-    <!-- Categories -->
-    <div
-      class="space-y-6"
-      role="region"
-      aria-label="Catégories de la checklist"
-    >
-      <!-- Skeleton pour les catégories pendant le chargement -->
-      <template v-if="isLoading">
-        <SkeletonCategory v-for="i in 3" :key="`skeleton-category-${i}`" />
-      </template>
+      <!-- En-tête, stats et barre de progression supprimés pour n'afficher que les accordéons -->
 
-      <!-- Catégories réelles -->
-      <template v-else>
-        <template v-for="(category, index) in categories" :key="category.id">
-          <div
-            class="card"
-            role="region"
-            :aria-label="`Catégorie categories.${category.id}.name`"
-          >
-            <!-- Category Header -->
+      <!-- Categories -->
+      <div
+        class="space-y-6"
+        role="region"
+        aria-label="Catégories de la checklist"
+      >
+        <!-- Catégories -->
+        <template v-if="categories.length > 0">
+          <template v-for="(category, index) in categories" :key="category.id">
             <div
-              class="p-4 md:p-5 cursor-pointer transition-all duration-300 hover:bg-opacity-80 relative overflow-hidden"
-              :class="{
-                'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-t-xl':
-                  isCategoryCompleted(category) &&
-                  isCategoryExpanded(category.id),
-                'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-xl':
-                  isCategoryCompleted(category) &&
-                  !isCategoryExpanded(category.id),
-                'hover:bg-opacity-80 rounded-t-xl':
-                  !isCategoryCompleted(category) &&
-                  isCategoryExpanded(category.id),
-                'hover:bg-opacity-80 rounded-xl':
-                  !isCategoryCompleted(category) &&
-                  !isCategoryExpanded(category.id),
-              }"
-              @click="toggleCategory(category.id)"
-              @keydown.enter="toggleCategory(category.id)"
-              @keydown.space.prevent="toggleCategory(category.id)"
-              role="button"
-              :aria-expanded="isCategoryExpanded(category.id)"
-              :aria-controls="`category-${category.id}`"
-              :aria-label="`${
-                isCategoryExpanded(category.id)
-                  ? 'Fermer categories.' + category.id + '.name'
-                  : 'Ouvrir categories.' + category.id + '.name'
-              }`"
-              tabindex="0"
+              class="card"
+              role="region"
+              :aria-label="`Catégorie categories.${category.id}.name`"
             >
-              <div class="flex items-center justify-between relative z-10">
-                <div class="flex items-center space-x-4">
-                  <div class="flex-shrink-0">
-                    <Icon
-                      :name="getCategoryIcon(category.id)"
-                      class="w-8 h-8 transition-colors duration-200"
+              <!-- Category Header -->
+              <div
+                class="p-4 md:p-5 cursor-pointer transition-all duration-300 hover:bg-opacity-80 relative overflow-hidden"
+                :class="{
+                  'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-t-xl':
+                    isCategoryCompleted(category) &&
+                    isCategoryExpanded(category.id),
+                  'bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 rounded-xl':
+                    isCategoryCompleted(category) &&
+                    !isCategoryExpanded(category.id),
+                  'hover:bg-opacity-80 rounded-t-xl':
+                    !isCategoryCompleted(category) &&
+                    isCategoryExpanded(category.id),
+                  'hover:bg-opacity-80 rounded-xl':
+                    !isCategoryCompleted(category) &&
+                    !isCategoryExpanded(category.id),
+                }"
+                @click="toggleCategory(category.id)"
+                @keydown.enter="toggleCategory(category.id)"
+                @keydown.space.prevent="toggleCategory(category.id)"
+                role="button"
+                :aria-expanded="isCategoryExpanded(category.id)"
+                :aria-controls="`category-${category.id}`"
+                :aria-label="`${
+                  isCategoryExpanded(category.id)
+                    ? 'Fermer categories.' + category.id + '.name'
+                    : 'Ouvrir categories.' + category.id + '.name'
+                }`"
+                tabindex="0"
+              >
+                <div class="flex items-center justify-between relative z-10">
+                  <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                      <Icon
+                        :name="getCategoryIcon(category.id)"
+                        class="w-8 h-8 transition-colors duration-200"
+                        :class="{
+                          'text-white drop-shadow-sm':
+                            isCategoryCompleted(category),
+                        }"
+                        :style="{
+                          color: isCategoryCompleted(category)
+                            ? 'white'
+                            : 'var(--accent-primary)',
+                        }"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h2
+                        class="text-xl font-semibold leading-tight transition-colors duration-200 mb-1"
+                        :class="{ 'text-white': isCategoryCompleted(category) }"
+                        :style="{
+                          color: isCategoryCompleted(category)
+                            ? 'white'
+                            : 'var(--text-primary)',
+                        }"
+                      >
+                        {{ $t("categories." + category.id + ".name") }}
+                      </h2>
+                      <p
+                        class="text-sm transition-colors duration-200"
+                        :class="{
+                          'text-green-100': isCategoryCompleted(category),
+                        }"
+                        :style="{
+                          color: isCategoryCompleted(category)
+                            ? '#dcfce7'
+                            : 'var(--text-secondary)',
+                        }"
+                      >
+                        {{ $t("categories." + category.id + ".description") }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="text-right">
+                      <div
+                        class="text-sm font-medium transition-colors duration-200"
+                        :class="{ 'text-white': isCategoryCompleted(category) }"
+                        :style="{
+                          color: isCategoryCompleted(category)
+                            ? 'white'
+                            : 'var(--text-primary)',
+                        }"
+                      >
+                        {{ getCategoryCompletedCount(category) }} /
+                        {{ category.items?.length || 0 }}
+                      </div>
+                      <div
+                        class="text-xs transition-colors duration-200"
+                        :class="{
+                          'text-green-100': isCategoryCompleted(category),
+                        }"
+                        :style="{
+                          color: isCategoryCompleted(category)
+                            ? '#dcfce7'
+                            : 'var(--text-muted)',
+                        }"
+                      >
+                        {{ $t("common.completed") }}
+                      </div>
+                    </div>
+                    <button
+                      class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
                       :class="{
-                        'text-white drop-shadow-sm':
+                        'rotate-180':
+                          isCategoryExpanded(category.id) &&
+                          !isCategoryCompleted(category),
+                        'bg-white/20 hover:bg-white/30':
                           isCategoryCompleted(category),
                       }"
-                      :style="{
-                        color: isCategoryCompleted(category)
-                          ? 'white'
-                          : 'var(--accent-primary)',
-                      }"
+                      :aria-expanded="isCategoryExpanded(category.id)"
+                      :aria-label="`${
+                        isCategoryExpanded(category.id)
+                          ? 'Fermer categories.' + category.id + '.name'
+                          : 'Ouvrir categories.' + category.id + '.name'
+                      }`"
                       aria-hidden="true"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <h2
-                      class="text-xl font-semibold leading-tight transition-colors duration-200 mb-1"
-                      :class="{ 'text-white': isCategoryCompleted(category) }"
-                      :style="{
-                        color: isCategoryCompleted(category)
-                          ? 'white'
-                          : 'var(--text-primary)',
-                      }"
                     >
-                      {{ $t("categories." + category.id + ".name") }}
-                    </h2>
-                    <p
-                      class="text-sm transition-colors duration-200"
-                      :class="{
-                        'text-green-100': isCategoryCompleted(category),
-                      }"
-                      :style="{
-                        color: isCategoryCompleted(category)
-                          ? '#dcfce7'
-                          : 'var(--text-secondary)',
-                      }"
-                    >
-                      {{ $t("categories." + category.id + ".description") }}
-                    </p>
+                      <Icon
+                        v-if="isCategoryCompleted(category)"
+                        name="heroicons:check-circle"
+                        class="w-6 h-6 transition-colors duration-200 text-white"
+                        aria-hidden="true"
+                      />
+                      <Icon
+                        v-else
+                        name="heroicons:chevron-down"
+                        class="w-5 h-5 transition-colors duration-200"
+                        :style="{ color: 'var(--text-muted)' }"
+                        aria-hidden="true"
+                      />
+                    </button>
                   </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                  <div class="text-right">
-                    <div
-                      class="text-sm font-medium transition-colors duration-200"
-                      :class="{ 'text-white': isCategoryCompleted(category) }"
-                      :style="{
-                        color: isCategoryCompleted(category)
-                          ? 'white'
-                          : 'var(--text-primary)',
-                      }"
-                    >
-                      {{ getCategoryCompletedCount(category) }} /
-                      {{ category.items?.length || 0 }}
-                    </div>
-                    <div
-                      class="text-xs transition-colors duration-200"
-                      :class="{
-                        'text-green-100': isCategoryCompleted(category),
-                      }"
-                      :style="{
-                        color: isCategoryCompleted(category)
-                          ? '#dcfce7'
-                          : 'var(--text-muted)',
-                      }"
-                    >
-                      {{ $t("common.completed") }}
-                    </div>
-                  </div>
-                  <button
-                    class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-opacity-80"
-                    :class="{
-                      'rotate-180':
-                        isCategoryExpanded(category.id) &&
-                        !isCategoryCompleted(category),
-                      'bg-white/20 hover:bg-white/30':
-                        isCategoryCompleted(category),
-                    }"
-                    :aria-expanded="isCategoryExpanded(category.id)"
-                    :aria-label="`${
-                      isCategoryExpanded(category.id)
-                        ? 'Fermer categories.' + category.id + '.name'
-                        : 'Ouvrir categories.' + category.id + '.name'
-                    }`"
-                    aria-hidden="true"
-                  >
-                    <Icon
-                      v-if="isCategoryCompleted(category)"
-                      name="heroicons:check-circle"
-                      class="w-6 h-6 transition-colors duration-200 text-white"
-                      aria-hidden="true"
+              </div>
+
+              <!-- Category Content -->
+              <div
+                :id="`category-${category.id}`"
+                class="border-t transition-all duration-500 ease-out overflow-hidden"
+                style="
+                  border-color: var(--bg-border);
+                  background-color: var(--bg-primary);
+                "
+                :class="{
+                  'max-h-0 opacity-0 transform -translate-y-2':
+                    !isCategoryExpanded(category.id),
+                  'max-h-[10000px] opacity-100 transform translate-y-0':
+                    isCategoryExpanded(category.id),
+                }"
+                role="region"
+                :aria-label="`Contenu de la catégorie categories.${category.id}.name`"
+              >
+                <div class="p-4 md:p-5 space-y-4">
+                  <!-- Items -->
+                  <template v-if="category.items && category.items.length > 0">
+                    <ItemAccordion
+                      v-for="item in category.items"
+                      :key="item.id"
+                      :item="item"
+                      :is-item-checked="isItemChecked(item.id)"
+                      @toggle-item="toggleItem"
+                      @accordion-opened="handleAccordionOpened"
+                      @accordion-closed="handleAccordionClosed"
                     />
-                    <Icon
-                      v-else
-                      name="heroicons:chevron-down"
-                      class="w-5 h-5 transition-colors duration-200"
-                      style="color: var(--text-muted)"
-                      aria-hidden="true"
-                    />
-                  </button>
+                  </template>
+
+                  <!-- Debug: afficher le nombre d'items -->
+                  <template v-else>
+                    <div class="text-center py-4 text-sm text-gray-500">
+                      Aucun item trouvé dans cette catégorie (items:
+                      {{ category.items?.length || 0 }})
+                    </div>
+                  </template>
                 </div>
               </div>
             </div>
+          </template>
+        </template>
 
-            <!-- Category Content -->
+        <!-- Message de chargement simple -->
+        <template v-else>
+          <div class="text-center py-12">
             <div
-              :id="`category-${category.id}`"
-              class="border-t transition-all duration-500 ease-out overflow-hidden"
-              style="
-                border-color: var(--bg-border);
-                background-color: var(--bg-primary);
-              "
-              :class="{
-                'max-h-0 opacity-0 transform -translate-y-2':
-                  !isCategoryExpanded(category.id),
-                'max-h-[10000px] opacity-100 transform translate-y-0':
-                  isCategoryExpanded(category.id),
-              }"
-              role="region"
-              :aria-label="`Contenu de la catégorie categories.${category.id}.name`"
+              class="text-lg font-medium"
+              style="color: var(--text-secondary)"
             >
-              <div class="p-4 md:p-5 space-y-4">
-                <!-- Skeleton pour les items pendant le chargement -->
-                <template v-if="category.isLoading">
-                  <SkeletonItem v-for="i in 3" :key="`skeleton-item-${i}`" />
-                </template>
-
-                <!-- Items réels -->
-                <template v-else>
-                  <ItemAccordion
-                    v-for="item in category.items"
-                    :key="item.id"
-                    :item="item"
-                    :is-item-checked="isItemChecked(item.id)"
-                    @toggle-item="toggleItem"
-                    @accordion-opened="handleAccordionOpened"
-                    @accordion-closed="handleAccordionClosed"
-                  />
-                </template>
-              </div>
+              Chargement de la checklist...
             </div>
           </div>
         </template>
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -215,8 +231,7 @@
 import { ref, computed, onMounted, watch, nextTick } from "vue";
 import ItemAccordion from "./ItemAccordion.vue";
 import DeploymentReadyCard from "./DeploymentReadyCard.vue";
-import SkeletonCategory from "../common/SkeletonCategory.vue";
-import SkeletonItem from "../common/SkeletonItem.vue";
+import SkeletonChecklist from "../common/SkeletonChecklist.vue";
 import { useI18n } from "vue-i18n";
 import { useProjectsStore } from "~/stores/projects";
 import { useChecklistData } from "~/composables/useChecklistData";
@@ -253,7 +268,6 @@ const categories = ref([]);
 const checkedItems = ref(new Set());
 const expandedCategories = ref(new Set());
 const expandedItems = ref(new Set()); // Nouveau: pour tracker les items ouverts
-const isLoading = ref(true);
 
 // (Mode debug retiré)
 
@@ -288,13 +302,20 @@ const totalCategoriesCount = computed(() => {
 // Méthodes
 const loadCategories = async () => {
   try {
-    isLoading.value = true;
-
     // ✅ Attendre seulement les données
     await waitForData();
 
     // Utiliser directement le checklistType pour déterminer les catégories
     const categoryIds = getAllCategories();
+
+    // Vérifier que les données sont bien chargées
+    if (!categoryIds || categoryIds.length === 0) {
+      console.error(
+        "Aucune catégorie trouvée pour le type:",
+        props.checklistType
+      );
+      return;
+    }
 
     categories.value = categoryIds.map((categoryId) => {
       const categoryData = getCategoryData(categoryId);
@@ -319,10 +340,12 @@ const loadCategories = async () => {
     // Émettre l'événement avec les catégories chargées
     emit("categories-loaded", categories.value);
   } catch (error) {
-    // Erreur lors du chargement de la checklist
+    console.error("Erreur lors du chargement des catégories:", error);
     categories.value = [];
   } finally {
-    isLoading.value = false;
+    // Chargement terminé
+    // Désactiver l'état de chargement global une fois la checklist chargée
+    projectsStore.finishLoading();
   }
 };
 
@@ -372,13 +395,16 @@ const loadCheckedItems = async () => {
       checkedItems.value = new Set();
       return;
     }
+
     await projectsStore.loadProjectChecked(
       currentUser.value.uid,
       props.currentProjectId
     );
-    checkedItems.value = projectsStore.getCheckedSet(props.currentProjectId);
+
+    const checkedSet = projectsStore.getCheckedSet(props.currentProjectId);
+    checkedItems.value = checkedSet;
   } catch (error) {
-    // Erreur lors du chargement du progrès
+    console.error("Erreur lors du chargement des éléments cochés:", error);
     checkedItems.value = new Set();
   }
 };
@@ -653,7 +679,57 @@ watch(
   { immediate: false }
 );
 
-// NOUVEAU: Watcher sur le changement de projet
+// Watchers pour détecter les changements de projet et de type de checklist
+watch(
+  () => props.currentProjectId,
+  async (newProjectId, oldProjectId) => {
+    if (newProjectId && newProjectId !== oldProjectId) {
+      try {
+        // Recharger les éléments cochés du nouveau projet
+        await loadCheckedItems();
+
+        // Recalculer les scores
+        await calculateScores();
+
+        // Émettre un événement pour informer les autres composants
+        if (process.client) {
+          window.dispatchEvent(
+            new CustomEvent("project-checklist-changed", {
+              detail: { projectId: newProjectId },
+            })
+          );
+        }
+      } catch (error) {
+        console.error("Erreur lors du changement de projet:", error);
+      }
+    }
+  },
+  { immediate: true }
+);
+
+watch(
+  () => props.checklistType,
+  async (newType, oldType) => {
+    if (newType && newType !== oldType) {
+      // Mettre à jour le type de checklist dans le composable
+      if (setChecklistType) {
+        setChecklistType(newType);
+      }
+
+      // Recharger les catégories avec le nouveau type
+      await loadCategories();
+
+      // Recharger les éléments cochés
+      await loadCheckedItems();
+
+      // Recalculer les scores
+      await calculateScores();
+    }
+  },
+  { immediate: true }
+);
+
+// Watcher sur le changement de projet
 watch(
   () => props.currentProjectId,
   async (newProjectId, oldProjectId) => {

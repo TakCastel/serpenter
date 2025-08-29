@@ -18,15 +18,7 @@
         {{ $t("app.navigation.verifications") }}
       </h3>
 
-      <!-- Skeleton pendant le chargement du projet -->
-      <div v-if="isProjectLoading" class="flex flex-wrap gap-2">
-        <div
-          v-for="i in 5"
-          :key="`skeleton-category-${i}`"
-          class="h-8 w-24 rounded-lg animate-pulse"
-          style="background-color: var(--bg-border)"
-        ></div>
-      </div>
+      
 
       <!-- Navigation des catégories -->
       <nav
@@ -77,12 +69,7 @@ import { useProjectsStore } from "~/stores/projects";
 import { useChecklistData } from "~/composables/useChecklistData";
 import { useI18n } from "vue-i18n";
 
-const props = defineProps({
-  isProjectLoading: {
-    type: Boolean,
-    default: false,
-  },
-});
+
 
 const isClient = ref(false);
 const activeCategory = ref(null);

@@ -15,9 +15,116 @@
       ]"
     >
       <!-- Sélecteur de projet -->
-      <div class="mb-6" v-if="!isSidebarCollapsed">
-        <ProjectSelector @project-changed="handleProjectChanged" />
+      <div class="mb-6">
+        <!-- Sélecteur complet quand la sidebar est dépliée -->
+        <div v-if="!isSidebarCollapsed">
+          <ProjectSelector @project-changed="handleProjectChanged" />
+        </div>
+
+        <!-- Icône de dossier simple quand la sidebar est repliée -->
+        <div v-else class="flex justify-center">
+          <div class="relative">
+            <button
+              @click="toggleProjectDropdown"
+              class="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md"
+              :style="{
+                backgroundColor: 'var(--bg-border)',
+                color: 'var(--text-primary)',
+              }"
+              :title="
+                currentProject ? currentProject.name : 'Sélectionner un projet'
+              "
+              :aria-label="
+                currentProject
+                  ? `Projet actuel: ${currentProject.name}`
+                  : 'Sélectionner un projet'
+              "
+            >
+              <Icon
+                name="heroicons:folder"
+                class="w-5 h-5"
+                :style="{ color: 'var(--accent-primary)' }"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+        </div>
       </div>
+
+      <!-- Dropdown des projets (en dehors de la sidebar pour éviter overflow hidden) -->
+      <Teleport to="body">
+        <div
+          v-if="isProjectDropdownOpen"
+          class="fixed z-[9999] w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border"
+          :style="{
+            backgroundColor: 'var(--bg-surface)',
+            borderColor: 'var(--bg-border)',
+            left: '70px', // Position à droite de la sidebar repliée
+            top: '120px', // Position en dessous du header
+          }"
+          data-cy="project-dropdown-collapsed"
+        >
+          <!-- Liste des projets -->
+          <div class="py-1">
+            <button
+              v-for="project in projects"
+              :key="project.id"
+              @click="selectProjectFromDropdown(project.id)"
+              class="w-full flex items-center justify-between px-3 py-2 text-sm transition-colors duration-200"
+              :class="{
+                'border-l-2 opacity-80': project.id === currentProject?.id,
+                'hover:opacity-80': project.id !== currentProject?.id,
+              }"
+              :style="{
+                color: 'var(--text-primary)',
+                backgroundColor:
+                  project.id === currentProject?.id
+                    ? 'var(--accent-color)'
+                    : 'transparent',
+                borderLeftColor:
+                  project.id === currentProject?.id
+                    ? 'var(--accent-color)'
+                    : 'transparent',
+              }"
+              data-cy="project-option"
+            >
+              <span class="truncate font-medium">{{ project.name }}</span>
+              <span
+                v-if="getProjectScores(project.id)"
+                class="text-xs ml-2 px-2 py-1 rounded-full transition-colors duration-200"
+                :style="{
+                  backgroundColor: 'var(--bg-secondary)',
+                  color: 'var(--text-secondary)',
+                }"
+              >
+                {{ Math.round(getProjectScores(project.id).percentage) }}%
+              </span>
+            </button>
+          </div>
+
+          <!-- Actions dans le dropdown -->
+          <div
+            class="border-t py-1"
+            :style="{ borderColor: 'var(--bg-border)' }"
+          >
+            <!-- Bouton ajouter -->
+            <button
+              @click="createProjectFromDropdown"
+              class="w-full flex items-center px-3 py-2 text-sm transition-colors duration-200 hover:opacity-80"
+              :style="{ color: 'var(--text-primary)' }"
+              data-cy="create-project-collapsed"
+            >
+              <Icon
+                name="heroicons:plus"
+                class="w-4 h-4 mr-2 flex-shrink-0"
+                :style="{ color: 'var(--accent-primary)' }"
+                aria-hidden="true"
+              />
+              Créer un projet
+            </button>
+          </div>
+        </div>
+      </Teleport>
 
       <!-- Navigation générale -->
       <div class="mb-6">
@@ -309,18 +416,51 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["toggle-sidebar", "project-changed"]);
+const emit = defineEmits([
+  "toggle-sidebar",
+  "project-changed",
+  "create-project",
+]);
 
 const isClient = ref(false);
-const isProjectLoading = ref(false);
 const activeCategory = ref(null);
+const isProjectDropdownOpen = ref(false);
 const projectsStore = useProjectsStore();
+
+// État de chargement du projet depuis le store global
+const isProjectLoading = computed(() => projectsStore.isLoading);
 const { t } = useI18n();
 
 // Computed properties
 const hasProjects = computed(() => projectsStore.hasProjects);
 const currentProjectId = computed(() => projectsStore.currentProjectId);
 const currentProject = computed(() => projectsStore.currentProject);
+const projects = computed(() => projectsStore.projects);
+
+// Méthodes pour le dropdown des projets
+const toggleProjectDropdown = () => {
+  isProjectDropdownOpen.value = !isProjectDropdownOpen.value;
+};
+
+const selectProjectFromDropdown = async (projectId) => {
+  try {
+    await handleProjectChanged(projectId);
+    isProjectDropdownOpen.value = false; // Fermer le dropdown après sélection
+  } catch (error) {
+    console.error("Erreur lors de la sélection du projet:", error);
+  }
+};
+
+const createProjectFromDropdown = () => {
+  // Émettre l'événement pour créer un projet
+  emit("create-project");
+  isProjectDropdownOpen.value = false; // Fermer le dropdown
+};
+
+// Méthode pour obtenir les scores d'un projet
+const getProjectScores = (projectId) => {
+  return projectsStore.getProjectScores(projectId);
+};
 
 // Initialiser les données de checklist une seule fois
 const checklistData = useChecklistData("web-prelaunch");
@@ -334,6 +474,18 @@ watch(
     }
   },
   { immediate: true }
+);
+
+// Watcher pour réinitialiser l'état de chargement quand la sidebar est fermée
+watch(
+  () => props.isSidebarCollapsed,
+  (isCollapsed) => {
+    if (isCollapsed && isProjectLoading.value) {
+      // Si la sidebar est fermée et qu'il y a un chargement en cours,
+      // réinitialiser l'état de chargement pour éviter les skeletons bloqués
+      projectsStore.resetLoading();
+    }
+  }
 );
 
 // Computed pour les catégories du projet
@@ -401,10 +553,13 @@ const getSommaireIcon = (categoryId) => {
 // Gestionnaire de changement de projet
 const handleProjectChanged = async (projectId) => {
   try {
-    isProjectLoading.value = true;
+    // Vérifier si c'est vraiment un changement de projet
+    if (projectsStore.currentProjectId === projectId) {
+      return; // Pas de changement, sortir
+    }
 
-    // Mettre à jour le projet
-    projectsStore.setCurrentProject(projectId);
+    // Mettre à jour le projet seulement si nécessaire
+    await projectsStore.setCurrentProject(projectId);
 
     // Réinitialiser la catégorie active
     activeCategory.value = null;
@@ -412,11 +567,10 @@ const handleProjectChanged = async (projectId) => {
     // Émettre l'événement vers le parent
     emit("project-changed", projectId);
   } catch (error) {
-  } finally {
-    // Petit délai pour l'effet visuel
-    setTimeout(() => {
-      isProjectLoading.value = false;
-    }, 300);
+    console.error(
+      "Erreur lors du changement de projet dans la sidebar:",
+      error
+    );
   }
 };
 
@@ -490,16 +644,28 @@ const checkScroll = () => {
   } catch (error) {}
 };
 
+// Gestion du clic en dehors du dropdown pour le fermer
+const handleClickOutside = (event) => {
+  if (isProjectDropdownOpen.value) {
+    const dropdown = event.target.closest(".relative");
+    if (!dropdown) {
+      isProjectDropdownOpen.value = false;
+    }
+  }
+};
+
 onMounted(() => {
   if (process.client) {
     isClient.value = true;
     window.addEventListener("scroll", checkScroll);
+    window.addEventListener("click", handleClickOutside);
   }
 });
 
 onUnmounted(() => {
   if (process.client) {
     window.removeEventListener("scroll", checkScroll);
+    window.removeEventListener("click", handleClickOutside);
   }
 });
 </script>

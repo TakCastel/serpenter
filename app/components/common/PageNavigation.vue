@@ -4,18 +4,42 @@
     <div class="flex items-center space-x-3">
       <button
         @click="goBack"
-        class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 rounded-lg hover:bg-gray-100"
+        class="flex items-center space-x-2 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg"
+        :style="{
+          color: 'var(--text-secondary)',
+          backgroundColor: 'transparent',
+        }"
+        :class="{ 'hover:bg-opacity-10': true }"
+        :onmouseover="
+          ($event) =>
+            ($event.target.style.backgroundColor = 'var(--button-hover)')
+        "
+        :onmouseleave="
+          ($event) => ($event.target.style.backgroundColor = 'transparent')
+        "
         aria-label="Retour au tableau de bord"
       >
         <Icon name="heroicons:arrow-left" class="w-4 h-4" />
         <span>Retour</span>
       </button>
-      
-      <div class="text-gray-400">|</div>
-      
+
+      <div :style="{ color: 'var(--bg-border)' }">|</div>
+
       <button
         @click="goToDashboard"
-        class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 rounded-lg hover:bg-gray-100"
+        class="flex items-center space-x-2 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg"
+        :style="{
+          color: 'var(--text-secondary)',
+          backgroundColor: 'transparent',
+        }"
+        :class="{ 'hover:bg-opacity-10': true }"
+        :onmouseover="
+          ($event) =>
+            ($event.target.style.backgroundColor = 'var(--button-hover)')
+        "
+        :onmouseleave="
+          ($event) => ($event.target.style.backgroundColor = 'transparent')
+        "
         aria-label="Aller au tableau de bord"
       >
         <Icon name="heroicons:home" class="w-4 h-4" />
@@ -24,42 +48,45 @@
     </div>
 
     <!-- Titre de la page -->
-    <div v-if="pageTitle" class="text-2xl font-bold text-gray-900">
+    <div
+      v-if="pageTitle"
+      class="text-2xl font-bold"
+      :style="{ color: 'var(--text-primary)' }"
+    >
       {{ pageTitle }}
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   pageTitle: {
     type: String,
-    default: ''
+    default: "",
   },
   showBackButton: {
     type: Boolean,
-    default: true
+    default: true,
   },
   showDashboardButton: {
     type: Boolean,
-    default: true
-  }
-})
+    default: true,
+  },
+});
 
-const router = useRouter()
+const router = useRouter();
 
 const goBack = () => {
   if (window.history.length > 1) {
-    router.back()
+    router.back();
   } else {
-    goToDashboard()
+    goToDashboard();
   }
-}
+};
 
 const goToDashboard = () => {
-  router.push('/dashboard')
-}
+  router.push("/dashboard");
+};
 </script>
-

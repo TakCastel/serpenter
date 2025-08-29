@@ -1,15 +1,30 @@
 ﻿<template>
-  <div class="px-4 lg:px-6 py-6 pb-24 w-full bg-[var(--bg-primary)]" :style="{ height: 'calc(100vh - 77px)' }">
+  <div
+    class="px-4 lg:px-6 py-6 pb-24 w-full bg-[var(--bg-primary)]"
+    :style="{ height: 'calc(100vh - 77px)' }"
+  >
     <!-- Header global avec titre, description et statistiques (visible seulement si projet sélectionné) -->
-    <div v-if="isClient && currentProjectId && currentProject?.checklistType" class="card p-6 mb-6" style="background-color: var(--bg-surface); border: 1px solid var(--bg-border);">
+    <div
+      v-if="isClient && currentProjectId && currentProject?.checklistType"
+      class="card p-6 mb-6"
+      style="
+        background-color: var(--bg-surface);
+        border: 1px solid var(--bg-border);
+      "
+    >
       <div class="flex items-start justify-between mb-4">
         <div class="flex-1">
           <div class="text-center mb-2">
-            <h1 class="text-2xl font-bold" style="color: var(--text-primary);">Checklist Pré-Déploiement</h1>
-            <p class="text-sm" style="color: var(--text-secondary);">Vérifiez tous les aspects essentiels avant de mettre votre site en ligne</p>
+            <h1 class="text-2xl font-bold" style="color: var(--text-primary)">
+              Checklist Pré-Déploiement
+            </h1>
+            <p class="text-sm" style="color: var(--text-secondary)">
+              Vérifiez tous les aspects essentiels avant de mettre votre site en
+              ligne
+            </p>
           </div>
         </div>
-        
+
         <!-- Bouton de réinitialisation -->
         <button
           @click="resetChecklistProgress"
@@ -17,35 +32,56 @@
           :style="{
             backgroundColor: 'var(--button-bg)',
             borderColor: 'var(--button-border)',
-            color: 'var(--text-primary)'
+            color: 'var(--text-primary)',
           }"
           :title="$t('common.resetTitle')"
           :aria-label="$t('common.resetDescription')"
         >
-          <Icon name="heroicons:arrow-path" class="w-5 h-5" :style="{ color: 'var(--text-secondary)' }" aria-hidden="true" />
-          <span class="text-sm font-semibold">{{ $t('common.reset') }}</span>
+          <Icon
+            name="heroicons:arrow-path"
+            class="w-5 h-5"
+            :style="{ color: 'var(--text-secondary)' }"
+            aria-hidden="true"
+          />
+          <span class="text-sm font-semibold">{{ $t("common.reset") }}</span>
         </button>
       </div>
-      
+
       <div class="flex items-center justify-center gap-6 text-sm">
         <div class="text-center">
-          <div class="text-2xl font-bold" style="color: var(--text-primary);">{{ projectsStore.currentProjectScores?.completedItems || 0 }}</div>
-          <div class="text-xs font-medium" style="color: var(--text-secondary);">sur {{ projectsStore.currentProjectScores?.totalItems || 44 }} complétés</div>
+          <div class="text-2xl font-bold" style="color: var(--text-primary)">
+            {{ projectsStore.currentProjectScores?.completedItems || 0 }}
+          </div>
+          <div class="text-xs font-medium" style="color: var(--text-secondary)">
+            sur
+            {{ projectsStore.currentProjectScores?.totalItems || 44 }} complétés
+          </div>
         </div>
-        <div class="w-px h-8" style="background-color: var(--bg-border);"></div>
+        <div class="w-px h-8" style="background-color: var(--bg-border)"></div>
         <div class="text-center">
-          <div class="text-2xl font-bold" style="color: var(--text-primary);">{{ Math.round(projectsStore.currentProjectScores?.percentage || 0) }}%</div>
-          <div class="text-xs font-medium" style="color: var(--text-secondary);">progression</div>
+          <div class="text-2xl font-bold" style="color: var(--text-primary)">
+            {{
+              Math.round(projectsStore.currentProjectScores?.percentage || 0)
+            }}%
+          </div>
+          <div class="text-xs font-medium" style="color: var(--text-secondary)">
+            progression
+          </div>
         </div>
       </div>
     </div>
 
-    <div v-if="isClient && currentProjectId && currentProject?.checklistType" class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+    <div
+      v-if="isClient && currentProjectId && currentProject?.checklistType"
+      class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start"
+    >
       <div class="lg:col-span-2">
         <SeoChecklist
           ref="seoChecklist"
           :current-project-id="currentProjectId"
-          :checklist-type="projectsStore.currentProject?.checklistType || 'web-prelaunch'"
+          :checklist-type="
+            projectsStore.currentProject?.checklistType || 'web-prelaunch'
+          "
         />
       </div>
       <div class="lg:col-span-1">
@@ -56,7 +92,10 @@
       </div>
     </div>
 
-    <div v-else class="min-h-[calc(100vh-200px)] flex items-center justify-center">
+    <div
+      v-else
+      class="min-h-[calc(100vh-200px)] flex items-center justify-center"
+    >
       <EmptyState @create-project="handleCreateFirstProject" />
     </div>
   </div>
@@ -68,7 +107,7 @@
     @close="cancelReset"
   >
     <p class="text-base text-gray-600 dark:text-gray-300">
-      {{ $t('common.resetConfirm') }}
+      {{ $t("common.resetConfirm") }}
     </p>
 
     <template #footer>
@@ -76,13 +115,13 @@
         @click="cancelReset"
         class="px-4 py-2 rounded-lg font-medium transition-colors durée-200 bg-white dark:bg-gray-8 00 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
       >
-        {{ $t('common.cancel') }}
+        {{ $t("common.cancel") }}
       </button>
       <button
         @click="confirmReset"
         class="px-4 py-2 rounded-lg font-medium transition-colors duration-200 bg-emerald-500 text-white hover:bg-emerald-600"
       >
-        {{ $t('common.reset') }}
+        {{ $t("common.reset") }}
       </button>
     </template>
   </Modal>
